@@ -15,6 +15,13 @@ export function lonLatToWorld(longitude, latitude) {
   };
 }
 
+export function worldToLonLat(x, z) {
+  return {
+    longitude: ORIGIN.longitude + x / metersPerDegreeEast,
+    latitude: ORIGIN.latitude - z / metersPerDegreeNorth,
+  };
+}
+
 export function splitBounds({ west, south, east, north }, divisions) {
   const tiles = [];
   const width = (east - west) / divisions;

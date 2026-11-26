@@ -244,6 +244,7 @@ function facade(windows, a, b, y0, y1, seed, spacing, nx, nz) {
 
 export async function buildBuildings({
   features, heights, sections, sampleGameY, maps, onProgress, separateIds, group,
+  districtIds, districtColor,
 }) {
   const wallMaterial = new THREE.MeshStandardMaterial({
     vertexColors: true, map: maps.concrete ?? null, roughness: 0.95,
@@ -257,6 +258,7 @@ export async function buildBuildings({
   const collisionPolygons = [];
   const windows = [];
   const edges = [];
+  const facadeEdges = [];
   const floors = new Map();
   const separateGroups = new Map();
   let rendered = 0;
@@ -289,6 +291,7 @@ export async function buildBuildings({
 
   function addMass(polygon, spec) {
     const seat = spec.seat ?? seatPolygon(polygon.outer, sampleGameY);
+    spec.floorY = spec.floorY ?? seat.floorY;
     const roofOf = spec.roofOf
       ?? ((x, z) => seat.floorY + spec.height + (spec.ridge ? spec.ridge(x, z) : 0));
     const batch = spec.batch ?? targetFor(polygon.outer[0], spec.role);
@@ -329,7 +332,8 @@ export async function buildBuildings({
     const ridgeM = role === 'backdrop' ? 0 : (record.ridgeM || 0);
     minHeight = Math.min(minHeight, height);
     maxHeight = Math.max(maxHeight, height);
-    const color = wallColor(id, record?.year, record?.garage);
+    const inDistrict = Boolean(districtIds?.has(id));
+    const color = (inDistrict && districtColor?.(id)) || wallColor(id, record?.year, record?.garage);
     const replaced = Boolean(record?.replacedBySections);
     for (const polygon of polygons) {
       const seat = seatPolygon(polygon.outer, sampleGameY);
@@ -343,7 +347,8 @@ export async function buildBuildings({
       } : null;
       addMass(polygon, {
         id, height, ridge, color, role, batch, seat,
-        windows: role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80,
+        district: inDistrict,
+        windows: role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80 && !inDistrict,
         spacing: 5.6,
         seed: id,
         collide: true,
@@ -361,20 +366,24 @@ export async function buildBuildings({
     const parent = floors.get(props.parentId);
     const polygons = polygonsOf(feature);
     const record = heights.buildings[String(props.parentId)];
-    const color = wallColor(props.parentId || 1, record?.year, false);
+    const sectionDistrict = Boolean(districtIds?.has(props.parentId));
+    const color = (sectionDistrict && districtColor?.(props.parentId))
+      || wallColor(props.parentId || 1, record?.year, false);
     for (const polygon of polygons) {
       if (props.replacesParent) {
         addMass(polygon, {
           id: props.parentId, height: props.heightM, color, role: 'playable',
-          collide: true, windows: true, spacing: 4, seed: props.parentId + 17,
+          district: sectionDistrict,
+          collide: true, windows: !sectionDistrict, spacing: 4, seed: props.parentId + 17,
         });
       } else if (parent) {
         const base = parent.floorY + (props.baseHeightM ?? 0) + 0.05;
         const top = parent.floorY + props.heightM;
         addMass(polygon, {
           id: props.parentId, height: props.heightM, color, role: 'playable',
-          skirtY: base, roofOf: () => top, upper: true, collide: false,
-          windows: top - base > 3, spacing: 4, seed: props.parentId + 29,
+          district: sectionDistrict,
+          skirtY: base, roofOf: () => top, upper: true, floorY: base, collide: false,
+          windows: top - base > 3 && !sectionDistrict, spacing: 4, seed: props.parentId + 29,
         });
       }
     }
@@ -433,6 +442,22 @@ export async function buildBuildings({
       { x: edge.b.x, y: topB, z: edge.b.z },
       { x: edge.a.x, y: topA, z: edge.a.z },
       edge.nx, 0, edge.nz, edge.color);
+    if (edge.district) {
+      facadeEdges.push({
+        id: edge.id,
+        ax: edge.a.x,
+        az: edge.a.z,
+        bx: edge.b.x,
+        bz: edge.b.z,
+        y0,
+        top: Math.min(topA, topB),
+        nx: edge.nx,
+        nz: edge.nz,
+        length: edge.length,
+        floorY: edge.floorY ?? y0,
+        upper: Boolean(edge.upper),
+      });
+    }
     if (edge.windows && topA - y0 > 2.4) {
       facade(windows, edge.a, edge.b, y0, Math.min(topA, topB), edge.seed, edge.spacing, edge.nx, edge.nz);
     }
@@ -456,6 +481,7 @@ export async function buildBuildings({
   return {
     rendered, skipped, collisionPolygons, separateGroups, windows: windows.length,
     sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
+    facadeEdges,
   };
 }
 

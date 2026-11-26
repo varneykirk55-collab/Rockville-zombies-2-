@@ -1,0 +1,91 @@
+// Street stands for the Hungerford corridor. Coordinates are WGS84.
+// eye and lookEye are metres above the terrain. locked keeps the camera
+// on the requested point instead of sliding it toward open ground.
+export const HUNGERFORD_SHOTS = [
+  {
+    id: 'gleaf-north',
+    title: 'Northern boundary at gLeaf, looking north',
+    at: [-77.15332, 39.09448],
+    look: [-77.15395, 39.09490],
+    locked: true,
+  },
+  {
+    id: 'gleaf-south',
+    title: 'Northern boundary looking south along Hungerford',
+    at: [-77.15338, 39.09502],
+    look: [-77.15385, 39.09445],
+    locked: true,
+  },
+  {
+    id: 'giant',
+    title: 'Giant Food and the surrounding centre',
+    at: [-77.15240, 39.09212],
+    look: [-77.15190, 39.09255],
+    locked: true,
+  },
+  {
+    id: 'popeyes',
+    title: 'Popeyes and the tenant storefronts',
+    at: [-77.15248, 39.09210],
+    look: [-77.15225, 39.09168],
+    locked: true,
+  },
+  {
+    id: 'fire-station',
+    title: 'South edge toward Fire Station 3',
+    at: [-77.15125, 39.08878],
+    look: [-77.15072, 39.08750],
+    locked: true,
+  },
+  {
+    id: 'walgreens',
+    title: 'South edge toward Walgreens at Hungerford Plaza',
+    at: [-77.15185, 39.08900],
+    look: [-77.15188, 39.08848],
+    locked: true,
+  },
+  {
+    id: 'wells-fargo',
+    title: 'Wells Fargo and the bank frontage',
+    at: [-77.15272, 39.09048],
+    look: [-77.15314, 39.09076],
+    locked: true,
+  },
+  {
+    id: 'apartments',
+    title: 'Heritage House, Exchange Place, and the Washington tower',
+    at: [-77.15362, 39.08928],
+    look: [-77.15302, 39.08955],
+    locked: true,
+  },
+  {
+    id: 'townhouses',
+    title: 'Hungerford townhouse rows',
+    at: [-77.15340, 39.09240],
+    look: [-77.15420, 39.09280],
+    locked: true,
+  },
+  {
+    id: 'street-north',
+    title: 'Hungerford Drive looking north',
+    at: [-77.15310, 39.09105],
+    look: [-77.15340, 39.09380],
+    locked: true,
+  },
+  {
+    id: 'street-south',
+    title: 'Hungerford Drive looking south',
+    at: [-77.15345, 39.09415],
+    look: [-77.15310, 39.09200],
+    locked: true,
+  },
+  {
+    id: 'overview',
+    title: 'Elevated overview of the Hungerford district',
+    at: [-77.1522, 39.0917],
+    look: [-77.1531, 39.0924],
+    eye: 210,
+    lookEye: 18,
+    locked: true,
+  },
+];

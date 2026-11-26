@@ -179,26 +179,40 @@ export function shotPose(shot, sampleGameY, blocked) {
   const origin = lonLatToWorld(shot.at[0], shot.at[1]);
   const look = lonLatToWorld(shot.look[0], shot.look[1]);
   let at = origin;
-  let best = clearance(origin.x, origin.z, blocked);
-  for (let radius = 2; radius <= 22; radius += 2) {
-    for (let turn = 0; turn < 12; turn++) {
-      const angle = turn * Math.PI / 6;
-      const x = origin.x + Math.cos(angle) * radius;
-      const z = origin.z + Math.sin(angle) * radius;
-      const open = clearance(x, z, blocked);
-      if (open > best) {
-        best = open;
-        at = { x, z };
-      }
+  if (shot.locked && blocked(origin.x, origin.z)) {
+    const dx = origin.x - look.x;
+    const dz = origin.z - look.z;
+    const length = Math.hypot(dx, dz) || 1;
+    let x = origin.x;
+    let z = origin.z;
+    for (let step = 0; step < 14 && blocked(x, z); step += 1) {
+      x += (dx / length) * 2;
+      z += (dz / length) * 2;
     }
-    if (best >= 6) break;
+    at = { x, z };
+  }
+  if (!shot.locked) {
+    let best = clearance(origin.x, origin.z, blocked);
+    for (let radius = 2; radius <= 22; radius += 2) {
+      for (let turn = 0; turn < 12; turn++) {
+        const angle = turn * Math.PI / 6;
+        const x = origin.x + Math.cos(angle) * radius;
+        const z = origin.z + Math.sin(angle) * radius;
+        const open = clearance(x, z, blocked);
+        if (open > best) {
+          best = open;
+          at = { x, z };
+        }
+      }
+      if (best >= 6) break;
+    }
   }
   return {
     x: at.x,
-    y: sampleGameY(at.x, at.z) + 1.68,
+    y: sampleGameY(at.x, at.z) + (shot.eye ?? 1.68),
     z: at.z,
     lookX: look.x,
-    lookY: sampleGameY(look.x, look.z) + 2.2,
+    lookY: sampleGameY(look.x, look.z) + (shot.lookEye ?? 2.2),
     lookZ: look.z,
   };
 }
