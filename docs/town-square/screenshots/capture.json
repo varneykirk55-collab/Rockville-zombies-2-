@@ -1,0 +1,178 @@
+{
+  "summary": {
+    "rendered": 743,
+    "skipped": 0,
+    "playable": 512,
+    "confidence": {
+      "Estimated": 243,
+      "High": 137,
+      "Medium": 132
+    },
+    "methods": {
+      "same-address-measured": 44,
+      "higher-measured-lowrise": 24,
+      "measured-high": 137,
+      "measured-medium": 132,
+      "published-storeys": 2,
+      "median-of-measured-neighbours": 70,
+      "single-measured-source": 51,
+      "higher-measured": 15,
+      "published-roof": 2,
+      "median-of-lowrise-district": 27,
+      "lower-measured-large-footprint": 4,
+      "published-plan-height": 4
+    },
+    "windows": 7641,
+    "sharedWallMetres": 11731,
+    "triangles": 14531,
+    "trees": 681,
+    "parking": 103,
+    "landmarks": [],
+    "townSquare": {
+      "edges": 341,
+      "storefronts": 472,
+      "windows": 3481,
+      "balconies": 411,
+      "awnings": 419,
+      "gables": 37,
+      "clocks": 1,
+      "triangles": 177651,
+      "buildings": 58
+    },
+    "bridge": {
+      "deckElevationM": null,
+      "clearanceOverPikeM": null
+    },
+    "heightRange": {
+      "min": 0.95,
+      "max": 73.65
+    }
+  },
+  "walk": {
+    "roadSamples": 7833,
+    "roadBlocked": 33,
+    "roadBlockedFraction": 0.0042,
+    "heightPops": {
+      "worstRiseM": 0.971,
+      "stepsOver045m": 5
+    },
+    "boundarySamples": [
+      {
+        "lon": -77.1412,
+        "lat": 39.09,
+        "x": 934.4312252325446,
+        "z": -444.06838522014914,
+        "outsideM": 607.7,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.152,
+        "lat": 39.0954,
+        "x": 0,
+        "z": -1043.5607052660096,
+        "outsideM": 50.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.1554,
+        "lat": 39.086,
+        "x": -294.17279312860467,
+        "z": 0,
+        "outsideM": 34.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.148,
+        "lat": 39.0794,
+        "x": 346.0856389753353,
+        "z": 732.7128356122206,
+        "outsideM": 131,
+        "blocked": false,
+        "buildingFree": true
+      }
+    ],
+    "approaches": [
+      {
+        "distanceM": 1.2,
+        "clearBeforeM": 0.8
+      },
+      {
+        "distanceM": 13.2,
+        "clearBeforeM": 12.8
+      }
+    ],
+    "controller": {
+      "start": {
+        "x": 186.9769694672329,
+        "z": 214.18846709802685
+      },
+      "end": {
+        "x": 154.98,
+        "z": 216.19
+      },
+      "blockedSteps": 0,
+      "movedM": 32.06
+    }
+  },
+  "townWalk": {
+    "plaza": {
+      "samples": 144,
+      "blocked": 0,
+      "stuckSteps": 0,
+      "movedM": 64,
+      "pathM": 64,
+      "worstDropM": 0.032,
+      "groundSpanM": 0.843,
+      "end": {
+        "x": 72,
+        "z": -6
+      }
+    },
+    "passage": {
+      "samples": 155,
+      "blocked": 0,
+      "stuckSteps": 0,
+      "movedM": 62.01,
+      "pathM": 62,
+      "worstDropM": 0.011,
+      "groundSpanM": null,
+      "end": {
+        "x": 32.3,
+        "z": 88
+      }
+    }
+  },
+  "desktop": {
+    "drawCalls": 21,
+    "triangles": 471276,
+    "frameMs": 1055.1349999999977,
+    "fps": 0.9477460230207531
+  },
+  "mobile": {
+    "drawCalls": 21,
+    "triangles": 471276,
+    "frameMs": 827.9849999999976,
+    "fps": 1.2077513481524458
+  },
+  "gl": {
+    "width": 390,
+    "height": 844,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "files": [
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-street.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-clock-plaza.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-passage.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-storefront.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-residential.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-library.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-overview.png",
+    "/agent/repos/Rockville-zombies-2-/docs/town-square/screenshots/ts-hotel.png"
+  ]
+}
