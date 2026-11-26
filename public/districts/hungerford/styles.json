@@ -1,0 +1,7012 @@
+{
+ "district": "hungerford-corridor",
+ "ownership": "Centroid inside docs/geographic-audit/data/districts.geojson feature hungerford-corridor.",
+ "excluded": [
+  "430 Hungerford Drive / Walgreens (Hungerford Plaza, OBJECTID 126073) centroid is in the gap between hungerford-corridor and town-center-core.",
+  "380 Hungerford Drive / Fire Station 3 (OBJECTID 125245) centroid is in town-center-core.",
+  "5 Dawson Avenue (OBJECTID 225291) centroid is in the same south-edge gap.",
+  "Montgomery College is north of latitude 39.09510 and outside the playable boundary."
+ ],
+ "buildings": {
+  "116279": {
+   "style": "gas",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "FUEL",
+   "signBg": "#2a2c28",
+   "signFg": "#f3f1e8",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": true,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Hungerford fuel (Gulf / Marathon)",
+   "sources": "County name Hungerford Gulf; OSM fuel way Hungerford Marathon, 801 Hungerford Drive.",
+   "notes": "County building name Hungerford Gulf (1963). OSM way is Hungerford Marathon. The sign says FUEL so neither logo is copied. Canopy is limited so it stays off the travel lane.",
+   "id": 116279,
+   "address": "801 HUNGERFORD DR 20850",
+   "countyName": "Hungerford Gulf",
+   "heightM": 4.67,
+   "confidence": "High",
+   "year": 1963,
+   "areaM2": 172.0,
+   "storeys": 1,
+   "modules": "brick skin, kiosk storefront, entry canopy, fuel canopy, text sign"
+  },
+  "118280": {
+   "style": "storefront",
+   "material": "stucco",
+   "tint": [
+    0.96,
+    0.93,
+    0.86
+   ],
+   "wall": [
+    0.8,
+    0.76,
+    0.68
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.55,
+    0.5,
+    0.42
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 118280,
+   "address": "91 FREDERICK AVE 20850",
+   "countyName": "",
+   "heightM": 3.99,
+   "confidence": "High",
+   "year": 1991,
+   "areaM2": 443.2,
+   "storeys": 1,
+   "modules": "stucco skin, storefront bays, parapet, metal canopy"
+  },
+  "118551": {
+   "style": "shed",
+   "material": "concrete",
+   "tint": [
+    0.75,
+    0.75,
+    0.73
+   ],
+   "wall": [
+    0.55,
+    0.55,
+    0.53
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and the approved height table.",
+   "notes": "Small outbuilding. Skin only, no storefront.",
+   "id": 118551,
+   "address": "790 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 3.84,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 76.2,
+   "storeys": 1,
+   "modules": "concrete panel skin, shed skin"
+  },
+  "118557": {
+   "style": "gas",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "SUNOCO",
+   "signBg": "#2c2a28",
+   "signFg": "#f2efe8",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": true,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Rockville Sunoco",
+   "sources": "County building name Rockville Sunoco, 790 Hungerford Drive.",
+   "notes": "County name Rockville Sunoco. Plain text on a dark band, not the diamond logo. The OSM fuel query on 26 Nov 2026 did not return this node.",
+   "id": 118557,
+   "address": "790 HUNGERFORD DR 20850",
+   "countyName": "Rockville Sunoco",
+   "heightM": 4.28,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 234.3,
+   "storeys": 1,
+   "modules": "brick skin, kiosk storefront, entry canopy, fuel canopy, text sign"
+  },
+  "119203": {
+   "style": "storefront",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.62,
+    0.36,
+    0.24
+   ],
+   "sign": "FRESH BAGUETTE",
+   "signBg": "#6a3a28",
+   "signFg": "#f8f1e6",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Fresh Baguette",
+   "sources": "OSM cafe Fresh Baguette at 804 Hungerford Drive.",
+   "notes": "1984 one-storey cafe front. Fabric awning, stucco, separate from the brick gLeaf bay.",
+   "id": 119203,
+   "address": "804 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.4,
+   "confidence": "High",
+   "year": 1984,
+   "areaM2": 683.5,
+   "storeys": 1,
+   "modules": "stucco skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "119220": {
+   "style": "shed",
+   "material": "concrete",
+   "tint": [
+    0.75,
+    0.75,
+    0.73
+   ],
+   "wall": [
+    0.55,
+    0.55,
+    0.53
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and the approved height table.",
+   "notes": "Small outbuilding. Skin only, no storefront.",
+   "id": 119220,
+   "address": "801 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.67,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 15.9,
+   "storeys": 1,
+   "modules": "concrete panel skin, shed skin"
+  },
+  "120023": {
+   "style": "civic",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "POST OFFICE",
+   "signBg": "#2c3340",
+   "signFg": "#f4f1ea",
+   "signScale": "band",
+   "front": "auto",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Rockville Post Office",
+   "sources": "County name Rockville Post Office, 500 N Washington Street; OSM post_office node.",
+   "notes": "1964 civic brick, 6.84 m, symmetrical punched windows, canopy only over the entry.",
+   "id": 120023,
+   "address": "500 N WASHINGTON ST 20850",
+   "countyName": "Rockville Post Office",
+   "heightM": 6.84,
+   "confidence": "High",
+   "year": 1964,
+   "areaM2": 2422.2,
+   "storeys": 1,
+   "modules": "brick skin, civic punched windows, entry canopy, text sign"
+  },
+  "120175": {
+   "style": "shed",
+   "material": "concrete",
+   "tint": [
+    0.75,
+    0.75,
+    0.73
+   ],
+   "wall": [
+    0.55,
+    0.55,
+    0.53
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and the approved height table.",
+   "notes": "Small outbuilding. Skin only, no storefront.",
+   "id": 120175,
+   "address": "501 HUNGERFORD DR 20850",
+   "countyName": "The Fitz At Rockville Apartments",
+   "heightM": 3.8,
+   "confidence": "High",
+   "year": null,
+   "areaM2": 33.7,
+   "storeys": 1,
+   "modules": "concrete panel skin, shed skin"
+  },
+  "120285": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 120285,
+   "address": "6 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 11.66,
+   "confidence": "High",
+   "year": 1988,
+   "areaM2": 68.7,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "120292": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 120292,
+   "address": "10 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 11.73,
+   "confidence": "Medium",
+   "year": 1988,
+   "areaM2": 74.7,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "120347": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "COUNTY",
+   "signBg": "#2e3a44",
+   "signFg": "#eef2f4",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Montgomery County ABS",
+   "sources": "OSM shop, 300 North Washington Street.",
+   "notes": "OSM alcohol shop Montgomery County ABS at 300 N Washington. Civic-leaning storefront, not a retail chain.",
+   "id": 120347,
+   "address": "300 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 5.66,
+   "confidence": "High",
+   "year": 1956,
+   "areaM2": 716.0,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, entry canopy, text sign"
+  },
+  "120605": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 120605,
+   "address": "500 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 4.87,
+   "confidence": "High",
+   "year": 1964,
+   "areaM2": 357.9,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "120606": {
+   "style": "shed",
+   "material": "concrete",
+   "tint": [
+    0.75,
+    0.75,
+    0.73
+   ],
+   "wall": [
+    0.55,
+    0.55,
+    0.53
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and the approved height table.",
+   "notes": "Small outbuilding. Skin only, no storefront.",
+   "id": 120606,
+   "address": "500 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 2.89,
+   "confidence": "High",
+   "year": null,
+   "areaM2": 16.6,
+   "storeys": 1,
+   "modules": "concrete panel skin, shed skin"
+  },
+  "121763": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified. Upper windows are added because the measured wall clears a second floor.",
+   "id": 121763,
+   "address": "650 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.55,
+   "confidence": "Medium",
+   "year": 1966,
+   "areaM2": 1229.6,
+   "storeys": 2,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, rooftop units"
+  },
+  "122161": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.62,
+    0.28,
+    0.18
+   ],
+   "sign": "CORNER BITES",
+   "signBg": "#5a2c22",
+   "signFg": "#f8f1e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Corner Bites",
+   "sources": "OSM restaurant Corner Bites, 316 North Washington Street.",
+   "notes": "1977 commercial building, 6.49 m, at 316 N Washington.",
+   "id": 122161,
+   "address": "316 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 6.49,
+   "confidence": "Medium",
+   "year": 1977,
+   "areaM2": 499.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "122300": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint.",
+   "notes": "10 North Street is a single narrow building, dressed as a house rather than a shop. No business name was found.",
+   "id": 122300,
+   "address": "10 NORTH ST 20850",
+   "countyName": "",
+   "heightM": 8.69,
+   "confidence": "Medium",
+   "year": 1954,
+   "areaM2": 150.0,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "122323": {
+   "style": "office-punched",
+   "material": "concrete",
+   "tint": [
+    0.84,
+    0.78,
+    0.68
+   ],
+   "wall": [
+    0.7,
+    0.64,
+    0.54
+   ],
+   "glass": [
+    0.34,
+    0.28,
+    0.2
+   ],
+   "metal": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "bay": 3.6,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "same",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 7,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Exchange Place, 451 Hungerford",
+   "sources": "City-geometry report LoopNet/CompStak seven storeys; OSM UPS Store suite 119 and Healing Acupuncture at 451 Hungerford.",
+   "notes": "Published seven storeys, built 1980, measured 29.87 m. Bronze punched windows over a ground-floor storefront. UPS Store and an acupuncture office are ground-floor tenants; the sign is not a chain logo.",
+   "id": 122323,
+   "address": "451 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 29.87,
+   "confidence": "Estimated",
+   "year": 1980,
+   "areaM2": 1668.4,
+   "storeys": 7,
+   "modules": "concrete panel skin, punched office windows, entry canopy, rooftop units"
+  },
+  "122429": {
+   "style": "civic",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.0,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": "office-ribbon",
+   "upperSign": "DHHS",
+   "business": "DHHS Administrative Building",
+   "sources": "County name DHHS Administrative Building, 401 Hungerford Drive; building-sections.geojson parent 122429.",
+   "notes": "Low wing stays at the measured 4.54 m. The Planning part rises to 31.24 m on its own polygon and is dressed as a brick ribbon tower. Both parts are inside the district ring.",
+   "id": 122429,
+   "address": "401 HUNGERFORD DR 20850",
+   "countyName": "DHHS Administrative Building",
+   "heightM": 4.54,
+   "confidence": "High",
+   "year": 1987,
+   "areaM2": 2831.5,
+   "storeys": 1,
+   "modules": "brick skin, civic punched windows, entry canopy, upper office-ribbon"
+  },
+  "123342": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 123342,
+   "address": "500 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.68,
+   "confidence": "High",
+   "year": 1959,
+   "areaM2": 250.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "123826": {
+   "style": "bank",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 5.6,
+   "canopy": "entry",
+   "canopyDepth": 1.6,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "WELLS FARGO",
+   "signBg": "#3d2a22",
+   "signFg": "#f3ecdf",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Wells Fargo",
+   "sources": "locations.wellsfargo.com 502 Hungerford Drive; OSM bank way.",
+   "notes": "1984 branch, long and narrow (about 46 m by 8 m). Brick, a few wide windows, entry canopy. Plain text, not the stagecoach logo.",
+   "id": 123826,
+   "address": "502 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.64,
+   "confidence": "High",
+   "year": 1984,
+   "areaM2": 578.6,
+   "storeys": 1,
+   "modules": "brick skin, bank windows, entry, entry canopy, text sign"
+  },
+  "123877": {
+   "style": "storefront",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.6,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "401 N Washington annex",
+   "sources": "County name on 401 N Washington; 401nwashington.com annex and retail description; height method median-of-measured-neighbours.",
+   "notes": "County name Commission for Women, but the height is an estimate (median of neighbours, 5.66 m) on a 2,046 m\u00b2 pad. The Gateway leasing page describes a low annex with ground-floor retail beside the tower. Dressed as stucco storefront at the measured estimate. No tenant names were copied.",
+   "id": 123877,
+   "address": "401 N WASHINGTON ST 20850",
+   "countyName": "Commission for Women",
+   "heightM": 5.66,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 2046.0,
+   "storeys": 1,
+   "modules": "stucco skin, storefront bays, parapet, metal canopy, rooftop units"
+  },
+  "124010": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 124010,
+   "address": "19 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 11.42,
+   "confidence": "High",
+   "year": 1988,
+   "areaM2": 69.3,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "124179": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 124179,
+   "address": "14 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 13.02,
+   "confidence": "Medium",
+   "year": 1988,
+   "areaM2": 79.2,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "124195": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 124195,
+   "address": "16 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 12.73,
+   "confidence": "Medium",
+   "year": 1988,
+   "areaM2": 77.9,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "124204": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 124204,
+   "address": "11 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 10.14,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 93.3,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "124309": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 124309,
+   "address": "474 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 5.08,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 104.9,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "124333": {
+   "style": "gas",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "FUEL",
+   "signBg": "#2a2c28",
+   "signFg": "#f3f1e8",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": true,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "510 Hungerford fuel (county name Freestate)",
+   "sources": "OSM fuel, 510 Hungerford Drive; county name Freestate.",
+   "notes": "OSM fuel way at 510 Hungerford, 4 m from the centroid. County name is Freestate. Sign says FUEL.",
+   "id": 124333,
+   "address": "510 HUNGERFORD DR 20850",
+   "countyName": "Freestate",
+   "heightM": 4.25,
+   "confidence": "High",
+   "year": 1996,
+   "areaM2": 159.3,
+   "storeys": 1,
+   "modules": "brick skin, kiosk storefront, entry canopy, fuel canopy, text sign"
+  },
+  "126115": {
+   "style": "apartment",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.5,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "HERITAGE HOUSE",
+   "signBg": "#4a3028",
+   "signFg": "#f3ece4",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "punched",
+   "rtu": false,
+   "balcony": "alternate",
+   "fuelCanopy": false,
+   "floors": 6,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Heritage House",
+   "sources": "County name HERITAGE HOUSE, 95 Dawson Avenue; apartmenthomeliving.com (7 storeys, 1981, 100 units); height table.",
+   "notes": "Senior apartments, built 1981, county name HERITAGE HOUSE. A listing says 7 storeys and 100 units; the measured roof is 19.11 m, so the facade uses 6 floors inside that height. Brick, punched windows, balconies on alternate bays of the long faces.",
+   "id": 126115,
+   "address": "95 DAWSON AVE 20850",
+   "countyName": "HERITAGE HOUSE",
+   "heightM": 19.11,
+   "confidence": "Estimated",
+   "year": 1981,
+   "areaM2": 1132.6,
+   "storeys": 6,
+   "modules": "brick skin, apartment windows, balconies, entry canopy, text sign"
+  },
+  "208398": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 208398,
+   "address": "621 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 8.62,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 225.7,
+   "storeys": 2,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "208937": {
+   "style": "office-ribbon",
+   "material": "concrete",
+   "tint": [
+    0.86,
+    0.85,
+    0.82
+   ],
+   "wall": [
+    0.68,
+    0.67,
+    0.64
+   ],
+   "glass": [
+    0.25,
+    0.38,
+    0.46
+   ],
+   "metal": [
+    0.58,
+    0.6,
+    0.62
+   ],
+   "bay": 3.8,
+   "canopy": "entry",
+   "canopyDepth": 1.4,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "same",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 10,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Office tower at 315 N Washington (Gateway mass)",
+   "sources": "Height table year 1971 and 134 ft Planning part; 401nwashington.com; commercialcafe Gateway Tower; SSA listing for 315 N Washington.",
+   "notes": "Measured 40.83 m, year 1971, floor plate about 3,100 m\u00b2. That matches the 1972 Gateway tower marketed as 401 N Washington (9 storeys, concrete and steel, new windows in 2000). The county address on this footprint is 315 N Washington, which is also the published Social Security field office. The ribbon is 10 bands on the measured height (9 storeys plus a base). No GATEWAY or SSA wordmark.",
+   "id": 208937,
+   "address": "315 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 40.83,
+   "confidence": "Medium",
+   "year": 1971,
+   "areaM2": 3103.7,
+   "storeys": 10,
+   "modules": "concrete panel skin, ribbon windows, spandrels, entry canopy, rooftop units"
+  },
+  "209199": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 209199,
+   "address": "466 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.44,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 608.0,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "209472": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 209472,
+   "address": "303 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 308.8,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "209478": {
+   "style": "cottage",
+   "material": "stucco",
+   "tint": [
+    0.9,
+    0.84,
+    0.72
+   ],
+   "wall": [
+    0.72,
+    0.64,
+    0.52
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint.",
+   "notes": "Small Dawson Avenue building without a verified tenant. Door and windows, no invented shop name.",
+   "id": 209478,
+   "address": "7 DAWSON AVE 20850",
+   "countyName": "Shopping Center",
+   "heightM": 4.93,
+   "confidence": "High",
+   "year": 1956,
+   "areaM2": 88.8,
+   "storeys": 1,
+   "modules": "stucco skin, cottage door and window"
+  },
+  "209982": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 5.0,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.55,
+    0.16,
+    0.2
+   ],
+   "sign": "TAIPEI CAFE",
+   "signBg": "#6e2430",
+   "signFg": "#f7f0e6",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Taipei Cafe",
+   "sources": "OSM restaurant Taipei Cafe at 802 Hungerford Drive.",
+   "notes": "Large 1984 one-storey restaurant block, 1,557 m\u00b2. Brick with a fabric awning, not the same canopy as 804.",
+   "id": 209982,
+   "address": "802 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.4,
+   "confidence": "High",
+   "year": 1984,
+   "areaM2": 1557.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign, rooftop units"
+  },
+  "210246": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.86,
+    0.8,
+    0.7
+   ],
+   "wall": [
+    0.7,
+    0.62,
+    0.5
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.65,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Ivy League Lane.",
+   "notes": "Ivy League Lane townhouse, about 10\u201311 m, built around 1982. Painted masonry so the row does not repeat the Martins Square brick.",
+   "id": 210246,
+   "address": "622 IVY LEAGUE LN 20850",
+   "countyName": "",
+   "heightM": 10.31,
+   "confidence": "Medium",
+   "year": 1982,
+   "areaM2": 81.4,
+   "storeys": 3,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "210511": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.7,
+    0.22,
+    0.28
+   ],
+   "sign": "YI FANG",
+   "signBg": "#6e2430",
+   "signFg": "#f8f1e6",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Yi Fang Tea",
+   "sources": "OSM cafe Yi Fang Tea, 777 Hungerford Drive.",
+   "notes": "",
+   "id": 210511,
+   "address": "777 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.86,
+   "confidence": "High",
+   "year": 1971,
+   "areaM2": 273.9,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "211039": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 211039,
+   "address": "753 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.86,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 269.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "211301": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "811",
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "811 Hungerford shopping center",
+   "sources": "County name Shopping Center, 811 Hungerford Drive.",
+   "notes": "County name Shopping Center. 1978, 4.92 m. Tenants were not verified, so the sign is the street number only.",
+   "id": 211301,
+   "address": "811 HUNGERFORD DR 20850",
+   "countyName": "Shopping Center",
+   "heightM": 4.92,
+   "confidence": "High",
+   "year": 1978,
+   "areaM2": 326.5,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign"
+  },
+  "223103": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.86,
+    0.8,
+    0.7
+   ],
+   "wall": [
+    0.7,
+    0.62,
+    0.5
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.65,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Ivy League Lane.",
+   "notes": "Ivy League Lane townhouse, about 10\u201311 m, built around 1982. Painted masonry so the row does not repeat the Martins Square brick.",
+   "id": 223103,
+   "address": "602 IVY LEAGUE LN 20850",
+   "countyName": "",
+   "heightM": 10.69,
+   "confidence": "Medium",
+   "year": 1982,
+   "areaM2": 61.6,
+   "storeys": 3,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "224181": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.86,
+    0.8,
+    0.7
+   ],
+   "wall": [
+    0.7,
+    0.62,
+    0.5
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.65,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Ivy League Lane.",
+   "notes": "Ivy League Lane townhouse, about 10\u201311 m, built around 1982. Painted masonry so the row does not repeat the Martins Square brick.",
+   "id": 224181,
+   "address": "638 IVY LEAGUE LN 20850",
+   "countyName": "",
+   "heightM": 8.68,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 64.3,
+   "storeys": 3,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "224182": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.86,
+    0.8,
+    0.7
+   ],
+   "wall": [
+    0.7,
+    0.62,
+    0.5
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.65,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Ivy League Lane.",
+   "notes": "Ivy League Lane townhouse, about 10\u201311 m, built around 1982. Painted masonry so the row does not repeat the Martins Square brick.",
+   "id": 224182,
+   "address": "640 IVY LEAGUE LN 20850",
+   "countyName": "",
+   "heightM": 10.29,
+   "confidence": "High",
+   "year": 1982,
+   "areaM2": 57.2,
+   "storeys": 3,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "225290": {
+   "style": "cottage",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.22,
+    0.24,
+    0.28
+   ],
+   "sign": "VIBES",
+   "signBg": "#242428",
+   "signFg": "#f2f0ea",
+   "signScale": "plaque",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Vibes Hookah Lounge",
+   "sources": "OSM restaurant Vibes Hookah Lounge, 1 Dawson Avenue.",
+   "notes": "Small 4.03 m building at 1 Dawson Avenue.",
+   "id": 225290,
+   "address": "1 DAWSON AVE 20850",
+   "countyName": "",
+   "heightM": 4.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 88.9,
+   "storeys": 1,
+   "modules": "brick skin, cottage door and window, fabric awning, text sign"
+  },
+  "225292": {
+   "style": "cottage",
+   "material": "stucco",
+   "tint": [
+    0.9,
+    0.84,
+    0.72
+   ],
+   "wall": [
+    0.72,
+    0.64,
+    0.52
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint.",
+   "notes": "Small Dawson Avenue building without a verified tenant. Door and windows, no invented shop name.",
+   "id": 225292,
+   "address": "9 DAWSON AVE 20850",
+   "countyName": "",
+   "heightM": 4.03,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 79.8,
+   "storeys": 1,
+   "modules": "stucco skin, cottage door and window"
+  },
+  "225293": {
+   "style": "cottage",
+   "material": "stucco",
+   "tint": [
+    0.9,
+    0.84,
+    0.72
+   ],
+   "wall": [
+    0.72,
+    0.64,
+    0.52
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint.",
+   "notes": "Small Dawson Avenue building without a verified tenant. Door and windows, no invented shop name.",
+   "id": 225293,
+   "address": "11 DAWSON AVE 20850",
+   "countyName": "",
+   "heightM": 4.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 80.5,
+   "storeys": 1,
+   "modules": "stucco skin, cottage door and window"
+  },
+  "225294": {
+   "style": "cottage",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.2,
+    0.4,
+    0.28
+   ],
+   "sign": "THAI",
+   "signBg": "#1c3330",
+   "signFg": "#f3f6f2",
+   "signScale": "plaque",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Gimme More Thai",
+   "sources": "OSM restaurant Gimme More Thai, 13 Dawson Avenue.",
+   "notes": "",
+   "id": 225294,
+   "address": "13 DAWSON AVE 20850",
+   "countyName": "",
+   "heightM": 4.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 75.3,
+   "storeys": 1,
+   "modules": "brick skin, cottage door and window, fabric awning, text sign"
+  },
+  "231090": {
+   "style": "storefront",
+   "material": "stucco",
+   "tint": [
+    0.96,
+    0.93,
+    0.86
+   ],
+   "wall": [
+    0.8,
+    0.76,
+    0.68
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 5.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.55,
+    0.5,
+    0.42
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint 231090, 800 Hungerford Drive.",
+   "notes": "Large one-storey retail pad at 800 Hungerford, 1,151 m\u00b2, same 5.40 m roof as 802 and 804. No tenant name was verified, so the sign band is blank.",
+   "id": 231090,
+   "address": "800 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.4,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 1150.6,
+   "storeys": 1,
+   "modules": "stucco skin, storefront bays, parapet, metal canopy, rooftop units"
+  },
+  "231091": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231091,
+   "address": "815 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.46,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 252.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231350": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231350,
+   "address": "817 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.46,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 124.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231635": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "7-ELEVEN",
+   "signBg": "#1d3d34",
+   "signFg": "#f4f7f2",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "7-Eleven",
+   "sources": "OSM convenience 7-Eleven, 779 Hungerford Drive.",
+   "notes": "Convenience storefront. Plain text on a dark green band, not the striped trade dress.",
+   "id": 231635,
+   "address": "779 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.86,
+   "confidence": "High",
+   "year": 1971,
+   "areaM2": 223.7,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign"
+  },
+  "231636": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "entry",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "DENTAL",
+   "signBg": "#2c3440",
+   "signFg": "#f4f1ea",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Smile Dental Care",
+   "sources": "OSM dentist Smile Dental Care, 775 Hungerford Drive.",
+   "notes": "",
+   "id": 231636,
+   "address": "775 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 3.72,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 176.6,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, entry canopy, text sign"
+  },
+  "231637": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.52,
+    0.22,
+    0.18
+   ],
+   "sign": "PHO 75",
+   "signBg": "#5c2a22",
+   "signFg": "#f6f0e4",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Pho 75",
+   "sources": "OSM restaurant Pho 75; county Shopping Center at 771 Hungerford Drive.",
+   "notes": "OSM node tagged 711 Hungerford Drive is 8 m from this 771 footprint. There is no 711 footprint in the county set. Assigned as the nearest storefront and flagged.",
+   "id": 231637,
+   "address": "771 HUNGERFORD DR 20850",
+   "countyName": "Shopping Center",
+   "heightM": 4.86,
+   "confidence": "High",
+   "year": 1971,
+   "areaM2": 249.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "231638": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231638,
+   "address": "763 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.86,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 150.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231639": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231639,
+   "address": "761 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.23,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 188.8,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231640": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231640,
+   "address": "759 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.23,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 182.0,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231641": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "BAKERY",
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Asian Bakery Cafe",
+   "sources": "County footprint and year in the height table.OSM bakery Asian Bakery Cafe at 10 m ().",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified. Sign text is the OSM name in plain letters.",
+   "id": 231641,
+   "address": "757 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.23,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 183.3,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign"
+  },
+  "231903": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231903,
+   "address": "755 HUNGERFORD DR 20850",
+   "countyName": "Shopping Center",
+   "heightM": 5.25,
+   "confidence": "High",
+   "year": 1968,
+   "areaM2": 224.7,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "231904": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 231904,
+   "address": "751 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.86,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 237.5,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "232689": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.8,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.64,
+    0.2,
+    0.24
+   ],
+   "sign": "T-SWIRL",
+   "signBg": "#6e2430",
+   "signFg": "#f8f1e6",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "T-Swirl Cr\u00eape",
+   "sources": "OSM restaurant T-Swirl Cr\u00eape & XO Pho, 313 North Washington Street.",
+   "notes": "OSM restaurant at 313 N Washington. The footprint is 675 m\u00b2, so the sign marks the tenant and the rest of the front is ordinary storefront.",
+   "id": 232689,
+   "address": "313 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 675.3,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "232690": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 232690,
+   "address": "311 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 181.3,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "232691": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.18,
+    0.36,
+    0.3
+   ],
+   "sign": "BOB'S SHANGHAI",
+   "signBg": "#1c3330",
+   "signFg": "#f3f6f2",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Bob's Shanghai 66",
+   "sources": "OSM restaurant Bob's Shanghai 66.",
+   "notes": "OSM node has no street number. It is 17 m from 309 N Washington and 16 m from 305. The name stays on 309 so it is not painted on both.",
+   "id": 232691,
+   "address": "309 N WASHINGTON ST 20850",
+   "countyName": "",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 227.7,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "232692": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 232692,
+   "address": "307 N WASHINGTON ST 20850",
+   "countyName": "Commission for Women",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 306.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "232693": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.4,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.36,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on North Washington Street.",
+   "notes": "North Washington one-storey commercial front. Fabric awning. No tenant name unless a source matched.",
+   "id": 232693,
+   "address": "305 N WASHINGTON ST 20850",
+   "countyName": "Commission for Women",
+   "heightM": 4.93,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 258.4,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "232694": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 232694,
+   "address": "460 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.44,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 547.9,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy"
+  },
+  "233564": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233564,
+   "address": "619 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 116.2,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233565": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233565,
+   "address": "617 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 107.8,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233566": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233566,
+   "address": "615 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 140.5,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233567": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233567,
+   "address": "613 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 138.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233568": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233568,
+   "address": "611 HUNGERFORD DR 20850",
+   "countyName": "Shopping Center",
+   "heightM": 8.62,
+   "confidence": "Medium",
+   "year": 1974,
+   "areaM2": 133.1,
+   "storeys": 2,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233569": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233569,
+   "address": "609 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 133.1,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233821": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.2,
+    0.38,
+    0.34
+   ],
+   "sign": "TEA HOUSE",
+   "signBg": "#1c3330",
+   "signFg": "#f2f6f3",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Hong Kong Tea House",
+   "sources": "County footprint and the approved height table.",
+   "notes": "",
+   "id": 233821,
+   "address": "605 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 99.6,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "233822": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233822,
+   "address": "603 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 108.5,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233823": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233823,
+   "address": "601 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 81.0,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233824": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233824,
+   "address": "599 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 70.4,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233826": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.25,
+    0.32,
+    0.34
+   ],
+   "sign": "ARIA",
+   "signBg": "#243238",
+   "signFg": "#f3f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Aria",
+   "sources": "County footprint and the approved height table.",
+   "notes": "",
+   "id": 233826,
+   "address": "595 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 75.6,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "233827": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.58,
+    0.4,
+    0.22
+   ],
+   "sign": "BREAD CORNER",
+   "signBg": "#5c3a24",
+   "signFg": "#f8f1e4",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Bread Corner",
+   "sources": "County footprint and the approved height table.",
+   "notes": "",
+   "id": 233827,
+   "address": "591 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 66.9,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning, text sign"
+  },
+  "233828": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.6,
+   "canopy": "fabric",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.2
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint on the 580\u2013630 Hungerford block.",
+   "notes": "One-storey bay in the tenant strip south of Giant. Shared brick and awning module; sign only where a business was matched.",
+   "id": 233828,
+   "address": "589 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 5.12,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 55.7,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, fabric awning"
+  },
+  "233829": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.55,
+    0.28,
+    0.16
+   ],
+   "sign": "POPEYES",
+   "signBg": "#7a2e14",
+   "signFg": "#f8f1e4",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Popeyes",
+   "sources": "popeyes.com restaurant at 587 Hungerford Drive; OSM node.",
+   "notes": "OSM fast_food at 587 Hungerford. The county footprint is a 3 m by 20 m sliver, so the facade is a narrow bay on that measured plan, not a freestanding restaurant box.",
+   "id": 233829,
+   "address": "587 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.25,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 62.4,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign"
+  },
+  "253837": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 253837,
+   "address": "9 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 11.54,
+   "confidence": "Medium",
+   "year": 1988,
+   "areaM2": 84.4,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "253838": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.2,
+   "canopy": "entry",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 3,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County address on Martins Square Lane.",
+   "notes": "Martins Square Lane townhouse module, about 11\u201313 m, narrow footprint. Brick, three floors inside the measured height, a small entry hood. No per-unit colour variation was sourced, so the row shares one brick.",
+   "id": 253838,
+   "address": "13 MARTINS SQUARE LN 20850",
+   "countyName": "",
+   "heightM": 10.75,
+   "confidence": "High",
+   "year": 1988,
+   "areaM2": 84.5,
+   "storeys": 3,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "336692": {
+   "style": "storefront",
+   "material": "stucco",
+   "tint": [
+    0.96,
+    0.93,
+    0.86
+   ],
+   "wall": [
+    0.8,
+    0.76,
+    0.68
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.55,
+    0.5,
+    0.42
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprint and year in the height table.",
+   "notes": "One-storey commercial front. Material follows the year band: brick before 1975, warm stucco from 1975, cream stucco from 1990. Blank sign where no tenant was verified.",
+   "id": 336692,
+   "address": "785 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 4.88,
+   "confidence": "High",
+   "year": 1991,
+   "areaM2": 484.5,
+   "storeys": 1,
+   "modules": "stucco skin, storefront bays, parapet, metal canopy"
+  },
+  "336694": {
+   "style": "grocery",
+   "material": "stucco",
+   "tint": [
+    0.9,
+    0.82,
+    0.68
+   ],
+   "wall": [
+    0.72,
+    0.64,
+    0.52
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 6.0,
+   "canopy": "entry",
+   "canopyDepth": 2.2,
+   "canopyColor": [
+    0.42,
+    0.24,
+    0.22
+   ],
+   "sign": "GIANT",
+   "signBg": "#6e1c22",
+   "signFg": "#f6f1e8",
+   "signScale": "billboard",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Giant Food",
+   "sources": "stores.giantfood.com lists 625 Hungerford Drive; OSM supermarket node; county footprint 336694.",
+   "notes": "2002 grocery box, measured 11.22 m (the higher Planning figure; Rockville measured 8.10 m). Tall blank masonry, one glazed entry, rooftop units. The sign is a colour block, not the Giant logo.",
+   "id": 336694,
+   "address": "625 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 11.22,
+   "confidence": "Medium",
+   "year": 2002,
+   "areaM2": 5265.8,
+   "storeys": 1,
+   "modules": "stucco skin, grocery entry, blank side walls, parapet, entry canopy, text sign, rooftop units"
+  },
+  "337980": {
+   "style": "garage",
+   "material": "concrete",
+   "tint": [
+    0.78,
+    0.78,
+    0.76
+   ],
+   "wall": [
+    0.58,
+    0.58,
+    0.56
+   ],
+   "glass": [
+    0.1,
+    0.11,
+    0.11
+   ],
+   "metal": [
+    0.55,
+    0.56,
+    0.55
+   ],
+   "bay": 8.0,
+   "canopy": "none",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "PARKING",
+   "signBg": "#2e3130",
+   "signFg": "#eceae4",
+   "signScale": "plaque",
+   "front": "auto",
+   "side": "same",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 5,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "City Center garage",
+   "sources": "County name City Center, 501 Hungerford Drive, garage true in the height table.",
+   "notes": "garage flag, year 2003, 16.59 m, three courtyard holes. Five open decks. The holes stay open. No second collider.",
+   "id": 337980,
+   "address": "501 HUNGERFORD DR 20850",
+   "countyName": "City Center",
+   "heightM": 16.59,
+   "confidence": "Medium",
+   "year": 2003,
+   "areaM2": 12166.9,
+   "storeys": 5,
+   "modules": "concrete panel skin, garage deck slots, text sign"
+  },
+  "338888": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 1.15,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "gLeaf",
+   "signBg": "#1b3a2c",
+   "signFg": "#e7f3ea",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": true,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "gLeaf",
+   "sources": "County OBJECTID 338888; OSM node gLeaf; geographic audit 03.",
+   "notes": "One-storey 1967 retail bay. Dark green sign band, brick piers, metal canopy. County footprint 808 Hungerford; OSM cannabis node is 6 m away.",
+   "id": 338888,
+   "address": "808 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.38,
+   "confidence": "High",
+   "year": 1967,
+   "areaM2": 754.6,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign, rooftop units"
+  },
+  "339338": {
+   "style": "storefront",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 4.2,
+   "canopy": "metal",
+   "canopyDepth": 0.7,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": "GREAT WALL",
+   "signBg": "#7a1e24",
+   "signFg": "#f7f1e6",
+   "signScale": "band",
+   "front": "auto",
+   "side": "blank",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": null,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "Great Wall Supermarket",
+   "sources": "OSM Great Wall Supermarket; county 700 Hungerford Drive, height evidence in building-heights.json.",
+   "notes": "OSM supermarket node sits 3 m from this centroid, tagged 460 Hungerford Drive, which does not match this 700 Hungerford footprint. Measured height is 2.84 m (Planning 9.3 ft, Medium). The mass stays that low. It reads as a market shed, not a full grocery hall.",
+   "id": 339338,
+   "address": "700 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 2.84,
+   "confidence": "Medium",
+   "year": 1963,
+   "areaM2": 2883.0,
+   "storeys": 1,
+   "modules": "brick skin, storefront bays, parapet, metal canopy, text sign"
+  },
+  "341164": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341164,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 61.9,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341165": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341165,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 64.1,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341166": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341166,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 64.5,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341167": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341167,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 64.8,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341168": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341168,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 53.1,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341169": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341169,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 54.8,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341170": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341170,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 56.0,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341171": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341171,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 56.4,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341172": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341172,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 57.3,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341173": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341173,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 57.7,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341174": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341174,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 57.8,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341175": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341175,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 61.2,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341176": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341176,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 61.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341177": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341177,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 8.74,
+   "confidence": "High",
+   "year": 1979,
+   "areaM2": 62.0,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341178": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341178,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Medium",
+   "year": null,
+   "areaM2": 63.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341179": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341179,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 65.3,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341438": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341438,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 65.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341439": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341439,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 66.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341440": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341440,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 68.8,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341442": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341442,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 45.4,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341443": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341443,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 46.5,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341444": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341444,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 47.1,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341445": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341445,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 49.3,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341446": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341446,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 50.8,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341447": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341447,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 51.0,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341448": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341448,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 51.7,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341449": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341449,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 53.9,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341450": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341450,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 53.9,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341451": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341451,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 55.3,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341452": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341452,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 58.8,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341453": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341453,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 60.3,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341454": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341454,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 6.84,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 61.1,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341691": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341691,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 66.5,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341692": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341692,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 77.0,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341693": {
+   "style": "townhouse",
+   "material": "brick",
+   "tint": [
+    1,
+    1,
+    1
+   ],
+   "wall": [
+    0.48,
+    0.24,
+    0.2
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.3,
+    0.32,
+    0.31
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341693,
+   "address": "620 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 66.3,
+   "storeys": 2,
+   "modules": "brick skin, townhouse door and windows, entry canopy"
+  },
+  "341695": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341695,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 45.8,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341697": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341697,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 48.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341698": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341698,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 50.6,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341700": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341700,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 55.9,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341701": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341701,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 55.9,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  },
+  "341702": {
+   "style": "townhouse",
+   "material": "stucco",
+   "tint": [
+    0.93,
+    0.84,
+    0.7
+   ],
+   "wall": [
+    0.74,
+    0.66,
+    0.54
+   ],
+   "glass": [
+    0.16,
+    0.25,
+    0.28
+   ],
+   "metal": [
+    0.34,
+    0.36,
+    0.35
+   ],
+   "bay": 3.0,
+   "canopy": "entry",
+   "canopyDepth": 0.55,
+   "canopyColor": [
+    0.45,
+    0.4,
+    0.34
+   ],
+   "sign": null,
+   "signBg": "#2c2824",
+   "signFg": "#f4f0e8",
+   "signScale": "band",
+   "front": "short",
+   "side": "punched",
+   "rtu": false,
+   "balcony": null,
+   "fuelCanopy": false,
+   "floors": 2,
+   "upperStyle": null,
+   "upperSign": null,
+   "business": "",
+   "sources": "County footprints sharing this street address.",
+   "notes": "Repeated narrow footprint in a same-address group. Treated as a 2-storey townhouse row. 620 stays brick; 622 is painted so the two rows are not the same template.",
+   "id": 341702,
+   "address": "622 HUNGERFORD DR 20850",
+   "countyName": "",
+   "heightM": 7.03,
+   "confidence": "Estimated",
+   "year": null,
+   "areaM2": 57.3,
+   "storeys": 2,
+   "modules": "stucco skin, townhouse door and windows, entry canopy"
+  }
+ }
+}

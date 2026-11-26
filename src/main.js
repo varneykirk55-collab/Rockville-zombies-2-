@@ -1,4 +1,4 @@
-import { Group } from 'three';
+import { Color, Group } from 'three';
 import { createScene, addStreets, addParking, addTrees, addBridgeMarkers, alignSun } from './scene.js';
 import { createCamera, createBuildingCollision } from './camera.js';
 import { buildBuildings } from './buildings.js';
@@ -6,6 +6,9 @@ import { createTerrain } from './terrain.js';
 import { placeLandmarks } from './landmarks.js';
 import { startGameLoop } from './game-loop.js';
 import { runWalkTest, SHOTS, shotPose } from './walk-test.js';
+import { dressHungerford, loadDistrictTextures } from './districts/hungerford/apply.js';
+import { HUNGERFORD_SHOTS } from './districts/hungerford/shots.js';
+import { runHungerfordWalk } from './districts/hungerford/walk.js';
 
 const viewport = document.querySelector('#viewport');
 const status = document.querySelector('#loading');
@@ -49,7 +52,7 @@ world.add(buildings);
 
 try {
   status.textContent = 'Loading surveyed heights and terrain…';
-  const [terrainJson, boundaryJson, heights, footprintCollection, sections, parking, landmarks] = await Promise.all([
+  const [terrainJson, boundaryJson, heights, footprintCollection, sections, parking, landmarks, hungerfordStyles, hungerfordTextures] = await Promise.all([
     loadJson(dataUrl('terrain.json')),
     loadJson(boundaryUrl),
     loadJson(dataUrl('building-heights.json')),
@@ -57,6 +60,8 @@ try {
     loadJson(dataUrl('building-sections.geojson')),
     loadJson(dataUrl('parking.geojson')),
     loadJson(dataUrl('landmarks.json')),
+    loadJson(new URL('../public/districts/hungerford/styles.json', import.meta.url)),
+    loadDistrictTextures(),
   ]);
   const terrain = createTerrain(terrainJson, boundaryJson);
   const ground = terrain.buildMesh();
@@ -71,6 +76,7 @@ try {
     (landmarks.landmarks ?? []).filter(item => item.hideProcedural).map(item => item.footprintId),
   );
   status.textContent = `Building ${footprintCollection.features.length} footprints…`;
+  const hungerfordIds = new Set(Object.keys(hungerfordStyles.buildings).map(Number));
   const built = await buildBuildings({
     features: footprintCollection.features,
     heights,
@@ -79,9 +85,22 @@ try {
     maps,
     group: buildings,
     separateIds,
+    districtIds: hungerfordIds,
+    districtColor: (id) => {
+      const item = hungerfordStyles.buildings[String(id)];
+      return item ? new Color(item.wall[0], item.wall[1], item.wall[2]) : null;
+    },
     onProgress: (done, total) => {
       status.textContent = `Building geometry (${done}/${total})…`;
     },
+  });
+  const hungerford = dressHungerford({
+    parent: buildings,
+    edges: built.facadeEdges,
+    styles: hungerfordStyles,
+    maps,
+    textures: hungerfordTextures,
+    collisionPolygons: built.collisionPolygons,
   });
   const placed = await placeLandmarks({
     world, manifest: landmarks, terrain,
@@ -108,6 +127,7 @@ try {
     trees: treeCount,
     parking: parking.features.length,
     landmarks: placed,
+    hungerford,
     bridge: {
       deckElevationM: landmarks.bridge.deckElevationM,
       clearanceOverPikeM: landmarks.bridge.clearanceOverPikeM,
@@ -123,11 +143,18 @@ try {
     freeze: controls.freeze,
     sampleGround,
     shots: SHOTS,
+    hungerfordShots: HUNGERFORD_SHOTS,
   };
   if (audit) {
     const blocked = createBuildingCollision(built.collisionPolygons);
     window.__ROCKVILLE__.blocked = blocked;
-    window.__ROCKVILLE__.pose = (id) => shotPose(SHOTS.find(item => item.id === id), sampleGround, blocked);
+    const findShot = (id) => SHOTS.find(item => item.id === id)
+      || HUNGERFORD_SHOTS.find(item => item.id === id);
+    window.__ROCKVILLE__.pose = (id) => shotPose(findShot(id), sampleGround, blocked);
+    window.__ROCKVILLE__.hungerfordWalk = () => runHungerfordWalk({
+      blocked,
+      sampleGameY: sampleGround,
+    });
     window.__ROCKVILLE__.walk = runWalkTest({
       blocked,
       sampleGameY: sampleGround,
