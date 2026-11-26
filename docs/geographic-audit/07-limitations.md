@@ -7,12 +7,9 @@
 - **Circuit Court.** Planning 169.44 ft at 50 Maryland Avenue. A Rockville Circuit Court part 22 m away is 84 ft. They were not overlayed as the same polygon.
 - **Bridge surface.** Planning polygon 1319 says Asphalt. The city notice of 1 December 2020 describes glass panels. The planimetric code is not the enclosure.
 
-## Edges the owner still has to set
+## Edges the owner has now set
 
-1. West option A (−77.155, both sides of Washington as far as the inspected addresses, and the game's current west bound) or west option B (−77.160, which adds a strip of 750 Planning parts, average 28.4 ft, maximum 118 ft).
-2. East edge at −77.14220 (includes the Highland Avenue circle, which is only an approximate point and is not labelled as a metro roundabout) or at −77.14460 (station parking and bridge, without the residential circle).
-3. Whether the south edge stays at 39.08050, which also excludes 700 Rockville Pike and 208 Monroe Street, or moves south a few metres on the Pike only.
-4. Whether the 131 m gap between the Hungerford 800 block and the named college footprints should be walked and named before the north edge is frozen. Those buildings were not in the footprint download used for the height table, because that download stopped at the game's north bound of 39.095.
+West −77.155, north at gLeaf, east on the rail with a station bulge, south adjusted so 208 Monroe Street and 700 Rockville Pike are in and the school polygon is out. The Highland Avenue circle is excluded. Remaining edge questions are in the questions at the end of this file, not a choice between the old rectangles.
 
 ## Data that was not opened
 
@@ -42,8 +39,16 @@
 - Rockville's building service source-code list stops at 2020. Planning's list includes 2023 and 2025. They are not the same vintage.
 - OSM school and bridge geometry is ODbL and was used because the county school footprint does not cover the campus grounds. It is not a deed.
 
+## Still open after 001B
+
+- Deck elevation and clearance of the pedestrian bridge. Plan and endpoints are known. The public EPT index does not cover this point, so a LAS tile or a measured section is still required.
+- Unresolved skyline rows in `height-reconciliation.csv`: Circuit Court (two towers), 32 Courthouse Square, 1 Church Street, the District Court at 191 East Jefferson, the Cambria / Town Square tower at 196 East Montgomery, and 451 Hungerford Drive. No chosen height is filled in for those.
+- 239 of 508 footprints are Unresolved. Most of those have no joined measurement at all, not a conflict. They need a Planning or Rockville join before they get a height. They do not get the area-seed formula.
+- Whether the east line should step off the western rail centerline onto the sidewalk. East-side shops that were tested, including 811 Hungerford and Giant, fall west of that centerline and are inside. A building that straddles the rail was not clipped on its own.
+- The 131 m between latitude 39.09510 and the first named college footprint was not walked building by building. The cutoff is the 800 block, as directed.
+
 ## What would make the next pass shorter
 
-- A written choice on the four edge questions and on the 20% height cross-check.
-- Permission to sample one LAS tile over 51 Monroe Place and 101 Monroe Street, so the 241 ft / 74 ft split can be checked against points instead of against two attributes.
-- A deck elevation for the bridge, from that same tile or from a section the owner already has.
+- A LAS tile, or any other point cloud, over the bridge and over the unresolved skyline addresses.
+- A deck elevation the owner already has for the glass bridge.
+- A decision on the unresolved rows: leave them blank until measured, which is what this table does now.

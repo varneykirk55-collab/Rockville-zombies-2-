@@ -297,31 +297,47 @@ def draw_base(ax, mosaic, extent, view):
     ax.text(x0 + dx / 2, y0 + 0.00018, "200 m", ha="center", va="bottom", fontsize=8, color="black")
 
 
+def load_rings(path):
+    data = json.loads(Path(path).read_text())
+    rings = []
+    for feature in data["features"]:
+        geom = feature["geometry"]
+        name = feature["properties"].get("name", "")
+        if geom["type"] == "Polygon":
+            rings.append((name, geom["coordinates"][0]))
+        elif geom["type"] == "LineString":
+            rings.append((name, geom["coordinates"]))
+    return rings
+
+
 def save_boundary_map(mosaic, extent):
     view = (-77.164, -77.138, 39.0755, 39.1025)
+    named = dict(load_rings(DATA / "playable-boundary.geojson"))
+    playable = named["Playable boundary"]
     fig, ax = plt.subplots(figsize=(11.5, 12.5), dpi=120)
     draw_base(ax, mosaic, extent, view)
-    ax.add_patch(MplPolygon(GAME_BOUNDS, closed=True, fill=False, edgecolor="#444444",
-                            linewidth=1.0, linestyle=(0, (2, 2)), label="Current game bounds"))
-    ax.add_patch(MplPolygon(PLAYABLE, closed=True, facecolor="#1d4e89", edgecolor="#0b2545",
-                            alpha=0.28, linewidth=2.0, label="Working playable boundary"))
-    ax.plot([p[0] for p in WEST_B], [p[1] for p in WEST_B], color="#6a1b9a", linewidth=2.2,
-            linestyle=(0, (4, 2)), label="West proposal B")
-    ax.plot([p[0] for p in EAST_ALT], [p[1] for p in EAST_ALT], color="#ef6c00", linewidth=2.0,
-            linestyle=(0, (1, 1.4)), label="East alternative")
-    ax.add_patch(MplPolygon(SCHOOL, closed=True, facecolor="#c62828", edgecolor="#7f1010",
-                            alpha=0.45, linewidth=1.0, label="Exclude: RMHS (OSM)"))
-    ax.add_patch(MplPolygon(COLLEGE, closed=True, facecolor="#ef6c00", edgecolor="#e65100",
-                            alpha=0.35, linewidth=1.0, label="Exclude: Montgomery College"))
-    ax.plot([p[0] for p in BRIDGE], [p[1] for p in BRIDGE], color="#00bcd4", linewidth=3.0,
+    ax.add_patch(MplPolygon(GAME_BOUNDS, closed=True, fill=False, edgecolor="#666666",
+                            linewidth=1.0, linestyle=(0, (2, 2)), label="Current game rectangle"))
+    ax.add_patch(MplPolygon(playable, closed=True, facecolor="#1d4e89", edgecolor="#0b2545",
+                            alpha=0.33, linewidth=2.0, label="Playable boundary"))
+    ax.add_patch(MplPolygon(named["Richard Montgomery High School"], closed=True, facecolor="#c62828",
+                            edgecolor="#7f1010", alpha=0.45, linewidth=1.0, label="Exclude: RMHS"))
+    ax.add_patch(MplPolygon(named["Montgomery College Rockville campus envelope"], closed=True,
+                            facecolor="#ef6c00", edgecolor="#e65100", alpha=0.35, linewidth=1.0,
+                            label="Exclude: Montgomery College"))
+    bridge = named["Pedestrian bridge"]
+    ax.plot([p[0] for p in bridge], [p[1] for p in bridge], color="#00bcd4", linewidth=3.0,
             label="Pedestrian bridge")
-    ax.scatter([GLEAF[0]], [GLEAF[1]], s=36, color="#2e7d32", zorder=5, label="808 Hungerford (gLeaf address)")
-    ax.scatter([METRO[0]], [METRO[1]], s=36, marker="s", color="#212121", zorder=5, label="Metro station point")
-    ax.scatter([CIRCLE[0]], [CIRCLE[1]], s=42, marker="o", facecolors="none", edgecolors="#ad1457",
-               linewidths=1.8, zorder=5, label="Approx. Highland Ave circle")
+    loop = named["East-of-platform bus and parking aisle"]
+    ax.plot([p[0] for p in loop], [p[1] for p in loop], color="#fdd835", linewidth=2.0,
+            label="East bus / parking loop")
+    ax.scatter([-77.153844], [39.094821], s=36, color="#2e7d32", zorder=5, label="808 Hungerford")
+    ax.scatter([-77.146634], [39.084431], s=36, marker="s", color="#212121", zorder=5, label="Metro station point")
+    ax.scatter([-77.14260], [39.08520], s=42, marker="o", facecolors="none", edgecolors="#ad1457",
+               linewidths=1.8, zorder=5, label="Excluded Highland Ave circle")
     ax.legend(loc="lower left", fontsize=7.5, framealpha=0.92)
-    ax.set_title("Rockville playable boundary — audit proposal, 26 Nov 2026\n"
-                 "Filled polygon uses west option A. Purple and orange lines are unapproved alternatives.\n"
+    ax.set_title("Rockville playable boundary — owner-directed outline, 26 Nov 2026\n"
+                 "West stays at -77.155. East follows the rail and bulges around the station lot.\n"
                  "Basemap © OpenStreetMap contributors", fontsize=11)
     fig.tight_layout()
     out = MAPS / "playable-boundary.png"
@@ -331,17 +347,17 @@ def save_boundary_map(mosaic, extent):
 
 
 def save_district_map(mosaic, extent):
-    view = (-77.1575, -77.1405, 39.0792, 39.0966)
+    view = (-77.1575, -77.1405, 39.0788, 39.0962)
     colors = {
         "hungerford-corridor": "#1565c0",
         "town-center-core": "#6a1b9a",
-        "metro-and-bridge": "#00838f",
+        "metro-station": "#00838f",
         "south-pike-approach": "#ef6c00",
-        "northeast-residential": "#2e7d32",
     }
+    districts = dict(load_rings(DATA / "districts.geojson"))
     fig, ax = plt.subplots(figsize=(11.5, 12.5), dpi=120)
     draw_base(ax, mosaic, extent, view)
-    for name, coords in DISTRICTS.items():
+    for name, coords in districts.items():
         ax.add_patch(MplPolygon(coords, closed=True, facecolor=colors[name], edgecolor="white",
                                 alpha=0.38, linewidth=1.4, label=name.replace("-", " ")))
         cx = sum(p[0] for p in coords[:-1]) / (len(coords) - 1)
@@ -349,7 +365,7 @@ def save_district_map(mosaic, extent):
         ax.text(cx, cy, name.replace("-", "\n"), ha="center", va="center", fontsize=8, color="white",
                 fontweight="bold")
     ax.plot([p[0] for p in BRIDGE], [p[1] for p in BRIDGE], color="#ffeb3b", linewidth=2.5)
-    ax.set_title("Proposed district divisions inside the working boundary\n"
+    ax.set_title("Proposed districts inside the irregular boundary\n"
                  "Not official neighborhoods. Basemap © OpenStreetMap contributors", fontsize=11)
     ax.legend(loc="lower left", fontsize=7.5, framealpha=0.92)
     fig.tight_layout()
@@ -360,7 +376,6 @@ def save_district_map(mosaic, extent):
 
 
 def main():
-    write_geojson()
     mosaic, extent = osm_mosaic(-77.164, 39.0755, -77.138, 39.1025)
     save_boundary_map(mosaic, extent)
     save_district_map(mosaic, extent)

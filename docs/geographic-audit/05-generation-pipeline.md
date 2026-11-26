@@ -8,17 +8,13 @@ The aim is one generator for a whole block. Landmarks stay as individual models.
 
 `fetchFootprints` already returns the outline, the holes, the address, the class, and `BLDG_ID`. Keep that request. Do not redraw the city from a second footprint set. The Planning 3D parts are split (mechanical penthouses, towers, garage decks) and 281 of them did not fall inside a county footprint. They are a height source, not a new street wall.
 
-## 2. Attach a height only when the tables agree
+## 2. Use the reconciliation table, not the area formula
 
-For each county footprint:
+`data/height-reconciliation.csv` already applies the rules in [08-height-reconciliation.md](08-height-reconciliation.md).
 
-1. Query Planning 3D parts whose centroid falls inside the footprint. Convert `BLDG_HEIGHT` and `BLDG_ELEV` from feet with 0.3048.
-2. Query the Rockville building layer for parts in the same footprint.
-3. Choose the Planning part with the largest area as the main roof candidate.
-4. If a Rockville part overlaps that piece and the two heights differ by more than 20%, do not invent a third number. Leave the footprint on the current estimated formula and flag it. 51 Monroe Place fails this test (241.6 ft versus 74.4 ft). The Executive Office Building passes it (222.9 ft versus 207.2 ft) and would use the Planning value, 67.9 m, instead of the game's 24.3 m.
-5. If only one source has a height, use it and record which source. If neither does, keep `massHeight`. Do not fill a measured building with the area formula.
-
-Where several parts on one footprint differ by more than 3 m, extrude the main footprint to the largest-area height and add the smaller parts as separate masses. That is how 401 Hungerford stops being a single 37 m slab over a 4.5 m wing. Cap the extra masses at a count per footprint so a mechanical farm does not become hundreds of draw calls. Merge them into the existing 96 m chunks.
+- Confidence High or Medium: extrude to `chosen_height_m`. That value is a measured height. For 51 Monroe Place it is 73.65 m. For 101 Monroe Street it is 67.94 m. Both are above the game's 40 m cap, which is why those two roofs are the skyline fix.
+- Confidence Unresolved: do not call `massHeight`, and do not silently pick the lower GIS number. Leave the footprint out of the verified set and keep it visible in the unresolved list. The Circuit Court, 1 Church Street, 32 Courthouse Square, the District Court, and 196 East Montgomery Avenue are in that list.
+- Where `planning_max_m` exceeds the chosen main mass by more than 3 m and the row is High or Medium, add the taller part as its own mass instead of stretching the whole footprint. Cap the extra parts so they stay inside the 96 m chunk merge.
 
 Set the building's base to `(BLDG_ELEV_ft * 0.3048) - demAtOrigin`, once the ground itself uses the DEM. Until the ground is a DEM, a per-building base just floats buildings off a flat plane and looks wrong. Do the terrain step in the same change as the bases.
 
@@ -50,9 +46,9 @@ Kit choice, in order, from attributes that exist:
 
 Shared edges of about 7,030 m should be welded or one of the two coincident faces dropped. The current double extrusion z-fights and wastes triangles. Class `Q` is only 53 footprints; the shared-edge test is the one that finds the party walls.
 
-## 5. Terrain from the DEM, not from street elevation
+## 5. Terrain from the Maryland DEM
 
-Sample `MD_montgomery_dem_m` on a 10 m grid over the accepted polygon. The identify call used in this audit returns metres. Subtract the DEM at the game origin (133.52 m) so the origin stays near Y = 0. Build one ground mesh. Move each building base with `BLDG_ELEV` in the same vertical datum.
+Sample [MD_montgomery_dem_m](https://mdgeodata.md.gov/lidar/rest/services/Montgomery/MD_montgomery_dem_m/ImageServer) on a 10 m grid over the irregular polygon. Identify returns metres, and USGS EPQS matches it to about a decimetre at the three points in [09-terrain-and-bridge.md](09-terrain-and-bridge.md). Subtract 133.52 m so the origin stays near Y = 0. The public 3DEP EPT bucket has no project polygon over downtown Rockville, so this DEM is the ground source, with EPQS as the fallback. Do not wait on a LAS download to shape the ground. Roof heights still come from the reconciliation table, not from a new point-cloud sample.
 
 Do not use `F_ELEV` / `T_ELEV` on the street centerlines. They were 0 on the downtown segments inspected.
 
@@ -75,7 +71,7 @@ Blocks that are not anchors — the Hungerford one-storey retail, the gable hous
 ## 8. Order of work, after approval
 
 1. Accept the boundary, including a west option and which east line is the roundabout.
-2. Accept the 20% cross-check rule, or replace it.
+2. Use `height-reconciliation.csv`. High and Medium rows have a chosen measured height. Unresolved rows stay blank.
 3. Add the DEM ground and building bases together.
 4. Swap estimated heights for agreed heights, weld shared edges, and apply roof codes.
 5. Swap sidewalk ribbons for sidewalk polygons and add parking surfaces.

@@ -1,35 +1,39 @@
 # Downtown Rockville geographic audit
 
-Research only, 26 November 2026. Nothing in `src/`, `public/`, or `index.html` was changed. The city was not rebuilt.
+Research only. Nothing in `src/`, `public/`, or `index.html` was changed, and the branch is not merged.
 
-This folder records what the repository already does, which public datasets actually contain measured heights and elevations, and a proposed playable boundary. A claim is tied to a query, a count, or a measurement. Where a source was not opened, the report says so.
+Assignment 001 recorded the foundation and the datasets. Assignment 001B, in the same folder, replaces the rectangle with the owner's irregular boundary and replaces the "keep a guessed height when the tables disagree" rule. A chosen height is either a measured value with a confidence level or it is left blank.
 
 ## Read in this order
 
 | Document | What it answers |
 | --- | --- |
-| [01-dataset-inventory.md](01-dataset-inventory.md) | Which services responded, what fields they expose, dates, and licenses that were actually present |
-| [02-foundation-audit.md](02-foundation-audit.md) | What the current Three.js map contains, and where it departs from the measured data |
-| [03-playable-boundary.md](03-playable-boundary.md) | North, south, east, and two west options, with the map and GeoJSON |
-| [04-height-comparison.md](04-height-comparison.md) | Game height formula versus Planning 3D heights, and the Rockville cross-check |
-| [05-generation-pipeline.md](05-generation-pipeline.md) | How to generate blocks from the data already in hand, without modelling every building by hand |
-| [06-districts.md](06-districts.md) | Five proposed assignment areas inside the working boundary |
-| [07-limitations.md](07-limitations.md) | Missing data, conflicts, and what this audit did not open |
+| [01-dataset-inventory.md](01-dataset-inventory.md) | Services that responded, fields, dates, and licenses |
+| [02-foundation-audit.md](02-foundation-audit.md) | What the current Three.js map contains |
+| [03-playable-boundary.md](03-playable-boundary.md) | The irregular boundary, the station loop, and the Hungerford corridor |
+| [08-height-reconciliation.md](08-height-reconciliation.md) | Why the two height tables differ, and the confidence rules |
+| [09-terrain-and-bridge.md](09-terrain-and-bridge.md) | DEM source, the missing point cloud, and the pedestrian bridge |
+| [05-generation-pipeline.md](05-generation-pipeline.md) | How a later change would apply this without hand-modelling every building |
+| [06-districts.md](06-districts.md) | Four assignment areas on the new outline |
+| [04-height-comparison.md](04-height-comparison.md) | The first pass against Planning only. Superseded where it conflicts with 08 |
+| [07-limitations.md](07-limitations.md) | What is still unresolved |
 
 ## Maps and tables
 
 | File | Contents |
 | --- | --- |
-| [maps/playable-boundary.png](maps/playable-boundary.png) | Working boundary over OpenStreetMap, plus the two unapproved alternatives |
-| [maps/districts.png](maps/districts.png) | The five proposed districts |
-| [data/playable-boundary.geojson](data/playable-boundary.geojson) | WGS84 geometries. Game-frame meters are in properties |
+| [maps/playable-boundary.png](maps/playable-boundary.png) | Irregular boundary over OpenStreetMap |
+| [maps/districts.png](maps/districts.png) | Four districts on that outline |
+| [data/playable-boundary.geojson](data/playable-boundary.geojson) | WGS84 polygon. Game-frame metres are on each vertex |
 | [data/districts.geojson](data/districts.geojson) | District polygons in the same frame |
-| [data/height-comparison.csv](data/height-comparison.csv) | 1,464 footprints joined to a Planning 3D part |
-| [data/tall-building-crosscheck.csv](data/tall-building-crosscheck.csv) | Planning versus Rockville heights for the buildings that were queried twice |
+| [data/boundary-change.csv](data/boundary-change.csv) | Footprints gained or lost versus the game rectangle and the previous audit rectangle |
+| [data/height-reconciliation.csv](data/height-reconciliation.csv) | One row per footprint inside the polygon: sources, chosen height, confidence, evidence |
+| [data/height-comparison.csv](data/height-comparison.csv) | Earlier Planning-only join for the game rectangle |
+| [data/tall-building-crosscheck.csv](data/tall-building-crosscheck.csv) | First tall-building sample. The rulings are in the reconciliation file |
 
 ## Scripts
 
-`scripts/compare_heights.py` re-queries the county footprint service and the Planning 3D MapServer and rewrites the comparison CSV. `scripts/build_maps.py` redraws the GeoJSON and the two PNGs from the coordinates recorded in that script. OpenStreetMap tiles are downloaded only while the map script runs; they are not committed.
+`scripts/finalize_audit.py` writes the polygon, the district file, the gain/loss table, and the reconciliation CSV from the coordinates and rules in that script. `scripts/build_maps.py` draws the two PNGs from those GeoJSON files. `scripts/compare_heights.py` still rebuilds the earlier Planning-only CSV. OpenStreetMap tiles are downloaded only while a map is rendered; they are not committed.
 
 ## Coordinate frame already in the game
 
@@ -37,4 +41,4 @@ This folder records what the repository already does, which public datasets actu
 
 ## Stop condition
 
-Do not treat the working polygon as an approved map. The west edge and the Highland Avenue circle are proposals. Do not replace estimated heights until the owner chooses which height source wins where Planning and Rockville disagree.
+The boundary now follows the owner's edges. Height rows with confidence High or Medium are measured values. Rows marked Unresolved have no chosen height. Geometry is not implemented in this branch.

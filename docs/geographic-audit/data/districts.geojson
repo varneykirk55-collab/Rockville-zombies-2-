@@ -1,8 +1,7 @@
 {
   "type": "FeatureCollection",
   "properties": {
-    "crs_note": "Geometries are WGS84 longitude/latitude. Game-frame meters are in properties. +X east, +Y up, +Z south, origin longitude -77.152 latitude 39.086. 1 unit = 1 metre.",
-    "status": "Proposed assignment areas inside the working boundary. They are not official neighborhoods."
+    "status": "Assignment areas inside the irregular boundary. Not official neighborhoods."
   },
   "features": [
     {
@@ -13,27 +12,105 @@
         "vertices_wgs84_and_game_frame": [
           {
             "longitude": -77.155,
-            "latitude": 39.0885,
+            "latitude": 39.0951,
             "game_x_m": -259.56,
-            "game_z_m": -277.54
+            "game_z_m": -1010.26
           },
           {
-            "longitude": -77.1493,
-            "latitude": 39.0885,
-            "game_x_m": 233.61,
-            "game_z_m": -277.54
+            "longitude": -77.15244,
+            "latitude": 39.0951,
+            "game_x_m": -38.07,
+            "game_z_m": -1010.26
           },
           {
-            "longitude": -77.1493,
-            "latitude": 39.09505,
-            "game_x_m": 233.61,
-            "game_z_m": -1004.7
+            "longitude": -77.152277,
+            "latitude": 39.09465,
+            "game_x_m": -23.97,
+            "game_z_m": -960.3
+          },
+          {
+            "longitude": -77.152113,
+            "latitude": 39.0942,
+            "game_x_m": -9.78,
+            "game_z_m": -910.34
+          },
+          {
+            "longitude": -77.151948,
+            "latitude": 39.09375,
+            "game_x_m": 4.5,
+            "game_z_m": -860.38
+          },
+          {
+            "longitude": -77.151782,
+            "latitude": 39.0933,
+            "game_x_m": 18.86,
+            "game_z_m": -810.42
+          },
+          {
+            "longitude": -77.151616,
+            "latitude": 39.09285,
+            "game_x_m": 33.22,
+            "game_z_m": -760.47
+          },
+          {
+            "longitude": -77.15145,
+            "latitude": 39.0924,
+            "game_x_m": 47.59,
+            "game_z_m": -710.51
+          },
+          {
+            "longitude": -77.151284,
+            "latitude": 39.09195,
+            "game_x_m": 61.95,
+            "game_z_m": -660.55
+          },
+          {
+            "longitude": -77.151119,
+            "latitude": 39.0915,
+            "game_x_m": 76.23,
+            "game_z_m": -610.59
+          },
+          {
+            "longitude": -77.150958,
+            "latitude": 39.09105,
+            "game_x_m": 90.16,
+            "game_z_m": -560.64
+          },
+          {
+            "longitude": -77.150792,
+            "latitude": 39.0906,
+            "game_x_m": 104.52,
+            "game_z_m": -510.68
+          },
+          {
+            "longitude": -77.150623,
+            "latitude": 39.09015,
+            "game_x_m": 119.14,
+            "game_z_m": -460.72
+          },
+          {
+            "longitude": -77.150462,
+            "latitude": 39.0897,
+            "game_x_m": 133.07,
+            "game_z_m": -410.76
+          },
+          {
+            "longitude": -77.150258,
+            "latitude": 39.08925,
+            "game_x_m": 150.72,
+            "game_z_m": -360.81
+          },
+          {
+            "longitude": -77.150023,
+            "latitude": 39.0888,
+            "game_x_m": 171.05,
+            "game_z_m": -310.85
           },
           {
             "longitude": -77.155,
-            "latitude": 39.09505,
+            "latitude": 39.0885,
             "game_x_m": -259.56,
-            "game_z_m": -1004.7
+            "game_z_m": -277.54
           }
         ]
       },
@@ -43,23 +120,75 @@
           [
             [
               -77.155,
-              39.0885
+              39.0951
             ],
             [
-              -77.1493,
-              39.0885
+              -77.15244,
+              39.0951
             ],
             [
-              -77.1493,
-              39.09505
+              -77.152277,
+              39.09465
+            ],
+            [
+              -77.152113,
+              39.0942
+            ],
+            [
+              -77.151948,
+              39.09375
+            ],
+            [
+              -77.151782,
+              39.0933
+            ],
+            [
+              -77.151616,
+              39.09285
+            ],
+            [
+              -77.15145,
+              39.0924
+            ],
+            [
+              -77.151284,
+              39.09195
+            ],
+            [
+              -77.151119,
+              39.0915
+            ],
+            [
+              -77.150958,
+              39.09105
+            ],
+            [
+              -77.150792,
+              39.0906
+            ],
+            [
+              -77.150623,
+              39.09015
+            ],
+            [
+              -77.150462,
+              39.0897
+            ],
+            [
+              -77.150258,
+              39.08925
+            ],
+            [
+              -77.150023,
+              39.0888
             ],
             [
               -77.155,
-              39.09505
+              39.0885
             ],
             [
               -77.155,
-              39.0885
+              39.0951
             ]
           ]
         ]
@@ -73,27 +202,99 @@
         "vertices_wgs84_and_game_frame": [
           {
             "longitude": -77.155,
-            "latitude": 39.0824,
-            "game_x_m": -259.56,
-            "game_z_m": 399.66
-          },
-          {
-            "longitude": -77.1476,
-            "latitude": 39.0824,
-            "game_x_m": 380.69,
-            "game_z_m": 399.66
-          },
-          {
-            "longitude": -77.1476,
             "latitude": 39.0885,
-            "game_x_m": 380.69,
+            "game_x_m": -259.56,
             "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.149789,
+            "latitude": 39.08835,
+            "game_x_m": 191.3,
+            "game_z_m": -260.89
+          },
+          {
+            "longitude": -77.149512,
+            "latitude": 39.0879,
+            "game_x_m": 215.27,
+            "game_z_m": -210.93
+          },
+          {
+            "longitude": -77.149239,
+            "latitude": 39.08745,
+            "game_x_m": 238.89,
+            "game_z_m": -160.97
+          },
+          {
+            "longitude": -77.148936,
+            "latitude": 39.087,
+            "game_x_m": 265.1,
+            "game_z_m": -111.02
+          },
+          {
+            "longitude": -77.148632,
+            "latitude": 39.08655,
+            "game_x_m": 291.4,
+            "game_z_m": -61.06
+          },
+          {
+            "longitude": -77.148287,
+            "latitude": 39.0861,
+            "game_x_m": 321.25,
+            "game_z_m": -11.1
+          },
+          {
+            "longitude": -77.14784,
+            "latitude": 39.08565,
+            "game_x_m": 359.93,
+            "game_z_m": 38.86
+          },
+          {
+            "longitude": -77.147362,
+            "latitude": 39.0852,
+            "game_x_m": 401.29,
+            "game_z_m": 88.81
+          },
+          {
+            "longitude": -77.146843,
+            "latitude": 39.08475,
+            "game_x_m": 446.19,
+            "game_z_m": 138.77
+          },
+          {
+            "longitude": -77.146326,
+            "latitude": 39.0843,
+            "game_x_m": 490.92,
+            "game_z_m": 188.73
+          },
+          {
+            "longitude": -77.14581,
+            "latitude": 39.08385,
+            "game_x_m": 535.57,
+            "game_z_m": 238.69
+          },
+          {
+            "longitude": -77.145294,
+            "latitude": 39.0834,
+            "game_x_m": 580.21,
+            "game_z_m": 288.64
+          },
+          {
+            "longitude": -77.144723,
+            "latitude": 39.08295,
+            "game_x_m": 629.62,
+            "game_z_m": 338.6
+          },
+          {
+            "longitude": -77.144156,
+            "latitude": 39.0825,
+            "game_x_m": 678.67,
+            "game_z_m": 388.56
           },
           {
             "longitude": -77.155,
-            "latitude": 39.0885,
+            "latitude": 39.0824,
             "game_x_m": -259.56,
-            "game_z_m": -277.54
+            "game_z_m": 399.66
           }
         ]
       },
@@ -103,23 +304,71 @@
           [
             [
               -77.155,
-              39.0824
-            ],
-            [
-              -77.1476,
-              39.0824
-            ],
-            [
-              -77.1476,
               39.0885
+            ],
+            [
+              -77.149789,
+              39.08835
+            ],
+            [
+              -77.149512,
+              39.0879
+            ],
+            [
+              -77.149239,
+              39.08745
+            ],
+            [
+              -77.148936,
+              39.087
+            ],
+            [
+              -77.148632,
+              39.08655
+            ],
+            [
+              -77.148287,
+              39.0861
+            ],
+            [
+              -77.14784,
+              39.08565
+            ],
+            [
+              -77.147362,
+              39.0852
+            ],
+            [
+              -77.146843,
+              39.08475
+            ],
+            [
+              -77.146326,
+              39.0843
+            ],
+            [
+              -77.14581,
+              39.08385
+            ],
+            [
+              -77.145294,
+              39.0834
+            ],
+            [
+              -77.144723,
+              39.08295
+            ],
+            [
+              -77.144156,
+              39.0825
+            ],
+            [
+              -77.155,
+              39.0824
             ],
             [
               -77.155,
               39.0885
-            ],
-            [
-              -77.155,
-              39.0824
             ]
           ]
         ]
@@ -128,32 +377,80 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "metro-and-bridge",
+        "name": "metro-station",
         "status": "proposed district",
         "vertices_wgs84_and_game_frame": [
           {
-            "longitude": -77.1476,
-            "latitude": 39.0824,
-            "game_x_m": 380.69,
-            "game_z_m": 399.66
+            "longitude": -77.14784,
+            "latitude": 39.08565,
+            "game_x_m": 359.93,
+            "game_z_m": 38.86
           },
           {
-            "longitude": -77.1422,
-            "latitude": 39.0824,
-            "game_x_m": 847.91,
-            "game_z_m": 399.66
+            "longitude": -77.147362,
+            "latitude": 39.0852,
+            "game_x_m": 401.29,
+            "game_z_m": 88.81
           },
           {
-            "longitude": -77.1422,
-            "latitude": 39.0885,
-            "game_x_m": 847.91,
-            "game_z_m": -277.54
+            "longitude": -77.146843,
+            "latitude": 39.08475,
+            "game_x_m": 446.19,
+            "game_z_m": 138.77
           },
           {
-            "longitude": -77.1476,
-            "latitude": 39.0885,
-            "game_x_m": 380.69,
-            "game_z_m": -277.54
+            "longitude": -77.146326,
+            "latitude": 39.0843,
+            "game_x_m": 490.92,
+            "game_z_m": 188.73
+          },
+          {
+            "longitude": -77.14581,
+            "latitude": 39.08385,
+            "game_x_m": 535.57,
+            "game_z_m": 238.69
+          },
+          {
+            "longitude": -77.145294,
+            "latitude": 39.0834,
+            "game_x_m": 580.21,
+            "game_z_m": 288.64
+          },
+          {
+            "longitude": -77.1459,
+            "latitude": 39.08555,
+            "game_x_m": 527.78,
+            "game_z_m": 49.96
+          },
+          {
+            "longitude": -77.1452,
+            "latitude": 39.0855,
+            "game_x_m": 588.35,
+            "game_z_m": 55.51
+          },
+          {
+            "longitude": -77.14382,
+            "latitude": 39.08362,
+            "game_x_m": 707.75,
+            "game_z_m": 264.22
+          },
+          {
+            "longitude": -77.14382,
+            "latitude": 39.08305,
+            "game_x_m": 707.75,
+            "game_z_m": 327.5
+          },
+          {
+            "longitude": -77.1447,
+            "latitude": 39.08305,
+            "game_x_m": 631.61,
+            "game_z_m": 327.5
+          },
+          {
+            "longitude": -77.145294,
+            "latitude": 39.0834,
+            "game_x_m": 580.21,
+            "game_z_m": 288.64
           }
         ]
       },
@@ -162,24 +459,56 @@
         "coordinates": [
           [
             [
-              -77.1476,
-              39.0824
+              -77.14784,
+              39.08565
             ],
             [
-              -77.1422,
-              39.0824
+              -77.147362,
+              39.0852
             ],
             [
-              -77.1422,
-              39.0885
+              -77.146843,
+              39.08475
             ],
             [
-              -77.1476,
-              39.0885
+              -77.146326,
+              39.0843
             ],
             [
-              -77.1476,
-              39.0824
+              -77.14581,
+              39.08385
+            ],
+            [
+              -77.145294,
+              39.0834
+            ],
+            [
+              -77.1459,
+              39.08555
+            ],
+            [
+              -77.1452,
+              39.0855
+            ],
+            [
+              -77.14382,
+              39.08362
+            ],
+            [
+              -77.14382,
+              39.08305
+            ],
+            [
+              -77.1447,
+              39.08305
+            ],
+            [
+              -77.145294,
+              39.0834
+            ],
+            [
+              -77.14784,
+              39.08565
             ]
           ]
         ]
@@ -193,27 +522,81 @@
         "vertices_wgs84_and_game_frame": [
           {
             "longitude": -77.155,
-            "latitude": 39.0805,
-            "game_x_m": -259.56,
-            "game_z_m": 610.59
-          },
-          {
-            "longitude": -77.1422,
-            "latitude": 39.0805,
-            "game_x_m": 847.91,
-            "game_z_m": 610.59
-          },
-          {
-            "longitude": -77.1422,
             "latitude": 39.0824,
-            "game_x_m": 847.91,
+            "game_x_m": -259.56,
             "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.143632,
+            "latitude": 39.08205,
+            "game_x_m": 724.01,
+            "game_z_m": 438.52
+          },
+          {
+            "longitude": -77.143108,
+            "latitude": 39.0816,
+            "game_x_m": 769.35,
+            "game_z_m": 488.48
+          },
+          {
+            "longitude": -77.141856,
+            "latitude": 39.08058,
+            "game_x_m": 877.67,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1431,
+            "latitude": 39.08058,
+            "game_x_m": 770.04,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1431,
+            "latitude": 39.08018,
+            "game_x_m": 770.04,
+            "game_z_m": 646.12
+          },
+          {
+            "longitude": -77.1442,
+            "latitude": 39.08018,
+            "game_x_m": 674.87,
+            "game_z_m": 646.12
+          },
+          {
+            "longitude": -77.1442,
+            "latitude": 39.08058,
+            "game_x_m": 674.87,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1496,
+            "latitude": 39.08058,
+            "game_x_m": 207.65,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1496,
+            "latitude": 39.0797,
+            "game_x_m": 207.65,
+            "game_z_m": 699.41
+          },
+          {
+            "longitude": -77.1505,
+            "latitude": 39.0797,
+            "game_x_m": 129.78,
+            "game_z_m": 699.41
+          },
+          {
+            "longitude": -77.1505,
+            "latitude": 39.0807,
+            "game_x_m": 129.78,
+            "game_z_m": 588.39
           },
           {
             "longitude": -77.155,
-            "latitude": 39.0824,
+            "latitude": 39.0807,
             "game_x_m": -259.56,
-            "game_z_m": 399.66
+            "game_z_m": 588.39
           }
         ]
       },
@@ -223,83 +606,59 @@
           [
             [
               -77.155,
-              39.0805
-            ],
-            [
-              -77.1422,
-              39.0805
-            ],
-            [
-              -77.1422,
               39.0824
+            ],
+            [
+              -77.143632,
+              39.08205
+            ],
+            [
+              -77.143108,
+              39.0816
+            ],
+            [
+              -77.141856,
+              39.08058
+            ],
+            [
+              -77.1431,
+              39.08058
+            ],
+            [
+              -77.1431,
+              39.08018
+            ],
+            [
+              -77.1442,
+              39.08018
+            ],
+            [
+              -77.1442,
+              39.08058
+            ],
+            [
+              -77.1496,
+              39.08058
+            ],
+            [
+              -77.1496,
+              39.0797
+            ],
+            [
+              -77.1505,
+              39.0797
+            ],
+            [
+              -77.1505,
+              39.0807
+            ],
+            [
+              -77.155,
+              39.0807
             ],
             [
               -77.155,
               39.0824
-            ],
-            [
-              -77.155,
-              39.0805
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "northeast-residential",
-        "status": "proposed district",
-        "vertices_wgs84_and_game_frame": [
-          {
-            "longitude": -77.1493,
-            "latitude": 39.0885,
-            "game_x_m": 233.61,
-            "game_z_m": -277.54
-          },
-          {
-            "longitude": -77.1422,
-            "latitude": 39.0885,
-            "game_x_m": 847.91,
-            "game_z_m": -277.54
-          },
-          {
-            "longitude": -77.1422,
-            "latitude": 39.09505,
-            "game_x_m": 847.91,
-            "game_z_m": -1004.7
-          },
-          {
-            "longitude": -77.1493,
-            "latitude": 39.09505,
-            "game_x_m": 233.61,
-            "game_z_m": -1004.7
-          }
-        ]
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -77.1493,
-              39.0885
-            ],
-            [
-              -77.1422,
-              39.0885
-            ],
-            [
-              -77.1422,
-              39.09505
-            ],
-            [
-              -77.1493,
-              39.09505
-            ],
-            [
-              -77.1493,
-              39.0885
             ]
           ]
         ]
