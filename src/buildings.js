@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import { DOWNTOWN } from './config.js';
 import { lonLatToWorld, nextFrame } from './utils.js';
+import { townSquareRole, townSquareWallHex } from './town-square/district.js';
+import { dressTownSquare } from './town-square/build.js';
 
 const warm = [0xb46951, 0xd6b77e, 0xb88d70];
 const cool = [0x8b9ebe, 0x6eaaa7, 0x9aa7a4];
@@ -283,7 +285,7 @@ export async function buildBuildings({
       nz = -nz;
     }
     edges.push({
-      a, b, skirtY, topOf, nx, nz, length, ...record,
+      a, b, skirtY, topOf, nx, nz, length, townSquare: Boolean(record.townSquare), ...record,
     });
   }
 
@@ -329,7 +331,9 @@ export async function buildBuildings({
     const ridgeM = role === 'backdrop' ? 0 : (record.ridgeM || 0);
     minHeight = Math.min(minHeight, height);
     maxHeight = Math.max(maxHeight, height);
-    const color = wallColor(id, record?.year, record?.garage);
+    const townHex = townSquareWallHex(id);
+    const color = townHex == null ? wallColor(id, record?.year, record?.garage) : new THREE.Color(townHex);
+    const town = townSquareRole(id);
     const replaced = Boolean(record?.replacedBySections);
     for (const polygon of polygons) {
       const seat = seatPolygon(polygon.outer, sampleGameY);
@@ -343,10 +347,11 @@ export async function buildBuildings({
       } : null;
       addMass(polygon, {
         id, height, ridge, color, role, batch, seat,
-        windows: role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80,
+        windows: !town && role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80,
         spacing: 5.6,
         seed: id,
         collide: true,
+        townSquare: Boolean(town),
       });
     }
     rendered++;
@@ -380,6 +385,7 @@ export async function buildBuildings({
     }
   }
 
+  const townEdges = [];
   const occupied = new Map();
   for (const edge of edges) {
     if (edge.upper) continue;
@@ -426,6 +432,21 @@ export async function buildBuildings({
       }
     }
     if (Math.max(topA, topB) - y0 < 0.35) continue;
+    if (edge.townSquare) {
+      townEdges.push({
+        id: edge.id,
+        a: edge.a,
+        b: edge.b,
+        nx: edge.nx,
+        nz: edge.nz,
+        y0,
+        topA,
+        topB,
+        skirtY: edge.skirtY,
+        length: edge.length,
+      });
+      continue;
+    }
     const batch = edge.batch ?? targetFor(edge.a, edge.role);
     emitQuad(batch.walls,
       { x: edge.a.x, y: y0, z: edge.a.z },
@@ -451,11 +472,13 @@ export async function buildBuildings({
     group.add(landmarkGroup);
   }
   addWindows(group, windows);
+  const townSquare = dressTownSquare(group, townEdges);
   onProgress?.(features.length, features.length);
 
   return {
     rendered, skipped, collisionPolygons, separateGroups, windows: windows.length,
     sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
+    townSquare,
   };
 }
 

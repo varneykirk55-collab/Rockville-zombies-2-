@@ -175,6 +175,135 @@ function clearance(x, z, blocked) {
   return 11;
 }
 
+export const TOWN_SQUARE_SHOTS = [
+  { id: 'ts-street', title: 'Town Square street, looking at the Gibbs frontage', x: 24, z: -12, lookX: -12, lookZ: -4, eye: 1.68, lookEye: 11 },
+  { id: 'ts-clock-plaza', title: 'Clock tower from the plaza', x: 38, z: -14, lookX: -16, lookZ: -4, eye: 1.68, lookEye: 18 },
+  { id: 'ts-passage', title: 'Pedestrian passage between Gibbs and Maryland', x: 31.25, z: 34, lookX: 31.25, lookZ: 78, eye: 1.68, lookEye: 3 },
+  { id: 'ts-storefront', title: 'Storefronts on the south side of the plaza', x: 48, z: -2, lookX: 56, lookZ: 28, eye: 1.68, lookEye: 2.2 },
+  { id: 'ts-residential', title: 'Residential facade on Gibbs Street', x: 10, z: 62, lookX: -14, lookZ: 48, eye: 1.68, lookEye: 9 },
+  { id: 'ts-library', title: 'Library and north plaza frontage', x: 18, z: -18, lookX: 52, lookZ: -62, eye: 1.68, lookEye: 11 },
+  { id: 'ts-overview', title: 'Elevated overview of Town Square', x: 78, z: 168, lookX: 30, lookZ: -10, eye: 62, lookEye: 14 },
+  { id: 'ts-hotel', title: 'Cambria and the east towers', x: 100, z: 230, lookX: 145, lookZ: 160, eye: 1.68, lookEye: 24 },
+];
+
+export function poseWorld(shot, sampleGameY, blocked) {
+  let x = shot.x;
+  let z = shot.z;
+  if (blocked?.(x, z)) {
+    const dx = shot.x - shot.lookX;
+    const dz = shot.z - shot.lookZ;
+    const length = Math.hypot(dx, dz) || 1;
+    for (let distance = 1; distance <= 20; distance += 1) {
+      const nextX = shot.x + (dx / length) * distance;
+      const nextZ = shot.z + (dz / length) * distance;
+      if (!blocked(nextX, nextZ)) {
+        x = nextX;
+        z = nextZ;
+        break;
+      }
+    }
+  }
+  return {
+    x,
+    y: sampleGameY(x, z) + (shot.eye ?? 1.68),
+    z,
+    lookX: shot.lookX,
+    lookY: sampleGameY(shot.lookX, shot.lookZ) + (shot.lookEye ?? 4),
+    lookZ: shot.lookZ,
+  };
+}
+
+function routeWalk(from, to, blocked, sampleGameY) {
+  const length = Math.hypot(to.x - from.x, to.z - from.z);
+  const steps = Math.max(1, Math.ceil(length / 0.45));
+  let blockedCount = 0;
+  let worstDrop = 0;
+  let minY = Infinity;
+  let maxY = -Infinity;
+  let previousY = null;
+  for (let i = 0; i <= steps; i += 1) {
+    const t = i / steps;
+    const x = from.x + (to.x - from.x) * t;
+    const z = from.z + (to.z - from.z) * t;
+    if (blocked(x, z)) blockedCount += 1;
+    const y = sampleGameY(x, z);
+    minY = Math.min(minY, y);
+    maxY = Math.max(maxY, y);
+    if (previousY != null) worstDrop = Math.max(worstDrop, previousY - y);
+    previousY = y;
+  }
+  const body = { x: from.x, z: from.z };
+  let stuck = 0;
+  const dx = (to.x - from.x) / steps;
+  const dz = (to.z - from.z) / steps;
+  for (let i = 0; i < steps; i += 1) {
+    const beforeX = body.x;
+    const beforeZ = body.z;
+    moveGrounded(body, dx, dz, blocked);
+    if (body.x === beforeX && body.z === beforeZ) stuck += 1;
+  }
+  return {
+    samples: steps + 1,
+    blocked: blockedCount,
+    stuckSteps: stuck,
+    movedM: Number(Math.hypot(body.x - from.x, body.z - from.z).toFixed(2)),
+    pathM: Number(length.toFixed(2)),
+    worstDropM: Number(worstDrop.toFixed(3)),
+    groundSpanM: Number((maxY - minY).toFixed(3)),
+    end: { x: Number(body.x.toFixed(2)), z: Number(body.z.toFixed(2)) },
+  };
+}
+
+function followPassage(blocked, sampleGameY) {
+  let x = 31.25;
+  let z = 26;
+  const start = { x, z };
+  let steps = 0;
+  let stuck = 0;
+  let worstDrop = 0;
+  let previousY = sampleGameY(x, z);
+  const shifts = [0, 0.15, -0.15, 0.35, -0.35, 0.6, -0.6, 0.9, -0.9];
+  while (z < 88 && steps < 200) {
+    steps += 1;
+    let moved = false;
+    for (const shift of shifts) {
+      const nextX = x + shift;
+      const nextZ = z + 0.4;
+      if (nextX < 29 || nextX > 38) continue;
+      if (!blocked(nextX, nextZ)) {
+        x = nextX;
+        z = nextZ;
+        moved = true;
+        break;
+      }
+    }
+    const y = sampleGameY(x, z);
+    worstDrop = Math.max(worstDrop, previousY - y);
+    previousY = y;
+    if (!moved) {
+      stuck += 1;
+      break;
+    }
+  }
+  return {
+    samples: steps,
+    blocked: stuck,
+    stuckSteps: stuck,
+    movedM: Number(Math.hypot(x - start.x, z - start.z).toFixed(2)),
+    pathM: Number((88 - 26).toFixed(2)),
+    worstDropM: Number(worstDrop.toFixed(3)),
+    groundSpanM: null,
+    end: { x: Number(x.toFixed(2)), z: Number(z.toFixed(2)) },
+  };
+}
+
+export function runTownSquareWalk({ blocked, sampleGameY }) {
+  return {
+    plaza: routeWalk({ x: 8, z: -6 }, { x: 72, z: -6 }, blocked, sampleGameY),
+    passage: followPassage(blocked, sampleGameY),
+  };
+}
+
 export function shotPose(shot, sampleGameY, blocked) {
   const origin = lonLatToWorld(shot.at[0], shot.at[1]);
   const look = lonLatToWorld(shot.look[0], shot.look[1]);

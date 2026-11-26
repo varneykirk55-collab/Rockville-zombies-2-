@@ -12,9 +12,9 @@
         "z": 321.87,
         "baseElevationM": -1.65
       },
-      "hideProcedural": true,
+      "hideProcedural": false,
       "sourceBranch": "grok/rockville-landmarks",
-      "notes": "1 Church Street is the downtown clock-tower office. The GLB stays on grok/rockville-landmarks and is not copied here. When the file is present the procedural mass and its collider are removed. rotationY aligns the model long axis with the county footprint and turns the facade toward west."
+      "notes": "The GLB is in public/landmarks and is not rebuilt. It is not substituted for a footprint. Its plan is 42.8 m by 20.2 m. 1 Church Street (this recorded position) is a 34 m by 34 m, 38.1 m office east of MD 355, outside Town Square. 130 Gibbs Street, the six-storey plaza front, is 23.3 m by 43.4 m and irregular; the same rectangle overhangs that polygon by up to 3.6 m. Either swap would delete approved mass or cover the plaza. hideProcedural stays false so the county masses remain. The plaza clock is a module on footprint 227490."
     },
     {
       "id": "turret-corner",
@@ -22,7 +22,7 @@
       "documentedRotationY": 3.14159,
       "hideProcedural": false,
       "sourceBranch": "grok/rockville-landmarks",
-      "notes": "Reserved. The GLB on grok/rockville-landmarks is a corner turret with a 31.5 m by 30.5 m plan. hideProcedural stays false until the owner confirms the footprint, so the county mass is not removed.",
+      "notes": "The GLB is in public/landmarks and is not rebuilt. Its plan is 31.5 m by 30.5 m. The candidate footprint 129621 is 43.0 m by 27.1 m and 28.83 m tall, a 2015 apartment slab, so the rectangle would leave a gap in that block. hideProcedural stays false and the model is not placed on top of the mass.",
       "candidateFootprintId": 129621,
       "candidateAddress": "1 HELEN HENEGHAN WAY 20850",
       "candidateName": "Apartments",

@@ -5,7 +5,8 @@ import { buildBuildings } from './buildings.js';
 import { createTerrain } from './terrain.js';
 import { placeLandmarks } from './landmarks.js';
 import { startGameLoop } from './game-loop.js';
-import { runWalkTest, SHOTS, shotPose } from './walk-test.js';
+import { runWalkTest, runTownSquareWalk, SHOTS, TOWN_SQUARE_SHOTS, shotPose, poseWorld } from './walk-test.js';
+import { townSquareTexturesReady } from './town-square/build.js';
 
 const viewport = document.querySelector('#viewport');
 const status = document.querySelector('#loading');
@@ -108,6 +109,7 @@ try {
     trees: treeCount,
     parking: parking.features.length,
     landmarks: placed,
+    townSquare: built.townSquare,
     bridge: {
       deckElevationM: landmarks.bridge.deckElevationM,
       clearanceOverPikeM: landmarks.bridge.clearanceOverPikeM,
@@ -123,11 +125,18 @@ try {
     freeze: controls.freeze,
     sampleGround,
     shots: SHOTS,
+    townShots: TOWN_SQUARE_SHOTS,
+    texturesReady: townSquareTexturesReady,
   };
   if (audit) {
     const blocked = createBuildingCollision(built.collisionPolygons);
     window.__ROCKVILLE__.blocked = blocked;
-    window.__ROCKVILLE__.pose = (id) => shotPose(SHOTS.find(item => item.id === id), sampleGround, blocked);
+    window.__ROCKVILLE__.pose = (id) => {
+      const town = TOWN_SQUARE_SHOTS.find(item => item.id === id);
+      if (town) return poseWorld(town, sampleGround, blocked);
+      return shotPose(SHOTS.find(item => item.id === id), sampleGround, blocked);
+    };
+    window.__ROCKVILLE__.townWalk = runTownSquareWalk({ blocked, sampleGameY: sampleGround });
     window.__ROCKVILLE__.walk = runWalkTest({
       blocked,
       sampleGameY: sampleGround,
