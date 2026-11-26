@@ -1,0 +1,284 @@
+{
+  "summary": {
+    "rendered": 743,
+    "skipped": 0,
+    "playable": 512,
+    "confidence": {
+      "Estimated": 243,
+      "High": 137,
+      "Medium": 132
+    },
+    "methods": {
+      "same-address-measured": 44,
+      "higher-measured-lowrise": 24,
+      "measured-high": 137,
+      "measured-medium": 132,
+      "published-storeys": 2,
+      "median-of-measured-neighbours": 70,
+      "single-measured-source": 51,
+      "higher-measured": 15,
+      "published-roof": 2,
+      "median-of-lowrise-district": 27,
+      "lower-measured-large-footprint": 4,
+      "published-plan-height": 4
+    },
+    "windows": 9303,
+    "sharedWallMetres": 11731,
+    "triangles": 15215,
+    "trees": 681,
+    "parking": 103,
+    "landmarks": [
+      {
+        "id": "clock-tower",
+        "loaded": false,
+        "footprintId": 129521
+      }
+    ],
+    "bridge": {
+      "deckElevationM": null,
+      "clearanceOverPikeM": null
+    },
+    "heightRange": {
+      "min": 0.95,
+      "max": 73.65
+    }
+  },
+  "walk": {
+    "roadSamples": 7833,
+    "roadBlocked": 33,
+    "roadBlockedFraction": 0.0042,
+    "heightPops": {
+      "worstRiseM": 0.971,
+      "stepsOver045m": 5
+    },
+    "boundarySamples": [
+      {
+        "lon": -77.1412,
+        "lat": 39.09,
+        "x": 934.4312252325446,
+        "z": -444.06838522014914,
+        "outsideM": 607.7,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.152,
+        "lat": 39.0954,
+        "x": 0,
+        "z": -1043.5607052660096,
+        "outsideM": 50.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.1554,
+        "lat": 39.086,
+        "x": -294.17279312860467,
+        "z": 0,
+        "outsideM": 34.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.148,
+        "lat": 39.0794,
+        "x": 346.0856389753353,
+        "z": 732.7128356122206,
+        "outsideM": 131,
+        "blocked": false,
+        "buildingFree": true
+      }
+    ],
+    "approaches": [
+      {
+        "distanceM": 1.2,
+        "clearBeforeM": 0.8
+      },
+      {
+        "distanceM": 13.2,
+        "clearBeforeM": 12.8
+      }
+    ],
+    "controller": {
+      "start": {
+        "x": 186.9769694672329,
+        "z": 214.18846709802685
+      },
+      "end": {
+        "x": 154.98,
+        "z": 216.19
+      },
+      "blockedSteps": 0,
+      "movedM": 32.06
+    }
+  },
+  "resources": [
+    {
+      "name": "public/styles.css",
+      "bytes": 3687,
+      "ms": 6
+    },
+    {
+      "name": "src/main.js",
+      "bytes": 5319,
+      "ms": 2
+    },
+    {
+      "name": "build/three.module.js",
+      "bytes": 103552,
+      "ms": 43
+    },
+    {
+      "name": "src/landmarks.js",
+      "bytes": 2465,
+      "ms": 4
+    },
+    {
+      "name": "src/scene.js",
+      "bytes": 12928,
+      "ms": 4
+    },
+    {
+      "name": "src/camera.js",
+      "bytes": 12549,
+      "ms": 6
+    },
+    {
+      "name": "src/terrain.js",
+      "bytes": 4587,
+      "ms": 6
+    },
+    {
+      "name": "src/buildings.js",
+      "bytes": 17825,
+      "ms": 6
+    },
+    {
+      "name": "src/game-loop.js",
+      "bytes": 816,
+      "ms": 6
+    },
+    {
+      "name": "src/walk-test.js",
+      "bytes": 6611,
+      "ms": 8
+    },
+    {
+      "name": "127.0.0.1:8000/favicon.ico",
+      "bytes": 635,
+      "ms": 7
+    },
+    {
+      "name": "loaders/GLTFLoader.js",
+      "bytes": 22084,
+      "ms": 30
+    },
+    {
+      "name": "src/utils.js",
+      "bytes": 1672,
+      "ms": 2
+    },
+    {
+      "name": "src/config.js",
+      "bytes": 36701,
+      "ms": 3
+    },
+    {
+      "name": "utils/SkeletonUtils.js",
+      "bytes": 3088,
+      "ms": 10
+    },
+    {
+      "name": "utils/BufferGeometryUtils.js",
+      "bytes": 8101,
+      "ms": 12
+    },
+    {
+      "name": "build/three.core.js",
+      "bytes": 211587,
+      "ms": 13
+    },
+    {
+      "name": "data/terrain.json",
+      "bytes": 83462,
+      "ms": 4
+    },
+    {
+      "name": "data/playable-boundary.geojson",
+      "bytes": 37203,
+      "ms": 5
+    },
+    {
+      "name": "data/building-sections.geojson",
+      "bytes": 3265,
+      "ms": 4
+    },
+    {
+      "name": "data/footprints.geojson",
+      "bytes": 368539,
+      "ms": 5
+    },
+    {
+      "name": "data/parking.geojson",
+      "bytes": 245293,
+      "ms": 7
+    },
+    {
+      "name": "data/building-heights.json",
+      "bytes": 252352,
+      "ms": 7
+    },
+    {
+      "name": "data/landmarks.json",
+      "bytes": 2592,
+      "ms": 11
+    },
+    {
+      "name": "public/clean_asphalt.webp",
+      "bytes": 710902,
+      "ms": 13
+    },
+    {
+      "name": "public/brick_pavement.webp",
+      "bytes": 493410,
+      "ms": 15
+    },
+    {
+      "name": "public/tarred_gravel.webp",
+      "bytes": 384990,
+      "ms": 14
+    },
+    {
+      "name": "public/rough_concrete.webp",
+      "bytes": 1130680,
+      "ms": 17
+    },
+    {
+      "name": "landmarks/clock_tower_building.glb",
+      "bytes": 300,
+      "ms": 7
+    }
+  ],
+  "performance": {
+    "drawCalls": 16,
+    "triangles": 334261,
+    "frameMs": 284.6033333333287
+  },
+  "gl": {
+    "width": 1280,
+    "height": 720,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "files": [
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/hungerford.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/town-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/maryland-regal.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/courthouse-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/rockville-pike.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-geometry-upgrade/screenshots/metro.png"
+  ]
+}

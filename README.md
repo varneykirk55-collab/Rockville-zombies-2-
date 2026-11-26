@@ -20,13 +20,13 @@ Open [http://localhost:8000](http://localhost:8000) in a modern browser with Web
 
 The player starts just east of East Montgomery Avenue and Helen Heneghan Way, facing toward the junction. Brick is applied to the two carriageways within the small junction patch. The other road surfaces are asphalt. Roads follow county centerlines with estimated widths and sidewalk offsets on the flat base. Downtown adds crosswalks, lane paint, streetlights, façade windows, hard sun shadows, and a limited warm/cool color palette.
 
-Building heights are estimated from area and a stable seed, with a 5–40 m design range. Tall convex footprints can receive a recessed upper story. Source L-shaped outlines and courtyard holes continue through the lower building geometry and the collision outline.
+Building heights inside the playable boundary come from `public/data/building-heights.json`, not from area and a seed. High and Medium values are the measured heights in the geographic audit. Estimated values are labelled in that file. The ground is a 10 m Maryland DEM grid, and roads, sidewalks, and parking sit on it. There is no invisible wall at the old rectangle.
 
 The camera uses a 1.68 m eye height, walk/sprint speeds of 4.3/6.9 m/s, and a narrower aim FOV. Collision uses a 0.36 m radius against the original footprint polygons, so the camera slides along walls and courtyards retain their interior space.
 
 ## Source layout
 
-`main.js` connects the scene, camera, loading status, and existing update loop. `footprints.js` still queries nine WGS84 tiles, paginates and deduplicates intersecting features by object ID. `buildings.js` builds the visible masses and exports their collision outlines. `camera.js` handles first-person input and movement. `scene.js` configures the renderer, street surfaces, and lighting. `config.js` holds the map bounds and sampled road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north).
+`main.js` loads the committed footprint snapshot, height table, and terrain grid, then connects the scene and the existing update loop. `buildings.js` extrudes those footprints, drops shared wall faces, and applies roof codes. `terrain.js` samples the height grid. `camera.js` handles first-person input, building collision, and terrain-aware eye height. `scene.js` configures the renderer, draped streets, parking, and backdrop trees. `config.js` holds the map origin and the road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north). `scripts/build_city_data.py` rebuilds the data files from the audit and the county, Planning, and Maryland DEM services.
 
 ## Materials and data
 

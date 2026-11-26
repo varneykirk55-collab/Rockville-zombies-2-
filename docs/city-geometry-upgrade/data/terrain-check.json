@@ -1,0 +1,160 @@
+{
+  "demOriginM": 133.531,
+  "grid": {
+    "cols": 129,
+    "rows": 187,
+    "stepM": 10.0
+  },
+  "checks": [
+    {
+      "name": "origin",
+      "longitude": -77.152,
+      "latitude": 39.086,
+      "gridM": 133.531,
+      "demM": 133.531,
+      "epqsM": 133.473,
+      "gridMinusDemM": 0.0,
+      "demMinusEpqsM": 0.058,
+      "gameYM": 0.0
+    },
+    {
+      "name": "hungerford_808",
+      "longitude": -77.153844,
+      "latitude": 39.094821,
+      "gridM": 140.693,
+      "demM": 140.665,
+      "epqsM": 140.734,
+      "gridMinusDemM": 0.028,
+      "demMinusEpqsM": -0.069,
+      "gameYM": 7.162
+    },
+    {
+      "name": "metro_station",
+      "longitude": -77.146634,
+      "latitude": 39.084431,
+      "gridM": 130.565,
+      "demM": 130.487,
+      "epqsM": 130.275,
+      "gridMinusDemM": 0.078,
+      "demMinusEpqsM": 0.211,
+      "gameYM": -2.966
+    },
+    {
+      "name": "bridge_midpoint",
+      "longitude": -77.1472855,
+      "latitude": 39.08424,
+      "gridM": 129.819,
+      "demM": 129.731,
+      "epqsM": 129.811,
+      "gridMinusDemM": 0.088,
+      "demMinusEpqsM": -0.081,
+      "gameYM": -3.712
+    },
+    {
+      "name": "town_square",
+      "longitude": -77.15000654,
+      "latitude": 39.08409274,
+      "gridM": 133.416,
+      "demM": 133.408,
+      "epqsM": 133.44,
+      "gridMinusDemM": 0.008,
+      "demMinusEpqsM": -0.032,
+      "gameYM": -0.115
+    },
+    {
+      "name": "pike_south",
+      "longitude": -77.1465,
+      "latitude": 39.0806,
+      "gridM": 128.874,
+      "demM": 128.874,
+      "epqsM": 128.734,
+      "gridMinusDemM": 0.0,
+      "demMinusEpqsM": 0.14,
+      "gameYM": -4.657
+    },
+    {
+      "name": "circuit_court",
+      "longitude": -77.150259,
+      "latitude": 39.083309,
+      "gridM": 130.611,
+      "demM": 130.594,
+      "epqsM": 130.488,
+      "gridMinusDemM": 0.017,
+      "demMinusEpqsM": 0.107,
+      "gameYM": -2.919
+    },
+    {
+      "name": "exchange_place",
+      "longitude": -77.151243,
+      "latitude": 39.089539,
+      "gridM": 135.912,
+      "demM": 135.898,
+      "epqsM": 135.888,
+      "gridMinusDemM": 0.014,
+      "demMinusEpqsM": 0.009,
+      "gameYM": 2.381
+    },
+    {
+      "name": "court_centroid",
+      "longitude": -77.1502368056966,
+      "latitude": 39.0833123580631,
+      "gridM": 130.579,
+      "demM": 130.502,
+      "epqsM": 130.388,
+      "gridMinusDemM": 0.077,
+      "demMinusEpqsM": 0.114,
+      "gameYM": -2.952
+    },
+    {
+      "name": "monroe_51",
+      "longitude": -77.147277,
+      "latitude": 39.084226,
+      "gridM": 129.862,
+      "demM": 129.774,
+      "epqsM": 129.854,
+      "gridMinusDemM": 0.089,
+      "demMinusEpqsM": -0.08,
+      "gameYM": -3.669
+    },
+    {
+      "name": "monroe_101",
+      "longitude": -77.14942,
+      "latitude": 39.083052,
+      "gridM": 129.011,
+      "demM": 128.982,
+      "epqsM": 128.987,
+      "gridMinusDemM": 0.029,
+      "demMinusEpqsM": -0.004,
+      "gameYM": -4.52
+    },
+    {
+      "name": "playable-grid-span",
+      "minM": 122.904,
+      "maxM": 143.747,
+      "spanM": 20.843
+    }
+  ],
+  "counts": {
+    "Estimated": 243,
+    "High": 137,
+    "Medium": 132
+  },
+  "methods": {
+    "same-address-measured": 44,
+    "higher-measured-lowrise": 24,
+    "measured-high": 137,
+    "measured-medium": 132,
+    "published-storeys": 2,
+    "median-of-measured-neighbours": 70,
+    "single-measured-source": 51,
+    "higher-measured": 15,
+    "published-roof": 2,
+    "median-of-lowrise-district": 27,
+    "lower-measured-large-footprint": 4,
+    "published-plan-height": 4
+  },
+  "sections": 3,
+  "parking": 103,
+  "backdrop": 231,
+  "playable": 512
+}
