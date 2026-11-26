@@ -1,0 +1,309 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "crs_note": "Geometries are WGS84 longitude/latitude. Game-frame meters are in properties. +X east, +Y up, +Z south, origin longitude -77.152 latitude 39.086. 1 unit = 1 metre.",
+    "status": "Proposed assignment areas inside the working boundary. They are not official neighborhoods."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "hungerford-corridor",
+        "status": "proposed district",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.155,
+            "latitude": 39.0885,
+            "game_x_m": -259.56,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.1493,
+            "latitude": 39.0885,
+            "game_x_m": 233.61,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.1493,
+            "latitude": 39.09505,
+            "game_x_m": 233.61,
+            "game_z_m": -1004.7
+          },
+          {
+            "longitude": -77.155,
+            "latitude": 39.09505,
+            "game_x_m": -259.56,
+            "game_z_m": -1004.7
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.155,
+              39.0885
+            ],
+            [
+              -77.1493,
+              39.0885
+            ],
+            [
+              -77.1493,
+              39.09505
+            ],
+            [
+              -77.155,
+              39.09505
+            ],
+            [
+              -77.155,
+              39.0885
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "town-center-core",
+        "status": "proposed district",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.155,
+            "latitude": 39.0824,
+            "game_x_m": -259.56,
+            "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.1476,
+            "latitude": 39.0824,
+            "game_x_m": 380.69,
+            "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.1476,
+            "latitude": 39.0885,
+            "game_x_m": 380.69,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.155,
+            "latitude": 39.0885,
+            "game_x_m": -259.56,
+            "game_z_m": -277.54
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.155,
+              39.0824
+            ],
+            [
+              -77.1476,
+              39.0824
+            ],
+            [
+              -77.1476,
+              39.0885
+            ],
+            [
+              -77.155,
+              39.0885
+            ],
+            [
+              -77.155,
+              39.0824
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "metro-and-bridge",
+        "status": "proposed district",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.1476,
+            "latitude": 39.0824,
+            "game_x_m": 380.69,
+            "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.0824,
+            "game_x_m": 847.91,
+            "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.0885,
+            "game_x_m": 847.91,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.1476,
+            "latitude": 39.0885,
+            "game_x_m": 380.69,
+            "game_z_m": -277.54
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1476,
+              39.0824
+            ],
+            [
+              -77.1422,
+              39.0824
+            ],
+            [
+              -77.1422,
+              39.0885
+            ],
+            [
+              -77.1476,
+              39.0885
+            ],
+            [
+              -77.1476,
+              39.0824
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "south-pike-approach",
+        "status": "proposed district",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.155,
+            "latitude": 39.0805,
+            "game_x_m": -259.56,
+            "game_z_m": 610.59
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.0805,
+            "game_x_m": 847.91,
+            "game_z_m": 610.59
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.0824,
+            "game_x_m": 847.91,
+            "game_z_m": 399.66
+          },
+          {
+            "longitude": -77.155,
+            "latitude": 39.0824,
+            "game_x_m": -259.56,
+            "game_z_m": 399.66
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.155,
+              39.0805
+            ],
+            [
+              -77.1422,
+              39.0805
+            ],
+            [
+              -77.1422,
+              39.0824
+            ],
+            [
+              -77.155,
+              39.0824
+            ],
+            [
+              -77.155,
+              39.0805
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "northeast-residential",
+        "status": "proposed district",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.1493,
+            "latitude": 39.0885,
+            "game_x_m": 233.61,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.0885,
+            "game_x_m": 847.91,
+            "game_z_m": -277.54
+          },
+          {
+            "longitude": -77.1422,
+            "latitude": 39.09505,
+            "game_x_m": 847.91,
+            "game_z_m": -1004.7
+          },
+          {
+            "longitude": -77.1493,
+            "latitude": 39.09505,
+            "game_x_m": 233.61,
+            "game_z_m": -1004.7
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.1493,
+              39.0885
+            ],
+            [
+              -77.1422,
+              39.0885
+            ],
+            [
+              -77.1422,
+              39.09505
+            ],
+            [
+              -77.1493,
+              39.09505
+            ],
+            [
+              -77.1493,
+              39.0885
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
