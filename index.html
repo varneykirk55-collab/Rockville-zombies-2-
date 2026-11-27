@@ -30,6 +30,8 @@
       <div id="reticle" aria-hidden="true"></div>
       <p id="gait" hidden></p>
       <output id="weapon-hud" aria-label="Weapon and ammunition"></output>
+      <output id="survival-hud" aria-label="Round, health and remaining zombies"></output>
+      <p id="round-banner" role="status"></p>
       <output id="points-hud" aria-label="Available points"></output>
       <p id="machine-prompt" role="status"></p>
       <p id="machine-hint"></p>
@@ -45,6 +47,13 @@
         <button id="shoulder" type="button">Shoulder</button>
       </div>
     </div>
+    <section id="game-over" aria-labelledby="game-over-title" hidden>
+      <div class="start-card">
+        <h2 id="game-over-title">Game over</h2>
+        <p id="game-over-summary"></p>
+        <button id="restart-rounds" type="button">Restart</button>
+      </div>
+    </section>
   </main>
   <script type="module">
     import('./src/main.js').catch((error) => {

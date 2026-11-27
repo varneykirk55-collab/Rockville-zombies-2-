@@ -3,6 +3,7 @@ import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js'
 import { createCamera, createBuildingCollision } from './camera.js';
 import { createPlayer } from './player.js';
 import { createCombat } from './combat.js';
+import { createSurvival } from './zombies.js';
 import { createMachines } from './machines.js';
 import { createWallet } from './machine-config.js';
 import { buildBuildings } from './buildings.js';
@@ -23,12 +24,15 @@ const demo = params.has('demo');
 const { scene, renderer, world, maps, sun } = createScene(viewport);
 const { camera, controls } = createCamera(renderer.domElement);
 const player = createPlayer({ scene, renderer });
-const combat = audit || params.has('preview') ? null
-  : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement });
-
 const wallet = createWallet();
+const survival = audit || params.has('preview') ? null : createSurvival({
+  world, camera, controls, renderer, wallet, overlay: document.querySelector('#start-panel'),
+});
+const combat = audit || params.has('preview') ? null
+  : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement, survival });
+
 const machines = combat ? createMachines({
-  world, camera, renderer, controls, combat, wallet, testing: params.has('machine-test') && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname),
+  world, camera, renderer, controls, combat, wallet, available: () => !survival?.dead, testing: params.has('machine-test') && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname),
 }) : null;
 
 function resize() {
@@ -51,10 +55,15 @@ startGameLoop({
   update: (delta) => {
     if (demo && !audit && controls.active) controls.drive(demoInput(demoTime += delta));
     controls.update(delta);
+    if (survival?.dead) {
+      survival.update(delta, false);
+      return;
+    }
     controls.pose.armed = combat?.armed ?? false;
     player.update(delta, controls.pose);
     combat?.update(delta);
     machines?.update(delta);
+    survival?.update(delta, combat?.ready);
   },
 });
 
@@ -153,6 +162,7 @@ async function loadCity() {
   await machines?.place(built.collisionPolygons, sampleGround, terrain.insidePlayable);
   controls.prepare(built.collisionPolygons, sampleGround);
   combat?.prepareTargets();
+  await survival?.prepare(terrain.insidePlayable);
   if (!audit && (demo || params.has('autostart'))) controls.engage();
   if (audit) {
     document.querySelector('#start-panel').hidden = true;
@@ -189,6 +199,7 @@ async function loadCity() {
   window.__ROCKVILLE__ = {
     summary,
     combat,
+    survival,
     machines,
     camera,
     renderer,

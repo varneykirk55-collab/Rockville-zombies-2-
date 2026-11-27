@@ -226,3 +226,24 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
 #machine-hint { top: 4.8rem; }
 #points-hud:empty, #machine-prompt:empty, #machine-hint:empty { display: none; }
 .touch-controls #machine-prompt { bottom: 10.5rem; }
+
+#survival-hud, #round-banner {
+  position: absolute;
+  padding: 0.45rem 0.7rem;
+  background: #182933df;
+  color: #fff4dd;
+  font-weight: 600;
+}
+#survival-hud { left: max(0.6rem, env(safe-area-inset-left)); top: max(0.6rem, env(safe-area-inset-top)); }
+#round-banner { top: 7rem; left: 50%; transform: translateX(-50%); }
+#survival-hud:empty, #round-banner:empty { display: none; }
+#survival-hud.hurt { animation: damage-indicator 0.6s ease-out; }
+@keyframes damage-indicator { from { background: #9b271f; } }
+#game-over { position: absolute; z-index: 3; inset: 0; display: grid; place-items: center; background: #141b23b3; }
+#game-over[hidden] { display: none; }
+#restart-rounds { cursor: pointer; padding: 0.6rem 1.2rem; }
+@media (max-width: 620px) {
+  #survival-hud { top: 5.45rem; font-size: 0.78rem; }
+  #machine-hint { top: 7rem; }
+  #round-banner { top: 9.4rem; }
+}
