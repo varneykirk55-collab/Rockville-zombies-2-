@@ -5,7 +5,7 @@
     {
       "id": "regal-cinemas",
       "buildingId": 277318,
-      "approval": "unapproved",
+      "approval": "approved",
       "active": true,
       "glb": "landmarks/regal.glb",
       "longitude": -77.149666,
@@ -22,12 +22,12 @@
         "path": "public/landmarks/regal.glb",
         "sha256": "0605a64ad922d1691b400be740e81f9fe4fc475d38c7643234bd7b58e8d77332"
       },
-      "notes": "Unapproved. PR #9 model, not the smaller PR #1 regal-cinemas.glb, which stays on disk and is not placed. East half of 199 East Montgomery Avenue (footprint 277318), beside the white-columned model. Facade +Z faces south onto East Montgomery. The marquee bbox is deeper than the 28 m footprint."
+      "notes": "Owner approved for use (PR #9 file). East half of 199 East Montgomery Avenue. The county polygon is one address, not a separate end building, so the uncovered ends are left as open ground and the collider is the model, not the 141 m polygon."
     },
     {
       "id": "white-columned",
       "buildingId": 277318,
-      "approval": "unapproved",
+      "approval": "approved",
       "active": true,
       "glb": "landmarks/white-columned.glb",
       "longitude": -77.150262,
@@ -37,14 +37,14 @@
       "elevationOffsetM": 0,
       "replaceProcedural": true,
       "shareFootprint": true,
-      "collision": { "mode": "footprint" },
+      "collision": { "mode": "model", "openLocalZAbove": 6 },
       "source": {
         "commit": "3975de596c576874160841d01f77b141449b2fb4",
         "pullRequest": 9,
         "path": "public/landmarks/white-columned.glb",
         "sha256": "804a24684de52e43e6b3b17e8f612b15053ecfd984ce0fae1d45eb4c643e2ac8"
       },
-      "notes": "Unapproved. PR #9 model. West of the Regal on the same 199 East Montgomery footprint. PR #1 montgomery-colonnade.glb is kept and not placed. One footprint collider is shared. The two models cover about 103 m of the 141 m frontage."
+      "notes": "Owner approved for use (PR #9 file). West of the Regal on the same footprint. Collision ignores local z above 6 m so the columned walkway on the street side stays open. PR #1 montgomery-colonnade.glb stays on disk, inactive."
     },
     {
       "id": "regal-cinemas-pr1",

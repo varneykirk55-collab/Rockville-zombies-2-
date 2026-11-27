@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { lonLatToWorld } from '../utils.js';
 
 const loader = new GLTFLoader();
@@ -33,6 +34,167 @@ function worldPosition(model) {
   return { x: model.position?.x ?? 0, z: model.position?.z ?? 0 };
 }
 
+const flatMaterial = new THREE.MeshStandardMaterial({
+  vertexColors: true,
+  roughness: 1,
+  metalness: 1,
+});
+flatMaterial.onBeforeCompile = (shader) => {
+  shader.vertexShader = shader.vertexShader
+    .replace('#include <common>', '#include <common>\nattribute vec2 surfaceFactors;\nvarying vec2 vSurface;')
+    .replace('#include <begin_vertex>', '#include <begin_vertex>\nvSurface = surfaceFactors;');
+  shader.fragmentShader = shader.fragmentShader
+    .replace('#include <common>', '#include <common>\nvarying vec2 vSurface;')
+    .replace('#include <roughnessmap_fragment>', 'float roughnessFactor = vSurface.x;')
+    .replace('#include <metalnessmap_fragment>', 'float metalnessFactor = vSurface.y;');
+};
+flatMaterial.customProgramCacheKey = () => 'rockville-flat-batch';
+
+function prepareGeometry(geometry) {
+  const geo = geometry.index ? geometry.toNonIndexed() : geometry;
+  if (!geo.attributes.normal) geo.computeVertexNormals();
+  if (!geo.attributes.uv) {
+    geo.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(geo.attributes.position.count * 2), 2));
+  }
+  for (const key of Object.keys(geo.attributes)) {
+    if (!['position', 'normal', 'uv', 'color', 'surfaceFactors'].includes(key)) geo.deleteAttribute(key);
+  }
+  return geo;
+}
+
+function consolidate(root) {
+  root.updateMatrixWorld(true);
+  const inverse = new THREE.Matrix4().copy(root.matrixWorld).invert();
+  const flat = [];
+  const textured = new Map();
+  const meshes = [];
+  root.traverse(node => { if (node.isMesh) meshes.push(node); });
+  let draws = 0;
+  for (const mesh of meshes) {
+    const source = Array.isArray(mesh.material) ? mesh.material[0] : mesh.material;
+    const local = new THREE.Matrix4().copy(inverse).multiply(mesh.matrixWorld);
+    const mapped = source.map || source.normalMap || source.roughnessMap || source.metalnessMap || source.emissiveMap;
+    const emissive = source.emissive && (source.emissive.r + source.emissive.g + source.emissive.b) > 0.02;
+    if (mapped) {
+      const geo = prepareGeometry(mesh.geometry.clone());
+      geo.deleteAttribute('color');
+      geo.deleteAttribute('surfaceFactors');
+      geo.applyMatrix4(local);
+      if (!textured.has(source.uuid)) textured.set(source.uuid, { material: source, geos: [] });
+      textured.get(source.uuid).geos.push(geo);
+    } else if (emissive) {
+      const geo = mesh.geometry.clone();
+      geo.applyMatrix4(local);
+      const kept = new THREE.Mesh(geo, source);
+      kept.castShadow = kept.receiveShadow = true;
+      kept.name = source.name || 'Emissive';
+      root.add(kept);
+      draws += 1;
+    } else {
+      const geo = prepareGeometry(mesh.geometry.clone());
+      geo.applyMatrix4(local);
+      const color = source.color || new THREE.Color(0xffffff);
+      const count = geo.attributes.position.count;
+      const colors = new Float32Array(count * 3);
+      const surface = new Float32Array(count * 2);
+      const rough = Number.isFinite(source.roughness) ? source.roughness : 0.8;
+      const metal = Number.isFinite(source.metalness) ? source.metalness : 0;
+      for (let i = 0; i < count; i++) {
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+        surface[i * 2] = rough;
+        surface[i * 2 + 1] = metal;
+      }
+      geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      geo.setAttribute('surfaceFactors', new THREE.BufferAttribute(surface, 2));
+      flat.push(geo);
+    }
+    mesh.removeFromParent();
+  }
+  if (flat.length) {
+    const merged = mergeGeometries(flat, false);
+    const mesh = new THREE.Mesh(merged, flatMaterial);
+    mesh.castShadow = mesh.receiveShadow = true;
+    mesh.name = 'Batched flat materials';
+    root.add(mesh);
+    draws += 1;
+  }
+  for (const { material, geos } of textured.values()) {
+    const merged = mergeGeometries(geos.map(prepareGeometry), false);
+    const mesh = new THREE.Mesh(merged, material);
+    mesh.castShadow = mesh.receiveShadow = true;
+    mesh.name = material.name || 'Batched textured';
+    root.add(mesh);
+    draws += 1;
+  }
+  return draws;
+}
+
+function modelBoxes(root, baseY, openLocalZAbove) {
+  const inverse = new THREE.Matrix4().copy(root.matrixWorld).invert();
+  const sample = new THREE.Vector3();
+  const local = new THREE.Vector3();
+  const cell = 4;
+  const occupied = new Set();
+  root.traverse(mesh => {
+    if (!mesh.isMesh || !mesh.geometry?.attributes?.position) return;
+    const attribute = mesh.geometry.attributes.position;
+    const step = Math.max(1, Math.floor(attribute.count / 2400));
+    for (let i = 0; i < attribute.count; i += step) {
+      sample.fromBufferAttribute(attribute, i).applyMatrix4(mesh.matrixWorld);
+      if (sample.y < baseY + 0.15 || sample.y > baseY + 3.2) continue;
+      if (openLocalZAbove != null) {
+        local.copy(sample).applyMatrix4(inverse);
+        if (local.z > openLocalZAbove) continue;
+      }
+      occupied.add(`${Math.floor(sample.x / cell)},${Math.floor(sample.z / cell)}`);
+    }
+  });
+  const rows = new Map();
+  for (const key of occupied) {
+    const [ix, iz] = key.split(',').map(Number);
+    if (!rows.has(iz)) rows.set(iz, []);
+    rows.get(iz).push(ix);
+  }
+  const rings = [];
+  for (const [iz, columns] of rows) {
+    columns.sort((a, b) => a - b);
+    let start = columns[0];
+    let previous = columns[0];
+    const flush = (from, to) => {
+      const x0 = from * cell;
+      const x1 = (to + 1) * cell;
+      const z0 = iz * cell;
+      const z1 = (iz + 1) * cell;
+      rings.push([{ x: x0, z: z0 }, { x: x1, z: z0 }, { x: x1, z: z1 }, { x: x0, z: z1 }]);
+    };
+    for (const column of columns.slice(1)) {
+      if (column === previous + 1) previous = column;
+      else {
+        flush(start, previous);
+        start = previous = column;
+      }
+    }
+    flush(start, previous);
+  }
+  return rings;
+}
+
+function dropFootprint(collisionPolygons, id, kept) {
+  const rings = [];
+  if (kept.has(id)) return rings;
+  for (let i = collisionPolygons.length - 1; i >= 0; i--) {
+    const polygon = collisionPolygons[i];
+    if (polygon.footprintId === id && polygon.source !== 'landmark') {
+      rings.push(polygon.outer);
+      collisionPolygons.splice(i, 1);
+    }
+  }
+  kept.add(id);
+  return rings;
+}
+
 async function readModel(glb) {
   if (!glb) return { ok: false, reason: 'no-file' };
   const url = new URL(`../../public/${glb}`, import.meta.url);
@@ -44,9 +206,13 @@ async function readModel(glb) {
   }
 }
 
-export async function integrateLandmarks({ world, models, terrain, separateGroups, collisionPolygons }) {
+const LAMP_LOCAL = [[-11.54, 15.0], [11.59, 15.7], [-11.59, -15.66], [11.82, -15.72]];
+
+export async function integrateLandmarks({ world, models, terrain, separateGroups, collisionPolygons, batch = true }) {
   const claimed = new Set();
+  const removedFootprints = new Set();
   const placed = [];
+  const markers = [];
   for (const model of models) {
     const record = {
       id: model.id,
@@ -93,9 +259,10 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
     const y = terrain.sampleGameY(x, z) + (model.elevationOffsetM || 0);
     const object = loaded.scene;
     object.position.set(x, y, z);
-    object.rotation.y = model.rotationY || 0;
+    object.rotation.y = Number.isFinite(model.rotationY) ? model.rotationY : 0;
     const scale = Number.isFinite(model.scale) ? model.scale : 1;
     object.scale.setScalar(scale);
+    object.updateMatrixWorld(true);
     const unapproved = model.approval !== 'approved';
     object.name = unapproved ? `UNAPPROVED landmark ${model.id}` : `Landmark ${model.id}`;
     object.userData = {
@@ -104,42 +271,67 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
       district: model.district,
       replaceable: true,
     };
-    object.traverse(node => {
-      if (node.isMesh) {
-        node.castShadow = true;
-        node.receiveShadow = true;
-      }
-    });
     world.add(object);
-    if (unapproved) {
-      const half = Array.isArray(model.collision?.size) ? model.collision.size[0] / 2 : 12;
-      const reach = Math.min(half, 18) + 1.6;
-      const marker = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.22, 0.22, 9, 8),
-        new THREE.MeshBasicMaterial({ color: 0xff7a18 }),
-      );
-      marker.position.set(x + reach, y + 4.5, z);
-      marker.name = `Unapproved marker ${model.id}`;
-      world.add(marker);
-    }
+    let drawCalls = 0;
+    if (batch) drawCalls = consolidate(object);
+    else object.traverse(node => { if (node.isMesh) drawCalls += 1; });
+    const box = new THREE.Box3().setFromObject(object);
+    if (unapproved) markers.push(new THREE.Vector3(box.max.x + 2.2, y + 4.5, z));
+    let footprintRing = null;
     if (replace) {
       separateGroups.get(model.buildingId)?.group.removeFromParent();
+      const rings = dropFootprint(collisionPolygons, model.buildingId, removedFootprints);
+      footprintRing = rings[0] ?? null;
     }
-    // The measured footprint collider stays. A second box would double-block
-    // the same ground. A plaza model adds no collider, so the square stays walkable.
-    if (model.collision?.mode === 'model' && Array.isArray(model.collision.size)) {
-      const [width, depth] = model.collision.size;
-      collisionPolygons.push({
-        outer: orientedFootprint(x, z, object.rotation.y, width * scale, depth * scale),
-        holes: [],
-        footprintId: model.buildingId,
-        source: 'landmark',
-      });
+    let hull = null;
+    if (model.collision?.mode !== 'none' && model.id !== 'courthouse-roundabout') {
+      hull = modelBoxes(object, y, model.collision?.openLocalZAbove ?? null);
+      for (const ring of hull) {
+        collisionPolygons.push({
+          outer: ring, holes: [], footprintId: model.buildingId ?? model.id, source: 'landmark',
+        });
+      }
+    }
+    if (model.id === 'courthouse-roundabout') {
+      const point = new THREE.Vector3();
+      for (const [lx, lz] of LAMP_LOCAL) {
+        point.set(lx, 0, lz).applyMatrix4(object.matrixWorld);
+        collisionPolygons.push({
+          outer: orientedFootprint(point.x, point.z, 0, 0.7, 0.7),
+          holes: [],
+          footprintId: model.id,
+          source: 'landmark-lamp',
+        });
+      }
     }
     record.placed = true;
+    record.drawCalls = drawCalls;
     record.removedPlaceholder = replace ? model.buildingId : null;
     record.reason = replace ? 'replaced-procedural' : 'placed';
+    record.frame = {
+      id: model.id,
+      x, z, y,
+      height: box.max.y - y,
+      minX: box.min.x, maxX: box.max.x, minZ: box.min.z, maxZ: box.max.z,
+      footprint: footprintRing,
+      hull,
+    };
     placed.push(record);
+  }
+  if (markers.length) {
+    const poles = new THREE.InstancedMesh(
+      new THREE.CylinderGeometry(0.22, 0.22, 9, 8),
+      new THREE.MeshBasicMaterial({ color: 0xff7a18 }),
+      markers.length,
+    );
+    poles.name = 'Unapproved landmark markers';
+    const dummy = new THREE.Object3D();
+    markers.forEach((position, index) => {
+      dummy.position.copy(position);
+      dummy.updateMatrix();
+      poles.setMatrixAt(index, dummy.matrix);
+    });
+    world.add(poles);
   }
   return placed;
 }

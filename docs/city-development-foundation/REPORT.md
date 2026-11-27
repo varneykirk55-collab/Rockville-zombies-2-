@@ -80,11 +80,13 @@ Neither file was deleted or overwritten.
 | Origin | ground centre, min Y = 0 | ground centre, min Y = 0 | ground centre, min Y = 0 | ground centre, min Y = 0 |
 | Street side | +Z (awnings, marquee) | +Z (marquee and REGAL letters out to z ≈ +19) | +Z | +Z (columns and canvas out to z ≈ +11) |
 
-The scene uses the PR #9 files. The assignment names `regal.glb` and `white-columned.glb`, they are the later owner delivery, and the Regal plan is closer to a real cinema frontage than the 30 m PR #1 block. The PR #1 files stay in `public/landmarks/` and are inactive rows in the District C manifest.
+The scene uses the PR #9 files. The owner has approved `regal.glb` and `white-columned.glb` for use. The PR #1 files stay on disk and stay inactive.
 
 ## Placement
 
-All eight are unapproved. An orange pole marks each one. No model was scaled. Units are metres: every file has min Y = 0 and a plan measured in tens of metres, so a feet-to-metres scale was not applied. District ownership was not edited. 1 Church Street (129521) is a normal procedural building again.
+Regal and the white-columned model are owner-approved. The other six are still unapproved, and one instanced orange pole marks those six. No model was scaled, and no GLB byte changed. District ownership was not edited. 1 Church Street (129521) is a normal procedural building again.
+
+Collision for a replaced building is no longer the county polygon. The county ring is removed once, and the collider is a set of 4 m boxes on the model's own ground vertices (between 0.15 m and 3.2 m above the placement elevation). That drops the invisible walls past the clock tower and past the uncovered ends of 199 East Montgomery, and it leaves the diagonal corners of the District Court and the Circuit Court steps walkable because those corners have no mesh. The white-columned colonnade ignores ground vertices with local z above 6 m, so the columned walkway stays open. The roundabout paving, curb, and shrubs are not colliders. Four 0.7 m boxes sit on the lamp poles.
 
 | Landmark | Footprint removed | Address | Model X × Z × height | County box | Origin vs footprint centre | Rotation |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -95,9 +97,9 @@ All eight are unapproved. An orange pole marks each one. No model was scaled. Un
 | Circuit Court | 129186 | 50 Maryland Ave | 91.7 × 134.6 × 34.1 m | 90.0 × 133.7 m, north tower record 46.0 m | about 1 m (model bbox centre is 1.1 m east and 2.7 m south of the origin) | 0. The materials named North sit on model −Z, which is world north. |
 | District Court | 132710 | 191 E Jefferson St | 94.4 × 84.8 × 24.0 m | 92.3 × 83.4 m, height record 36.8 m | about 1 m | 0, axes match the footprint |
 | Historic courthouse | 129058 | 29 Courthouse Sq | 23.9 × 38.5 × 30.2 m | 30.9 × 37.3 m, height record 12.8 m | origin on the footprint centre; the bbox centre is 1.2 m west and 2.5 m north of the origin | −26°, so the −Z entry faces 26° east of north, the footprint's long-axis bearing |
-| Roundabout plaza | none | open ground south of 29 Courthouse Sq | 41.6 × 46.2 × 4.2 m | no building | placed on open ground | 0. No collider, so the square stays walkable |
+| Roundabout plaza | none | open ground south of 29 Courthouse Sq | 41.6 × 46.2 × 4.2 m | no building | placed on open ground | 0. Lamp poles collide. The plaza surface does not. |
 
-The two Montgomery models together are 103 m along a 141 m frontage, so about 19 m of that footprint at each end has no mesh after the procedural mass is removed. The footprint collider still covers the whole county polygon. Regal's marquee bbox is about 7 m deeper than the 28 m footprint.
+The two Montgomery models together cover about 103 m of the 141 m frontage. The leftover ~19 m at each end is open ground. See the alignment section for why that ground was not filled with a procedural mass, and why none of the three courthouse heights were scaled.
 
 ![Clock tower](screenshots/integrated/landmark-clock-tower.png)
 
@@ -145,7 +147,7 @@ A manifest row with `glb: null` (`missing-model-fallback`) is the empty-file tes
 | Centreline samples with no way around a building | 0 (was 14, through 34 Maryland Avenue) |
 | Centreline samples that still touch a footprint | 19, each with a shoulder within 6 m (15) or a detour within 16 m (4) |
 | Placeholders removed | 131322, 227492, 277318, 129186, 132710, 129058 |
-| Roundabout | placed, no placeholder, no collider |
+| Roundabout | placed, no placeholder, lamp colliders only |
 | Missing model | procedural fallback, no building removed |
 | Console errors | none |
 | Controller | 32.06 m, 0 blocked steps |
@@ -159,13 +161,16 @@ Same machine, same SwiftShader, before any of these edits and after them. The pu
 
 Renderer: ANGLE SwiftShader (Subzero), Vulkan 1.3.0, on this VM's Intel Xeon. 1280×720. The published 16 draw calls were not reproduced on this machine; the before triangle count matches PR #4, and the counter here includes the shadow pass and the individual street lights.
 
-| | This machine, before any of this work | After geometry fixes, clock tower only | After all eight landmarks | Published PR #4 |
+| | Before this work | Eight landmarks, unbatched | Same view after batching | Published PR #4 |
 | --- | --- | --- | --- | --- |
-| Draw calls | 47 | 58 | 122 | 16 |
-| Triangles | 334,823 | 276,028 | 337,915 | 334,261 |
-| Frame time | 417 ms | 362 ms | 414 ms | 285 ms |
+| Draw calls | 47 | 129 | 72 | 16 |
+| Rendered triangles | 334,823 | 340,715 | 476,683 | 334,261 |
+| Scene triangles | | 383,953 | 383,953 | |
+| Frame time | 417 ms | | 443 ms | 285 ms |
 
-Window instances fell from 9,303 to 5,817, which is why the middle column is faster. Placing the eight GLBs puts the frame time back near the original software-GL number. The extra draw calls are the models' materials (one primitive each) and the orange markers. None of the GLBs were merged or re-exported to reduce that.
+The 129 and the 72 are the same overview camera (x 180 m, 420 m up, looking toward x 220, z 40), 1280×720, SwiftShader on this Intel Xeon. An earlier row of 122 draws and 337,915 triangles was that camera before this pass. Batching runs at load. Untextured materials become one mesh with vertex colour and a roughness/metalness attribute. Textured materials merge by material. Emissive meshes stay separate. The GLB files are not rewritten. Per landmark the draw counts are clock 2, turret 2, Regal 1, white-columned 1, Circuit Court 1, District Court 1, historic courthouse 4, roundabout 1, plus one instanced pole mesh.
+
+Rendered triangles go up because a merged landmark is one object, so a partial view draws the whole mesh, and the shadow pass counts that mesh again. The scene triangle total, 383,953, is the same with batching on or off. Window instances are still 5,817.
 
 ## Screenshots
 
@@ -196,20 +201,121 @@ District stands and the placement tests are after only:
 
 ![Entrance at grade](screenshots/after/entrance-grade.png)
 
+## Landmark alignment
+
+Cameras stand outside the models. Overhead frames draw the county ring in yellow. Full set: `docs/city-development-foundation/screenshots/alignment/`.
+
+### Clock tower, 200 East Middle Lane (131322)
+
+The county polygon is one address and one ring (10 vertices, a bar with a small west notch), not two parcels joined together. The nearest other footprint is 38 Maryland Avenue, about 18 m away. The model is 42.8 m along a 62.3 m frontage, so about 9.8 m at each end of the same building has no mesh. The model was not stretched, and those ends were not given a procedural mass, because they are not a separate building. The county collider is gone. Collision is the visible ground only, and the ends are open ground. The 24.2 m county height is the roof record. The model spire is 41.8 m and was not scaled down.
+
+![Clock tower from the street](screenshots/alignment/clock-tower-street.png)
+
+![Clock tower, elevated](screenshots/alignment/clock-tower-elevated.png)
+
+![Clock tower and the neighbouring block](screenshots/alignment/clock-tower-context.png)
+
+![Clock tower over the county ring](screenshots/alignment/clock-tower-overhead.png)
+
+### Turret, 33 Maryland Avenue (227492)
+
+The county frontage is 25.40 m east-west and 37.42 m north-south. The model plan is 30.52 m by 31.52 m. Putting the shorter axis across the street still leaves 5.1 m that cannot sit inside the lot. Centred, that is about 2.6 m past the line on each side. The east side is the sidewalk: Maryland Avenue's centreline is at about x = 90 m and the model stops at x = 78.4 m, so it does not reach the carriageway. The west edge clips the north corner of 115 Gibbs Street (227491) by about 2.5 m. Starbucks, 39 Maryland Avenue (127071), does not intersect the model. Rotation stays π/2 so the rounded corner points southeast, toward that Starbucks block. A uniform scale of about 0.83 would drop the 45.05 m finial to about 37.5 m, and there is no architectural source for that shorter tower, so the model was not scaled. Collision matches the visible ground, including the overhang.
+
+![Turret from the street](screenshots/alignment/turret-corner-street.png)
+
+![Turret, elevated](screenshots/alignment/turret-corner-elevated.png)
+
+![Turret and Maryland Avenue](screenshots/alignment/turret-corner-context.png)
+
+![Turret over its county ring](screenshots/alignment/turret-corner-overhead.png)
+
+### Regal and the white-columned block, 199 East Montgomery (277318)
+
+One polygon, one address. The footprints across the street are other addresses. The uncovered ~19 m at each end is the same structure, not an adjoining garage or shop with its own county ring, so it is open ground. The models were not stretched. Together they cover x 122.9 m to 226.0 m of a footprint that runs 104.1 m to 244.7 m. The county collider is removed. Each model collides on its own ground. The white-columned walkway (local z above 6 m) is left open. The Regal marquee sits above 4.4 m, so it is not a ground collider. The marquee's local +Z faces south, toward the Circuit Court, and the walkable street on the north side sees the plain wall.
+
+![Regal from the north](screenshots/alignment/regal-cinemas-street.png)
+
+![Regal, elevated](screenshots/alignment/regal-cinemas-elevated.png)
+
+![Regal, the colonnade, and the street](screenshots/alignment/regal-cinemas-context.png)
+
+![199 East Montgomery, county ring past both models](screenshots/alignment/regal-cinemas-overhead.png)
+
+![White-columned from the street](screenshots/alignment/white-columned-street.png)
+
+![White-columned, elevated](screenshots/alignment/white-columned-elevated.png)
+
+![White-columned and the neighbouring block](screenshots/alignment/white-columned-context.png)
+
+![White-columned over the shared ring](screenshots/alignment/white-columned-overhead.png)
+
+### Circuit Court (129186)
+
+The model plan is 91.7 m by 134.6 m. The county box is 90.0 m by 133.7 m. The 46.02 m record is the north tower (9 storeys). The model height of 34.1 m is the whole complex, and the audit's south tower is 25.6 m. A uniform scale up to 46 m would raise the podium and the south wing and would enlarge the plan, which already matches. Not scaled.
+
+![Circuit Court from the street](screenshots/alignment/circuit-court-street.png)
+
+![Circuit Court, elevated](screenshots/alignment/circuit-court-elevated.png)
+
+![Circuit Court and the surrounding blocks](screenshots/alignment/circuit-court-context.png)
+
+![Circuit Court over its county ring](screenshots/alignment/circuit-court-overhead.png)
+
+### District Court (132710)
+
+The model plan is 94.4 m by 84.8 m against a county box of 92.3 m by 83.4 m. The county ring itself is a diagonal bar, and the model's ground vertices follow that bar rather than filling the box. The 36.83 m record is the 6-storey mass with a tall atrium (the audit kept 120.8 ft, about 20 ft a storey). A uniform scale of 36.8 / 24.0 would stretch the matching plan to about 145 m. Not scaled. Collision follows the occupied ground, so the road through the empty corner of the box stays open.
+
+![District Court from the street](screenshots/alignment/district-court-street.png)
+
+![District Court, elevated](screenshots/alignment/district-court-elevated.png)
+
+![District Court and the neighbouring streets](screenshots/alignment/district-court-context.png)
+
+![District Court over its county ring](screenshots/alignment/district-court-overhead.png)
+
+### Historic red-brick courthouse (129058)
+
+The model finial is 30.24 m and was not shrunk. The 12.84 m county record matches the main cornice in the historic-courthouse specification (cornice about 10.5–12.5 m, tower and finial about 28–31 m), not the tower. Rotation stays −26°, with the entry toward the footprint's long edge.
+
+![Historic courthouse from the street](screenshots/alignment/historic-red-brick-courthouse-street.png)
+
+![Historic courthouse, elevated](screenshots/alignment/historic-red-brick-courthouse-elevated.png)
+
+![Historic courthouse, the square, and the clock tower](screenshots/alignment/historic-red-brick-courthouse-context.png)
+
+![Historic courthouse over its county ring](screenshots/alignment/historic-red-brick-courthouse-overhead.png)
+
+### Courthouse roundabout
+
+The plaza model sits on open ground south of the red-brick courthouse. The road and sidewalk ribbons are the existing clipped geometry. The four lamp clusters collide. The paving does not, and a 16-point ring around the plaza is clear. There is still no OSM `junction=roundabout` for this circle.
+
+![Roundabout from the street](screenshots/alignment/courthouse-roundabout-street.png)
+
+![Roundabout, elevated](screenshots/alignment/courthouse-roundabout-elevated.png)
+
+![Roundabout, the courthouse, and the roads](screenshots/alignment/courthouse-roundabout-context.png)
+
+![Roundabout from above](screenshots/alignment/courthouse-roundabout-overhead.png)
+
+![All eight landmarks](screenshots/alignment/all-eight-overview.png)
+
+### Pedestrian check
+
+7,816 centreline samples. 0 are interior with no way around. 19 still touch a footprint: 15 with a shoulder within 6 m, 4 with a detour within 16 m. That is the same remainder as before this collision change (51 Monroe Street and 111 Rockville Pike). A point 2.2 m off the south face of every landmark is clear. Samples on a ring around a landmark do hit the neighbouring buildings. That is the neighbour, not an invisible footprint wall. The turret's ring is the crowded one (8 of 16), because Gibbs Street and the Starbucks block stand against it.
+
 ## Known limitations
 
 - 239 of the 508 audit heights are still estimates. This pass did not resurvey them.
 - Gable ridges are still the 2 m placeholder.
-- No landmark is owner-approved. The orange poles are status markers.
-- The clock tower is on 200 East Middle Lane (131322), not on a footprint labelled as a clock tower. The county plan is 62 m by 25 m and the model is 43 m by 20 m, so about 10 m at each end of the footprint has collision and no mesh. The measured roof is 24.2 m and the model spire is 41.8 m. District of that building stays D.
-- The turret is 33 Maryland Avenue, the next building north of the Starbucks block, not a separate corner footprint at the Starbucks door. The model overhangs that footprint by about 3 m on the short side. 1 Helen Heneghan Way was not used. District stays C.
-- Regal and the white-columned model cover 103 m of the 141 m 199 East Montgomery footprint. The shared collider still fills the county polygon. Regal's marquee sticks past the 28 m depth.
-- Circuit Court model height is 34.1 m; the measured north tower is 46.0 m. District Court model height is 24.0 m; the measured mass is 36.8 m. Neither was scaled.
-- The historic courthouse model is 23.9 m by 38.5 m against a county box of 30.9 m by 37.3 m. Its height record is 12.8 m and the model finial is 30.2 m.
-- The roundabout has no collider. Lamps can be walked through. There is still no OSM `junction=roundabout`.
+- Regal and the white-columned model are owner-approved. The other six landmarks are not, and they carry the orange pole.
+- The clock tower stays on 200 East Middle Lane (131322), district D. About 10 m at each end of that one county building is open ground. The spire stays 41.8 m against a 24.2 m roof record.
+- The turret stays centred on 33 Maryland Avenue, district C. About 2.6 m of the 30.5 m plan hangs past the 25.4 m frontage on each side. The east overhang does not reach Maryland Avenue. The west overhang clips 115 Gibbs Street. It was not scaled.
+- The Regal marquee faces south, toward the Circuit Court. The north wall is the plain street face. The ~19 m ends of 199 East Montgomery are open ground.
+- Circuit Court stays 34.1 m, not the 46.0 m north tower. District Court stays 24.0 m, not the 36.8 m atrium record. The historic courthouse keeps its 30.2 m tower. The 12.8 m record is the cornice.
+- The roundabout lamps collide. The plaza surface does not. There is still no OSM `junction=roundabout`.
 - 19 centreline samples still touch a footprint, with a shoulder or a short detour. Five DEM steps over 0.45 m are unchanged (worst 0.97 m in 2 m).
 - The pedestrian bridge deck elevation, clearance, and width are still null.
 - District polygons follow centroids. They are ownership areas, not surveyed neighbourhood lines.
 - No zombie actors exist in this repository. The verified loop is movement, aim, sprint, and render.
 - `grok/hungerford-corridor` did not exist yet. The District B paths are reserved for it. See CONTRIBUTING.md.
-- The close Circuit Court frame is inside the 135 m mass. The elevated courthouse frame and the roundabout frame show that group from outside.
+- Rendered triangle counts rise under batching when the shadow pass draws a merged mesh that is only partly in view. The scene triangle total does not.

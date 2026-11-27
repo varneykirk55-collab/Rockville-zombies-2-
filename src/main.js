@@ -1,4 +1,4 @@
-import { Group } from 'three';
+import { Group, BufferGeometry, Float32BufferAttribute, LineBasicMaterial, LineLoop } from 'three';
 import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js';
 import { createCamera, createBuildingCollision } from './camera.js';
 import { buildBuildings } from './buildings.js';
@@ -91,6 +91,7 @@ try {
     world, models: landmarkModels, terrain,
     separateGroups: built.separateGroups,
     collisionPolygons: built.collisionPolygons,
+    batch: params.get('batch') !== '0',
   });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   controls.prepare(built.collisionPolygons, sampleGround);
@@ -122,14 +123,37 @@ try {
     heightRange: { min: built.minHeight, max: built.maxHeight },
   };
   console.info('Rockville geometry', summary);
+  const guides = new Group();
+  guides.name = 'Footprint guides';
+  world.add(guides);
+  const frames = placed.filter(item => item.frame).map(item => item.frame);
   window.__ROCKVILLE__ = {
     summary,
     camera,
     renderer,
     scene,
+    world,
+    frames,
     freeze: controls.freeze,
     drive: controls.nudge,
     sampleGround,
+    showGuides(frame, on) {
+      while (guides.children.length) guides.remove(guides.children[0]);
+      if (!on || !frame) return;
+      const add = (ring, color, y) => {
+        if (!ring?.length) return;
+        const positions = [];
+        for (const point of ring) positions.push(point.x, y, point.z);
+        positions.push(ring[0].x, y, ring[0].z);
+        const geometry = new BufferGeometry();
+        geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+        guides.add(new LineLoop(geometry, new LineBasicMaterial({ color })));
+      };
+      const ground = sampleGround(frame.x, frame.z);
+      add(frame.footprint, 0xffcc33, ground + 1.2);
+      const hulls = Array.isArray(frame.hull?.[0]) ? frame.hull : [frame.hull];
+      for (const ring of hulls) add(ring, 0x3ec6ff, ground + 1.6);
+    },
     shots: SHOTS,
     extraPoses: EXTRA_POSES.map(pose => {
       const at = lonLatToWorld(pose.at[0], pose.at[1]);
@@ -149,6 +173,19 @@ try {
       sampleGameY: sampleGround,
       insidePlayable: terrain.insidePlayable,
       distanceOutside: terrain.distanceOutside,
+    });
+    window.__ROCKVILLE__.landmarkPassage = frames.map(frame => {
+      const reach = Math.hypot((frame.maxX - frame.minX) / 2, (frame.maxZ - frame.minZ) / 2) + 2.4;
+      let blockedCount = 0;
+      const samples = 16;
+      for (let i = 0; i < samples; i++) {
+        const angle = i / samples * Math.PI * 2;
+        const x = frame.x + Math.cos(angle) * reach;
+        const z = frame.z + Math.sin(angle) * reach;
+        if (blocked(x, z)) blockedCount += 1;
+      }
+      const south = blocked(frame.x, frame.maxZ + 2.2);
+      return { id: frame.id, ringBlocked: blockedCount, samples, southBlocked: south };
     });
     window.__ROCKVILLE__.ready = true;
     controls.freeze(true);
