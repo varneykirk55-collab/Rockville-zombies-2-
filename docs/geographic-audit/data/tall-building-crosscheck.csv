@@ -1,0 +1,10 @@
+name,address_or_location,source,height_ft,height_m,base_elevation_ft,longitude,latitude,notes
+MC Government / MCG,51 MONROE PL 20850,Montgomery Planning Buildings_3D,241.63,73.65,422.21,-77.148179,39.083809,One 3D part covering the county footprint. Source code 5 (Captured 2014).
+MC Government,same location envelope,Rockville ImperviousSurface Building,74.36,22.67,427.94,-77.148179,39.083809,"Point query returned this part plus lower parts of 24.3 41.3 and 56.6 ft named DHHS Offices; Rockville Metro Center. Not the same height as the Planning part."
+Executive Office Building,101 MONROE ST 20850,Montgomery Planning Buildings_3D,222.89,67.94,418.90,-77.149407,39.083040,One 3D part. Year built 2012. Source code 5. Flat roof on the Rockville copy.
+Executive Office Building,101 MONROE ST area,Rockville ImperviousSurface Building,207.23,63.16,426.13,-77.14942,39.08305,Same name and within about 2 m of the Planning centroid. Heights differ by 15.7 ft (4.8 m).
+Montgomery County Circuit Court,50 MARYLAND AVE 20850,Montgomery Planning Buildings_3D,169.44,51.65,,-77.150237,39.083312,Largest-area part. Two parts on the county footprint.
+Montgomery County Circuit Court,nearby Rockville part,Rockville ImperviousSurface Building,84.05,25.62,433.80,-77.15012,39.08349,About 22 m from the Planning centroid. Not proven to be the same polygon.
+gLeaf address building,808 HUNGERFORD DR 20850,Montgomery Planning Buildings_3D,20.93,6.38,,-77.153844,39.094821,County footprint name is blank. Planning height is the largest-area part.
+unnamed parts at gLeaf,808 Hungerford envelope,Rockville ImperviousSurface Building,19.13,5.83,463.17,,,"Two Rockville parts in the envelope: 15.40 ft and 19.13 ft, both flat, source code 5. Names null."
+Americana Centre Condo,118 MONROE ST 20850,Montgomery Planning Buildings_3D,132.06,40.25,413.96,-77.147906,39.082025,Largest-area of 3 parts. Rockville parts within about 20 m are 114.3 to 137.3 ft.

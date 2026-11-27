@@ -1,5 +1,5 @@
 import { MathUtils, PerspectiveCamera } from 'three';
-import { BOUNDS, DOWNTOWN } from './config.js';
+import { DOWNTOWN } from './config.js';
 import { lonLatToWorld } from './utils.js';
 
 const EYE_HEIGHT = 1.68;
@@ -8,8 +8,6 @@ const WALK_SPEED = 4.3;
 const SPRINT_SPEED = 6.9;
 const AIM_SPEED = 2.5;
 const CELL_SIZE = 32;
-const mapMin = lonLatToWorld(BOUNDS.west, BOUNDS.north);
-const mapMax = lonLatToWorld(BOUNDS.east, BOUNDS.south);
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
 const start = { x: junction.x + 14.5, z: junction.z + 2.45 };
 const movementKeys = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD',
@@ -66,8 +64,6 @@ export function createBuildingCollision(polygons) {
   }
 
   return (x, z) => {
-    if (x < mapMin.x + BODY_RADIUS || x > mapMax.x - BODY_RADIUS ||
-        z < mapMin.z + BODY_RADIUS || z > mapMax.z - BODY_RADIUS) return true;
     for (const body of cells.get(cellKey(x, z)) ?? []) {
       if (x < body.minX - BODY_RADIUS || x > body.maxX + BODY_RADIUS ||
           z < body.minZ - BODY_RADIUS || z > body.maxZ + BODY_RADIUS) continue;
@@ -120,7 +116,9 @@ export function createCamera(canvas) {
   const aim = document.querySelector('#aim');
   const help = document.querySelector('#control-help');
   const keys = new Set();
-  let blocked;
+  let blocked = () => false;
+  let sampleGround = () => 0;
+  let frozen = false;
   let active = false;
   let locked = false;
   let lockSettlesAt = 0;
@@ -280,15 +278,21 @@ export function createCamera(canvas) {
   window.addEventListener('blur', resetInputs);
   document.addEventListener('visibilitychange', () => { if (document.hidden) resetInputs(); });
 
-  function prepare(polygons) {
+  function prepare(polygons, ground) {
     blocked = createBuildingCollision(polygons);
+    if (ground) sampleGround = ground;
     const spawn = safeSpawn(blocked);
-    camera.position.set(spawn.x, EYE_HEIGHT, spawn.z);
+    camera.position.set(spawn.x, sampleGround(spawn.x, spawn.z) + EYE_HEIGHT, spawn.z);
     camera.rotation.set(pitch, yaw, 0);
     overlay.hidden = false;
   }
 
+  function freeze(value = true) {
+    frozen = value;
+  }
+
   function update(delta) {
+    if (frozen) return;
     const baseFov = camera.aspect < 1 ? 67 : 58;
     const aimed = active && (aimHeld || touchAim);
     let sprinting = false;
@@ -311,8 +315,9 @@ export function createCamera(canvas) {
         Math.max(delta * WALK_SPEED, 0.001));
       stride += delta * (sprinting ? 15 : 11);
     }
-    camera.position.y = MathUtils.damp(camera.position.y || EYE_HEIGHT,
-      EYE_HEIGHT + Math.sin(stride) * gait * (aimed ? 0.018 : 0.042), 20, delta);
+    const groundY = sampleGround(camera.position.x, camera.position.z);
+    camera.position.y = MathUtils.damp(camera.position.y || groundY + EYE_HEIGHT,
+      groundY + EYE_HEIGHT + Math.sin(stride) * gait * (aimed ? 0.018 : 0.042), 16, delta);
     camera.rotation.set(pitch, yaw, Math.sin(stride * 0.5) * gait * 0.007);
     const desiredFov = baseFov + (aimed ? -18 : sprinting ? 5 : 0);
     if (Math.abs(camera.fov - desiredFov) > 0.02) {
@@ -322,5 +327,5 @@ export function createCamera(canvas) {
     hud.classList.toggle('aimed', aimed);
   }
 
-  return { camera, controls: { prepare, update } };
+  return { camera, controls: { prepare, update, freeze } };
 }
