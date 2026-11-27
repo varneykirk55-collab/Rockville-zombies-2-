@@ -1,0 +1,5 @@
+{
+  "id": "infrastructure",
+  "extension": null,
+  "note": "Set extension to a path relative to src/infrastructure/module.js to add road or pedestrian code without editing src/main.js."
+}

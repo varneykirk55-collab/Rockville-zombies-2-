@@ -1,0 +1,6 @@
+{
+  "district": "hungerford",
+  "code": "B",
+  "extension": null,
+  "note": "District B slot for grok/hungerford-corridor. Set extension to a path relative to src/districts/hungerford/module.js. Do not edit src/main.js."
+}

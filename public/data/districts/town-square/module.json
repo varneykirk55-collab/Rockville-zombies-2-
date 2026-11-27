@@ -1,0 +1,6 @@
+{
+  "district": "town-square",
+  "code": "A",
+  "extension": null,
+  "note": "Set extension to a path relative to src/districts/town-square/module.js, for example ./extension.js, when this district adds code."
+}

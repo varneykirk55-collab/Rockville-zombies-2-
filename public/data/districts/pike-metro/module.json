@@ -1,0 +1,6 @@
+{
+  "district": "pike-metro",
+  "code": "D",
+  "extension": null,
+  "note": "Set extension to a path relative to src/districts/pike-metro/module.js when this district adds code. The pedestrian bridge deck stays unmodelled until its elevation is measured."
+}

@@ -1,0 +1,5 @@
+{
+  "id": "vegetation",
+  "extension": null,
+  "note": "Set extension to a path relative to src/vegetation/module.js to add landscaping without editing src/main.js."
+}

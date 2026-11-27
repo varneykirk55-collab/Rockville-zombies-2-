@@ -1,11 +1,13 @@
 import { Group } from 'three';
-import { createScene, addStreets, addParking, addTrees, addBridgeMarkers, alignSun } from './scene.js';
+import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js';
 import { createCamera, createBuildingCollision } from './camera.js';
 import { buildBuildings } from './buildings.js';
 import { createTerrain } from './terrain.js';
-import { placeLandmarks } from './landmarks.js';
+import { integrateLandmarks } from './landmarks/integrate.js';
+import { loadCityModules, loadLandmarkModels, separateBuildingIds } from './runtime/modules.js';
 import { startGameLoop } from './game-loop.js';
-import { runWalkTest, SHOTS, shotPose } from './walk-test.js';
+import { runWalkTest, SHOTS, EXTRA_POSES, shotPose } from './walk-test.js';
+import { lonLatToWorld } from './utils.js';
 
 const viewport = document.querySelector('#viewport');
 const status = document.querySelector('#loading');
@@ -35,7 +37,6 @@ startGameLoop({
 });
 
 const dataUrl = (file) => new URL(`../public/data/${file}`, import.meta.url);
-const boundaryUrl = new URL('../docs/geographic-audit/data/playable-boundary.geojson', import.meta.url);
 
 async function loadJson(url) {
   const response = await fetch(url);
@@ -49,27 +50,24 @@ world.add(buildings);
 
 try {
   status.textContent = 'Loading surveyed heights and terrain…';
-  const [terrainJson, boundaryJson, heights, footprintCollection, sections, parking, landmarks] = await Promise.all([
+  const [terrainJson, boundaryJson, heights, footprintCollection, sections, parking, bridgeManifest, landmarkModels] = await Promise.all([
     loadJson(dataUrl('terrain.json')),
-    loadJson(boundaryUrl),
+    loadJson(dataUrl('playable-boundary.geojson')),
     loadJson(dataUrl('building-heights.json')),
     loadJson(dataUrl('footprints.geojson')),
     loadJson(dataUrl('building-sections.geojson')),
     loadJson(dataUrl('parking.geojson')),
     loadJson(dataUrl('landmarks.json')),
+    loadLandmarkModels(),
   ]);
   const terrain = createTerrain(terrainJson, boundaryJson);
   const ground = terrain.buildMesh();
   world.add(ground);
   alignSun(sun, terrain.sampleGameY);
-  addStreets(world, maps, terrain);
   addParking(world, parking, terrain);
-  const treeCount = addTrees(world, terrain, footprintCollection.features);
-  addBridgeMarkers(world, landmarks.bridge, terrain);
+  addBridgeMarkers(world, bridgeManifest.bridge, terrain);
 
-  const separateIds = new Set(
-    (landmarks.landmarks ?? []).filter(item => item.hideProcedural).map(item => item.footprintId),
-  );
+  const separateIds = separateBuildingIds(landmarkModels);
   status.textContent = `Building ${footprintCollection.features.length} footprints…`;
   const built = await buildBuildings({
     features: footprintCollection.features,
@@ -83,8 +81,14 @@ try {
       status.textContent = `Building geometry (${done}/${total})…`;
     },
   });
-  const placed = await placeLandmarks({
-    world, manifest: landmarks, terrain,
+  const shared = {};
+  const moduleContext = {
+    scene, world, terrain, maps, features: footprintCollection.features,
+    heights, boundary: boundaryJson, buildings: built, shared,
+  };
+  const modules = await loadCityModules(moduleContext);
+  const placed = await integrateLandmarks({
+    world, models: landmarkModels, terrain,
     separateGroups: built.separateGroups,
     collisionPolygons: built.collisionPolygons,
   });
@@ -103,14 +107,17 @@ try {
     confidence: heights.counts,
     methods: heights.methods,
     windows: built.windows,
+    windowAudit: built.windowAudit,
     sharedWallMetres: built.sharedMetres,
     triangles: built.triangles,
-    trees: treeCount,
+    trees: shared.trees,
+    roads: shared.roads,
+    modules: modules.map(item => item.id),
     parking: parking.features.length,
     landmarks: placed,
     bridge: {
-      deckElevationM: landmarks.bridge.deckElevationM,
-      clearanceOverPikeM: landmarks.bridge.clearanceOverPikeM,
+      deckElevationM: bridgeManifest.bridge.deckElevationM,
+      clearanceOverPikeM: bridgeManifest.bridge.clearanceOverPikeM,
     },
     heightRange: { min: built.minHeight, max: built.maxHeight },
   };
@@ -121,8 +128,17 @@ try {
     renderer,
     scene,
     freeze: controls.freeze,
+    drive: controls.nudge,
     sampleGround,
     shots: SHOTS,
+    extraPoses: EXTRA_POSES.map(pose => {
+      const at = lonLatToWorld(pose.at[0], pose.at[1]);
+      const look = lonLatToWorld(pose.look[0], pose.look[1]);
+      return {
+        id: pose.id, x: at.x, z: at.z, lookX: look.x, lookZ: look.z,
+        eye: pose.eye, lookEye: pose.lookEye,
+      };
+    }),
   };
   if (audit) {
     const blocked = createBuildingCollision(built.collisionPolygons);

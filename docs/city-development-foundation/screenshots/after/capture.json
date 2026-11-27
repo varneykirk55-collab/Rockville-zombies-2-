@@ -1,0 +1,232 @@
+{
+  "label": "after",
+  "summary": {
+    "rendered": 743,
+    "skipped": 0,
+    "playable": 512,
+    "confidence": {
+      "Estimated": 243,
+      "High": 137,
+      "Medium": 132
+    },
+    "methods": {
+      "same-address-measured": 44,
+      "higher-measured-lowrise": 24,
+      "measured-high": 137,
+      "measured-medium": 132,
+      "published-storeys": 2,
+      "median-of-measured-neighbours": 70,
+      "single-measured-source": 51,
+      "higher-measured": 15,
+      "published-roof": 2,
+      "median-of-lowrise-district": 27,
+      "lower-measured-large-footprint": 4,
+      "published-plan-height": 4
+    },
+    "windows": 5817,
+    "windowAudit": {
+      "placed": 5817,
+      "buried": 0,
+      "rejected": 0
+    },
+    "sharedWallMetres": 11731,
+    "triangles": 20959,
+    "trees": 681,
+    "roads": {
+      "trimmed": 93,
+      "omitted": 16
+    },
+    "modules": [
+      "infrastructure",
+      "vegetation",
+      "town-square",
+      "hungerford",
+      "regal-courthouse",
+      "pike-metro"
+    ],
+    "parking": 103,
+    "landmarks": [
+      {
+        "id": "clock-tower",
+        "district": "town-square",
+        "approval": "unapproved",
+        "buildingId": 129521,
+        "active": true,
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 20730
+      },
+      {
+        "id": "turret-corner",
+        "district": "town-square",
+        "approval": "unapproved",
+        "buildingId": 129621,
+        "active": true,
+        "loaded": true,
+        "placed": false,
+        "fallback": "procedural",
+        "reason": "duplicate-prevented",
+        "triangles": 21068
+      },
+      {
+        "id": "missing-model-fallback",
+        "district": "town-square",
+        "approval": "unapproved",
+        "buildingId": null,
+        "active": true,
+        "loaded": false,
+        "placed": false,
+        "fallback": "procedural",
+        "reason": "no-file"
+      },
+      {
+        "id": "regal-cinemas",
+        "district": "regal-courthouse",
+        "approval": "unapproved",
+        "buildingId": null,
+        "active": false,
+        "loaded": false,
+        "placed": false,
+        "fallback": null,
+        "reason": "inactive"
+      },
+      {
+        "id": "montgomery-colonnade",
+        "district": "regal-courthouse",
+        "approval": "unapproved",
+        "buildingId": null,
+        "active": false,
+        "loaded": false,
+        "placed": false,
+        "fallback": null,
+        "reason": "inactive"
+      },
+      {
+        "id": "historic-red-brick-courthouse",
+        "district": "regal-courthouse",
+        "approval": "unapproved",
+        "buildingId": 129058,
+        "active": false,
+        "loaded": false,
+        "placed": false,
+        "fallback": null,
+        "reason": "inactive"
+      }
+    ],
+    "bridge": {
+      "deckElevationM": null,
+      "clearanceOverPikeM": null
+    },
+    "heightRange": {
+      "min": 0.95,
+      "max": 73.65
+    }
+  },
+  "walk": {
+    "roadSamples": 7833,
+    "roadBlocked": 33,
+    "roadBlockedFraction": 0.0042,
+    "pedestrian": {
+      "center": 7800,
+      "shoulder": 15,
+      "detour": 4,
+      "interior": 14
+    },
+    "heightPops": {
+      "worstRiseM": 0.971,
+      "stepsOver045m": 5
+    },
+    "boundarySamples": [
+      {
+        "lon": -77.1412,
+        "lat": 39.09,
+        "x": 934.4312252325446,
+        "z": -444.06838522014914,
+        "outsideM": 607.7,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.152,
+        "lat": 39.0954,
+        "x": 0,
+        "z": -1043.5607052660096,
+        "outsideM": 50.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.1554,
+        "lat": 39.086,
+        "x": -294.17279312860467,
+        "z": 0,
+        "outsideM": 34.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.148,
+        "lat": 39.0794,
+        "x": 346.0856389753353,
+        "z": 732.7128356122206,
+        "outsideM": 131,
+        "blocked": false,
+        "buildingFree": true
+      }
+    ],
+    "approaches": [
+      {
+        "distanceM": 1.2,
+        "clearBeforeM": 0.8
+      },
+      {
+        "distanceM": 13.2,
+        "clearBeforeM": 12.8
+      }
+    ],
+    "controller": {
+      "start": {
+        "x": 186.9769694672329,
+        "z": 214.18846709802685
+      },
+      "end": {
+        "x": 154.98,
+        "z": 216.19
+      },
+      "blockedSteps": 0,
+      "movedM": 32.06
+    }
+  },
+  "performance": {
+    "drawCalls": 58,
+    "triangles": 276028,
+    "frameMs": 361.575
+  },
+  "gl": {
+    "width": 1280,
+    "height": 720,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "errors": [],
+  "files": [
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/hungerford.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/town-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/maryland-regal.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/courthouse-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/rockville-pike.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/metro.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/district-a.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/district-b.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/district-c.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/district-d-metro.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/clock-tower.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/entrance-grade.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/after/overview.png"
+  ],
+  "gameplay": {
+    "movedM": 5.159999999999851,
+    "loopAdvanced": true
+  }
+}

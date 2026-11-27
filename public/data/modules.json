@@ -1,0 +1,47 @@
+{
+  "description": "Discovery list for the six owners. An owner adds behaviour by setting extension in their own module.json and adding files under their directory. This index is the slot list; owners do not add themselves here.",
+  "systems": [
+    {
+      "id": "infrastructure",
+      "role": "infrastructure",
+      "module": "../infrastructure/module.js",
+      "meta": "infrastructure/module.json"
+    },
+    {
+      "id": "vegetation",
+      "role": "vegetation",
+      "module": "../vegetation/module.js",
+      "meta": "vegetation/module.json"
+    }
+  ],
+  "districts": [
+    {
+      "code": "A",
+      "id": "town-square",
+      "module": "../districts/town-square/module.js",
+      "landmarks": "districts/town-square/landmarks.json",
+      "meta": "districts/town-square/module.json"
+    },
+    {
+      "code": "B",
+      "id": "hungerford",
+      "module": "../districts/hungerford/module.js",
+      "landmarks": "districts/hungerford/landmarks.json",
+      "meta": "districts/hungerford/module.json"
+    },
+    {
+      "code": "C",
+      "id": "regal-courthouse",
+      "module": "../districts/regal-courthouse/module.js",
+      "landmarks": "districts/regal-courthouse/landmarks.json",
+      "meta": "districts/regal-courthouse/module.json"
+    },
+    {
+      "code": "D",
+      "id": "pike-metro",
+      "module": "../districts/pike-metro/module.js",
+      "landmarks": "districts/pike-metro/landmarks.json",
+      "meta": "districts/pike-metro/module.json"
+    }
+  ]
+}

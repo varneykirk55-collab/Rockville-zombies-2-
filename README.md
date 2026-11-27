@@ -26,7 +26,9 @@ The camera uses a 1.68 m eye height, walk/sprint speeds of 4.3/6.9 m/s, and a na
 
 ## Source layout
 
-`main.js` loads the committed footprint snapshot, height table, and terrain grid, then connects the scene and the existing update loop. `buildings.js` extrudes those footprints, drops shared wall faces, and applies roof codes. `terrain.js` samples the height grid. `camera.js` handles first-person input, building collision, and terrain-aware eye height. `scene.js` configures the renderer, draped streets, parking, and backdrop trees. `config.js` holds the map origin and the road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north). `scripts/build_city_data.py` rebuilds the data files from the audit and the county, Planning, and Maryland DEM services.
+`main.js` loads the committed footprint snapshot, height table, terrain grid, and the playable boundary in `public/data/playable-boundary.geojson`, then connects the scene and the existing update loop. `buildings.js` extrudes those footprints, drops shared wall faces, and applies roof codes. `terrain.js` samples the height grid. `camera.js` handles first-person input, building collision, and terrain-aware eye height. `scene.js` configures the renderer and parking. Roads live in `src/infrastructure/`. Backdrop trees live in `src/vegetation/`. District slots live in `src/districts/<id>/`. `src/runtime/modules.js` loads those owners from `public/data/modules.json`, and `src/landmarks/integrate.js` places GLB landmarks from each district manifest. `config.js` holds the map origin and the road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north). `scripts/build_city_data.py` rebuilds the city files. `scripts/build_districts.py` rebuilds district ownership.
+
+Ownership, the landmark inventory, and how the six parallel agents add work without editing `src/main.js` are in `docs/city-development-foundation/CONTRIBUTING.md`.
 
 ## Materials and data
 

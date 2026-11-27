@@ -1,0 +1,56 @@
+{
+  "district": "town-square",
+  "code": "A",
+  "models": [
+    {
+      "id": "clock-tower",
+      "buildingId": 129521,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/clock_tower_building.glb",
+      "longitude": -77.146252,
+      "latitude": 39.083118,
+      "rotationY": -1.5707963267948966,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "size": [42.8, 20.2], "keepFootprint": true },
+      "source": {
+        "branch": "grok/rockville-landmarks",
+        "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
+        "path": "public/landmarks/clock_tower_building.glb",
+        "pullRequest": 2
+      },
+      "notes": "Unapproved test asset from PR #2. Suggested rotation.y is -π/2 so the facade faces west. PR #4 linked this file to footprint 129521 (1 Church Street). That centroid is on the Pike side of downtown, in district D, not on the plaza. The model stays registered to District A because it is the Town Square clock-tower asset. Retarget buildingId in this file when the plaza footprint is confirmed. An orange pole beside the model marks it as unapproved."
+    },
+    {
+      "id": "turret-corner",
+      "buildingId": 129621,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/turret_corner_building.glb",
+      "longitude": -77.150277,
+      "latitude": 39.084596,
+      "rotationY": 3.141592653589793,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": false,
+      "source": {
+        "branch": "grok/rockville-landmarks",
+        "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
+        "path": "public/landmarks/turret_corner_building.glb",
+        "pullRequest": 2
+      },
+      "notes": "Unapproved test asset. The file loads. It is not placed: replaceProcedural is false, so the county mass at 1 Helen Heneghan Way (about 29 m by 43 m, not the model's 31.5 m by 30.5 m) stays. Suggested rotation.y is π."
+    },
+    {
+      "id": "missing-model-fallback",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": true,
+      "glb": null,
+      "replaceProcedural": true,
+      "notes": "Intentional empty path. The loader reports a procedural fallback and does not remove a building."
+    }
+  ]
+}

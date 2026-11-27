@@ -1,0 +1,58 @@
+{
+  "district": "regal-courthouse",
+  "code": "C",
+  "models": [
+    {
+      "id": "regal-cinemas",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": false,
+      "glb": "landmarks/regal-cinemas.glb",
+      "rotationY": 0,
+      "scale": 1,
+      "replaceProcedural": false,
+      "source": {
+        "branch": "cursor/rockville-landmarks-6f3d",
+        "commit": "369a2db525d06882dd01be1ccdefcfb371afab98",
+        "path": "public/landmarks/regal-cinemas.glb",
+        "pullRequest": 1
+      },
+      "notes": "Present and inactive. 199 East Montgomery Avenue is one 140 m county footprint, not the model's 30 m by 22 m plan. It is not a confirmed replacement target, so the procedural mass stays."
+    },
+    {
+      "id": "montgomery-colonnade",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": false,
+      "glb": "landmarks/montgomery-colonnade.glb",
+      "rotationY": 0,
+      "scale": 1,
+      "replaceProcedural": false,
+      "source": {
+        "branch": "cursor/rockville-landmarks-6f3d",
+        "commit": "369a2db525d06882dd01be1ccdefcfb371afab98",
+        "path": "public/landmarks/montgomery-colonnade.glb",
+        "pullRequest": 1
+      },
+      "notes": "Present and inactive. The white columned frontage is the same 199 East Montgomery mass as the cinema model. No separate footprint is confirmed."
+    },
+    {
+      "id": "historic-red-brick-courthouse",
+      "buildingId": 129058,
+      "approval": "unapproved",
+      "active": false,
+      "glb": "landmarks/historic_courthouse.glb",
+      "longitude": -77.151553,
+      "latitude": 39.083656,
+      "rotationY": 0.4538,
+      "scale": 1,
+      "replaceProcedural": false,
+      "source": {
+        "branch": "landmark/historic-courthouse",
+        "commit": "c34966f4fb29e5113c3a40068c9d4b797b5f3cea",
+        "path": "public/landmarks/historic_courthouse.glb"
+      },
+      "notes": "Present and inactive. The specification on that branch is marked awaiting approval. The export is 24,782 triangles and 49 material draws, which would move the SwiftShader frame well past the geometry-upgrade baseline, so the default scene keeps the procedural mass at 29 Courthouse Square. rotationY of about 26 degrees is the footprint bearing from the specification, not a placed calibration."
+    }
+  ]
+}
