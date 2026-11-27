@@ -56,7 +56,7 @@ function reach(arm, goal, wrist, weight) {
   arm.hand.quaternion.slerp(parentRotation.multiply(wrist), weight);
 }
 
-export function createCombat({ scene, renderer, camera, controls, player, canvas }) {
+export function createCombat({ scene, renderer, camera, controls, player, canvas, survival }) {
   const hud = document.querySelector('#weapon-hud');
   const reticle = document.querySelector('#reticle');
   const arms = [];
@@ -194,7 +194,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   }
 
   function equip(index, sound = true) {
-    if (machineBusy || !rigsReady || (sound && active === index)) return;
+    if (survival?.dead || machineBusy || !rigsReady || (sound && active === index)) return;
     holster(gear[active]);
     active = index;
     renderer.shadowMap.needsUpdate = true;
@@ -212,7 +212,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
 
   function startReload() {
     const item = gear[active];
-    if (machineBusy || !rigsReady || reload || draw || item.ammo === Math.round(stat(item, 'magazine')) || !item.reserve) return;
+    if (survival?.dead || machineBusy || !rigsReady || reload || draw || item.ammo === Math.round(stat(item, 'magazine')) || !item.reserve) return;
     reload = item.config.reload;
     play(item.config.reloadSound);
   }
@@ -238,13 +238,15 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
         }
       }
     }
+    const enemy = testTargets ? survival?.trace(traceRay, distance) : null;
+    if (enemy) distance = enemy.distance;
     const steps = Math.ceil(distance / 0.19);
     for (let i = 1; i <= steps; i++) {
       const along = Math.min(distance, i * 0.19);
       probe.copy(start).addScaledVector(direction, along);
       if (solidsAt(probe)) return { distance: along, wall: true };
     }
-    return { distance, target };
+    return { distance, target: enemy ? undefined : target, enemy };
   }
 
   function prepareTargets() {
@@ -281,9 +283,9 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     const { config, group } = item;
     camera.getWorldDirection(view);
     const sight = trace(camera.position, view, config.range, true);
-    sightOnTarget = Boolean(sight.target);
+    sightOnTarget = Boolean(sight.target || sight.enemy);
     aimPoint.copy(camera.position).addScaledVector(view, sight.distance);
-    if (sight.target) aimPoint.addScaledVector(view, 0.025);
+    if (sight.target || sight.enemy) aimPoint.addScaledVector(view, 0.025);
     origin.set(motion.x, motion.y + 1.24, motion.z);
     const cos = Math.cos(motion.yaw);
     const sin = Math.sin(motion.yaw);
@@ -354,17 +356,21 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     flashTime = 0.055;
     view.copy(aimPoint).sub(muzzle).normalize();
     const hit = trace(muzzle, view, config.range, true);
-    lastImpact = hit.target ? 'target' : hit.wall ? 'wall' : 'none';
-    if (hit.target) {
+    lastImpact = hit.enemy ? hit.enemy.part : hit.target ? 'target' : hit.wall ? 'wall' : 'none';
+    if (hit.target || hit.enemy) {
       const falloff = MathUtils.clamp((hit.distance - config.effective) / (config.range - config.effective), 0, 1);
-      hit.target.health -= stat(item, 'damage') * MathUtils.lerp(1, config.falloff, falloff);
-      hits++;
-      if (hit.target.health <= 0) {
-        hit.target.mesh.visible = false;
-        hit.target.reset = 2.5;
+      const damage = stat(item, 'damage') * MathUtils.lerp(1, config.falloff, falloff);
+      if (hit.enemy) survival.hit(hit.enemy, damage, config.id);
+      else {
+        hit.target.health -= damage;
+        if (hit.target.health <= 0) {
+          hit.target.mesh.visible = false;
+          hit.target.reset = 2.5;
+        }
       }
+      hits++;
     }
-    if (hit.wall || hit.target) {
+    if (hit.wall || hit.target || hit.enemy) {
       const effect = sparks[impactCursor++ % sparks.length];
       effect.life = 0.24;
       effect.mesh.position.copy(muzzle).addScaledVector(view, hit.distance);
@@ -377,7 +383,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   function update(delta) {
     if (!worldReady) return;
     if (modelsReady && !rigsReady) attach();
-    if (!rigsReady || !controls.active) {
+    if (survival?.dead || !rigsReady || !controls.active) {
       trigger = pressed = false;
       return;
     }
@@ -463,6 +469,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
 
   return {
     update, prepareTargets,
+    get ready() { return rigsReady; },
     get armed() { return rigsReady && !machineBusy; },
     get currentWeapon() {
       const item = gear[active];

@@ -22,6 +22,12 @@ Open [http://localhost:8000](http://localhost:8000) in a modern browser with Web
 | Switch weapon | 1 M4, 2 MK35, 3 M1911 | Swap | D-pad left/right or RB / R1 |
 | Switch shoulder | Q | Shoulder | Click right stick |
 
+## Zombie survival
+
+Enter downtown to start round one. Defeat the remaining Prisoner Zombies to advance, with a short break between rounds. Aim for headshots to earn additional points, then spend the points at the machines near spawn. Health regenerates after four seconds without damage. Use **Restart** on the game-over screen to begin a fresh run.
+
+The Prisoner Zombie is by [Vinish.Dev](https://vinish.dev/free-3d-models/zombies) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [asset and configuration notes](docs/zombies/SOURCES.md).
+
 ## Training machines
 
 Two temporary machines sit near the downtown spawn, clear of the surveyed roads and sidewalks. The HUD shows their distances. Use **E**, gamepad **Y / Triangle**, or the mobile **Interact** button when in reach.

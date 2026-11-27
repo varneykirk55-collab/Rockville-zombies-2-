@@ -71,7 +71,7 @@ function bounceOut(t) {
   return 7.5625 * (t - 2.625 / 2.75) ** 2 + 0.984375;
 }
 
-export function createMachines({ world, camera, renderer, controls, combat, wallet, testing = false }) {
+export function createMachines({ world, camera, renderer, controls, combat, wallet, testing = false, available = () => true }) {
   const points = document.querySelector('#points-hud');
   const prompt = document.querySelector('#machine-prompt');
   const touch = document.querySelector('#interact');
@@ -171,7 +171,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
   }
 
   function nearest() {
-    if (!ready || !combat.currentWeapon || !controls.active) return -1;
+    if (!available() || !ready || !combat.currentWeapon || !controls.active) return -1;
     const { x, z } = controls.pose;
     const distance = scenic.map(group => Math.hypot(x - group.position.x, z - group.position.z));
     const index = distance[0] <= distance[1] ? 0 : 1;
@@ -340,7 +340,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
   }
 
   addEventListener('keydown', event => {
-    if (event.repeat || !controls.active) return;
+    if (!available() || event.repeat || !controls.active) return;
     if (event.code === 'KeyE') interact();
     if (testing && event.code === 'KeyP') wallet.credit(5000);
   });
