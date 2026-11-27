@@ -247,3 +247,24 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
   #machine-hint { top: 7rem; }
   #round-banner { top: 9.4rem; }
 }
+
+#graphics-settings {
+  position: fixed;
+  bottom: max(0.55rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 0.35rem 0.55rem;
+  background: #182933df;
+  color: #fff4dd;
+  font-weight: 600;
+}
+#graphics-preset { font: inherit; }
+@media (pointer: coarse) {
+  #graphics-settings {
+    top: max(0.55rem, env(safe-area-inset-top));
+    bottom: auto;
+    left: max(0.55rem, env(safe-area-inset-left));
+    transform: none;
+  }
+}

@@ -19,7 +19,7 @@ const HIT_REGIONS = [['head', 0, 0.15], ['torso', 1.08, 0.35], ['legs', 0.49, 0.
 const pick = list => list[Math.floor(Math.random() * list.length)];
 const lerp = (a, b) => MathUtils.lerp(a, b, Math.random());
 
-export function createSurvival({ world, camera, controls, renderer, wallet, overlay }) {
+export function createSurvival({ world, camera, controls, renderer, wallet, graphics, overlay }) {
   const panel = document.querySelector('#survival-hud');
   const banner = document.querySelector('#round-banner');
   const gameOver = document.querySelector('#game-over');
@@ -34,7 +34,7 @@ export function createSurvival({ world, camera, controls, renderer, wallet, over
   const hurtSphere = new Sphere(new Vector3(), 0.15);
   const intersect = new Vector3();
   const view = new Vector3();
-  const waypoint = { x: 0, z: 0 };
+
   const spawnAt = { x: 0, z: 0 };
   const audio = new Map([...GROANS, ...ATTACKS, ...DEATHS, ...HURTS, 'player_death', 'round_start', 'round_end', 'impact_flesh'].map(name =>
     [name, { cursor: 0, voices: Array.from({ length: name.startsWith('zombie_') ? 2 : 1 }, () => {
@@ -123,8 +123,8 @@ export function createSurvival({ world, camera, controls, renderer, wallet, over
       return [name, action];
     }));
     root.visible = false;
-    world.add(root);
-    return { root, meshes, head, mixer, actions, lod: -1 };
+
+    return { root, meshes, head, mixer, actions, lod: -1, waypoint: { x: 0, z: 0 } };
   }
 
   function transition(zombie, clip, fade = 0.15) {
@@ -146,17 +146,19 @@ export function createSurvival({ world, camera, controls, renderer, wallet, over
     Object.assign(zombie, {
       health: healthForRound(round), speed, age: 0, clip: '', detected: false, state: 'idle',
       until: 0, attackReady: clock, hitAt: Infinity, corpseUntil: Infinity, stalled: 0,
-      animationTime: 0, nextGroan: clock + lerp(3, 8), motion: 0,
+      animationTime: 0, routeAt: 0, hasRoute: false, nextGroan: clock + lerp(3, 8), motion: 0,
     });
     zombie.root.position.set(x, controls.sampleGround(x, z), z);
     zombie.root.rotation.y = 0;
     transition(zombie, 'Idle');
+    world.add(zombie.root);
     living.push(zombie);
     return zombie;
   }
 
   function release(zombie) {
     zombie.root.visible = false;
+    zombie.root.removeFromParent();
     zombie.mixer.stopAllAction();
     pool.push(zombie);
   }
@@ -265,14 +267,21 @@ export function createSurvival({ world, camera, controls, renderer, wallet, over
 
     const start = performance.now();
     const direct = distance < 13 && clear();
-    const route = direct || navigation.waypoint(position, waypoint);
+    const waypoint = zombie.waypoint;
+    if (!direct && (clock >= zombie.routeAt || (zombie.hasRoute &&
+      (position.x - waypoint.x) ** 2 + (position.z - waypoint.z) ** 2 < 0.13))) {
+      zombie.hasRoute = navigation.waypoint(position, waypoint);
+      zombie.routeAt = clock + 0.1 + (zombie.root.id % 7) * 0.012;
+    }
+    const route = direct || zombie.hasRoute;
     let tx = direct ? x : waypoint.x, tz = direct ? z : waypoint.z;
     if (route && distance > config.attackRange * 0.72) {
       for (const other of living) {
         if (other === zombie) continue;
         const sx = position.x - other.root.position.x, sz = position.z - other.root.position.z;
-        const separation = Math.hypot(sx, sz);
-        if (separation < 0.86 && separation > 0.001) {
+        const squared = sx * sx + sz * sz;
+        if (squared < 0.86 * 0.86 && squared > 0.000001) {
+          const separation = Math.sqrt(squared);
           const weight = (0.86 - separation) / separation;
           tx += sx * weight;
           tz += sz * weight;
@@ -315,7 +324,8 @@ export function createSurvival({ world, camera, controls, renderer, wallet, over
       zombie.mixer.update(zombie.animationTime);
       zombie.animationTime = 0;
     }
-    const lod = distance < 13 ? 0 : distance < 32 ? 1 : 2;
+    const quality = graphics();
+    const lod = distance < quality.near ? 0 : distance < quality.mid ? 1 : 2;
     if (lod !== zombie.lod) {
       zombie.meshes.forEach((mesh, id) => {
         mesh.geometry = levels[id][lod];

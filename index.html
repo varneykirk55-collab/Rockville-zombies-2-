@@ -9,13 +9,20 @@
   <script type="importmap">
     {
       "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+        "three": "./public/vendor/three/build/three.module.js",
+        "three/addons/": "./public/vendor/three/addons/"
       }
     }
   </script>
 </head>
 <body>
+  <label id="graphics-settings">Graphics
+    <select id="graphics-preset">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+  </label>
   <main id="viewport" aria-label="3D map of Rockville Town Center">
     <div id="loading" role="status" aria-live="polite">Starting 3D map…</div>
     <section id="start-panel" aria-labelledby="location" hidden>

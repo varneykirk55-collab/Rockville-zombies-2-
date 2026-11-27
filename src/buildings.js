@@ -200,15 +200,20 @@ function buildMesh(group, batch, material, name, castShadow) {
   return batch.position.length / 3;
 }
 
-function addWindows(group, windows) {
+function windowMaterials() {
+  return {
+    geometry: new THREE.BoxGeometry(1, 1, 1),
+    frame: new THREE.MeshStandardMaterial({ color: 0x373743, roughness: 0.92 }),
+    glass: new THREE.MeshStandardMaterial({
+      color: white, roughness: 0.56, metalness: 0.12, emissive: 0x091921, emissiveIntensity: 0.42,
+    }),
+  };
+}
+
+function addWindows(group, windows, materials) {
   if (!windows.length) return;
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const glass = new THREE.MeshStandardMaterial({
-    color: white, roughness: 0.56, metalness: 0.12, emissive: 0x091921, emissiveIntensity: 0.42,
-  });
-  const frames = new THREE.InstancedMesh(geometry,
-    new THREE.MeshStandardMaterial({ color: 0x373743, roughness: 0.92 }), windows.length);
-  const panes = new THREE.InstancedMesh(geometry, glass, windows.length);
+  const frames = new THREE.InstancedMesh(materials.geometry, materials.frame, windows.length);
+  const panes = new THREE.InstancedMesh(materials.geometry, materials.glass, windows.length);
   frames.name = 'Window frames';
   panes.name = 'Glass';
   const dummy = new THREE.Object3D();
@@ -282,9 +287,9 @@ export async function buildBuildings({
   const roofMaterial = new THREE.MeshStandardMaterial({
     vertexColors: true, map: maps.roof ?? null, roughness: 1,
   });
-  const near = { walls: geometryBatch(), roofs: geometryBatch() };
-  const far = { walls: geometryBatch(), roofs: geometryBatch() };
-  const backdrop = { walls: geometryBatch(), roofs: geometryBatch() };
+  const districts = new Map();
+  const windowTiles = new Map();
+  const glazing = windowMaterials();
   const collisionPolygons = [];
   const windows = [];
   const windowAudit = { placed: 0, buried: 0, rejected: 0 };
@@ -298,9 +303,10 @@ export async function buildBuildings({
   let sharedMetres = 0;
 
   function targetFor(point, role) {
-    if (role === 'backdrop') return backdrop;
-    const distance = Math.hypot(point.x - focus.x, point.z - focus.z);
-    return distance < 235 ? near : far;
+    const layer = role === 'backdrop' ? 'backdrop' : Math.hypot(point.x - focus.x, point.z - focus.z) < 235 ? 'near' : 'far';
+    const key = layer + ':' + Math.floor(point.x / 224) + ':' + Math.floor(point.z / 224);
+    if (!districts.has(key)) districts.set(key, { walls: geometryBatch(), roofs: geometryBatch(), layer });
+    return districts.get(key);
   }
 
   function rememberEdge(polygon, a, b, skirtY, topOf, record) {
@@ -494,19 +500,22 @@ export async function buildBuildings({
   }
 
   let triangles = 0;
-  triangles += buildMesh(group, near.walls, wallMaterial, 'Walls near', true) / 3;
-  triangles += buildMesh(group, near.roofs, roofMaterial, 'Roofs near', true) / 3;
-  triangles += buildMesh(group, far.walls, wallMaterial, 'Walls far', false) / 3;
-  triangles += buildMesh(group, far.roofs, roofMaterial, 'Roofs far', false) / 3;
-  triangles += buildMesh(group, backdrop.walls, wallMaterial, 'Backdrop walls', false) / 3;
-  triangles += buildMesh(group, backdrop.roofs, roofMaterial, 'Backdrop roofs', false) / 3;
+  for (const { walls, roofs, layer } of districts.values()) {
+    triangles += buildMesh(group, walls, wallMaterial, 'Walls ' + layer, layer === 'near') / 3;
+    triangles += buildMesh(group, roofs, roofMaterial, 'Roofs ' + layer, layer === 'near') / 3;
+  }
   for (const { group: landmarkGroup, walls, roofs, windows: landmarkWindows } of separateGroups.values()) {
     buildMesh(landmarkGroup, walls, wallMaterial, 'Landmark walls', true);
     buildMesh(landmarkGroup, roofs, roofMaterial, 'Landmark roofs', true);
-    addWindows(landmarkGroup, landmarkWindows ?? []);
+    addWindows(landmarkGroup, landmarkWindows ?? [], glazing);
     group.add(landmarkGroup);
   }
-  addWindows(group, windows);
+  for (const window of windows) {
+    const key = Math.floor(window.x / 144) + ':' + Math.floor(window.z / 144);
+    if (!windowTiles.has(key)) windowTiles.set(key, []);
+    windowTiles.get(key).push(window);
+  }
+  for (const tile of windowTiles.values()) addWindows(group, tile, glazing);
   onProgress?.(features.length, features.length);
 
   return {

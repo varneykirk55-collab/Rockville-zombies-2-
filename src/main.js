@@ -12,6 +12,7 @@ import { addStreets } from './infrastructure/roads.js';
 import { integrateLandmarks } from './landmarks/integrate.js';
 import { loadCityModules, loadLandmarkModels, separateBuildingIds } from './runtime/modules.js';
 import { startGameLoop } from './game-loop.js';
+import { configureGraphics } from './graphics.js';
 import { runWalkTest, SHOTS, EXTRA_POSES, shotPose } from './walk-test.js';
 import { lonLatToWorld } from './utils.js';
 
@@ -23,10 +24,11 @@ const demo = params.has('demo');
 
 const { scene, renderer, world, maps, sun } = createScene(viewport);
 const { camera, controls } = createCamera(renderer.domElement);
+const graphics = configureGraphics(renderer, sun, resize);
 const player = createPlayer({ scene, renderer });
 const wallet = createWallet();
 const survival = audit || params.has('preview') ? null : createSurvival({
-  world, camera, controls, renderer, wallet, overlay: document.querySelector('#start-panel'),
+  world, camera, controls, renderer, wallet, graphics, overlay: document.querySelector('#start-panel'),
 });
 const combat = audit || params.has('preview') ? null
   : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement, survival });
@@ -48,10 +50,13 @@ observer.observe(viewport);
 resize();
 
 let demoTime = 0;
+let readyToRender = false;
 startGameLoop({
   renderer,
   scene,
   camera,
+  ready: () => readyToRender,
+  shadowInterval: () => graphics().shadowInterval,
   update: (delta) => {
     if (demo && !audit && controls.active) controls.drive(demoInput(demoTime += delta));
     controls.update(delta);
@@ -107,6 +112,7 @@ try {
   } else {
     await loadCity();
   }
+  readyToRender = true;
 } catch (error) {
   console.error('Rockville building load failed:', error);
   status.hidden = false;
@@ -159,10 +165,13 @@ async function loadCity() {
     batch: params.get('batch') !== '0',
   });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
-  await machines?.place(built.collisionPolygons, sampleGround, terrain.insidePlayable);
+  status.textContent = 'Loading training machines and survival assets…';
+  await Promise.all([
+    machines?.place(built.collisionPolygons, sampleGround, terrain.insidePlayable),
+    survival?.prepare(terrain.insidePlayable),
+  ]);
   controls.prepare(built.collisionPolygons, sampleGround);
   combat?.prepareTargets();
-  await survival?.prepare(terrain.insidePlayable);
   if (!audit && (demo || params.has('autostart'))) controls.engage();
   if (audit) {
     document.querySelector('#start-panel').hidden = true;
