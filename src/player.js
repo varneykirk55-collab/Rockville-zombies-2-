@@ -8,9 +8,11 @@ import {
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { createDirectionalGait } from './directional-gait.js';
 
 const MODEL_URL = new URL('../public/models/cowgirl.glb', import.meta.url);
 const CLIP_NAMES = ['idle', 'walk', 'run', 'sprint', 'jump', 'fall', 'land'];
+const CYCLES = new Set(['walk', 'run', 'sprint']);
 const LOOPING = new Set(['idle', 'walk', 'run', 'sprint', 'fall']);
 // Ground speeds of the retargeted Mixamo takes, in m/s. Playback rate matches
 // the real pace so the feet stay near the distance she actually covers.
@@ -39,6 +41,10 @@ export function createPlayer({ scene, renderer }) {
   const sockets = {};
   const pose = { clip: 'idle' };
   let mixer;
+  let directionalGait;
+  const fading = new Set();
+  const gaitFrame = {};
+  const label = document.querySelector('#gait');
   let actions;
   let current = '';
   let landTimer = 0;
@@ -70,6 +76,7 @@ export function createPlayer({ scene, renderer }) {
     root.add(model);
 
     mixer = new AnimationMixer(model);
+    directionalGait = createDirectionalGait(model);
     actions = {};
     for (const name of CLIP_NAMES) {
       const clip = gltf.animations.find((entry) => entry.name === name);
@@ -98,20 +105,27 @@ export function createPlayer({ scene, renderer }) {
   function play(name, fade) {
     const next = actions?.[name];
     if (!next || current === name) return;
-    next.enabled = true;
+    const previous = actions[current];
+    const phase = CYCLES.has(name) && CYCLES.has(current)
+      ? MathUtils.euclideanModulo(previous.time / previous.getClip().duration, 1) : 0;
+    fading.delete(next);
     next.reset().setEffectiveWeight(1).play();
+    next.time = phase * next.getClip().duration;
     if (fade > 0) {
       next.fadeIn(fade);
-      if (current && actions[current]) actions[current].fadeOut(fade);
-    } else if (current && actions[current]) {
-      actions[current].stop();
+      if (previous) {
+        previous.setEffectiveWeight(previous.getEffectiveWeight()).fadeOut(fade);
+        fading.add(previous);
+      }
+    } else if (previous) {
+      previous.stop();
+      fading.delete(previous);
     }
     current = name;
     pose.clip = name;
   }
 
   function update(delta, motion) {
-    const label = document.querySelector('#gait');
     if (!ready || !motion) {
       if (label && !label.hidden) label.textContent = 'Cowgirl loading…';
       return;
@@ -124,8 +138,9 @@ export function createPlayer({ scene, renderer }) {
     const travelFacing = Math.atan2(-motion.velocityX, -motion.velocityZ);
     const forwardSpeed = -motion.velocityX * Math.sin(motion.yaw) - motion.velocityZ * Math.cos(motion.yaw);
     const sideSpeed = motion.velocityX * Math.cos(motion.yaw) - motion.velocityZ * Math.sin(motion.yaw);
-    const sideTurn = motion.armed ? MathUtils.clamp(sideSpeed * 0.09, -0.3, 0.3) : 0;
+    const sideTurn = motion.armed ? MathUtils.clamp(sideSpeed * 0.16, -0.54, 0.54) : 0;
     const targetFacing = (motion.armed || motion.aiming || !moving ? motion.yaw - sideTurn : travelFacing) + Math.PI;
+    const priorFacing = facing;
     facing = dampAngle(facing, targetFacing, 12, delta);
     root.rotation.y = facing;
 
@@ -142,19 +157,30 @@ export function createPlayer({ scene, renderer }) {
     }
     play(desired, desired === 'jump' || desired === 'land' ? 0.07 : 0.16);
     const native = NATIVE_SPEED[desired];
+    const reversed = motion.armed && forwardSpeed < -Math.abs(sideSpeed) * 0.65;
     if (native && motion.planarSpeed > 0.2) {
-      const direction = motion.armed && forwardSpeed < -Math.abs(sideSpeed) * 0.65 ? -1 : 1;
-      actions[desired].setEffectiveTimeScale(direction * MathUtils.clamp(motion.planarSpeed / native, 0.75, 1.7));
+      const rate = MathUtils.clamp(motion.planarSpeed / native, 0.62, 1.75);
+      actions[desired].setEffectiveTimeScale(reversed ? -rate : rate);
     } else if (actions[desired]) {
       actions[desired].setEffectiveTimeScale(1);
     }
     mixer.update(delta);
+    for (const action of fading) {
+      if (action.getEffectiveWeight() >= 0.003) continue;
+      action.stop();
+      fading.delete(action);
+    }
+    Object.assign(gaitFrame, { delta, facing, reversed, ground: motion.grounded && !landTimer,
+      forward: motion.armed ? forwardSpeed : motion.planarSpeed, side: motion.armed ? sideSpeed : 0,
+      turn: delta > 0 ? (facing - priorFacing) / delta : 0 });
+    directionalGait(gaitFrame);
 
     const movingNow = motion.planarSpeed > 0.05 || !motion.grounded;
     if (movingNow || wasMoving) renderer.shadowMap.needsUpdate = true;
     wasMoving = movingNow;
     if (label && !label.hidden) {
-      label.textContent = `${pose.clip}  ${motion.planarSpeed.toFixed(1)} m/s`;
+      const text = `${pose.clip}  ${motion.planarSpeed.toFixed(1)} m/s`;
+      if (label.textContent !== text) label.textContent = text;
     }
   }
 
