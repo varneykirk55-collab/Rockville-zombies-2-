@@ -206,3 +206,23 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
 #touch-actions #fire { touch-action: none; background: #704032; }
 
 #reticle.on-target { border-color: #ffd06d; }
+
+#points-hud, #machine-prompt, #machine-hint {
+  position: absolute;
+  color: #fff4dd;
+  background: #182933df;
+  padding: 0.4rem 0.65rem;
+  font-weight: 600;
+}
+#points-hud { top: 3.6rem; right: max(1rem, env(safe-area-inset-right)); }
+#machine-prompt, #machine-hint {
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+}
+#machine-prompt { bottom: 6rem; }
+#machine-hint { top: 4.8rem; }
+#points-hud:empty, #machine-prompt:empty, #machine-hint:empty { display: none; }
+.touch-controls #machine-prompt { bottom: 10.5rem; }
