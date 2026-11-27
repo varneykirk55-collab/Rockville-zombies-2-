@@ -1,0 +1,34 @@
+{
+  "sourceRepo": "https://github.com/varneykirk55-collab/Splashdown",
+  "sourceBranch": "astra/full-integration",
+  "sourceModel": "Assets/BikiniWipeout/Characters/Cowgirl/charA_cowgirl.fbx",
+  "textures": [
+    "charA_cowgirl_body_albedo.png",
+    "charA_cowgirl_body_normal.png",
+    "charA_cowgirl_body_metallicSmoothness.png",
+    "charA_cowgirl_hands_albedo.png",
+    "charA_cowgirl_hands_normal.png",
+    "charA_cowgirl_hands_metallicSmoothness.png"
+  ],
+  "clips": {
+    "idle": { "file": "Idle.fbx", "loop": true },
+    "walk": { "file": "Female Walk.fbx", "loop": true, "nativeSpeed": 1.138 },
+    "run": { "file": "Slow Run.fbx", "loop": true, "nativeSpeed": 2.798 },
+    "sprint": { "file": "Fast Run.fbx", "loop": true, "nativeSpeed": 5.899 },
+    "jump": { "file": "Running Jump (1).fbx", "frames": [2, 11], "loop": false, "note": "Push-off through apex. Vertical travel stays with the player motor." },
+    "fall": { "file": "Falling Idle.fbx", "loop": true, "note": "Yaw aligned to her forward. Plays after the jump clip while still airborne." },
+    "land": { "file": "Running Jump (1).fbx", "frames": [19, 28], "loop": false }
+  },
+  "sockets": {
+    "socket_weapon_r": "Right hand, a short step toward the fingers. Parent mixamorig:RightHand.",
+    "socket_weapon_l": "Left hand, a short step toward the fingers. Parent mixamorig:LeftHand.",
+    "socket_holster_r": "Right hip, muzzle aimed down. Parent mixamorig:Hips.",
+    "socket_sling": "Upper back, behind the chest. Parent mixamorig:Spine2."
+  },
+  "missingCombatAnimations": [
+    "No aim, fire, or reload takes exist in Assets/BikiniWipeout/Animations/Cowgirl.",
+    "No draw, holster, melee, hit-react, or combat-death takes.",
+    "No armed idle, strafe, or cover set.",
+    "The folder does include wipeout recovers (Getting Up, Standing Up, Falling Down, Falling Into Pool, Falling From Losing Balance) and catwalk/start/stop walks. Those are not combat and are not wired up."
+  ]
+}

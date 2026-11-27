@@ -11,9 +11,12 @@ Open [http://localhost:8000](http://localhost:8000) in a modern browser with Web
 | Action | Desktop | Phone |
 | --- | --- | --- |
 | Move | WASD or arrow keys | Left thumbstick |
+| Walk | Hold C, or a light push on the stick | Push the stick part way |
 | Look | Mouse with pointer lock | Drag the scene |
 | Sprint forward | Hold Shift | Tap Sprint |
+| Jump | Space | Tap Jump |
 | Aim-down-sights placeholder | Hold right mouse button | Tap Aim |
+| Show the character | V, third person behind her | V |
 | Pause | Esc | Leaving the page clears movement input |
 
 ## Downtown pass
@@ -22,7 +25,9 @@ The player starts just east of East Montgomery Avenue and Helen Heneghan Way, fa
 
 Building heights are estimated from area and a stable seed, with a 5–40 m design range. Tall convex footprints can receive a recessed upper story. Source L-shaped outlines and courtyard holes continue through the lower building geometry and the collision outline.
 
-The camera uses a 1.68 m eye height, walk/sprint speeds of 4.3/6.9 m/s, and a narrower aim FOV. Collision uses a 0.36 m radius against the original footprint polygons, so the camera slides along walls and courtyards retain their interior space.
+The camera uses a 1.68 m eye height. The default pace is still 4.3 m/s, sprint is 6.9 m/s, and aiming slows movement to 2.5 m/s. Holding C (or easing the stick) walks at 1.55 m/s. Space jumps about 1.15 m and lands on the same flat ground. Collision uses a 0.36 m radius against the original footprint polygons, so the player slides along walls and courtyards retain their interior space.
+
+The player character is the Splashdown cowgirl (`public/models/cowgirl.glb`). In the normal view the camera stays at eye height and does not draw her mesh, so the body cannot fill the lens. She still casts a shadow. Press V to stand the camera behind her. Idle, walk, run, sprint, and jump come from her Mixamo takes and follow the real ground speed. Weapon grips are empty bones named `socket_weapon_r`, `socket_weapon_l`, `socket_holster_r`, and `socket_sling`. The source set has no combat animations. Open `?preview=1&demo=1` to watch the locomotion on the local streets without waiting for the county tiles.
 
 ## Source layout
 

@@ -195,5 +195,5 @@ export function createScene(viewport) {
   addStreets(world, maps);
   renderer.shadowMap.needsUpdate = true;
 
-  return { scene, renderer, world, maps };
+  return { scene, renderer, world, maps, sun };
 }
