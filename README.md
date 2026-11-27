@@ -6,7 +6,7 @@ A no-build Three.js third-person shooter foundation set in Rockville, Maryland. 
 
 From the repository root, run `python3 -m http.server 8000` on macOS or Linux, or `py -m http.server 8000` on Windows.
 
-Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. Three.js and the version-pinned Arena Mortis 2 weapon assets load from jsDelivr. The city and cowgirl assets are served from this repository.
+Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. Three.js loads from jsDelivr. The city, cowgirl, weapon models, embedded weapon textures, and combat audio are served from this repository.
 
 | Action | Desktop | Phone | Standard gamepad |
 | --- | --- | --- | --- |

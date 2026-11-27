@@ -5,17 +5,17 @@ import {
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createArmedAnimation } from './armed-animation.js';
 
-const SOURCE = 'https://cdn.jsdelivr.net/gh/varneykirk55-collab/Arena-mortis-2-@4d05984aa14407a6a6ec42238438c9433339a380/assets/';
+const WEAPON_ASSETS = new URL('../public/weapons/', import.meta.url);
 const WEAPONS = [
-  { id: 'm4', name: 'M4 Carbine', model: 'weapon_m4.glb', magazine: 30, reserve: 210,
+  { id: 'm4', name: 'M4 Carbine', model: 'm4.glb', magazine: 30, reserve: 210,
     rate: 12.5, damage: 42, reload: 2.3, range: 160, effective: 35, falloff: 0.6,
     auto: true, fire: 'm4_fire', reloadSound: 'reload_rifle',
     right: [0, -0.004, 0.05], left: [0, 0.01, -0.28], muzzle: [0, 0.06, -0.4755] },
-  { id: 'mk35', name: 'MK35 ISR', model: 'weapon_mk35.glb', magazine: 30, reserve: 180,
+  { id: 'mk35', name: 'MK35 ISR', model: 'mk35.glb', magazine: 30, reserve: 180,
     rate: 10, damage: 48, reload: 2.6, range: 160, effective: 35, falloff: 0.6,
     auto: true, fire: 'mk35_fire', reloadSound: 'reload_mk35',
     right: [0, -0.025, 0.05], left: [0, 0.01, -0.28], muzzle: [0, 0.06, -0.615] },
-  { id: 'pistol', name: 'M1911', model: 'weapon_pistol_new.glb', magazine: 8, reserve: 96,
+  { id: 'pistol', name: 'M1911', model: 'pistol.glb', magazine: 8, reserve: 96,
     rate: 7, damage: 45, reload: 1.5, range: 110, effective: 25, falloff: 0.5,
     auto: false, fire: 'pistol_fire', reloadSound: 'reload_pistol',
     right: [0, -0.032, 0.045], left: [-0.052, -0.03, 0.03], muzzle: [0, 0.037, -0.14] },
@@ -66,7 +66,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   const audio = new Map();
   for (const name of [...WEAPONS.flatMap(w => [w.fire, w.reloadSound]), 'dry_fire', 'weapon_switch', 'impact_stone']) {
     const voices = Array.from({ length: name.endsWith('_fire') ? 4 : 1 }, () => {
-      const node = new Audio(SOURCE + 'audio/' + name + '.wav');
+      const node = new Audio(new URL(name + '.wav', WEAPON_ASSETS).href);
       node.preload = 'none';
       node.volume = name.endsWith('_fire') ? 0.25 : 0.32;
       return node;
@@ -134,7 +134,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
 
   async function load() {
     const loaded = await Promise.all(gear.map(async item => {
-      const result = await loader.loadAsync(SOURCE + 'models/' + item.config.model);
+      const result = await loader.loadAsync(new URL(item.config.model, WEAPON_ASSETS).href);
       if (item.config.auto) result.scene.rotation.y = Math.PI / 2;
       result.scene.traverse(node => { if (node.isMesh) node.castShadow = true; });
       item.model = result.scene;
