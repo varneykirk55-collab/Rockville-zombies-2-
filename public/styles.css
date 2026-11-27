@@ -183,3 +183,26 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
   background: #f5aa6b;
   border-color: #f5aa6b;
 }
+
+#weapon-hud {
+  position: absolute;
+  top: max(1rem, env(safe-area-inset-top));
+  right: max(1rem, env(safe-area-inset-right));
+  padding: 0.5rem 0.75rem;
+  background: #182933d9;
+  color: #fff4dd;
+  font: 600 0.9rem/1.2 ui-monospace, monospace;
+}
+
+#weapon-hud:empty { display: none; }
+#reticle.obstructed { border-color: #ff7860; background: #ff7860; }
+
+.touch-controls #touch-actions {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 0.35rem;
+}
+
+#touch-actions #fire { touch-action: none; background: #704032; }
+
+#reticle.on-target { border-color: #ffd06d; }

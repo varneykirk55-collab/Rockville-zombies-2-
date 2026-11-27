@@ -1,9 +1,7 @@
-import { MathUtils, PerspectiveCamera } from 'three';
+import { MathUtils, PerspectiveCamera, Vector3 } from 'three';
 import { DOWNTOWN } from './config.js';
 import { lonLatToWorld } from './utils.js';
-import { CHARACTER_LAYER } from './player.js';
 
-const EYE_HEIGHT = 1.68;
 const BODY_RADIUS = 0.36;
 const WALK_SPEED = 1.55;
 const RUN_SPEED = 4.3;
@@ -124,6 +122,7 @@ export function createCamera(canvas) {
   let blocked = () => false;
   let sampleGround = () => 0;
   let frozen = false;
+  let ready = false;
   let active = false;
   let locked = false;
   let lockSettlesAt = 0;
@@ -143,22 +142,30 @@ export function createCamera(canvas) {
   let coyote = 0;
   let jumpHeld = false;
   let touchJump = false;
-  let thirdPerson = new URLSearchParams(location.search).get('view') === 'third';
+  let shoulder = 1;
+  let shoulderOffset = 0.7;
+  let followY;
+  let boomFraction = 1;
+  let zoom = 0;
+  let recoilPitch = 0;
+  let padShoulder = false;
+  let padStart = false;
+  const pivot = new Vector3();
+  const offset = new Vector3();
+  const probe = new Vector3();
   let scripted = null;
-  let stride = 0;
   const body = { x: 0, y: 0, z: 0 };
-  let bobbed = 0;
   const pose = {
     x: 0, y: 0, z: 0, yaw, pitch,
     velocityX: 0, velocityZ: 0, planarSpeed: 0, verticalSpeed: 0,
     grounded: true, sprinting: false, aiming: false, walking: false,
-    thirdPerson, jumped: false,
+    jumped: false,
   };
 
   document.querySelector('#viewport').classList.toggle('touch-controls', touch);
   help.textContent = touch
-    ? 'Left stick to move · Drag to look · Sprint, Jump, or Aim'
-    : 'WASD to move · Hold C to walk · Shift to sprint · Space to jump · V toggles the body view · Esc to pause';
+    ? 'Left stick to move · Drag to look · Aim and Fire'
+    : 'WASD to move · Hold C to walk · Shift to sprint · Space to jump · Q switches shoulder · Esc to pause';
 
   function resetInputs() {
     keys.clear();
@@ -227,9 +234,9 @@ export function createCamera(canvas) {
   document.addEventListener('keydown', (event) => {
     if (!active) return;
     if (event.code === 'Escape' && !locked) setActive(false);
-    if (event.code === 'KeyV') {
+    if (event.code === 'KeyQ' && !event.repeat) {
       event.preventDefault();
-      thirdPerson = !thirdPerson;
+      switchShoulder();
       return;
     }
     if (!movementKeys.has(event.code)) return;
@@ -297,6 +304,7 @@ export function createCamera(canvas) {
     aim.setAttribute('aria-pressed', String(touchAim));
   });
   const jumpButton = document.querySelector('#jump');
+  document.querySelector('#shoulder').addEventListener('click', switchShoulder);
   jumpButton.addEventListener('pointerdown', (event) => {
     event.stopPropagation();
     event.preventDefault();
@@ -312,6 +320,7 @@ export function createCamera(canvas) {
   document.addEventListener('visibilitychange', () => { if (document.hidden) resetInputs(); });
 
   function prepare(polygons, ground) {
+    ready = true;
     blocked = createBuildingCollision(polygons);
     if (ground) sampleGround = ground;
     const spawn = safeSpawn(blocked);
@@ -321,6 +330,7 @@ export function createCamera(canvas) {
     Object.assign(pose, { x: body.x, y: sampleGround(body.x, body.z), z: body.z, yaw, pitch });
     verticalVelocity = 0;
     grounded = true;
+    followY = undefined;
     placeCamera(0);
     overlay.hidden = false;
   }
@@ -347,57 +357,75 @@ export function createCamera(canvas) {
     scripted = input;
   }
 
-  function setThirdPerson(value) {
-    thirdPerson = value;
+  function kick(amount) {
+    pitch = Math.min(1.41, pitch + amount);
+    recoilPitch += amount;
   }
 
-  function placeCamera(bob) {
+  function switchShoulder() {
+    shoulder *= -1;
+  }
+
+  function placeCamera(delta, aimed = false) {
     const feetY = sampleGround(body.x, body.z) + body.y;
-    if (thirdPerson) {
-      camera.layers.enable(CHARACTER_LAYER);
-      const lookY = feetY + 1.15;
-      const camY = feetY + 1.5 - Math.sin(pitch) * 0.85;
-      let horiz = Math.max(2.2, 3.55 * Math.cos(Math.min(pitch, 1.1)));
-      for (let i = 0; i < 6 && blocked; i++) {
-        const cx = body.x + Math.sin(yaw) * horiz;
-        const cz = body.z + Math.cos(yaw) * horiz;
-        if (!blocked(cx, cz)) break;
-        horiz *= 0.72;
+    followY = delta && followY !== undefined ? MathUtils.damp(followY, feetY, 18, delta) : feetY;
+    zoom = MathUtils.damp(zoom, Number(aimed), 12, delta);
+    shoulderOffset = MathUtils.damp(shoulderOffset, shoulder * (0.71 - zoom * 0.11), 14, delta);
+    const distance = MathUtils.lerp(3.65, 2.85, zoom);
+    camera.rotation.set(pitch, yaw, 0);
+    pivot.set(body.x, Math.max(feetY - 0.23, followY) + MathUtils.lerp(1.45, 1.2, zoom), body.z);
+    offset.set(shoulderOffset, 0.23, distance).applyQuaternion(camera.quaternion);
+
+    // Sweep the whole boom so a clear endpoint cannot jump across a wall.
+    const steps = Math.ceil(offset.length() / 0.09);
+    let limit = 1;
+    for (let i = 1; i <= steps; i++) {
+      probe.copy(pivot).addScaledVector(offset, i / steps);
+      if (blocked(probe.x, probe.z) || probe.y < sampleGround(probe.x, probe.z) + 0.2) {
+        limit = (i - 1) / steps;
+        break;
       }
-      camera.position.set(body.x + Math.sin(yaw) * horiz, camY, body.z + Math.cos(yaw) * horiz);
-      camera.position.y = Math.max(camera.position.y, sampleGround(camera.position.x, camera.position.z) + 0.25);
-      camera.lookAt(body.x, lookY, body.z);
-    } else {
-      camera.layers.disable(CHARACTER_LAYER);
-      camera.position.set(body.x, feetY + EYE_HEIGHT + bob, body.z);
-      camera.rotation.order = 'YXZ';
-      camera.rotation.set(pitch, yaw, 0);
     }
+    boomFraction = limit < boomFraction || !delta ? limit : MathUtils.damp(boomFraction, limit, 10, delta);
+    camera.position.copy(pivot).addScaledVector(offset, boomFraction);
+    camera.updateMatrixWorld();
   }
 
   function update(delta) {
     if (frozen) return;
     const baseFov = camera.aspect < 1 ? 67 : 58;
-    const aimed = active && (aimHeld || touchAim || scripted?.aim);
+    const gamepad = Array.from(navigator.getGamepads?.() ?? []).find(pad => pad?.mapping === 'standard');
+    const button = index => Boolean(gamepad?.buttons[index]?.pressed);
+    const axis = index => {
+      const value = gamepad?.axes[index] ?? 0;
+      return Math.abs(value) > 0.16 ? Math.sign(value) * (Math.abs(value) - 0.16) / 0.84 : 0;
+    };
+    const startPressed = button(9);
+    if (ready && startPressed && !padStart) setActive(!active);
+    padStart = startPressed;
+    const shoulderPressed = button(11);
+    if (active && shoulderPressed && !padShoulder) switchShoulder();
+    padShoulder = shoulderPressed;
+    const aimed = active && Boolean(aimHeld || touchAim || scripted?.aim || button(6));
+    if (active) look(axis(2), axis(3), delta * (aimed ? 1.05 : 2.2));
     let sprinting = false;
     let walking = false;
-    let gait = 0;
     let jumped = false;
     if (active) {
       const pressed = (a, b) => Number(keys.has(a) || keys.has(b));
       const side = scripted ? (scripted.side || 0)
-        : padX + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
+        : padX + axis(0) + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
       const forward = scripted ? (scripted.forward || 0)
-        : padY + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
+        : padY - axis(1) + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
       const magnitude = Math.max(1, Math.hypot(side, forward));
-      const stick = Math.hypot(padX, padY);
+      const stick = Math.hypot(padX + axis(0), padY - axis(1));
       walking = scripted ? !!scripted.walk : keys.has('KeyC');
       const keyboard = !scripted && Math.hypot(
         pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft'),
         pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown'),
       ) > 0;
       sprinting = !aimed && !walking && forward > 0.3 &&
-        (scripted?.sprint || touchSprint || keys.has('ShiftLeft') || keys.has('ShiftRight'));
+        (scripted?.sprint || button(10) || touchSprint || keys.has('ShiftLeft') || keys.has('ShiftRight'));
       const partialStick = !scripted && !keyboard && !aimed && !sprinting && stick > 0.05 && stick < 0.62;
       let chosen = RUN_SPEED;
       if (aimed) chosen = AIM_SPEED;
@@ -412,13 +440,11 @@ export function createCamera(canvas) {
       const beforeX = body.x, beforeZ = body.z;
       moveGrounded(body, velocityX * delta, velocityZ * delta, blocked);
       const step = Math.hypot(body.x - beforeX, body.z - beforeZ);
-      gait = Math.min(1, step / Math.max(delta * RUN_SPEED, 0.001));
-      stride += delta * (sprinting ? 15 : 11);
       pose.velocityX = step > 0 ? (body.x - beforeX) / Math.max(delta, 0.001) : 0;
       pose.velocityZ = step > 0 ? (body.z - beforeZ) / Math.max(delta, 0.001) : 0;
       pose.planarSpeed = step / Math.max(delta, 0.001);
 
-      const spaceDown = scripted ? !!scripted.jump : keys.has('Space') || touchJump;
+      const spaceDown = scripted ? !!scripted.jump : keys.has('Space') || touchJump || button(0);
       const jumpEdge = spaceDown && !jumpHeld;
       jumpHeld = spaceDown;
       touchJump = false;
@@ -444,13 +470,11 @@ export function createCamera(canvas) {
       pose.velocityX = pose.velocityZ = pose.planarSpeed = 0;
       jumpHeld = false;
     }
-    const bob = Math.sin(stride) * gait * (aimed ? 0.018 : 0.042);
-    bobbed = MathUtils.damp(bobbed, thirdPerson ? 0 : bob, 20, delta);
-    placeCamera(bobbed);
-    if (!thirdPerson) {
-      camera.rotation.z = Math.sin(stride * 0.5) * gait * 0.007;
-    }
-    const desiredFov = baseFov + (aimed ? -18 : sprinting ? 5 : 0);
+    const recovered = MathUtils.damp(recoilPitch, 0, 8, delta);
+    pitch = Math.max(-1.41, pitch - (recoilPitch - recovered));
+    recoilPitch = recovered;
+    placeCamera(delta, aimed);
+    const desiredFov = baseFov + (aimed ? -12 : sprinting ? 5 : 0);
     if (Math.abs(camera.fov - desiredFov) > 0.02) {
       camera.fov = MathUtils.damp(camera.fov, desiredFov, 15, delta);
       camera.updateProjectionMatrix();
@@ -466,12 +490,11 @@ export function createCamera(canvas) {
     pose.sprinting = sprinting;
     pose.aiming = aimed;
     pose.walking = walking;
-    pose.thirdPerson = thirdPerson;
     pose.jumped = jumped;
   }
 
   return {
     camera,
-    controls: { prepare, update, engage, drive, setThirdPerson, freeze, nudge, pose, get active() { return active; } },
+    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z) => blocked(x, z), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
   };
 }

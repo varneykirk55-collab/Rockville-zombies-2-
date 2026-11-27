@@ -1,23 +1,26 @@
 # Rockville Town Center
 
-A no-build Three.js first-person map foundation set in Rockville, Maryland. The browser loads Three.js r187 from a CDN and uses the committed Montgomery County building footprint snapshot.
+A no-build Three.js third-person shooter foundation set in Rockville, Maryland. The browser loads Three.js r187 from a CDN and uses the committed Montgomery County building footprint snapshot.
 
 ## Run locally
 
 From the repository root, run `python3 -m http.server 8000` on macOS or Linux, or `py -m http.server 8000` on Windows.
 
-Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. The Three.js CDN requires internet access. The city assets are served from this repository.
+Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. Three.js and the version-pinned Arena Mortis 2 weapon assets load from jsDelivr. The city and cowgirl assets are served from this repository.
 
-| Action | Desktop | Phone |
-| --- | --- | --- |
-| Move | WASD or arrow keys | Left thumbstick |
-| Walk | Hold C, or a light push on the stick | Push the stick part way |
-| Look | Mouse with pointer lock | Drag the scene |
-| Sprint forward | Hold Shift | Tap Sprint |
-| Jump | Space | Tap Jump |
-| Aim-down-sights placeholder | Hold right mouse button | Tap Aim |
-| Show the character | V, third person behind her | External keyboard V |
-| Pause | Esc | Leaving the page clears movement input |
+| Action | Desktop | Phone | Standard gamepad |
+| --- | --- | --- | --- |
+| Enter or pause | Enter downtown / Esc | Enter downtown / leave the page | Start |
+| Move | WASD or arrows | Left thumbstick | Left stick |
+| Walk slowly | Hold C | Ease the thumbstick | Ease the left stick |
+| Look | Mouse | Drag the scene | Right stick |
+| Sprint forward | Hold Shift | Tap Sprint | Click left stick |
+| Jump | Space | Tap Jump | A / Cross |
+| Aim | Hold right mouse button | Tap Aim | LT / L2 |
+| Fire | Left mouse button | Fire | RT / R2 |
+| Reload | R | Reload | X / Square |
+| Switch weapon | 1 M4, 2 MK35, 3 M1911 | Swap | D-pad left/right or RB / R1 |
+| Switch shoulder | Q | Shoulder | Click right stick |
 
 ## Downtown pass
 
@@ -25,13 +28,15 @@ The player starts just east of East Montgomery Avenue and Helen Heneghan Way, fa
 
 Building heights inside the playable boundary come from `public/data/building-heights.json`, not from area and a seed. High and Medium values are the measured heights in the geographic audit. Estimated values are labelled in that file. The ground is a 10 m Maryland DEM grid, and roads, sidewalks, and parking sit on it. There is no invisible wall at the old rectangle.
 
-The camera uses a 1.68 m eye height. The default pace is still 4.3 m/s, sprint is 6.9 m/s, and aiming slows movement to 2.5 m/s. Holding C (or easing the stick) walks at 1.55 m/s. Space jumps about 1.15 m and lands at the local terrain elevation. Collision uses a 0.36 m radius against building footprints and fitted landmark hulls, so the player slides along walls and courtyards retain their interior space.
+The cowgirl stays visible in the over-the-shoulder camera. Aiming eases the camera in and narrows its field of view. The default pace is still 4.3 m/s, sprint is 6.9 m/s, and aiming slows movement to 2.5 m/s. Holding C (or easing the stick) walks at 1.55 m/s. Space jumps about 1.15 m and lands at the local terrain elevation. Collision uses a 0.36 m radius against building footprints and fitted landmark hulls, so the player slides along walls and courtyards retain their interior space.
 
-The player character is the Splashdown cowgirl (`public/models/cowgirl.glb`). In the normal view the camera stays at eye height and does not draw her mesh, so the body cannot fill the lens. She still casts a shadow. Press V to stand the camera behind her. Idle, walk, run, sprint, jump, fall, and land come from her Mixamo takes and follow the real ground speed. Weapon grips are empty bones named `socket_weapon_r`, `socket_weapon_l`, `socket_holster_r`, and `socket_sling`. The source set has no combat animations. Open `?preview=1&demo=1` to watch the locomotion on the local streets without loading the buildings and landmarks. Use `?demo=1&view=third` to run it in the complete city.
+The Splashdown cowgirl uses her original locomotion clips. Retargeted Arena Mortis 2 spine animation and procedural hand placement layer over those clips during combat. Three orange training targets spawn near the starting block. A red crosshair indicates that nearby geometry blocks the weapon. Targets reset after being destroyed.
+
+Open `?preview=1&demo=1` to watch the original locomotion in the lightweight street preview. The full city and combat use the standard launch URL.
 
 ## Source layout
 
-`main.js` loads the committed footprint snapshot, height table, terrain grid, and the playable boundary in `public/data/playable-boundary.geojson`, then connects the scene and the existing update loop. `buildings.js` extrudes those footprints, drops shared wall faces, and applies roof codes. `terrain.js` samples the height grid. `camera.js` handles first-person input, building collision, and terrain-aware eye height. `scene.js` configures the renderer and parking. Roads live in `src/infrastructure/`. Backdrop trees live in `src/vegetation/`. District slots live in `src/districts/<id>/`. `src/runtime/modules.js` loads those owners from `public/data/modules.json`, and `src/landmarks/integrate.js` places GLB landmarks from each district manifest. `config.js` holds the map origin and the road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north). `scripts/build_city_data.py` rebuilds the city files. `scripts/build_districts.py` rebuilds district ownership.
+`main.js` loads the committed footprint snapshot, height table, terrain grid, and the playable boundary in `public/data/playable-boundary.geojson`, then connects the scene and the existing update loop. `buildings.js` extrudes those footprints, drops shared wall faces, and applies roof codes. `terrain.js` samples the height grid. `camera.js` handles movement input, building collision, and the terrain-aware shoulder camera. `scene.js` configures the renderer and parking. Roads live in `src/infrastructure/`. Backdrop trees live in `src/vegetation/`. District slots live in `src/districts/<id>/`. `src/runtime/modules.js` loads those owners from `public/data/modules.json`, and `src/landmarks/integrate.js` places GLB landmarks from each district manifest. `config.js` holds the map origin and the road centerlines. `utils.js` converts longitude and latitude to local meters (+X east, +Y up, −Z north). `scripts/build_city_data.py` rebuilds the city files. `scripts/build_districts.py` rebuilds district ownership.
 
 Ownership, the landmark inventory, and how the six parallel agents add work without editing `src/main.js` are in `docs/city-development-foundation/CONTRIBUTING.md`.
 

@@ -2,6 +2,7 @@ import { Group, BufferGeometry, Float32BufferAttribute, LineBasicMaterial, LineL
 import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js';
 import { createCamera, createBuildingCollision } from './camera.js';
 import { createPlayer } from './player.js';
+import { createCombat } from './combat.js';
 import { buildBuildings } from './buildings.js';
 import { createTerrain } from './terrain.js';
 import { addStreets } from './infrastructure/roads.js';
@@ -19,7 +20,9 @@ const demo = params.has('demo');
 
 const { scene, renderer, world, maps, sun } = createScene(viewport);
 const { camera, controls } = createCamera(renderer.domElement);
-const player = createPlayer({ scene, renderer, sun });
+const player = createPlayer({ scene, renderer });
+const combat = audit || params.has('preview') ? null
+  : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement });
 
 function resize() {
   const { clientWidth: width, clientHeight: height } = viewport;
@@ -41,7 +44,9 @@ startGameLoop({
   update: (delta) => {
     if (demo && !audit && controls.active) controls.drive(demoInput(demoTime += delta));
     controls.update(delta);
+    controls.pose.armed = combat?.armed ?? false;
     player.update(delta, controls.pose);
+    combat?.update(delta);
   },
 });
 
@@ -80,7 +85,6 @@ try {
     alignSun(sun, terrain.sampleGameY);
     addStreets(world, maps, terrain, []);
     controls.prepare([], (x, z) => terrain.sampleGameY(x, z) + 0.04);
-    if (demo) controls.setThirdPerson(true);
     if (demo || params.has('autostart')) controls.engage();
     status.hidden = true;
   } else {
@@ -139,6 +143,7 @@ async function loadCity() {
   });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   controls.prepare(built.collisionPolygons, sampleGround);
+  combat?.prepareTargets();
   if (!audit && (demo || params.has('autostart'))) controls.engage();
   if (audit) {
     document.querySelector('#start-panel').hidden = true;
@@ -174,6 +179,7 @@ async function loadCity() {
   const frames = placed.filter(item => item.frame).map(item => item.frame);
   window.__ROCKVILLE__ = {
     summary,
+    combat,
     camera,
     renderer,
     scene,

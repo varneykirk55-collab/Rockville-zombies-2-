@@ -9,10 +9,6 @@ import {
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-// The cowgirl is drawn on this layer. The first-person camera leaves it off so
-// the mesh cannot sit inside the lens. The third-person debug view turns it on.
-export const CHARACTER_LAYER = 1;
-
 const MODEL_URL = new URL('../public/models/cowgirl.glb', import.meta.url);
 const CLIP_NAMES = ['idle', 'walk', 'run', 'sprint', 'jump', 'fall', 'land'];
 const LOOPING = new Set(['idle', 'walk', 'run', 'sprint', 'fall']);
@@ -35,7 +31,7 @@ const dampAngle = (current, target, lambda, delta) => {
   return current + difference * (1 - Math.exp(-lambda * delta));
 };
 
-export function createPlayer({ scene, renderer, sun }) {
+export function createPlayer({ scene, renderer }) {
   const root = new Group();
   root.name = 'Player';
   scene.add(root);
@@ -57,7 +53,6 @@ export function createPlayer({ scene, renderer, sun }) {
     model.name = 'Cowgirl';
     const environment = characterEnvironment(renderer);
     model.traverse((object) => {
-      object.layers.set(CHARACTER_LAYER);
       object.frustumCulled = false;
       if (!object.isMesh) return;
       object.castShadow = true;
@@ -88,7 +83,6 @@ export function createPlayer({ scene, renderer, sun }) {
       action.setLoop(LOOPING.has(name) ? LoopRepeat : LoopOnce, LOOPING.has(name) ? Infinity : 1);
       actions[name] = action;
     }
-    if (sun) sun.shadow.camera.layers.enable(CHARACTER_LAYER);
     ready = true;
     play('idle', 0);
     renderer.shadowMap.needsUpdate = true;
@@ -128,7 +122,10 @@ export function createPlayer({ scene, renderer, sun }) {
     // Chase camera sits behind the look direction. Her bind faces the camera
     // at yaw 0, so the mesh is turned 180 degrees to run the way she looks.
     const travelFacing = Math.atan2(-motion.velocityX, -motion.velocityZ);
-    const targetFacing = (motion.aiming || !moving ? motion.yaw : travelFacing) + Math.PI;
+    const forwardSpeed = -motion.velocityX * Math.sin(motion.yaw) - motion.velocityZ * Math.cos(motion.yaw);
+    const sideSpeed = motion.velocityX * Math.cos(motion.yaw) - motion.velocityZ * Math.sin(motion.yaw);
+    const sideTurn = motion.armed ? MathUtils.clamp(sideSpeed * 0.09, -0.3, 0.3) : 0;
+    const targetFacing = (motion.armed || motion.aiming || !moving ? motion.yaw - sideTurn : travelFacing) + Math.PI;
     facing = dampAngle(facing, targetFacing, 12, delta);
     root.rotation.y = facing;
 
@@ -146,7 +143,8 @@ export function createPlayer({ scene, renderer, sun }) {
     play(desired, desired === 'jump' || desired === 'land' ? 0.07 : 0.16);
     const native = NATIVE_SPEED[desired];
     if (native && motion.planarSpeed > 0.2) {
-      actions[desired].setEffectiveTimeScale(MathUtils.clamp(motion.planarSpeed / native, 0.75, 1.7));
+      const direction = motion.armed && forwardSpeed < -Math.abs(sideSpeed) * 0.65 ? -1 : 1;
+      actions[desired].setEffectiveTimeScale(direction * MathUtils.clamp(motion.planarSpeed / native, 0.75, 1.7));
     } else if (actions[desired]) {
       actions[desired].setEffectiveTimeScale(1);
     }
