@@ -22,6 +22,12 @@ Open [http://localhost:8000](http://localhost:8000) in a modern browser with Web
 | Switch weapon | 1 M4, 2 MK35, 3 M1911 | Swap | D-pad left/right or RB / R1 |
 | Switch shoulder | Q | Shoulder | Click right stick |
 
+## Training machines
+
+Two temporary machines sit near the downtown spawn, clear of the surveyed roads and sidewalks. The HUD shows their distances. Use **E**, gamepad **Y / Triangle**, or the mobile **Interact** button when in reach.
+
+The shared wallet starts at 500 points. The Mystery Box costs 950 points and Pack-a-Punch costs 5,000. Use the interact control again to collect a reward or retrieve an upgraded weapon. In a loopback-hosted development build, add `?machine-test=1` and press **P** to credit 5,000 test points.
+
 ## Downtown pass
 
 The player starts just east of East Montgomery Avenue and Helen Heneghan Way, facing toward the junction. Brick is applied to the two carriageways within the small junction patch. The other road surfaces are asphalt. Roads follow county centerlines with estimated widths and sidewalk offsets on the surveyed terrain. Downtown adds crosswalks, lane paint, streetlights, façade windows, hard sun shadows, and a limited warm/cool color palette.

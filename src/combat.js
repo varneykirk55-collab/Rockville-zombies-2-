@@ -1,11 +1,14 @@
 import {
-  BoxGeometry, Group, MathUtils, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
+  BoxGeometry, Color, Group, MathUtils, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   Quaternion, Ray, Sphere, SphereGeometry, Vector3,
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createArmedAnimation } from './armed-animation.js';
+import { UPGRADES } from './machine-config.js';
+import { withUpgradeCamo } from './upgrade-camo.js';
 
 const WEAPON_ASSETS = new URL('../public/weapons/', import.meta.url);
+const MACHINE_ASSETS = new URL('../public/machines/', import.meta.url);
 const WEAPONS = [
   { id: 'm4', name: 'M4 Carbine', model: 'm4.glb', magazine: 30, reserve: 210,
     rate: 12.5, damage: 42, reload: 2.3, range: 160, effective: 35, falloff: 0.6,
@@ -60,15 +63,15 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   const loader = new GLTFLoader();
   const animation = createArmedAnimation();
   const gear = WEAPONS.map(config => ({
-    config, ammo: config.magazine, reserve: config.reserve, group: new Group(),
+    config, ammo: config.magazine, reserve: config.reserve, group: new Group(), upgraded: false,
     muzzleOffset: new Vector3(...config.muzzle).sub(new Vector3(...config.right)),
   }));
   const audio = new Map();
-  for (const name of [...WEAPONS.flatMap(w => [w.fire, w.reloadSound]), 'dry_fire', 'weapon_switch', 'impact_stone']) {
-    const voices = Array.from({ length: name.endsWith('_fire') ? 4 : 1 }, () => {
-      const node = new Audio(new URL(name + '.wav', WEAPON_ASSETS).href);
+  for (const name of [...WEAPONS.flatMap(w => [w.fire, w.reloadSound, w.fire + '_upgraded']), 'dry_fire', 'weapon_switch', 'impact_stone']) {
+    const voices = Array.from({ length: name.includes('_fire') ? 4 : 1 }, () => {
+      const node = new Audio(new URL(name + '.wav', name.endsWith('_upgraded') ? MACHINE_ASSETS : WEAPON_ASSETS).href);
       node.preload = 'none';
-      node.volume = name.endsWith('_fire') ? 0.25 : 0.32;
+      node.volume = name.includes('_fire') ? 0.25 : 0.32;
       return node;
     });
     audio.set(name, { voices, next: 0 });
@@ -174,8 +177,24 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     item.group.rotation.set(item.config.auto ? 1.05 : 0, item.config.auto ? Math.PI / 2 : 0, 0);
   }
 
+  let machineBusy = false;
+  const upgradeClock = { value: 0 };
+
+  function stat(item, key) {
+    return item.config[key] * (item.upgraded ? UPGRADES[item.config.id][key] : 1);
+  }
+
+  function displayName(item) {
+    return item.upgraded ? UPGRADES[item.config.id].name : item.config.name;
+  }
+
+  function refill(item) {
+    item.ammo = Math.round(stat(item, 'magazine'));
+    item.reserve = Math.round(stat(item, 'reserve'));
+  }
+
   function equip(index, sound = true) {
-    if (!rigsReady || (sound && active === index)) return;
+    if (machineBusy || !rigsReady || (sound && active === index)) return;
     holster(gear[active]);
     active = index;
     renderer.shadowMap.needsUpdate = true;
@@ -193,7 +212,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
 
   function startReload() {
     const item = gear[active];
-    if (!rigsReady || reload || draw || item.ammo === item.config.magazine || !item.reserve) return;
+    if (machineBusy || !rigsReady || reload || draw || item.ammo === Math.round(stat(item, 'magazine')) || !item.reserve) return;
     reload = item.config.reload;
     play(item.config.reloadSound);
   }
@@ -324,11 +343,11 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     }
     item.ammo--;
     shots++;
-    cooldown = 1 / config.rate;
+    cooldown = 1 / stat(item, 'rate');
     recoil = 1;
     animation.fire();
     controls.kick(config.auto ? 0.012 : 0.021);
-    play(config.fire);
+    play(config.fire + (item.upgraded ? '_upgraded' : ''));
     flash.position.copy(muzzle);
     flash.quaternion.copy(orientation);
     flash.visible = true;
@@ -338,7 +357,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     lastImpact = hit.target ? 'target' : hit.wall ? 'wall' : 'none';
     if (hit.target) {
       const falloff = MathUtils.clamp((hit.distance - config.effective) / (config.range - config.effective), 0, 1);
-      hit.target.health -= config.damage * MathUtils.lerp(1, config.falloff, falloff);
+      hit.target.health -= stat(item, 'damage') * MathUtils.lerp(1, config.falloff, falloff);
       hits++;
       if (hit.target.health <= 0) {
         hit.target.mesh.visible = false;
@@ -362,6 +381,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       trigger = pressed = false;
       return;
     }
+    upgradeClock.value += delta;
     const motion = controls.pose;
     const pad = Array.from(navigator.getGamepads?.() ?? []).find(p => p?.mapping === 'standard');
     const buttons = pad?.buttons.map(button => button.pressed) ?? [];
@@ -375,7 +395,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     if (reload) {
       reload = Math.max(0, reload - delta);
       if (!reload) {
-        const count = Math.min(item.reserve, item.config.magazine - item.ammo);
+        const count = Math.min(item.reserve, Math.round(stat(item, 'magazine')) - item.ammo);
         item.ammo += count;
         item.reserve -= count;
       }
@@ -399,17 +419,19 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
         target.mesh.visible = true;
       }
     }
-    animation.apply(player.root, motion, !item.config.auto, delta);
-    poseWeapon(item, motion, delta);
+    if (!machineBusy) {
+      animation.apply(player.root, motion, !item.config.auto, delta);
+      poseWeapon(item, motion, delta);
+    }
     const firing = pressed || (item.config.auto && (trigger || buttons[7]));
-    if (reload || motion.sprinting) pressed = false;
+    if (machineBusy || reload || motion.sprinting) pressed = false;
     else if (firing && !cooldown && !draw) {
       fire(item);
       pressed = false;
     }
     reticle.classList.toggle('obstructed', blockedShot);
     reticle.classList.toggle('on-target', sightOnTarget && !blockedShot);
-    const label = item.config.name + '  ' + item.ammo + ' / ' + item.reserve + (reload ? ' · Reloading' : '');
+    const label = displayName(item) + '  ' + item.ammo + ' / ' + item.reserve + (reload ? ' · Reloading' : '');
     if (hudText !== label) hud.textContent = hudText = label;
   }
 
@@ -441,10 +463,48 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
 
   return {
     update, prepareTargets,
-    get armed() { return rigsReady; },
+    get armed() { return rigsReady && !machineBusy; },
+    get currentWeapon() {
+      const item = gear[active];
+      return rigsReady ? { id: item.config.id, name: displayName(item), upgraded: item.upgraded } : null;
+    },
+    weaponDisplay(id) {
+      return gear.find(item => item.config.id === id)?.model?.clone(true);
+    },
+    weaponName(id) {
+      return gear.find(item => item.config.id === id)?.config.name ?? id;
+    },
+    awardWeapon(id) {
+      const index = gear.findIndex(item => item.config.id === id);
+      if (index < 0 || !rigsReady || machineBusy) return false;
+      refill(gear[index]);
+      equip(index);
+      return true;
+    },
+    setMachineBusy(busy) {
+      machineBusy = busy;
+      trigger = pressed = false;
+      reload = 0;
+      gear[active].group.visible = !busy;
+      renderer.shadowMap.needsUpdate = true;
+    },
+    upgradeWeapon(id) {
+      const item = gear[active];
+      if (!rigsReady || !machineBusy || item.config.id !== id || item.upgraded) return false;
+      item.upgraded = true;
+      refill(item);
+      const tint = new Color().setRGB(...UPGRADES[id].tint);
+      item.model.traverse(node => {
+        if (!node.isMesh) return;
+        const tintMaterial = material => withUpgradeCamo(material, tint, upgradeClock);
+        node.material = Array.isArray(node.material) ? node.material.map(tintMaterial) : tintMaterial(node.material);
+      });
+      return true;
+    },
     get state() {
       return {
         ready: rigsReady, active, shots, hits, blockedShot, sightOnTarget, lastImpact,
+        upgrades: gear.map(item => item.upgraded),
         ammo: gear.map(item => [item.ammo, item.reserve]),
         targets: targets.map(item => item.health),
       };

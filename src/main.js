@@ -3,6 +3,8 @@ import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js'
 import { createCamera, createBuildingCollision } from './camera.js';
 import { createPlayer } from './player.js';
 import { createCombat } from './combat.js';
+import { createMachines } from './machines.js';
+import { createWallet } from './machine-config.js';
 import { buildBuildings } from './buildings.js';
 import { createTerrain } from './terrain.js';
 import { addStreets } from './infrastructure/roads.js';
@@ -23,6 +25,11 @@ const { camera, controls } = createCamera(renderer.domElement);
 const player = createPlayer({ scene, renderer });
 const combat = audit || params.has('preview') ? null
   : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement });
+
+const wallet = createWallet();
+const machines = combat ? createMachines({
+  world, camera, renderer, controls, combat, wallet, testing: params.has('machine-test') && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname),
+}) : null;
 
 function resize() {
   const { clientWidth: width, clientHeight: height } = viewport;
@@ -47,6 +54,7 @@ startGameLoop({
     controls.pose.armed = combat?.armed ?? false;
     player.update(delta, controls.pose);
     combat?.update(delta);
+    machines?.update(delta);
   },
 });
 
@@ -142,6 +150,7 @@ async function loadCity() {
     batch: params.get('batch') !== '0',
   });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
+  await machines?.place(built.collisionPolygons, sampleGround, terrain.insidePlayable);
   controls.prepare(built.collisionPolygons, sampleGround);
   combat?.prepareTargets();
   if (!audit && (demo || params.has('autostart'))) controls.engage();
@@ -180,6 +189,7 @@ async function loadCity() {
   window.__ROCKVILLE__ = {
     summary,
     combat,
+    machines,
     camera,
     renderer,
     scene,
