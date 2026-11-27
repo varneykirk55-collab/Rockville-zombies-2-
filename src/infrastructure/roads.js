@@ -202,9 +202,9 @@ export function addStreets(world, maps, terrain, features) {
       }
     }
   }
-  addRoadMesh(world, 'Concrete sidewalks', walks,
+  addRoadMesh(world, 'Concrete sidewalks', terrain.drapeTriangles(walks, 0.028),
     new THREE.MeshStandardMaterial({ color: 0x9ca9ae, map: maps.concrete, roughness: 1 }), 3.5);
-  addRoadMesh(world, 'Asphalt streets', roads,
+  addRoadMesh(world, 'Asphalt streets', terrain.drapeTriangles(roads, 0.045),
     new THREE.MeshStandardMaterial({
       color: 0xa8b6bc, map: maps.asphalt, roughness: 1,
       emissive: 0x8ea7b9, emissiveMap: maps.asphalt, emissiveIntensity: 0.38,
@@ -215,7 +215,7 @@ export function addStreets(world, maps, terrain, features) {
   const brick = [];
   clippedRibbon(brick, point(-7, 0.24), point(7, -0.24), 4.1, 0.06, solid, stats);
   clippedRibbon(brick, point(0, -4.05), point(-0.06, -8.3), 4.1, 0.06, solid, stats);
-  addRoadMesh(world, 'Brick at East Montgomery and Helen Heneghan', brick,
+  addRoadMesh(world, 'Brick at East Montgomery and Helen Heneghan', terrain.drapeTriangles(brick, 0.06),
     new THREE.MeshStandardMaterial({
       color: 0xffb595, map: maps.brick, roughness: 0.9,
       emissive: 0xd88d73, emissiveMap: maps.brick, emissiveIntensity: 0.34,
@@ -230,7 +230,7 @@ export function addStreets(world, maps, terrain, features) {
   for (let stripe = -3; stripe <= 3; stripe++) {
     clippedRibbon(paint, point(stripe * 0.92, -10), point(stripe * 0.92, -12.5), 0.24, 0.07, solid, stats);
   }
-  addRoadMesh(world, 'Junction crosswalk paint', paint,
+  addRoadMesh(world, 'Junction crosswalk paint', terrain.drapeTriangles(paint, 0.07),
     new THREE.MeshStandardMaterial({ color: 0xf6e4b8, roughness: 0.82 }), 1);
 
   const centerPaint = [];
@@ -238,7 +238,7 @@ export function addStreets(world, maps, terrain, features) {
     const roadZ = -offset * 0.023;
     clippedRibbon(centerPaint, point(offset - 2.6, roadZ), point(offset + 2.6, roadZ), 0.072, 0.07, solid, stats);
   }
-  addRoadMesh(world, 'East Montgomery lane paint', centerPaint,
+  addRoadMesh(world, 'East Montgomery lane paint', terrain.drapeTriangles(centerPaint, 0.07),
     new THREE.MeshStandardMaterial({ color: 0xd69a33, roughness: 0.9 }), 1);
 
   const poleMaterial = new THREE.MeshStandardMaterial({ color: 0x293e46, roughness: 0.8 });

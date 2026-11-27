@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { modelBoxes } from './collision.js';
 import { lonLatToWorld } from '../utils.js';
 
 const loader = new GLTFLoader();
@@ -131,56 +132,6 @@ function consolidate(root) {
   return draws;
 }
 
-function modelBoxes(root, baseY, openLocalZAbove) {
-  const inverse = new THREE.Matrix4().copy(root.matrixWorld).invert();
-  const sample = new THREE.Vector3();
-  const local = new THREE.Vector3();
-  const cell = 4;
-  const occupied = new Set();
-  root.traverse(mesh => {
-    if (!mesh.isMesh || !mesh.geometry?.attributes?.position) return;
-    const attribute = mesh.geometry.attributes.position;
-    const step = Math.max(1, Math.floor(attribute.count / 2400));
-    for (let i = 0; i < attribute.count; i += step) {
-      sample.fromBufferAttribute(attribute, i).applyMatrix4(mesh.matrixWorld);
-      if (sample.y < baseY + 0.15 || sample.y > baseY + 3.2) continue;
-      if (openLocalZAbove != null) {
-        local.copy(sample).applyMatrix4(inverse);
-        if (local.z > openLocalZAbove) continue;
-      }
-      occupied.add(`${Math.floor(sample.x / cell)},${Math.floor(sample.z / cell)}`);
-    }
-  });
-  const rows = new Map();
-  for (const key of occupied) {
-    const [ix, iz] = key.split(',').map(Number);
-    if (!rows.has(iz)) rows.set(iz, []);
-    rows.get(iz).push(ix);
-  }
-  const rings = [];
-  for (const [iz, columns] of rows) {
-    columns.sort((a, b) => a - b);
-    let start = columns[0];
-    let previous = columns[0];
-    const flush = (from, to) => {
-      const x0 = from * cell;
-      const x1 = (to + 1) * cell;
-      const z0 = iz * cell;
-      const z1 = (iz + 1) * cell;
-      rings.push([{ x: x0, z: z0 }, { x: x1, z: z0 }, { x: x1, z: z1 }, { x: x0, z: z1 }]);
-    };
-    for (const column of columns.slice(1)) {
-      if (column === previous + 1) previous = column;
-      else {
-        flush(start, previous);
-        start = previous = column;
-      }
-    }
-    flush(start, previous);
-  }
-  return rings;
-}
-
 function dropFootprint(collisionPolygons, id, kept) {
   const rings = [];
   if (kept.has(id)) return rings;
@@ -207,6 +158,15 @@ async function readModel(glb) {
 }
 
 const LAMP_LOCAL = [[-11.54, 15.0], [11.59, 15.7], [-11.59, -15.66], [11.82, -15.72]];
+
+// Both approved machine sites lie inside the Regal shell. Preserve this
+// published proxy until an exterior placement is approved for the machines.
+const REGAL_PUBLISHED_HULL = [
+  [176, 248, 180, 252], [184, 248, 188, 252],
+  [200, 248, 228, 252], [176, 244, 228, 248],
+].map(([x0, z0, x1, z1]) => [
+  { x: x0, z: z0 }, { x: x1, z: z0 }, { x: x1, z: z1 }, { x: x0, z: z1 },
+]);
 
 export async function integrateLandmarks({ world, models, terrain, separateGroups, collisionPolygons, batch = true }) {
   const claimed = new Set();
@@ -285,7 +245,8 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
     }
     let hull = null;
     if (model.collision?.mode !== 'none' && model.id !== 'courthouse-roundabout') {
-      hull = modelBoxes(object, y, model.collision?.openLocalZAbove ?? null);
+      hull = model.id === 'regal-cinemas' ? REGAL_PUBLISHED_HULL
+        : modelBoxes(object, y, model.collision?.openLocalZAbove ?? null);
       for (const ring of hull) {
         collisionPolygons.push({
           outer: ring, holes: [], footprintId: model.buildingId ?? model.id, source: 'landmark',

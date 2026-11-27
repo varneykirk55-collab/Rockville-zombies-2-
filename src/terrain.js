@@ -20,6 +20,23 @@ function segmentDistance(x, z, a, b) {
   return Math.hypot(x - (a.x + dx * t), z - (a.z + dz * t));
 }
 
+function clipPlan(points, distance) {
+  const result = [];
+  let a = points.at(-1);
+  let da = distance(a);
+  for (const b of points) {
+    const db = distance(b);
+    if ((da > 0 && db < 0) || (da < 0 && db > 0)) {
+      const t = da / (da - db);
+      result.push({ x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t });
+    }
+    if (db >= 0) result.push(b);
+    a = b;
+    da = db;
+  }
+  return result;
+}
+
 export function createTerrain(terrain, boundaryGeoJson) {
   const ringLonLat = boundaryGeoJson.features[0].geometry.coordinates[0];
   const ring = ringLonLat.map(([longitude, latitude]) => lonLatToWorld(longitude, latitude));
@@ -33,17 +50,72 @@ export function createTerrain(terrain, boundaryGeoJson) {
   }
 
   function sampleGameY(x, z) {
-    const col = Math.min(cols - 1.001, Math.max(0, (x - x0) / step));
-    const row = Math.min(rows - 1.001, Math.max(0, (z - z0) / step));
-    const c0 = Math.floor(col);
-    const r0 = Math.floor(row);
+    const col = Math.min(cols - 1, Math.max(0, (x - x0) / step));
+    const row = Math.min(rows - 1, Math.max(0, (z - z0) / step));
+    const c0 = Math.min(cols - 2, Math.floor(col));
+    const r0 = Math.min(rows - 2, Math.floor(row));
     const tx = col - c0;
     const tz = row - r0;
     const y00 = heightAt(c0, r0);
     const y10 = heightAt(c0 + 1, r0);
     const y01 = heightAt(c0, r0 + 1);
     const y11 = heightAt(c0 + 1, r0 + 1);
-    return (y00 * (1 - tx) + y10 * tx) * (1 - tz) + (y01 * (1 - tx) + y11 * tx) * tz;
+    // Follow the same diagonal as buildMesh's two triangles per DEM cell.
+    return tx + tz <= 1
+      ? y00 + (y10 - y00) * tx + (y01 - y00) * tz
+      : y11 + (y01 - y11) * (1 - tx) + (y10 - y11) * (1 - tz);
+  }
+
+  function drapeTriangles(positions, lift) {
+    const result = [];
+    function emit(polygon) {
+      const a = polygon[0];
+      for (let i = 2; i < polygon.length; i++) {
+        const b = polygon[i - 1], c = polygon[i];
+        if (Math.abs((b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x)) < 1e-8) continue;
+        for (const { x, z } of [a, b, c]) result.push(x, sampleGameY(x, z) + lift, z);
+      }
+    }
+    for (let i = 0; i < positions.length; i += 9) {
+      const triangle = [0, 3, 6].map(offset => ({ x: positions[i + offset], z: positions[i + offset + 2] }));
+      const [a, b, c] = triangle;
+      const divisor = (b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x);
+      if (Math.abs(divisor) < 1e-8) continue;
+      const start = result.length;
+      const aY = sampleGameY(a.x, a.z) + lift;
+      const dyB = sampleGameY(b.x, b.z) + lift - aY;
+      const dyC = sampleGameY(c.x, c.z) + lift - aY;
+      const xs = triangle.map(p => p.x), zs = triangle.map(p => p.z);
+      const c0 = Math.floor((Math.min(...xs) - x0) / step), c1 = Math.floor((Math.max(...xs) - x0) / step);
+      const r0 = Math.floor((Math.min(...zs) - z0) / step), r1 = Math.floor((Math.max(...zs) - z0) / step);
+      for (let row = r0; row <= r1; row++) for (let col = c0; col <= c1; col++) {
+        const left = x0 + col * step, top = z0 + row * step;
+        let tile = clipPlan(triangle, p => p.x - left);
+        if (tile.length) tile = clipPlan(tile, p => left + step - p.x);
+        if (tile.length) tile = clipPlan(tile, p => p.z - top);
+        if (tile.length) tile = clipPlan(tile, p => top + step - p.z);
+        if (tile.length < 3) continue;
+        const diagonal = left + top + step;
+        emit(clipPlan(tile, p => diagonal - p.x - p.z));
+        emit(clipPlan(tile, p => p.x + p.z - diagonal));
+      }
+      // Keep the original triangle if its plane already follows the terrain.
+      // Both surfaces are piecewise linear, so only split vertices need testing.
+      let needsSplit = false;
+      for (let j = start; j < result.length; j += 3) {
+        const x = result[j] - a.x, z = result[j + 2] - a.z;
+        const u = (x * (c.z - a.z) - z * (c.x - a.x)) / divisor;
+        const v = ((b.x - a.x) * z - (b.z - a.z) * x) / divisor;
+        if (Math.abs(aY + dyB * u + dyC * v - result[j + 1]) <= 0.025) continue;
+        needsSplit = true;
+        break;
+      }
+      if (!needsSplit) {
+        result.length = start;
+        result.push(a.x, aY, a.z, b.x, aY + dyB, b.z, c.x, aY + dyC, c.z);
+      }
+    }
+    return result;
   }
 
   function insidePlayable(x, z) {
@@ -106,7 +178,7 @@ export function createTerrain(terrain, boundaryGeoJson) {
   }
 
   return {
-    sampleGameY, insidePlayable, distanceOutside, buildMesh, ring,
+    sampleGameY, drapeTriangles, insidePlayable, distanceOutside, buildMesh, ring,
     demOriginM: terrain.demOriginM,
   };
 }
