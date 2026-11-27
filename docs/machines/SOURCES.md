@@ -13,14 +13,14 @@ The two GLBs have movable nodes and no baked animation clips. Rockville ports th
 
 The source game's 500 starting points, 950-point box, and 5,000-point upgrade come from `resources/economy/economy_config.tres`. Rockville's loopback-only testing switch credits points without adding a production income source. Both machines hold one transaction at a time. Training target hits award no points.
 
-The source rolls M4, MK35, and Jupiter with weights 85, 40, and 12, respectively. The M1911's source weight is zero and it is absent from that scene's reward list. This draft keeps the two eligible Rockville weights in their original ratio. The M1911 is represented in the Rockville configuration at its original zero weight pending owner approval of a positive weight or another pool mapping.
+The source rolls M4, MK35, and Jupiter with weights 85, 40, and 12. Rockville keeps the rifle weights and uses the owner-approved M1911 weight of 25 for a total weight of 150.
 
-| Weapon | Original source odds | Rockville draft odds |
-| --- | ---: | ---: |
-| M4 | 62.04% | 68% |
-| MK35 | 29.20% | 32% |
-| Jupiter | 8.76% | Out of pool |
-| M1911 | 0% | 0% |
+| Weapon | Original source odds | Rockville weight | Rockville odds |
+| --- | ---: | ---: | ---: |
+| M4 | 62.04% | 85 | 56.67% |
+| MK35 | 29.20% | 40 | 26.67% |
+| M1911 | 0% | 25 | 16.67% |
+| Jupiter | 8.76% | — | — |
 
 The box cycles for 3.4 seconds and presents the roll for 9 seconds. Collection refills and equips the matching weapon because all three weapons are already carried. An uncollected offer expires without a refund.
 

@@ -6,9 +6,8 @@ export const UPGRADES = {
   pistol: { name: 'Mars Ultor', damage: 2.5, magazine: 1.5, reserve: 1.5, rate: 1.2, tint: [0.85, 0.2, 1] },
 };
 
-// Jupiter is not part of Rockville's inventory. Each available weapon retains
-// its source weight. A zero-weight entry is never selected.
-export const BOX_POOL = [{ id: 'm4', weight: 85 }, { id: 'mk35', weight: 40 }, { id: 'pistol', weight: 0 }];
+// Rockville retains Arena Mortis 2's rifle weights and assigns the M1911 weight 25.
+export const BOX_POOL = [{ id: 'm4', weight: 85 }, { id: 'mk35', weight: 40 }, { id: 'pistol', weight: 25 }];
 
 export function createWallet(startingPoints = ECONOMY.startingPoints) {
   let points = startingPoints;
