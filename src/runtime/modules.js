@@ -47,7 +47,11 @@ export async function loadLandmarkModels() {
 }
 
 export function separateBuildingIds(models) {
-  return new Set(models
-    .filter(model => model.active !== false && model.replaceProcedural && model.glb && model.buildingId)
-    .map(model => model.buildingId));
+  const ids = new Set();
+  for (const model of models) {
+    if (model.active === false || !model.replaceProcedural || !model.glb) continue;
+    if (model.buildingId) ids.add(model.buildingId);
+    for (const id of model.buildingIds ?? []) ids.add(id);
+  }
+  return ids;
 }

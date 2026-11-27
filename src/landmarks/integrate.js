@@ -64,7 +64,8 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
       placed.push(record);
       continue;
     }
-    if (model.buildingId && claimed.has(model.buildingId)) {
+    const shares = Boolean(model.shareFootprint);
+    if (model.buildingId && claimed.has(model.buildingId) && !shares) {
       record.reason = 'duplicate-building';
       record.fallback = 'procedural';
       placed.push(record);
@@ -81,8 +82,9 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
     record.loaded = true;
     record.triangles = loaded.triangles;
     const replace = Boolean(model.replaceProcedural && model.buildingId);
-    if (!replace) {
-      record.reason = model.buildingId ? 'duplicate-prevented' : 'unplaced';
+    const placeable = model.place !== false && (replace || !model.buildingId);
+    if (!placeable) {
+      record.reason = 'held';
       record.fallback = model.buildingId ? 'procedural' : null;
       placed.push(record);
       continue;
@@ -110,7 +112,8 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
     });
     world.add(object);
     if (unapproved) {
-      const reach = Array.isArray(model.collision?.size) ? model.collision.size[0] / 2 + 1.4 : 8;
+      const half = Array.isArray(model.collision?.size) ? model.collision.size[0] / 2 : 12;
+      const reach = Math.min(half, 18) + 1.6;
       const marker = new THREE.Mesh(
         new THREE.CylinderGeometry(0.22, 0.22, 9, 8),
         new THREE.MeshBasicMaterial({ color: 0xff7a18 }),
@@ -119,19 +122,23 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
       marker.name = `Unapproved marker ${model.id}`;
       world.add(marker);
     }
-    const placeholder = separateGroups.get(model.buildingId);
-    placeholder?.group.removeFromParent();
-    const size = model.collision?.size;
-    if (Array.isArray(size) && size.length === 2) {
+    if (replace) {
+      separateGroups.get(model.buildingId)?.group.removeFromParent();
+    }
+    // The measured footprint collider stays. A second box would double-block
+    // the same ground. A plaza model adds no collider, so the square stays walkable.
+    if (model.collision?.mode === 'model' && Array.isArray(model.collision.size)) {
+      const [width, depth] = model.collision.size;
       collisionPolygons.push({
-        outer: orientedFootprint(x, z, object.rotation.y, size[0] * scale, size[1] * scale),
+        outer: orientedFootprint(x, z, object.rotation.y, width * scale, depth * scale),
         holes: [],
         footprintId: model.buildingId,
         source: 'landmark',
       });
     }
     record.placed = true;
-    record.reason = 'replaced-procedural';
+    record.removedPlaceholder = replace ? model.buildingId : null;
+    record.reason = replace ? 'replaced-procedural' : 'placed';
     placed.push(record);
   }
   return placed;

@@ -40,8 +40,16 @@ export const EXTRA_POSES = [
   { id: 'district-b', at: [-77.1536, 39.0922], look: [-77.1532, 39.0942], eye: 28, lookEye: 8 },
   { id: 'district-c', at: [-77.15115, 39.08315], look: [-77.15155, 39.08366], eye: 18, lookEye: 8 },
   { id: 'district-d-metro', at: [-77.1469, 39.08415], look: [-77.1455, 39.08455], eye: 26, lookEye: 6 },
-  { id: 'clock-tower', at: [-77.14662, 39.08342], look: [-77.14625, 39.08312], eye: 2.2, lookEye: 12 },
   { id: 'entrance-grade', at: [-77.15055, 39.08455], look: [-77.15028, 39.0846], eye: 1.68, lookEye: 3 },
+  { id: 'landmark-clock-tower', at: [-77.15052, 39.08505], look: [-77.15052, 39.08531], eye: 4, lookEye: 14 },
+  { id: 'landmark-turret', at: [-77.15105, 39.0855], look: [-77.15127, 39.08569], eye: 4, lookEye: 12 },
+  { id: 'landmark-regal', at: [-77.14967, 39.08368], look: [-77.14967, 39.08388], eye: 3, lookEye: 8 },
+  { id: 'landmark-white-columned', at: [-77.15026, 39.08368], look: [-77.15026, 39.08388], eye: 3, lookEye: 6 },
+  { id: 'landmark-circuit-court', at: [-77.1502, 39.08285], look: [-77.1502, 39.08323], eye: 8, lookEye: 16 },
+  { id: 'landmark-district-court', at: [-77.15175, 39.0824], look: [-77.15175, 39.08267], eye: 6, lookEye: 12 },
+  { id: 'landmark-historic-courthouse', at: [-77.15135, 39.0834], look: [-77.15151, 39.08358], eye: 3, lookEye: 8 },
+  { id: 'landmark-roundabout', at: [-77.15135, 39.08305], look: [-77.15154, 39.08319], eye: 6, lookEye: 1 },
+  { id: 'elevated-courthouse', at: [-77.1512, 39.0834], look: [-77.1506, 39.0832], eye: 90, lookEye: 10 },
 ];
 
 export const SHOTS = [

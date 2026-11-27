@@ -10,9 +10,9 @@
   "overlapProblems": [],
   "problems": [],
   "capture": {
-    "drawCalls": 58,
-    "triangles": 276028,
-    "frameMs": 361.6,
+    "drawCalls": 122,
+    "triangles": 337915,
+    "frameMs": 414.0,
     "errors": [],
     "windows": 5817,
     "windowAudit": {
@@ -21,17 +21,17 @@
       "rejected": 0
     },
     "roads": {
-      "trimmed": 93,
-      "omitted": 16
+      "trimmed": 91,
+      "omitted": 13
     },
     "walk": {
-      "roadSamples": 7833,
-      "roadBlocked": 33,
+      "roadSamples": 7816,
+      "roadBlocked": 19,
       "pedestrian": {
-        "center": 7800,
+        "center": 7797,
         "shoulder": 15,
         "detour": 4,
-        "interior": 14
+        "interior": 0
       },
       "controllerMovedM": 32.06,
       "blockedSteps": 0
@@ -51,9 +51,9 @@
         "id": "turret-corner",
         "approval": "unapproved",
         "loaded": true,
-        "placed": false,
-        "fallback": "procedural",
-        "reason": "duplicate-prevented",
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
         "triangles": 21068
       },
       {
@@ -67,26 +67,72 @@
       {
         "id": "regal-cinemas",
         "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 22254
+      },
+      {
+        "id": "white-columned",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 6518
+      },
+      {
+        "id": "regal-cinemas-pr1",
+        "approval": "unapproved",
         "loaded": false,
         "placed": false,
         "fallback": null,
         "reason": "inactive"
       },
       {
-        "id": "montgomery-colonnade",
+        "id": "montgomery-colonnade-pr1",
         "approval": "unapproved",
         "loaded": false,
         "placed": false,
         "fallback": null,
         "reason": "inactive"
+      },
+      {
+        "id": "circuit-court",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 19472
+      },
+      {
+        "id": "district-court",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 15326
       },
       {
         "id": "historic-red-brick-courthouse",
         "approval": "unapproved",
-        "loaded": false,
-        "placed": false,
+        "loaded": true,
+        "placed": true,
         "fallback": null,
-        "reason": "inactive"
+        "reason": "replaced-procedural",
+        "triangles": 24782
+      },
+      {
+        "id": "courthouse-roundabout",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "placed",
+        "triangles": 5718
       }
     ]
   }

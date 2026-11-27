@@ -4,44 +4,45 @@
   "models": [
     {
       "id": "clock-tower",
-      "buildingId": 129521,
+      "buildingId": 131322,
       "approval": "unapproved",
       "active": true,
       "glb": "landmarks/clock_tower_building.glb",
-      "longitude": -77.146252,
-      "latitude": 39.083118,
-      "rotationY": -1.5707963267948966,
+      "longitude": -77.150515,
+      "latitude": 39.08531,
+      "rotationY": 0,
       "scale": 1,
       "elevationOffsetM": 0,
       "replaceProcedural": true,
-      "collision": { "size": [42.8, 20.2], "keepFootprint": true },
+      "collision": { "mode": "footprint" },
       "source": {
         "branch": "grok/rockville-landmarks",
         "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
         "path": "public/landmarks/clock_tower_building.glb",
-        "pullRequest": 2
+        "sha256": "0fcfd6003b213f407e277c7b091877e69cd0353bbb439e562a0bf044e4908020"
       },
-      "notes": "Unapproved test asset from PR #2. Suggested rotation.y is -π/2 so the facade faces west. PR #4 linked this file to footprint 129521 (1 Church Street). That centroid is on the Pike side of downtown, in district D, not on the plaza. The model stays registered to District A because it is the Town Square clock-tower asset. Retarget buildingId in this file when the plaza footprint is confirmed. An orange pole beside the model marks it as unapproved."
+      "notes": "Unapproved. Moved off 1 Church Street (129521). Placed on 200 East Middle Lane, footprint 131322, the six-storey town-square building on the south edge of the open square. Model plan 42.8 by 20.2 m; county footprint 62.3 by 24.9 m. Origin at the footprint centre, no scale change. rotationY 0 faces the long facade south onto the open frontage; the tower is at the west end, toward Maryland Avenue. The building's district stays D."
     },
     {
       "id": "turret-corner",
-      "buildingId": 129621,
+      "buildingId": 227492,
       "approval": "unapproved",
       "active": true,
       "glb": "landmarks/turret_corner_building.glb",
-      "longitude": -77.150277,
-      "latitude": 39.084596,
-      "rotationY": 3.141592653589793,
+      "longitude": -77.15127,
+      "latitude": 39.085686,
+      "rotationY": 1.5707963267948966,
       "scale": 1,
       "elevationOffsetM": 0,
-      "replaceProcedural": false,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
       "source": {
         "branch": "grok/rockville-landmarks",
         "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
         "path": "public/landmarks/turret_corner_building.glb",
-        "pullRequest": 2
+        "sha256": "73abdb84332587571b5349f288751af1cb4bf413fcdbce9caca76f6f1698d792"
       },
-      "notes": "Unapproved test asset. The file loads. It is not placed: replaceProcedural is false, so the county mass at 1 Helen Heneghan Way (about 29 m by 43 m, not the model's 31.5 m by 30.5 m) stays. Suggested rotation.y is π."
+      "notes": "Unapproved. 33 Maryland Avenue, the building immediately north of the Starbucks block at 39 Maryland Avenue (footprint 127071). Model plan 31.5 by 30.5 m; county footprint 25.4 by 37.4 m, so the model overhangs the short side by about 3 m. Not scaled. rotationY is π/2 so the rounded corner points southeast, toward the Starbucks corner. The generic suggestion of π pointed the corner northeast and does not match this site. District stays C because the address is Maryland Avenue. The Starbucks apartments themselves are not removed."
     },
     {
       "id": "missing-model-fallback",
@@ -50,7 +51,7 @@
       "active": true,
       "glb": null,
       "replaceProcedural": true,
-      "notes": "Intentional empty path. The loader reports a procedural fallback and does not remove a building."
+      "notes": "Empty path. The loader reports a procedural fallback and removes nothing."
     }
   ]
 }

@@ -51,7 +51,9 @@ def main() -> int:
         if hits != [record["district"]]:
             problems.append(f"{building_id} classified {record['district']} but polygons say {hits}")
 
-    capture_path = ROOT / "docs/city-development-foundation/screenshots/after/capture.json"
+    capture_path = ROOT / "docs/city-development-foundation/screenshots/integrated/capture.json"
+    if not capture_path.exists():
+        capture_path = ROOT / "docs/city-development-foundation/screenshots/after/capture.json"
     capture = json.loads(capture_path.read_text()) if capture_path.exists() else None
     if capture:
         audit = capture["summary"].get("windowAudit") or {}
@@ -60,12 +62,18 @@ def main() -> int:
         if capture.get("errors"):
             problems.append(f"console errors: {capture['errors']}")
         placed = {item["id"]: item for item in capture["summary"]["landmarks"]}
-        if not placed.get("clock-tower", {}).get("placed"):
-            problems.append("clock tower did not replace its procedural building")
-        if placed.get("turret-corner", {}).get("placed"):
-            problems.append("turret was placed on an unconfirmed footprint")
+        for required in (
+            "clock-tower", "turret-corner", "regal-cinemas", "white-columned",
+            "circuit-court", "district-court", "historic-red-brick-courthouse",
+            "courthouse-roundabout",
+        ):
+            if not placed.get(required, {}).get("placed"):
+                problems.append(f"{required} was not placed")
         if placed.get("missing-model-fallback", {}).get("fallback") != "procedural":
             problems.append("missing model did not fall back to procedural")
+        pedestrian = (capture.get("walk") or {}).get("pedestrian") or {}
+        if pedestrian.get("interior"):
+            problems.append(f"interior pedestrian samples {pedestrian.get('interior')}")
 
     counts = {code: len(ids) for code, ids in owners.items()}
     result = {
