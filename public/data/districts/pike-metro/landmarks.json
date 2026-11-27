@@ -1,0 +1,10 @@
+{
+  "district": "pike-metro",
+  "code": "D",
+  "models": [],
+  "bridge": {
+    "id": "metro-pedestrian-bridge",
+    "osmWay": 266681164,
+    "note": "The connection points stay in public/data/landmarks.json. Deck elevation, clearance, and width are unknown and are not invented here."
+  }
+}

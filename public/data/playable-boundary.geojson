@@ -1,0 +1,1563 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "crs_note": "WGS84. Game frame: +X east, +Z south, origin -77.152, 39.086, 1 unit = 1 metre.",
+    "meters_per_degree_east": 86521.40974372809,
+    "meters_per_degree_north": 111017.09630490161,
+    "status": "Owner-directed irregular boundary, 26 Nov 2026. West -77.155. North at gLeaf. East on the west rail except the station parking bulge."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Playable boundary",
+        "status": "owner-directed",
+        "west": "-77.155",
+        "north": "39.09510, north end of the Hungerford 800 block at gLeaf",
+        "east": "west rail of the CSX/Metrorail bundle, bulging around Rockville Metro Station parking",
+        "south": "local dips retain 208 Monroe Street and 700 Rockville Pike; the OSM school polygon is outside",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.155,
+            "latitude": 39.0951,
+            "game_x_m": -259.56,
+            "game_z_m": -1010.26
+          },
+          {
+            "longitude": -77.15244,
+            "latitude": 39.0951,
+            "game_x_m": -38.07,
+            "game_z_m": -1010.26
+          },
+          {
+            "longitude": -77.152277,
+            "latitude": 39.09465,
+            "game_x_m": -23.97,
+            "game_z_m": -960.3
+          },
+          {
+            "longitude": -77.152113,
+            "latitude": 39.0942,
+            "game_x_m": -9.78,
+            "game_z_m": -910.34
+          },
+          {
+            "longitude": -77.151948,
+            "latitude": 39.09375,
+            "game_x_m": 4.5,
+            "game_z_m": -860.38
+          },
+          {
+            "longitude": -77.151782,
+            "latitude": 39.0933,
+            "game_x_m": 18.86,
+            "game_z_m": -810.42
+          },
+          {
+            "longitude": -77.151616,
+            "latitude": 39.09285,
+            "game_x_m": 33.22,
+            "game_z_m": -760.47
+          },
+          {
+            "longitude": -77.15145,
+            "latitude": 39.0924,
+            "game_x_m": 47.59,
+            "game_z_m": -710.51
+          },
+          {
+            "longitude": -77.151284,
+            "latitude": 39.09195,
+            "game_x_m": 61.95,
+            "game_z_m": -660.55
+          },
+          {
+            "longitude": -77.151119,
+            "latitude": 39.0915,
+            "game_x_m": 76.23,
+            "game_z_m": -610.59
+          },
+          {
+            "longitude": -77.150958,
+            "latitude": 39.09105,
+            "game_x_m": 90.16,
+            "game_z_m": -560.64
+          },
+          {
+            "longitude": -77.150792,
+            "latitude": 39.0906,
+            "game_x_m": 104.52,
+            "game_z_m": -510.68
+          },
+          {
+            "longitude": -77.150623,
+            "latitude": 39.09015,
+            "game_x_m": 119.14,
+            "game_z_m": -460.72
+          },
+          {
+            "longitude": -77.150462,
+            "latitude": 39.0897,
+            "game_x_m": 133.07,
+            "game_z_m": -410.76
+          },
+          {
+            "longitude": -77.150258,
+            "latitude": 39.08925,
+            "game_x_m": 150.72,
+            "game_z_m": -360.81
+          },
+          {
+            "longitude": -77.150023,
+            "latitude": 39.0888,
+            "game_x_m": 171.05,
+            "game_z_m": -310.85
+          },
+          {
+            "longitude": -77.149789,
+            "latitude": 39.08835,
+            "game_x_m": 191.3,
+            "game_z_m": -260.89
+          },
+          {
+            "longitude": -77.149512,
+            "latitude": 39.0879,
+            "game_x_m": 215.27,
+            "game_z_m": -210.93
+          },
+          {
+            "longitude": -77.149239,
+            "latitude": 39.08745,
+            "game_x_m": 238.89,
+            "game_z_m": -160.97
+          },
+          {
+            "longitude": -77.148936,
+            "latitude": 39.087,
+            "game_x_m": 265.1,
+            "game_z_m": -111.02
+          },
+          {
+            "longitude": -77.148632,
+            "latitude": 39.08655,
+            "game_x_m": 291.4,
+            "game_z_m": -61.06
+          },
+          {
+            "longitude": -77.148287,
+            "latitude": 39.0861,
+            "game_x_m": 321.25,
+            "game_z_m": -11.1
+          },
+          {
+            "longitude": -77.14784,
+            "latitude": 39.08565,
+            "game_x_m": 359.93,
+            "game_z_m": 38.86
+          },
+          {
+            "longitude": -77.1459,
+            "latitude": 39.08555,
+            "game_x_m": 527.78,
+            "game_z_m": 49.96
+          },
+          {
+            "longitude": -77.1452,
+            "latitude": 39.0855,
+            "game_x_m": 588.35,
+            "game_z_m": 55.51
+          },
+          {
+            "longitude": -77.14382,
+            "latitude": 39.08362,
+            "game_x_m": 707.75,
+            "game_z_m": 264.22
+          },
+          {
+            "longitude": -77.14382,
+            "latitude": 39.08305,
+            "game_x_m": 707.75,
+            "game_z_m": 327.5
+          },
+          {
+            "longitude": -77.1447,
+            "latitude": 39.08305,
+            "game_x_m": 631.61,
+            "game_z_m": 327.5
+          },
+          {
+            "longitude": -77.145294,
+            "latitude": 39.0834,
+            "game_x_m": 580.21,
+            "game_z_m": 288.64
+          },
+          {
+            "longitude": -77.144156,
+            "latitude": 39.0825,
+            "game_x_m": 678.67,
+            "game_z_m": 388.56
+          },
+          {
+            "longitude": -77.143632,
+            "latitude": 39.08205,
+            "game_x_m": 724.01,
+            "game_z_m": 438.52
+          },
+          {
+            "longitude": -77.143108,
+            "latitude": 39.0816,
+            "game_x_m": 769.35,
+            "game_z_m": 488.48
+          },
+          {
+            "longitude": -77.141856,
+            "latitude": 39.08058,
+            "game_x_m": 877.67,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1431,
+            "latitude": 39.08058,
+            "game_x_m": 770.04,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1431,
+            "latitude": 39.08018,
+            "game_x_m": 770.04,
+            "game_z_m": 646.12
+          },
+          {
+            "longitude": -77.1442,
+            "latitude": 39.08018,
+            "game_x_m": 674.87,
+            "game_z_m": 646.12
+          },
+          {
+            "longitude": -77.1442,
+            "latitude": 39.08058,
+            "game_x_m": 674.87,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1496,
+            "latitude": 39.08058,
+            "game_x_m": 207.65,
+            "game_z_m": 601.71
+          },
+          {
+            "longitude": -77.1496,
+            "latitude": 39.0797,
+            "game_x_m": 207.65,
+            "game_z_m": 699.41
+          },
+          {
+            "longitude": -77.1505,
+            "latitude": 39.0797,
+            "game_x_m": 129.78,
+            "game_z_m": 699.41
+          },
+          {
+            "longitude": -77.1505,
+            "latitude": 39.0807,
+            "game_x_m": 129.78,
+            "game_z_m": 588.39
+          },
+          {
+            "longitude": -77.155,
+            "latitude": 39.0807,
+            "game_x_m": -259.56,
+            "game_z_m": 588.39
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.155,
+              39.0951
+            ],
+            [
+              -77.15244,
+              39.0951
+            ],
+            [
+              -77.152277,
+              39.09465
+            ],
+            [
+              -77.152113,
+              39.0942
+            ],
+            [
+              -77.151948,
+              39.09375
+            ],
+            [
+              -77.151782,
+              39.0933
+            ],
+            [
+              -77.151616,
+              39.09285
+            ],
+            [
+              -77.15145,
+              39.0924
+            ],
+            [
+              -77.151284,
+              39.09195
+            ],
+            [
+              -77.151119,
+              39.0915
+            ],
+            [
+              -77.150958,
+              39.09105
+            ],
+            [
+              -77.150792,
+              39.0906
+            ],
+            [
+              -77.150623,
+              39.09015
+            ],
+            [
+              -77.150462,
+              39.0897
+            ],
+            [
+              -77.150258,
+              39.08925
+            ],
+            [
+              -77.150023,
+              39.0888
+            ],
+            [
+              -77.149789,
+              39.08835
+            ],
+            [
+              -77.149512,
+              39.0879
+            ],
+            [
+              -77.149239,
+              39.08745
+            ],
+            [
+              -77.148936,
+              39.087
+            ],
+            [
+              -77.148632,
+              39.08655
+            ],
+            [
+              -77.148287,
+              39.0861
+            ],
+            [
+              -77.14784,
+              39.08565
+            ],
+            [
+              -77.1459,
+              39.08555
+            ],
+            [
+              -77.1452,
+              39.0855
+            ],
+            [
+              -77.14382,
+              39.08362
+            ],
+            [
+              -77.14382,
+              39.08305
+            ],
+            [
+              -77.1447,
+              39.08305
+            ],
+            [
+              -77.145294,
+              39.0834
+            ],
+            [
+              -77.144156,
+              39.0825
+            ],
+            [
+              -77.143632,
+              39.08205
+            ],
+            [
+              -77.143108,
+              39.0816
+            ],
+            [
+              -77.141856,
+              39.08058
+            ],
+            [
+              -77.1431,
+              39.08058
+            ],
+            [
+              -77.1431,
+              39.08018
+            ],
+            [
+              -77.1442,
+              39.08018
+            ],
+            [
+              -77.1442,
+              39.08058
+            ],
+            [
+              -77.1496,
+              39.08058
+            ],
+            [
+              -77.1496,
+              39.0797
+            ],
+            [
+              -77.1505,
+              39.0797
+            ],
+            [
+              -77.1505,
+              39.0807
+            ],
+            [
+              -77.155,
+              39.0807
+            ],
+            [
+              -77.155,
+              39.0951
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Richard Montgomery High School",
+        "status": "exclude",
+        "source": "OSM way 239942500",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.147174,
+            "latitude": 39.076869,
+            "game_x_m": 417.55,
+            "game_z_m": 1013.7
+          },
+          {
+            "longitude": -77.148067,
+            "latitude": 39.077442,
+            "game_x_m": 340.29,
+            "game_z_m": 950.08
+          },
+          {
+            "longitude": -77.149232,
+            "latitude": 39.078263,
+            "game_x_m": 239.49,
+            "game_z_m": 858.94
+          },
+          {
+            "longitude": -77.149519,
+            "latitude": 39.078466,
+            "game_x_m": 214.66,
+            "game_z_m": 836.4
+          },
+          {
+            "longitude": -77.148973,
+            "latitude": 39.079318,
+            "game_x_m": 261.9,
+            "game_z_m": 741.82
+          },
+          {
+            "longitude": -77.148823,
+            "latitude": 39.079552,
+            "game_x_m": 274.88,
+            "game_z_m": 715.84
+          },
+          {
+            "longitude": -77.148603,
+            "latitude": 39.08014,
+            "game_x_m": 293.91,
+            "game_z_m": 650.56
+          },
+          {
+            "longitude": -77.147882,
+            "latitude": 39.08003,
+            "game_x_m": 356.3,
+            "game_z_m": 662.77
+          },
+          {
+            "longitude": -77.147327,
+            "latitude": 39.080072,
+            "game_x_m": 404.31,
+            "game_z_m": 658.11
+          },
+          {
+            "longitude": -77.147107,
+            "latitude": 39.080113,
+            "game_x_m": 423.35,
+            "game_z_m": 653.56
+          },
+          {
+            "longitude": -77.14628,
+            "latitude": 39.080398,
+            "game_x_m": 494.9,
+            "game_z_m": 621.92
+          },
+          {
+            "longitude": -77.146141,
+            "latitude": 39.080413,
+            "game_x_m": 506.93,
+            "game_z_m": 620.25
+          },
+          {
+            "longitude": -77.145959,
+            "latitude": 39.080384,
+            "game_x_m": 522.68,
+            "game_z_m": 623.47
+          },
+          {
+            "longitude": -77.145806,
+            "latitude": 39.080298,
+            "game_x_m": 535.91,
+            "game_z_m": 633.02
+          },
+          {
+            "longitude": -77.145747,
+            "latitude": 39.080255,
+            "game_x_m": 541.02,
+            "game_z_m": 637.79
+          },
+          {
+            "longitude": -77.145682,
+            "latitude": 39.080144,
+            "game_x_m": 546.64,
+            "game_z_m": 650.12
+          },
+          {
+            "longitude": -77.145197,
+            "latitude": 39.079759,
+            "game_x_m": 588.61,
+            "game_z_m": 692.86
+          },
+          {
+            "longitude": -77.145087,
+            "latitude": 39.079697,
+            "game_x_m": 598.12,
+            "game_z_m": 699.74
+          },
+          {
+            "longitude": -77.144829,
+            "latitude": 39.079497,
+            "game_x_m": 620.45,
+            "game_z_m": 721.94
+          },
+          {
+            "longitude": -77.14469,
+            "latitude": 39.079297,
+            "game_x_m": 632.47,
+            "game_z_m": 744.15
+          },
+          {
+            "longitude": -77.144615,
+            "latitude": 39.079128,
+            "game_x_m": 638.96,
+            "game_z_m": 762.91
+          },
+          {
+            "longitude": -77.144537,
+            "latitude": 39.07891,
+            "game_x_m": 645.71,
+            "game_z_m": 787.11
+          },
+          {
+            "longitude": -77.144475,
+            "latitude": 39.07872,
+            "game_x_m": 651.07,
+            "game_z_m": 808.2
+          },
+          {
+            "longitude": -77.144397,
+            "latitude": 39.078552,
+            "game_x_m": 657.82,
+            "game_z_m": 826.86
+          },
+          {
+            "longitude": -77.144237,
+            "latitude": 39.078335,
+            "game_x_m": 671.67,
+            "game_z_m": 850.95
+          },
+          {
+            "longitude": -77.143917,
+            "latitude": 39.078083,
+            "game_x_m": 699.35,
+            "game_z_m": 878.92
+          },
+          {
+            "longitude": -77.143718,
+            "latitude": 39.077951,
+            "game_x_m": 716.57,
+            "game_z_m": 893.58
+          },
+          {
+            "longitude": -77.143762,
+            "latitude": 39.07792,
+            "game_x_m": 712.76,
+            "game_z_m": 897.02
+          },
+          {
+            "longitude": -77.144003,
+            "latitude": 39.077746,
+            "game_x_m": 691.91,
+            "game_z_m": 916.34
+          },
+          {
+            "longitude": -77.144729,
+            "latitude": 39.077224,
+            "game_x_m": 629.1,
+            "game_z_m": 974.29
+          },
+          {
+            "longitude": -77.144974,
+            "latitude": 39.077046,
+            "game_x_m": 607.9,
+            "game_z_m": 994.05
+          },
+          {
+            "longitude": -77.145101,
+            "latitude": 39.076855,
+            "game_x_m": 596.91,
+            "game_z_m": 1015.25
+          },
+          {
+            "longitude": -77.145445,
+            "latitude": 39.076702,
+            "game_x_m": 567.15,
+            "game_z_m": 1032.24
+          },
+          {
+            "longitude": -77.145755,
+            "latitude": 39.076701,
+            "game_x_m": 540.33,
+            "game_z_m": 1032.35
+          },
+          {
+            "longitude": -77.145992,
+            "latitude": 39.076732,
+            "game_x_m": 519.82,
+            "game_z_m": 1028.91
+          },
+          {
+            "longitude": -77.146707,
+            "latitude": 39.077132,
+            "game_x_m": 457.96,
+            "game_z_m": 984.5
+          },
+          {
+            "longitude": -77.147015,
+            "latitude": 39.076998,
+            "game_x_m": 431.31,
+            "game_z_m": 999.38
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.147174,
+              39.076869
+            ],
+            [
+              -77.148067,
+              39.077442
+            ],
+            [
+              -77.149232,
+              39.078263
+            ],
+            [
+              -77.149519,
+              39.078466
+            ],
+            [
+              -77.148973,
+              39.079318
+            ],
+            [
+              -77.148823,
+              39.079552
+            ],
+            [
+              -77.148603,
+              39.08014
+            ],
+            [
+              -77.147882,
+              39.08003
+            ],
+            [
+              -77.147327,
+              39.080072
+            ],
+            [
+              -77.147107,
+              39.080113
+            ],
+            [
+              -77.14628,
+              39.080398
+            ],
+            [
+              -77.146141,
+              39.080413
+            ],
+            [
+              -77.145959,
+              39.080384
+            ],
+            [
+              -77.145806,
+              39.080298
+            ],
+            [
+              -77.145747,
+              39.080255
+            ],
+            [
+              -77.145682,
+              39.080144
+            ],
+            [
+              -77.145197,
+              39.079759
+            ],
+            [
+              -77.145087,
+              39.079697
+            ],
+            [
+              -77.144829,
+              39.079497
+            ],
+            [
+              -77.14469,
+              39.079297
+            ],
+            [
+              -77.144615,
+              39.079128
+            ],
+            [
+              -77.144537,
+              39.07891
+            ],
+            [
+              -77.144475,
+              39.07872
+            ],
+            [
+              -77.144397,
+              39.078552
+            ],
+            [
+              -77.144237,
+              39.078335
+            ],
+            [
+              -77.143917,
+              39.078083
+            ],
+            [
+              -77.143718,
+              39.077951
+            ],
+            [
+              -77.143762,
+              39.07792
+            ],
+            [
+              -77.144003,
+              39.077746
+            ],
+            [
+              -77.144729,
+              39.077224
+            ],
+            [
+              -77.144974,
+              39.077046
+            ],
+            [
+              -77.145101,
+              39.076855
+            ],
+            [
+              -77.145445,
+              39.076702
+            ],
+            [
+              -77.145755,
+              39.076701
+            ],
+            [
+              -77.145992,
+              39.076732
+            ],
+            [
+              -77.146707,
+              39.077132
+            ],
+            [
+              -77.147015,
+              39.076998
+            ],
+            [
+              -77.147174,
+              39.076869
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Montgomery College Rockville campus envelope",
+        "status": "exclude",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.161632,
+            "latitude": 39.096234,
+            "game_x_m": -833.37,
+            "game_z_m": -1136.15
+          },
+          {
+            "longitude": -77.154939,
+            "latitude": 39.096234,
+            "game_x_m": -254.29,
+            "game_z_m": -1136.15
+          },
+          {
+            "longitude": -77.154939,
+            "latitude": 39.10085,
+            "game_x_m": -254.29,
+            "game_z_m": -1648.6
+          },
+          {
+            "longitude": -77.161632,
+            "latitude": 39.10085,
+            "game_x_m": -833.37,
+            "game_z_m": -1648.6
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.161632,
+              39.096234
+            ],
+            [
+              -77.154939,
+              39.096234
+            ],
+            [
+              -77.154939,
+              39.10085
+            ],
+            [
+              -77.161632,
+              39.10085
+            ],
+            [
+              -77.161632,
+              39.096234
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pedestrian bridge",
+        "status": "include",
+        "source": "OSM way 266681164",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.146665,
+            "latitude": 39.084408,
+            "game_x_m": 461.59,
+            "game_z_m": 176.74
+          },
+          {
+            "longitude": -77.146739,
+            "latitude": 39.084363,
+            "game_x_m": 455.19,
+            "game_z_m": 181.73
+          },
+          {
+            "longitude": -77.146793,
+            "latitude": 39.084348,
+            "game_x_m": 450.52,
+            "game_z_m": 183.4
+          },
+          {
+            "longitude": -77.147645,
+            "latitude": 39.084114,
+            "game_x_m": 376.8,
+            "game_z_m": 209.38
+          },
+          {
+            "longitude": -77.147754,
+            "latitude": 39.084087,
+            "game_x_m": 367.37,
+            "game_z_m": 212.38
+          },
+          {
+            "longitude": -77.147906,
+            "latitude": 39.084072,
+            "game_x_m": 354.22,
+            "game_z_m": 214.04
+          }
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.146665,
+            39.084408
+          ],
+          [
+            -77.146739,
+            39.084363
+          ],
+          [
+            -77.146793,
+            39.084348
+          ],
+          [
+            -77.147645,
+            39.084114
+          ],
+          [
+            -77.147754,
+            39.084087
+          ],
+          [
+            -77.147906,
+            39.084072
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "East-of-platform bus and parking aisle",
+        "status": "include",
+        "source": "OSM way 46963870, closed parking_aisle",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.145854,
+            "latitude": 39.084683,
+            "game_x_m": 531.76,
+            "game_z_m": 146.21
+          },
+          {
+            "longitude": -77.145631,
+            "latitude": 39.084679,
+            "game_x_m": 551.05,
+            "game_z_m": 146.65
+          },
+          {
+            "longitude": -77.145612,
+            "latitude": 39.084795,
+            "game_x_m": 552.7,
+            "game_z_m": 133.78
+          },
+          {
+            "longitude": -77.145365,
+            "latitude": 39.084816,
+            "game_x_m": 574.07,
+            "game_z_m": 131.44
+          },
+          {
+            "longitude": -77.145333,
+            "latitude": 39.085263,
+            "game_x_m": 576.84,
+            "game_z_m": 81.82
+          },
+          {
+            "longitude": -77.145567,
+            "latitude": 39.085276,
+            "game_x_m": 556.59,
+            "game_z_m": 80.38
+          },
+          {
+            "longitude": -77.145787,
+            "latitude": 39.085288,
+            "game_x_m": 537.56,
+            "game_z_m": 79.04
+          },
+          {
+            "longitude": -77.145837,
+            "latitude": 39.084831,
+            "game_x_m": 533.23,
+            "game_z_m": 129.78
+          },
+          {
+            "longitude": -77.145854,
+            "latitude": 39.084683,
+            "game_x_m": 531.76,
+            "game_z_m": 146.21
+          }
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.145854,
+            39.084683
+          ],
+          [
+            -77.145631,
+            39.084679
+          ],
+          [
+            -77.145612,
+            39.084795
+          ],
+          [
+            -77.145365,
+            39.084816
+          ],
+          [
+            -77.145333,
+            39.085263
+          ],
+          [
+            -77.145567,
+            39.085276
+          ],
+          [
+            -77.145787,
+            39.085288
+          ],
+          [
+            -77.145837,
+            39.084831
+          ],
+          [
+            -77.145854,
+            39.084683
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rockville Metro Station Parking",
+        "status": "include",
+        "source": "OSM way 46963862",
+        "vertices_wgs84_and_game_frame": [
+          {
+            "longitude": -77.144456,
+            "latitude": 39.083196,
+            "game_x_m": 652.72,
+            "game_z_m": 311.29
+          },
+          {
+            "longitude": -77.143955,
+            "latitude": 39.083535,
+            "game_x_m": 696.06,
+            "game_z_m": 273.66
+          },
+          {
+            "longitude": -77.145191,
+            "latitude": 39.084614,
+            "game_x_m": 589.12,
+            "game_z_m": 153.87
+          },
+          {
+            "longitude": -77.1454,
+            "latitude": 39.084477,
+            "game_x_m": 571.04,
+            "game_z_m": 169.08
+          },
+          {
+            "longitude": -77.145435,
+            "latitude": 39.084508,
+            "game_x_m": 568.01,
+            "game_z_m": 165.64
+          },
+          {
+            "longitude": -77.145569,
+            "latitude": 39.08441,
+            "game_x_m": 556.42,
+            "game_z_m": 176.52
+          },
+          {
+            "longitude": -77.145634,
+            "latitude": 39.084464,
+            "game_x_m": 550.8,
+            "game_z_m": 170.52
+          },
+          {
+            "longitude": -77.145696,
+            "latitude": 39.084429,
+            "game_x_m": 545.43,
+            "game_z_m": 174.41
+          },
+          {
+            "longitude": -77.145725,
+            "latitude": 39.084454,
+            "game_x_m": 542.92,
+            "game_z_m": 171.63
+          },
+          {
+            "longitude": -77.145766,
+            "latitude": 39.084543,
+            "game_x_m": 539.37,
+            "game_z_m": 161.75
+          },
+          {
+            "longitude": -77.145785,
+            "latitude": 39.084572,
+            "game_x_m": 537.73,
+            "game_z_m": 158.53
+          },
+          {
+            "longitude": -77.145805,
+            "latitude": 39.084596,
+            "game_x_m": 536.0,
+            "game_z_m": 155.87
+          },
+          {
+            "longitude": -77.145814,
+            "latitude": 39.084612,
+            "game_x_m": 535.22,
+            "game_z_m": 154.09
+          },
+          {
+            "longitude": -77.14581,
+            "latitude": 39.084634,
+            "game_x_m": 535.57,
+            "game_z_m": 151.65
+          },
+          {
+            "longitude": -77.145804,
+            "latitude": 39.084641,
+            "game_x_m": 536.09,
+            "game_z_m": 150.87
+          },
+          {
+            "longitude": -77.145782,
+            "latitude": 39.084646,
+            "game_x_m": 537.99,
+            "game_z_m": 150.32
+          },
+          {
+            "longitude": -77.145762,
+            "latitude": 39.084647,
+            "game_x_m": 539.72,
+            "game_z_m": 150.21
+          },
+          {
+            "longitude": -77.145708,
+            "latitude": 39.084646,
+            "game_x_m": 544.39,
+            "game_z_m": 150.32
+          },
+          {
+            "longitude": -77.145676,
+            "latitude": 39.084646,
+            "game_x_m": 547.16,
+            "game_z_m": 150.32
+          },
+          {
+            "longitude": -77.145577,
+            "latitude": 39.084668,
+            "game_x_m": 555.73,
+            "game_z_m": 147.87
+          },
+          {
+            "longitude": -77.14554,
+            "latitude": 39.084753,
+            "game_x_m": 558.93,
+            "game_z_m": 138.44
+          },
+          {
+            "longitude": -77.145266,
+            "latitude": 39.084783,
+            "game_x_m": 582.64,
+            "game_z_m": 135.11
+          },
+          {
+            "longitude": -77.145219,
+            "latitude": 39.085297,
+            "game_x_m": 586.7,
+            "game_z_m": 78.05
+          },
+          {
+            "longitude": -77.145286,
+            "latitude": 39.085301,
+            "game_x_m": 580.9,
+            "game_z_m": 77.6
+          },
+          {
+            "longitude": -77.145277,
+            "latitude": 39.085356,
+            "game_x_m": 581.68,
+            "game_z_m": 71.5
+          },
+          {
+            "longitude": -77.145749,
+            "latitude": 39.085374,
+            "game_x_m": 540.85,
+            "game_z_m": 69.5
+          },
+          {
+            "longitude": -77.145834,
+            "latitude": 39.085377,
+            "game_x_m": 533.49,
+            "game_z_m": 69.16
+          },
+          {
+            "longitude": -77.145839,
+            "latitude": 39.085331,
+            "game_x_m": 533.06,
+            "game_z_m": 74.27
+          },
+          {
+            "longitude": -77.145898,
+            "latitude": 39.085332,
+            "game_x_m": 527.95,
+            "game_z_m": 74.16
+          },
+          {
+            "longitude": -77.14591,
+            "latitude": 39.085238,
+            "game_x_m": 526.92,
+            "game_z_m": 84.6
+          },
+          {
+            "longitude": -77.145924,
+            "latitude": 39.085132,
+            "game_x_m": 525.7,
+            "game_z_m": 96.36
+          },
+          {
+            "longitude": -77.145933,
+            "latitude": 39.085013,
+            "game_x_m": 524.93,
+            "game_z_m": 109.57
+          },
+          {
+            "longitude": -77.145942,
+            "latitude": 39.084908,
+            "game_x_m": 524.15,
+            "game_z_m": 121.23
+          },
+          {
+            "longitude": -77.145948,
+            "latitude": 39.084849,
+            "game_x_m": 523.63,
+            "game_z_m": 127.78
+          },
+          {
+            "longitude": -77.145969,
+            "latitude": 39.084641,
+            "game_x_m": 521.81,
+            "game_z_m": 150.87
+          },
+          {
+            "longitude": -77.145967,
+            "latitude": 39.084616,
+            "game_x_m": 521.98,
+            "game_z_m": 153.65
+          },
+          {
+            "longitude": -77.145966,
+            "latitude": 39.084597,
+            "game_x_m": 522.07,
+            "game_z_m": 155.76
+          },
+          {
+            "longitude": -77.145948,
+            "latitude": 39.084531,
+            "game_x_m": 523.63,
+            "game_z_m": 163.08
+          },
+          {
+            "longitude": -77.145918,
+            "latitude": 39.084458,
+            "game_x_m": 526.22,
+            "game_z_m": 171.19
+          },
+          {
+            "longitude": -77.145867,
+            "latitude": 39.084401,
+            "game_x_m": 530.64,
+            "game_z_m": 177.52
+          },
+          {
+            "longitude": -77.145763,
+            "latitude": 39.084312,
+            "game_x_m": 539.63,
+            "game_z_m": 187.4
+          }
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -77.144456,
+              39.083196
+            ],
+            [
+              -77.143955,
+              39.083535
+            ],
+            [
+              -77.145191,
+              39.084614
+            ],
+            [
+              -77.1454,
+              39.084477
+            ],
+            [
+              -77.145435,
+              39.084508
+            ],
+            [
+              -77.145569,
+              39.08441
+            ],
+            [
+              -77.145634,
+              39.084464
+            ],
+            [
+              -77.145696,
+              39.084429
+            ],
+            [
+              -77.145725,
+              39.084454
+            ],
+            [
+              -77.145766,
+              39.084543
+            ],
+            [
+              -77.145785,
+              39.084572
+            ],
+            [
+              -77.145805,
+              39.084596
+            ],
+            [
+              -77.145814,
+              39.084612
+            ],
+            [
+              -77.14581,
+              39.084634
+            ],
+            [
+              -77.145804,
+              39.084641
+            ],
+            [
+              -77.145782,
+              39.084646
+            ],
+            [
+              -77.145762,
+              39.084647
+            ],
+            [
+              -77.145708,
+              39.084646
+            ],
+            [
+              -77.145676,
+              39.084646
+            ],
+            [
+              -77.145577,
+              39.084668
+            ],
+            [
+              -77.14554,
+              39.084753
+            ],
+            [
+              -77.145266,
+              39.084783
+            ],
+            [
+              -77.145219,
+              39.085297
+            ],
+            [
+              -77.145286,
+              39.085301
+            ],
+            [
+              -77.145277,
+              39.085356
+            ],
+            [
+              -77.145749,
+              39.085374
+            ],
+            [
+              -77.145834,
+              39.085377
+            ],
+            [
+              -77.145839,
+              39.085331
+            ],
+            [
+              -77.145898,
+              39.085332
+            ],
+            [
+              -77.14591,
+              39.085238
+            ],
+            [
+              -77.145924,
+              39.085132
+            ],
+            [
+              -77.145933,
+              39.085013
+            ],
+            [
+              -77.145942,
+              39.084908
+            ],
+            [
+              -77.145948,
+              39.084849
+            ],
+            [
+              -77.145969,
+              39.084641
+            ],
+            [
+              -77.145967,
+              39.084616
+            ],
+            [
+              -77.145966,
+              39.084597
+            ],
+            [
+              -77.145948,
+              39.084531
+            ],
+            [
+              -77.145918,
+              39.084458
+            ],
+            [
+              -77.145867,
+              39.084401
+            ],
+            [
+              -77.145763,
+              39.084312
+            ],
+            [
+              -77.144456,
+              39.083196
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "808 Hungerford Drive footprint centroid",
+        "game_x_m": -159.55,
+        "game_z_m": -979.28
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.153844,
+          39.094821
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "County Rockville Metro station point",
+        "game_x_m": 464.27,
+        "game_z_m": 174.19
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.146634,
+          39.084431
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Highland Avenue circle",
+        "status": "excluded residential circle",
+        "game_x_m": 813.3,
+        "game_z_m": 88.81
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.1426,
+          39.0852
+        ]
+      }
+    }
+  ]
+}

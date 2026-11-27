@@ -1,0 +1,6 @@
+{
+  "district": "regal-courthouse",
+  "code": "C",
+  "extension": null,
+  "note": "Set extension to a path relative to src/districts/regal-courthouse/module.js when this district adds code."
+}

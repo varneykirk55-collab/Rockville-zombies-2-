@@ -291,6 +291,15 @@ export function createCamera(canvas) {
     frozen = value;
   }
 
+  function nudge(seconds) {
+    const step = Math.min(Math.max(seconds, 0), 2);
+    const sin = Math.sin(yaw);
+    const cos = Math.cos(yaw);
+    moveGrounded(camera.position, -sin * WALK_SPEED * step, -cos * WALK_SPEED * step, blocked);
+    const groundY = sampleGround(camera.position.x, camera.position.z);
+    camera.position.y = groundY + EYE_HEIGHT;
+  }
+
   function update(delta) {
     if (frozen) return;
     const baseFov = camera.aspect < 1 ? 67 : 58;
@@ -327,5 +336,5 @@ export function createCamera(canvas) {
     hud.classList.toggle('aimed', aimed);
   }
 
-  return { camera, controls: { prepare, update, freeze } };
+  return { camera, controls: { prepare, update, freeze, nudge } };
 }

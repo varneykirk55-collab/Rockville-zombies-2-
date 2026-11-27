@@ -1,0 +1,166 @@
+{
+  "district": "regal-courthouse",
+  "code": "C",
+  "models": [
+    {
+      "id": "regal-cinemas",
+      "buildingId": 277318,
+      "approval": "approved",
+      "active": true,
+      "glb": "landmarks/regal.glb",
+      "longitude": -77.149666,
+      "latitude": 39.083883,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "shareFootprint": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "commit": "3975de596c576874160841d01f77b141449b2fb4",
+        "pullRequest": 9,
+        "path": "public/landmarks/regal.glb",
+        "sha256": "0605a64ad922d1691b400be740e81f9fe4fc475d38c7643234bd7b58e8d77332"
+      },
+      "notes": "Owner approved for use (PR #9 file). East half of 199 East Montgomery Avenue. The county polygon is one address, not a separate end building, so the uncovered ends are left as open ground and the collider is the model, not the 141 m polygon."
+    },
+    {
+      "id": "white-columned",
+      "buildingId": 277318,
+      "approval": "approved",
+      "active": true,
+      "glb": "landmarks/white-columned.glb",
+      "longitude": -77.150262,
+      "latitude": 39.083883,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "shareFootprint": true,
+      "collision": { "mode": "model", "openLocalZAbove": 6 },
+      "source": {
+        "commit": "3975de596c576874160841d01f77b141449b2fb4",
+        "pullRequest": 9,
+        "path": "public/landmarks/white-columned.glb",
+        "sha256": "804a24684de52e43e6b3b17e8f612b15053ecfd984ce0fae1d45eb4c643e2ac8"
+      },
+      "notes": "Owner approved for use (PR #9 file). West of the Regal on the same footprint. Collision ignores local z above 6 m so the columned walkway on the street side stays open. PR #1 montgomery-colonnade.glb stays on disk, inactive."
+    },
+    {
+      "id": "regal-cinemas-pr1",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": false,
+      "glb": "landmarks/regal-cinemas.glb",
+      "replaceProcedural": false,
+      "source": {
+        "branch": "cursor/rockville-landmarks-6f3d",
+        "commit": "369a2db525d06882dd01be1ccdefcfb371afab98",
+        "pullRequest": 1,
+        "path": "public/landmarks/regal-cinemas.glb",
+        "sha256": "6b088300056ffb223e9cb6d6cad9e9edba40f5cfce81d9ee0ca1d52e9d232ab7"
+      },
+      "notes": "Kept, not placed. Earlier stylized Regal. See the version comparison in the report."
+    },
+    {
+      "id": "montgomery-colonnade-pr1",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": false,
+      "glb": "landmarks/montgomery-colonnade.glb",
+      "replaceProcedural": false,
+      "source": {
+        "branch": "cursor/rockville-landmarks-6f3d",
+        "commit": "369a2db525d06882dd01be1ccdefcfb371afab98",
+        "pullRequest": 1,
+        "path": "public/landmarks/montgomery-colonnade.glb",
+        "sha256": "444e17ab842e895e0979a85920c8161b65aab78cb21ae60b7e00ff9057c5a252"
+      },
+      "notes": "Kept, not placed. Earlier stylized colonnade."
+    },
+    {
+      "id": "circuit-court",
+      "buildingId": 129186,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/courthouse.glb",
+      "longitude": -77.150197,
+      "latitude": 39.08323,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "commit": "3975de596c576874160841d01f77b141449b2fb4",
+        "pullRequest": 9,
+        "path": "public/landmarks/courthouse.glb",
+        "sha256": "5ac46f92e620d062dee9e991d993e8067c5341ff854ea77026afcb2b50125f67"
+      },
+      "notes": "Unapproved. Circuit Court, 50 Maryland Avenue, footprint 129186. Plan 91.7 by 134.6 m against the county 90.0 by 133.7 m. North facade is the model's −Z side, which faces world north at rotationY 0. Model height 34.1 m; the measured north tower is 46.0 m. Not scaled."
+    },
+    {
+      "id": "district-court",
+      "buildingId": 132710,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/district-court.glb",
+      "longitude": -77.15175,
+      "latitude": 39.082672,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "commit": "3975de596c576874160841d01f77b141449b2fb4",
+        "pullRequest": 9,
+        "path": "public/landmarks/district-court.glb",
+        "sha256": "8459933131f653003e10f4e9b31deb026d5463c1782ae940f3513f871582f812"
+      },
+      "notes": "Unapproved. District Court, 191 East Jefferson Street, footprint 132710. Plan 94.4 by 84.8 m against the county 92.3 by 83.4 m. Model height 24.0 m; the measured mass is 36.8 m. Not scaled."
+    },
+    {
+      "id": "historic-red-brick-courthouse",
+      "buildingId": 129058,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/historic_courthouse.glb",
+      "longitude": -77.151509,
+      "latitude": 39.083579,
+      "rotationY": -0.453786,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "branch": "landmark/historic-courthouse",
+        "commit": "c34966f4fb29e5113c3a40068c9d4b797b5f3cea",
+        "path": "public/landmarks/historic_courthouse.glb",
+        "sha256": "6f37f742aaec3bb2d1c3a96f585813ad253b0c4ab7a7f4530cbbebd71708d1f5"
+      },
+      "notes": "Unapproved. The specification on that branch says awaiting approval. 29 Courthouse Square, footprint 129058. Entry faces model −Z. rotationY −26° turns that entry 26° east of north, matching the footprint's long-axis bearing. Model plan about 23.9 by 38.5 m; county box about 30.9 by 37.3 m."
+    },
+    {
+      "id": "courthouse-roundabout",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/roundabout-plaza.glb",
+      "longitude": -77.151538,
+      "latitude": 39.08319,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": false,
+      "collision": { "mode": "none" },
+      "source": {
+        "commit": "3975de596c576874160841d01f77b141449b2fb4",
+        "pullRequest": 9,
+        "path": "public/landmarks/roundabout-plaza.glb",
+        "sha256": "0e24560d2c42684df23dffd945709322fbf99cd00bc166bd625035a484bc3587"
+      },
+      "notes": "Unapproved. Paving, curbs and lamps, 41.6 by 46.2 m, 4.2 m tall. Set on the open ground south of the red-brick courthouse. No building is removed and no collider is added, so the square stays walkable. There is still no OSM junction=roundabout; this is the delivered plaza model."
+    }
+  ]
+}

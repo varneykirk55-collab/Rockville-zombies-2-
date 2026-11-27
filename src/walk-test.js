@@ -35,6 +35,23 @@ function pops(samples) {
   return { worstRiseM: Number(worst.toFixed(3)), stepsOver045m: count };
 }
 
+export const EXTRA_POSES = [
+  { id: 'district-a', at: [-77.15035, 39.08455], look: [-77.1504, 39.0842], eye: 22, lookEye: 6 },
+  { id: 'district-b', at: [-77.1536, 39.0922], look: [-77.1532, 39.0942], eye: 28, lookEye: 8 },
+  { id: 'district-c', at: [-77.15115, 39.08315], look: [-77.15155, 39.08366], eye: 18, lookEye: 8 },
+  { id: 'district-d-metro', at: [-77.1469, 39.08415], look: [-77.1455, 39.08455], eye: 26, lookEye: 6 },
+  { id: 'entrance-grade', at: [-77.15055, 39.08455], look: [-77.15028, 39.0846], eye: 1.68, lookEye: 3 },
+  { id: 'landmark-clock-tower', at: [-77.15052, 39.08505], look: [-77.15052, 39.08531], eye: 4, lookEye: 14 },
+  { id: 'landmark-turret', at: [-77.15105, 39.0855], look: [-77.15127, 39.08569], eye: 4, lookEye: 12 },
+  { id: 'landmark-regal', at: [-77.14967, 39.08368], look: [-77.14967, 39.08388], eye: 3, lookEye: 8 },
+  { id: 'landmark-white-columned', at: [-77.15026, 39.08368], look: [-77.15026, 39.08388], eye: 3, lookEye: 6 },
+  { id: 'landmark-circuit-court', at: [-77.1502, 39.08285], look: [-77.1502, 39.08323], eye: 8, lookEye: 16 },
+  { id: 'landmark-district-court', at: [-77.15175, 39.0824], look: [-77.15175, 39.08267], eye: 6, lookEye: 12 },
+  { id: 'landmark-historic-courthouse', at: [-77.15135, 39.0834], look: [-77.15151, 39.08358], eye: 3, lookEye: 8 },
+  { id: 'landmark-roundabout', at: [-77.15135, 39.08305], look: [-77.15154, 39.08319], eye: 6, lookEye: 1 },
+  { id: 'elevated-courthouse', at: [-77.1512, 39.0834], look: [-77.1506, 39.0832], eye: 90, lookEye: 10 },
+];
+
 export const SHOTS = [
   {
     id: 'hungerford',
@@ -74,12 +91,32 @@ export const SHOTS = [
   },
 ];
 
+function lateralClear(x, z, ox, oz, blocked) {
+  if (!blocked(x, z)) return { kind: 'center', offset: 0 };
+  for (const sign of [1, -1]) {
+    for (let distance = 0.8; distance <= 6; distance += 0.8) {
+      if (!blocked(x + ox * sign * distance, z + oz * sign * distance)) {
+        return { kind: 'shoulder', offset: Number((sign * distance).toFixed(2)) };
+      }
+    }
+  }
+  for (const sign of [1, -1]) {
+    for (let distance = 7.5; distance <= 16; distance += 1.5) {
+      if (!blocked(x + ox * sign * distance, z + oz * sign * distance)) {
+        return { kind: 'detour', offset: Number((sign * distance).toFixed(2)) };
+      }
+    }
+  }
+  return { kind: 'interior', offset: null };
+}
+
 export function runWalkTest({ blocked, sampleGameY, insidePlayable, distanceOutside }) {
   let roadBlocked = 0;
   let roadCount = 0;
   let worstRiseM = 0;
   let stepsOver045m = 0;
-  for (const [, coordinates] of ROAD_CENTERLINES) {
+  const pedestrian = { center: 0, shoulder: 0, detour: 0, interior: 0 };
+  for (const [width, coordinates] of ROAD_CENTERLINES) {
     const points = coordinates.map(([lon, lat]) => lonLatToWorld(lon, lat));
     for (let i = 1; i < points.length; i++) {
       const midX = (points[i - 1].x + points[i].x) / 2;
@@ -88,9 +125,24 @@ export function runWalkTest({ blocked, sampleGameY, insidePlayable, distanceOuts
       const samples = march([points[i - 1], points[i]], blocked, sampleGameY);
       roadCount += samples.length;
       roadBlocked += samples.filter(sample => sample.blocked).length;
+      const dx = points[i].x - points[i - 1].x;
+      const dz = points[i].z - points[i - 1].z;
+      const length = Math.hypot(dx, dz) || 1;
+      const ox = dz / length;
+      const oz = -dx / length;
+      for (const sample of samples) {
+        if (!sample.blocked) {
+          pedestrian.center += 1;
+          continue;
+        }
+        const lane = lateralClear(sample.x, sample.z, ox, oz, blocked);
+        pedestrian[lane.kind] += 1;
+        sample.lane = lane.kind;
+      }
       const rise = pops(samples.filter(sample => !sample.blocked));
       worstRiseM = Math.max(worstRiseM, rise.worstRiseM);
       stepsOver045m += rise.stepsOver045m;
+      void width;
     }
   }
 
@@ -152,6 +204,7 @@ export function runWalkTest({ blocked, sampleGameY, insidePlayable, distanceOuts
     roadSamples: roadCount,
     roadBlocked,
     roadBlockedFraction: roadCount ? Number((roadBlocked / roadCount).toFixed(4)) : null,
+    pedestrian,
     heightPops: { worstRiseM: Number(worstRiseM.toFixed(3)), stepsOver045m },
     boundarySamples,
     approaches,
