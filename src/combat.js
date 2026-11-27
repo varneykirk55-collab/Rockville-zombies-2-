@@ -1,11 +1,13 @@
 import {
-  BoxGeometry, Color, Group, MathUtils, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
+  Box3, BoxGeometry, Color, Group, MathUtils, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   Quaternion, Ray, Sphere, SphereGeometry, Vector3,
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createArmedAnimation } from './armed-animation.js';
 import { UPGRADES } from './machine-config.js';
 import { withUpgradeCamo } from './upgrade-camo.js';
+import { solveLimb } from './rig-limb.js';
+import { DRAW_SECONDS, HOLSTER_SECONDS, HANDLING, envelope, magazineOffset } from './weapon-motion.js';
 
 const WEAPON_ASSETS = new URL('../public/weapons/', import.meta.url);
 const MACHINE_ASSETS = new URL('../public/machines/', import.meta.url);
@@ -33,27 +35,13 @@ function arm(socket) {
   return { socket, hand, forearm: hand.parent, upper: hand.parent.parent };
 }
 
-const jointOrigin = new Vector3();
-const from = new Vector3();
-const to = new Vector3();
-const parentRotation = new Quaternion();
-const jointRotation = new Quaternion();
+const handTarget = new Vector3(), elbow = new Vector3();
+const LEFT_WRIST = new Quaternion().setFromAxisAngle(LOCAL_FORWARD, -Math.PI / 2);
 
-function reach(arm, goal, wrist, weight) {
-  for (let i = 0; i < 4; i++) {
-    for (const joint of [arm.forearm, arm.upper]) {
-      joint.getWorldPosition(jointOrigin);
-      arm.socket.getWorldPosition(from).sub(jointOrigin).normalize();
-      to.copy(goal).sub(jointOrigin).normalize();
-      joint.parent.getWorldQuaternion(parentRotation).invert();
-      from.applyQuaternion(parentRotation);
-      to.applyQuaternion(parentRotation);
-      jointRotation.setFromUnitVectors(from, to);
-      joint.quaternion.slerp(jointRotation.multiply(joint.quaternion), weight);
-    }
-  }
-  arm.hand.parent.getWorldQuaternion(parentRotation).invert();
-  arm.hand.quaternion.slerp(parentRotation.multiply(wrist), weight);
+function reach(arm, goal, wrist, yaw, side) {
+  handTarget.copy(arm.socket.position).applyQuaternion(wrist).negate().add(goal);
+  elbow.set(Math.cos(yaw) * side * 0.68, -1, -Math.sin(yaw) * side * 0.68);
+  solveLimb(arm.upper, arm.forearm, arm.hand, handTarget, elbow, wrist);
 }
 
 export function createCombat({ scene, renderer, camera, controls, player, canvas, survival }) {
@@ -63,8 +51,9 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   const loader = new GLTFLoader();
   const animation = createArmedAnimation();
   const gear = WEAPONS.map(config => ({
-    config, ammo: config.magazine, reserve: config.reserve, group: new Group(), upgraded: false,
+    config, handling: HANDLING[config.id], ammo: config.magazine, reserve: config.reserve, group: new Group(), upgraded: false,
     muzzleOffset: new Vector3(...config.muzzle).sub(new Vector3(...config.right)),
+    supportOffset: new Vector3(...HANDLING[config.id].grip).sub(new Vector3(...config.right)),
   }));
   const audio = new Map();
   for (const name of [...WEAPONS.flatMap(w => [w.fire, w.reloadSound, w.fire + '_upgraded']), 'dry_fire', 'weapon_switch', 'impact_stone']) {
@@ -145,6 +134,8 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       item.mag = item.model.getObjectByName(item.config.auto ? 'magazine' : 'Magazine');
       item.slide = item.model.getObjectByName(item.config.auto ? 'bolt_carrier' : 'Slide');
       item.magRest = item.mag.position.clone();
+      item.magGrab = new Box3().setFromObject(item.mag).getCenter(new Vector3());
+      item.mag.worldToLocal(item.magGrab);
       item.slideRest = item.slide.position.clone();
       return item;
     }));
@@ -178,6 +169,17 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   }
 
   let machineBusy = false;
+  let outgoing = null;
+  let aimWeight = 0;
+  let sprintWeight = 0;
+  const magOffset = new Vector3();
+  const magGrip = new Vector3();
+  const gripWorld = new Vector3();
+  const aimForward = new Vector3();
+  const supportReach = new Vector3();
+  const shoulderWorld = new Vector3();
+  const reloadSupport = new Vector3();
+
   const upgradeClock = { value: 0 };
 
   function stat(item, key) {
@@ -193,18 +195,30 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     item.reserve = Math.round(stat(item, 'reserve'));
   }
 
-  function equip(index, sound = true) {
-    if (survival?.dead || machineBusy || !rigsReady || (sound && active === index)) return;
-    holster(gear[active]);
-    active = index;
-    renderer.shadowMap.needsUpdate = true;
-    const item = gear[active];
+  function present(item) {
     arms[0].socket.add(item.group);
     for (const entry of gear) {
       entry.group.visible = entry === item || (entry.config.auto ? !gear.some(other =>
         other !== entry && other !== item && other.config.auto && gear.indexOf(other) < gear.indexOf(entry)) : true);
     }
-    draw = sound ? 0.32 : 0;
+  }
+
+  function finishHolster() {
+    if (!outgoing) return;
+    holster(outgoing);
+    outgoing = null;
+    present(gear[active]);
+  }
+
+  function equip(index, sound = true) {
+    if (survival?.dead || machineBusy || !rigsReady || (sound && active === index)) return;
+    const previous = outgoing ?? gear[active];
+    if (gear[active] !== previous) holster(gear[active]);
+    outgoing = sound && previous !== gear[index] ? previous : null;
+    active = index;
+    renderer.shadowMap.needsUpdate = true;
+    present(outgoing ?? gear[active]);
+    draw = sound ? DRAW_SECONDS : 0;
     reload = 0;
     recoil = 0;
     if (sound) play('weapon_switch');
@@ -279,8 +293,20 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     worldReady = true;
   }
 
+  function alignFrom(item, grip, tilt) {
+    temp.copy(aimForward);
+    for (let i = 0; i < 2; i++) {
+      lookMatrix.lookAt(grip, temp, UP);
+      orientation.setFromRotationMatrix(lookMatrix);
+      temp.copy(item.muzzleOffset).applyQuaternion(orientation).add(grip);
+    }
+    lookMatrix.lookAt(temp, aimForward, UP);
+    orientation.setFromRotationMatrix(lookMatrix);
+    if (tilt) orientation.multiply(wrist.setFromAxisAngle(RIGHT, tilt));
+  }
+
   function poseWeapon(item, motion, delta) {
-    const { config, group } = item;
+    const { config, group, handling } = item;
     camera.getWorldDirection(view);
     const sight = trace(camera.position, view, config.range, true);
     sightOnTarget = Boolean(sight.target || sight.enemy);
@@ -289,33 +315,67 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     origin.set(motion.x, motion.y + 1.24, motion.z);
     const cos = Math.cos(motion.yaw);
     const sin = Math.sin(motion.yaw);
-    const low = motion.sprinting ? 0.19 : 0;
-    const lower = low + draw * 0.4 + (reload ? 0.11 : 0);
-    rightGoal.set(motion.x + cos * 0.2 - sin * 0.23, motion.y + 1.28 - lower,
-      motion.z - sin * 0.2 - cos * 0.23);
-    // Account for the muzzle offset so its axis intersects the crosshair ray.
-    temp.copy(aimPoint);
-    for (let i = 0; i < 2; i++) {
-      lookMatrix.lookAt(rightGoal, temp, UP);
-      orientation.setFromRotationMatrix(lookMatrix);
-      temp.copy(item.muzzleOffset).applyQuaternion(orientation).add(rightGoal);
-    }
-    lookMatrix.lookAt(temp, aimPoint, UP);
-    orientation.setFromRotationMatrix(lookMatrix);
-    if (motion.sprinting || reload || draw) {
-      wrist.setFromAxisAngle(RIGHT, -lower);
-      orientation.multiply(wrist);
+    aimWeight = MathUtils.damp(aimWeight, Number(motion.aiming), 15, delta);
+    sprintWeight = MathUtils.damp(sprintWeight, Number(motion.sprinting), 18, delta);
+    const progress = draw ? DRAW_SECONDS - draw : DRAW_SECONDS;
+    const stow = outgoing ? MathUtils.smoothstep(progress, 0, HOLSTER_SECONDS)
+      : 1 - MathUtils.smoothstep(progress, HOLSTER_SECONDS, DRAW_SECONDS);
+    const phase = reload ? 1 - reload / config.reload : 0;
+    const reloadHold = envelope(phase, 0, 0.17, 0.78, 1);
+    const lower = sprintWeight * handling.lower + stow * 0.27 - reloadHold * (config.auto ? 0.115 : 0.022);
+    const retreat = recoil * handling.recoil + stow * 0.10;
+    const reachForward = handling.forward + aimWeight * handling.aimForward - retreat;
+    const side = handling.side + stow * (config.auto ? 0.09 : 0.12) - reloadHold * (config.auto ? 0.035 : 0);
+    rightGoal.set(motion.x + cos * side - sin * reachForward,
+      motion.y + handling.height + aimWeight * handling.aimHeight - lower,
+      motion.z - sin * side - cos * reachForward);
+    aimForward.copy(aimPoint);
+
+    const tilt = motion.sprinting || reload || draw
+      ? -(stow * 0.65 + reloadHold * 0.10 + sprintWeight * 0.28) : 0;
+    magazineOffset(handling.magazine, phase, magOffset);
+    item.mag.position.copy(item.magRest).add(magOffset);
+    const leftRelease = reload ? envelope(phase, 0.04, handling.magazine[0][0],
+      handling.magazine.at(-1)[0], 0.98) : 0;
+    alignFrom(item, rightGoal, tilt);
+    if (!draw) {
+      wrist.copy(orientation).multiply(LEFT_WRIST);
+      supportReach.copy(item.supportOffset);
+      if (leftRelease > 0) {
+        reloadSupport.copy(item.magGrab);
+        item.mag.localToWorld(reloadSupport);
+        group.worldToLocal(reloadSupport);
+        reloadSupport.sub(temp.set(...config.right));
+        supportReach.lerp(reloadSupport, leftRelease);
+      }
+      supportReach.applyQuaternion(orientation).add(rightGoal);
+      supportReach.sub(handTarget.copy(arms[1].socket.position).applyQuaternion(wrist));
+      arms[1].upper.getWorldPosition(shoulderWorld);
+      supportReach.sub(shoulderWorld);
+      const extension = supportReach.length();
+      if (extension > 0.258) {
+        rightGoal.addScaledVector(supportReach, -Math.min(0.13, extension - 0.258) / extension);
+        alignFrom(item, rightGoal, tilt);
+      }
     }
     wrist.copy(orientation).multiply(localWrist);
-    reach(arms[0], rightGoal, wrist, 0.8);
+    reach(arms[0], rightGoal, wrist, motion.yaw, 1);
+    arms[0].socket.getWorldPosition(gripWorld);
+    // Aim from the actual socket after the reach clamp, so barrel alignment
+    // remains consistent even when the right arm reaches its limit.
+    alignFrom(item, gripWorld, tilt);
     arms[0].socket.getWorldQuaternion(worldRotation).invert();
     group.quaternion.copy(worldRotation).multiply(orientation);
     group.position.set(...config.right).negate().applyQuaternion(group.quaternion);
-    temp.set(...config.left);
-    group.localToWorld(leftGoal.copy(temp));
-    if (reload) leftGoal.y -= 0.22 * Math.sin(Math.PI * reload / config.reload);
-    wrist.copy(orientation).multiply(localWrist);
-    reach(arms[1], leftGoal, wrist, 0.8);
+    leftGoal.fromArray(handling.grip);
+    group.localToWorld(leftGoal);
+    if (leftRelease > 0) {
+      magGrip.copy(item.magGrab);
+      item.mag.localToWorld(magGrip);
+      leftGoal.lerp(magGrip, leftRelease);
+    }
+    wrist.copy(orientation).multiply(LEFT_WRIST);
+    reach(arms[1], leftGoal, wrist, motion.yaw, -1);
     muzzle.set(...config.muzzle);
     group.localToWorld(muzzle);
     blockedShot = solidsAt(muzzle);
@@ -327,8 +387,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     item.slide.position.copy(item.slideRest);
     if (config.auto) item.slide.position.x -= recoil * 0.04;
     else item.slide.position.z += recoil * 0.04;
-    item.mag.position.copy(item.magRest);
-    if (reload) item.mag.position.y -= 0.16 * Math.sin(Math.PI * reload / config.reload);
+
     // The two arms, attached gear and any moving parts share the world shadow.
     if (delta && (motion.planarSpeed || recoil || reload || draw || motion.yaw !== priorYaw || motion.pitch !== priorPitch)) {
       renderer.shadowMap.needsUpdate = true;
@@ -407,8 +466,9 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       }
     }
     draw = Math.max(0, draw - delta);
+    if (outgoing && DRAW_SECONDS - draw >= HOLSTER_SECONDS) finishHolster();
     cooldown = Math.max(0, cooldown - delta);
-    recoil = recoil > 0.005 ? MathUtils.damp(recoil, 0, 23, delta) : 0;
+    recoil = recoil > 0.005 ? MathUtils.damp(recoil, 0, item.handling.recovery, delta) : 0;
     flashTime = Math.max(0, flashTime - delta);
     flash.visible = flashTime > 0;
     for (const effect of sparks) {
@@ -426,8 +486,9 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       }
     }
     if (!machineBusy) {
-      animation.apply(player.root, motion, !item.config.auto, delta);
-      poseWeapon(item, motion, delta);
+      const visible = outgoing ?? item;
+      animation.apply(player.root, motion, !visible.config.auto, delta, aimWeight);
+      poseWeapon(visible, motion, delta);
     }
     const firing = pressed || (item.config.auto && (trigger || buttons[7]));
     if (machineBusy || reload || motion.sprinting) pressed = false;
@@ -489,6 +550,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       return true;
     },
     setMachineBusy(busy) {
+      finishHolster();
       machineBusy = busy;
       trigger = pressed = false;
       reload = 0;
@@ -511,6 +573,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     get state() {
       return {
         ready: rigsReady, active, shots, hits, blockedShot, sightOnTarget, lastImpact,
+        animation: { drawing: draw > 0, reloading: reload > 0, displayed: (outgoing ?? gear[active]).config.id },
         upgrades: gear.map(item => item.upgraded),
         ammo: gear.map(item => [item.ammo, item.reserve]),
         targets: targets.map(item => item.health),

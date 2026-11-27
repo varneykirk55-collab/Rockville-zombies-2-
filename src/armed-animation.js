@@ -36,13 +36,13 @@ export function createArmedAnimation() {
     .then(value => { clips = value; })
     .catch(error => console.warn(error.message));
 
-  function apply(root, motion, pistol, delta) {
+  function apply(root, motion, pistol, delta, aimWeight = 0) {
     if (!clips) return;
     if (!bones.length) {
       bones.push(...BONES.map(name => root.getObjectByName('mixamorig' + name)
         || root.getObjectByName('mixamorig:' + name)));
     }
-    const gait = motion.aiming ? 'AimIdle' : motion.planarSpeed > 2.2 ? 'Run' : motion.planarSpeed > 0.3 ? 'Walk' : 'Idle';
+    const gait = motion.planarSpeed > 2.2 ? 'Run' : motion.planarSpeed > 0.3 ? 'Walk' : 'Idle';
     const suffix = pistol ? '_Pistol' : '';
     const next = gait + suffix;
     if (next !== last) {
@@ -63,6 +63,7 @@ export function createArmedAnimation() {
       const name = BONES[i];
       POSE.copy(sample(clips[last], name, time, true));
       if (fade < 1) POSE.slerp(sample(clips[previous], name, previousTime, true), 1 - fade);
+      if (aimWeight > 0.01) POSE.slerp(sample(clips['AimIdle' + suffix], name, time, true), aimWeight * 0.85);
       if (recoilTime < recoil.duration) POSE.slerp(sample(recoil, name, recoilTime, false), 0.75);
       POSE.slerp(IDENTITY, 1 - weight);
       bones[i].quaternion.premultiply(POSE);
