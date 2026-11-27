@@ -228,6 +228,11 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     sound(1, 'pap_work');
   }
 
+  let shownPoints;
+  function setText(element, value) {
+    if (element.textContent !== value) element.textContent = value;
+  }
+
   function update(delta) {
     if (!ready || !controls.active) return;
     const index = nearest();
@@ -316,17 +321,20 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
       pack.light.intensity = flash > 0.60 ? MathUtils.lerp(1.5, 12, (0.68 - flash) / 0.08)
         : MathUtils.lerp(1.5, 12, flash / 0.60);
     }
-    points.textContent = wallet.points.toLocaleString('en-US') + ' points';
+    if (shownPoints !== wallet.points) {
+      shownPoints = wallet.points;
+      points.textContent = shownPoints.toLocaleString('en-US') + ' points';
+    }
     if (index < 0) {
-      prompt.textContent = noticeTimer ? notice : '';
+      setText(prompt, noticeTimer ? notice : '');
       touch.hidden = true;
       const { x, z } = controls.pose;
       const meters = group => Math.ceil(Math.hypot(x - group.position.x, z - group.position.z));
-      hint.textContent = 'Training machines near spawn · Mystery Box ' + meters(scenic[0]) +
-        ' m · Pack-a-Punch ' + meters(scenic[1]) + ' m';
+      setText(hint, 'Training machines near spawn · Mystery Box ' + meters(scenic[0]) +
+        ' m · Pack-a-Punch ' + meters(scenic[1]) + ' m');
       return;
     }
-    hint.textContent = '';
+    setText(hint, '');
     const status = states[index];
     const label = index ? 'Pack-a-Punch · 5,000 points' : 'Mystery Box · 950 points';
     let action = status === 'offering'
@@ -335,7 +343,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     else if (status === 'idle' && wallet.points < (index ? ECONOMY.pack : ECONOMY.box)) action += ' · Insufficient points';
     if (status !== 'idle' && status !== 'offering') action = index ? 'Upgrading weapon…' : 'Mystery Box in use…';
     if (status === 'idle' && states[1 - index] !== 'idle') action = 'Finish the other machine transaction';
-    prompt.textContent = noticeTimer ? notice : action + (status === 'idle' || status === 'offering' ? ' · E / Y' : '');
+    setText(prompt, noticeTimer ? notice : action + (status === 'idle' || status === 'offering' ? ' · E / Y' : ''));
     touch.hidden = status !== 'idle' && status !== 'offering';
   }
 
