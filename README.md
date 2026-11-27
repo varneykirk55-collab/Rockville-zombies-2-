@@ -1,28 +1,33 @@
 # Rockville Town Center
 
-A no-build Three.js first-person map foundation set in Rockville, Maryland. The browser loads Three.js r187 and the live Montgomery County building footprint tiles.
+A no-build Three.js first-person map foundation set in Rockville, Maryland. The browser loads Three.js r187 from a CDN and uses the committed Montgomery County building footprint snapshot.
 
 ## Run locally
 
 From the repository root, run `python3 -m http.server 8000` on macOS or Linux, or `py -m http.server 8000` on Windows.
 
-Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. Three.js and the county data need internet access. If the map reports a failed tile, refresh to retry. The developer console includes the tile number, bounds, and error.
+Open [http://localhost:8000](http://localhost:8000) in a modern browser with WebGL 2 and select **Enter downtown**. Keep the server running. The Three.js CDN requires internet access. The city assets are served from this repository.
 
 | Action | Desktop | Phone |
 | --- | --- | --- |
 | Move | WASD or arrow keys | Left thumbstick |
+| Walk | Hold C, or a light push on the stick | Push the stick part way |
 | Look | Mouse with pointer lock | Drag the scene |
 | Sprint forward | Hold Shift | Tap Sprint |
+| Jump | Space | Tap Jump |
 | Aim-down-sights placeholder | Hold right mouse button | Tap Aim |
+| Show the character | V, third person behind her | External keyboard V |
 | Pause | Esc | Leaving the page clears movement input |
 
 ## Downtown pass
 
-The player starts just east of East Montgomery Avenue and Helen Heneghan Way, facing toward the junction. Brick is applied to the two carriageways within the small junction patch. The other road surfaces are asphalt. Roads follow county centerlines with estimated widths and sidewalk offsets on the flat base. Downtown adds crosswalks, lane paint, streetlights, façade windows, hard sun shadows, and a limited warm/cool color palette.
+The player starts just east of East Montgomery Avenue and Helen Heneghan Way, facing toward the junction. Brick is applied to the two carriageways within the small junction patch. The other road surfaces are asphalt. Roads follow county centerlines with estimated widths and sidewalk offsets on the surveyed terrain. Downtown adds crosswalks, lane paint, streetlights, façade windows, hard sun shadows, and a limited warm/cool color palette.
 
 Building heights inside the playable boundary come from `public/data/building-heights.json`, not from area and a seed. High and Medium values are the measured heights in the geographic audit. Estimated values are labelled in that file. The ground is a 10 m Maryland DEM grid, and roads, sidewalks, and parking sit on it. There is no invisible wall at the old rectangle.
 
-The camera uses a 1.68 m eye height, walk/sprint speeds of 4.3/6.9 m/s, and a narrower aim FOV. Collision uses a 0.36 m radius against the original footprint polygons, so the camera slides along walls and courtyards retain their interior space.
+The camera uses a 1.68 m eye height. The default pace is still 4.3 m/s, sprint is 6.9 m/s, and aiming slows movement to 2.5 m/s. Holding C (or easing the stick) walks at 1.55 m/s. Space jumps about 1.15 m and lands at the local terrain elevation. Collision uses a 0.36 m radius against building footprints and fitted landmark hulls, so the player slides along walls and courtyards retain their interior space.
+
+The player character is the Splashdown cowgirl (`public/models/cowgirl.glb`). In the normal view the camera stays at eye height and does not draw her mesh, so the body cannot fill the lens. She still casts a shadow. Press V to stand the camera behind her. Idle, walk, run, sprint, jump, fall, and land come from her Mixamo takes and follow the real ground speed. Weapon grips are empty bones named `socket_weapon_r`, `socket_weapon_l`, `socket_holster_r`, and `socket_sling`. The source set has no combat animations. Open `?preview=1&demo=1` to watch the locomotion on the local streets without loading the buildings and landmarks. Use `?demo=1&view=third` to run it in the complete city.
 
 ## Source layout
 

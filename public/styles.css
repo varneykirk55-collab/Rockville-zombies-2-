@@ -115,6 +115,17 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
   box-shadow: 0 0 1px 1px #12232b9c;
 }
 
+#gait {
+  position: absolute;
+  left: max(1rem, env(safe-area-inset-left));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  margin: 0;
+  padding: 0.35rem 0.55rem;
+  background: #172730d0;
+  color: #f6ecdb;
+  font: 600 0.82rem/1.2 ui-monospace, monospace;
+}
+
 #hud.aimed #reticle {
   width: 4px;
   height: 4px;

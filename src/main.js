@@ -1,8 +1,10 @@
 import { Group, BufferGeometry, Float32BufferAttribute, LineBasicMaterial, LineLoop } from 'three';
 import { createScene, addParking, addBridgeMarkers, alignSun } from './scene.js';
 import { createCamera, createBuildingCollision } from './camera.js';
+import { createPlayer } from './player.js';
 import { buildBuildings } from './buildings.js';
 import { createTerrain } from './terrain.js';
+import { addStreets } from './infrastructure/roads.js';
 import { integrateLandmarks } from './landmarks/integrate.js';
 import { loadCityModules, loadLandmarkModels, separateBuildingIds } from './runtime/modules.js';
 import { startGameLoop } from './game-loop.js';
@@ -13,9 +15,11 @@ const viewport = document.querySelector('#viewport');
 const status = document.querySelector('#loading');
 const params = new URLSearchParams(location.search);
 const audit = params.has('audit');
+const demo = params.has('demo');
 
 const { scene, renderer, world, maps, sun } = createScene(viewport);
 const { camera, controls } = createCamera(renderer.domElement);
+const player = createPlayer({ scene, renderer, sun });
 
 function resize() {
   const { clientWidth: width, clientHeight: height } = viewport;
@@ -29,12 +33,28 @@ const observer = new ResizeObserver(resize);
 observer.observe(viewport);
 resize();
 
+let demoTime = 0;
 startGameLoop({
   renderer,
   scene,
   camera,
-  update: (delta) => controls.update(delta),
+  update: (delta) => {
+    if (demo && !audit && controls.active) controls.drive(demoInput(demoTime += delta));
+    controls.update(delta);
+    player.update(delta, controls.pose);
+  },
 });
+
+function demoInput(time) {
+  if (time < 1) return { forward: 0 };
+  if (time < 3.2) return { forward: 1, walk: true };
+  if (time < 5.4) return { forward: 1 };
+  if (time < 7.3) return { forward: 1, sprint: true };
+  if (time < 7.55) return { forward: 1, sprint: true, jump: true };
+  if (time < 9.4) return { forward: 1, sprint: true };
+  if (time < 10.3) return { forward: 0 };
+  return { forward: 1, walk: true };
+}
 
 const dataUrl = (file) => new URL(`../public/data/${file}`, import.meta.url);
 
@@ -48,7 +68,31 @@ const buildings = new Group();
 buildings.name = 'Buildings';
 world.add(buildings);
 
+if (params.has('debug') || demo) document.querySelector('#gait').hidden = false;
 try {
+  if (params.has('preview')) {
+    const [terrainJson, boundaryJson] = await Promise.all([
+      loadJson(dataUrl('terrain.json')),
+      loadJson(dataUrl('playable-boundary.geojson')),
+    ]);
+    const terrain = createTerrain(terrainJson, boundaryJson);
+    world.add(terrain.buildMesh());
+    alignSun(sun, terrain.sampleGameY);
+    addStreets(world, maps, terrain, []);
+    controls.prepare([], (x, z) => terrain.sampleGameY(x, z) + 0.04);
+    if (demo) controls.setThirdPerson(true);
+    if (demo || params.has('autostart')) controls.engage();
+    status.hidden = true;
+  } else {
+    await loadCity();
+  }
+} catch (error) {
+  console.error('Rockville building load failed:', error);
+  status.hidden = false;
+  status.textContent = 'Could not load the city geometry. Check the browser console for details.';
+}
+
+async function loadCity() {
   status.textContent = 'Loading surveyed heights and terrain…';
   const [terrainJson, boundaryJson, heights, footprintCollection, sections, parking, bridgeManifest, landmarkModels] = await Promise.all([
     loadJson(dataUrl('terrain.json')),
@@ -95,6 +139,7 @@ try {
   });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   controls.prepare(built.collisionPolygons, sampleGround);
+  if (!audit && (demo || params.has('autostart'))) controls.engage();
   if (audit) {
     document.querySelector('#start-panel').hidden = true;
     document.querySelector('#hud').hidden = true;
@@ -191,8 +236,4 @@ try {
     controls.freeze(true);
   }
   status.hidden = true;
-} catch (error) {
-  console.error('Rockville building load failed:', error);
-  status.hidden = false;
-  status.textContent = 'Could not load the city geometry. Check the browser console for details.';
 }

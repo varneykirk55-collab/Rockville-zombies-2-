@@ -1,17 +1,22 @@
 import { MathUtils, PerspectiveCamera } from 'three';
 import { DOWNTOWN } from './config.js';
 import { lonLatToWorld } from './utils.js';
+import { CHARACTER_LAYER } from './player.js';
 
 const EYE_HEIGHT = 1.68;
 const BODY_RADIUS = 0.36;
-const WALK_SPEED = 4.3;
+const WALK_SPEED = 1.55;
+const RUN_SPEED = 4.3;
 const SPRINT_SPEED = 6.9;
 const AIM_SPEED = 2.5;
+const GRAVITY = 22;
+const JUMP_SPEED = Math.sqrt(2 * GRAVITY * 1.15);
 const CELL_SIZE = 32;
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
 const start = { x: junction.x + 14.5, z: junction.z + 2.45 };
 const movementKeys = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD',
-  'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ShiftLeft', 'ShiftRight']);
+  'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ShiftLeft', 'ShiftRight',
+  'KeyC', 'Space']);
 
 const cellKey = (x, z) => `${Math.floor(x / CELL_SIZE)},${Math.floor(z / CELL_SIZE)}`;
 
@@ -133,17 +138,34 @@ export function createCamera(canvas) {
   let yaw = Math.PI / 2 + 0.13;
   let pitch = -0.055;
   let velocityX = 0, velocityZ = 0;
+  let verticalVelocity = 0;
+  let grounded = true;
+  let coyote = 0;
+  let jumpHeld = false;
+  let touchJump = false;
+  let thirdPerson = new URLSearchParams(location.search).get('view') === 'third';
+  let scripted = null;
   let stride = 0;
+  const body = { x: 0, y: 0, z: 0 };
+  let bobbed = 0;
+  const pose = {
+    x: 0, y: 0, z: 0, yaw, pitch,
+    velocityX: 0, velocityZ: 0, planarSpeed: 0, verticalSpeed: 0,
+    grounded: true, sprinting: false, aiming: false, walking: false,
+    thirdPerson, jumped: false,
+  };
 
   document.querySelector('#viewport').classList.toggle('touch-controls', touch);
-  help.textContent = touch ? 'Left stick to move · Drag to look · Tap Sprint or Aim'
-    : 'WASD to move · Shift to sprint · Hold right mouse to aim · Esc to pause';
+  help.textContent = touch
+    ? 'Left stick to move · Drag to look · Sprint, Jump, or Aim'
+    : 'WASD to move · Hold C to walk · Shift to sprint · Space to jump · V toggles the body view · Esc to pause';
 
   function resetInputs() {
     keys.clear();
     velocityX = velocityZ = padX = padY = 0;
     movingPointer = lookingPointer = null;
-    aimHeld = touchAim = touchSprint = false;
+    aimHeld = touchAim = touchSprint = touchJump = false;
+    jumpHeld = false;
     aim.setAttribute('aria-pressed', 'false');
     sprint.setAttribute('aria-pressed', 'false');
     stick.style.transform = '';
@@ -171,7 +193,7 @@ export function createCamera(canvas) {
     if (touch) return;
     function enableDrag() {
       dragMouse = true;
-      help.textContent = 'Drag to look · WASD to move · Shift to sprint · Hold right mouse to aim';
+      help.textContent = 'Drag to look · WASD to move · Hold C to walk · Shift to sprint · Space to jump';
     }
     if (typeof canvas.requestPointerLock !== 'function') {
       enableDrag();
@@ -205,6 +227,11 @@ export function createCamera(canvas) {
   document.addEventListener('keydown', (event) => {
     if (!active) return;
     if (event.code === 'Escape' && !locked) setActive(false);
+    if (event.code === 'KeyV') {
+      event.preventDefault();
+      thirdPerson = !thirdPerson;
+      return;
+    }
     if (!movementKeys.has(event.code)) return;
     event.preventDefault();
     keys.add(event.code);
@@ -269,6 +296,12 @@ export function createCamera(canvas) {
     sprint.setAttribute('aria-pressed', String(touchSprint));
     aim.setAttribute('aria-pressed', String(touchAim));
   });
+  const jumpButton = document.querySelector('#jump');
+  jumpButton.addEventListener('pointerdown', (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    touchJump = true;
+  });
   aim.addEventListener('click', () => {
     touchAim = !touchAim;
     if (touchAim) touchSprint = false;
@@ -282,8 +315,13 @@ export function createCamera(canvas) {
     blocked = createBuildingCollision(polygons);
     if (ground) sampleGround = ground;
     const spawn = safeSpawn(blocked);
-    camera.position.set(spawn.x, sampleGround(spawn.x, spawn.z) + EYE_HEIGHT, spawn.z);
-    camera.rotation.set(pitch, yaw, 0);
+    body.x = spawn.x;
+    body.y = 0;
+    body.z = spawn.z;
+    Object.assign(pose, { x: body.x, y: sampleGround(body.x, body.z), z: body.z, yaw, pitch });
+    verticalVelocity = 0;
+    grounded = true;
+    placeCamera(0);
     overlay.hidden = false;
   }
 
@@ -293,48 +331,147 @@ export function createCamera(canvas) {
 
   function nudge(seconds) {
     const step = Math.min(Math.max(seconds, 0), 2);
-    const sin = Math.sin(yaw);
-    const cos = Math.cos(yaw);
-    moveGrounded(camera.position, -sin * WALK_SPEED * step, -cos * WALK_SPEED * step, blocked);
-    const groundY = sampleGround(camera.position.x, camera.position.z);
-    camera.position.y = groundY + EYE_HEIGHT;
+    moveGrounded(body, -Math.sin(yaw) * RUN_SPEED * step, -Math.cos(yaw) * RUN_SPEED * step, blocked);
+    pose.x = body.x;
+    pose.y = sampleGround(body.x, body.z) + body.y;
+    pose.z = body.z;
+    placeCamera(0);
+  }
+
+  function engage() {
+    if (!blocked) return;
+    setActive(true);
+  }
+
+  function drive(input) {
+    scripted = input;
+  }
+
+  function setThirdPerson(value) {
+    thirdPerson = value;
+  }
+
+  function placeCamera(bob) {
+    const feetY = sampleGround(body.x, body.z) + body.y;
+    if (thirdPerson) {
+      camera.layers.enable(CHARACTER_LAYER);
+      const lookY = feetY + 1.15;
+      const camY = feetY + 1.5 - Math.sin(pitch) * 0.85;
+      let horiz = Math.max(2.2, 3.55 * Math.cos(Math.min(pitch, 1.1)));
+      for (let i = 0; i < 6 && blocked; i++) {
+        const cx = body.x + Math.sin(yaw) * horiz;
+        const cz = body.z + Math.cos(yaw) * horiz;
+        if (!blocked(cx, cz)) break;
+        horiz *= 0.72;
+      }
+      camera.position.set(body.x + Math.sin(yaw) * horiz, camY, body.z + Math.cos(yaw) * horiz);
+      camera.position.y = Math.max(camera.position.y, sampleGround(camera.position.x, camera.position.z) + 0.25);
+      camera.lookAt(body.x, lookY, body.z);
+    } else {
+      camera.layers.disable(CHARACTER_LAYER);
+      camera.position.set(body.x, feetY + EYE_HEIGHT + bob, body.z);
+      camera.rotation.order = 'YXZ';
+      camera.rotation.set(pitch, yaw, 0);
+    }
   }
 
   function update(delta) {
     if (frozen) return;
     const baseFov = camera.aspect < 1 ? 67 : 58;
-    const aimed = active && (aimHeld || touchAim);
+    const aimed = active && (aimHeld || touchAim || scripted?.aim);
     let sprinting = false;
+    let walking = false;
     let gait = 0;
+    let jumped = false;
     if (active) {
       const pressed = (a, b) => Number(keys.has(a) || keys.has(b));
-      const side = padX + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
-      const forward = padY + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
+      const side = scripted ? (scripted.side || 0)
+        : padX + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
+      const forward = scripted ? (scripted.forward || 0)
+        : padY + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
       const magnitude = Math.max(1, Math.hypot(side, forward));
-      sprinting = !aimed && forward > 0.3 && (touchSprint || keys.has('ShiftLeft') || keys.has('ShiftRight'));
-      const speed = (aimed ? AIM_SPEED : sprinting ? SPRINT_SPEED : WALK_SPEED) / magnitude;
+      const stick = Math.hypot(padX, padY);
+      walking = scripted ? !!scripted.walk : keys.has('KeyC');
+      const keyboard = !scripted && Math.hypot(
+        pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft'),
+        pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown'),
+      ) > 0;
+      sprinting = !aimed && !walking && forward > 0.3 &&
+        (scripted?.sprint || touchSprint || keys.has('ShiftLeft') || keys.has('ShiftRight'));
+      const partialStick = !scripted && !keyboard && !aimed && !sprinting && stick > 0.05 && stick < 0.62;
+      let chosen = RUN_SPEED;
+      if (aimed) chosen = AIM_SPEED;
+      else if (sprinting) chosen = SPRINT_SPEED;
+      else if (walking || partialStick) chosen = partialStick ? WALK_SPEED * (stick / 0.62) : WALK_SPEED;
+      const speed = chosen / magnitude;
       const sin = Math.sin(yaw), cos = Math.cos(yaw);
       const targetX = (side * cos - forward * sin) * speed;
       const targetZ = (-side * sin - forward * cos) * speed;
       velocityX = MathUtils.damp(velocityX, targetX, 18, delta);
       velocityZ = MathUtils.damp(velocityZ, targetZ, 18, delta);
-      const x = camera.position.x, z = camera.position.z;
-      moveGrounded(camera.position, velocityX * delta, velocityZ * delta, blocked);
-      gait = Math.min(1, Math.hypot(camera.position.x - x, camera.position.z - z) /
-        Math.max(delta * WALK_SPEED, 0.001));
+      const beforeX = body.x, beforeZ = body.z;
+      moveGrounded(body, velocityX * delta, velocityZ * delta, blocked);
+      const step = Math.hypot(body.x - beforeX, body.z - beforeZ);
+      gait = Math.min(1, step / Math.max(delta * RUN_SPEED, 0.001));
       stride += delta * (sprinting ? 15 : 11);
+      pose.velocityX = step > 0 ? (body.x - beforeX) / Math.max(delta, 0.001) : 0;
+      pose.velocityZ = step > 0 ? (body.z - beforeZ) / Math.max(delta, 0.001) : 0;
+      pose.planarSpeed = step / Math.max(delta, 0.001);
+
+      const spaceDown = scripted ? !!scripted.jump : keys.has('Space') || touchJump;
+      const jumpEdge = spaceDown && !jumpHeld;
+      jumpHeld = spaceDown;
+      touchJump = false;
+      if (grounded) coyote = 0.12;
+      else coyote = Math.max(0, coyote - delta);
+      if (jumpEdge && (grounded || coyote > 0)) {
+        verticalVelocity = JUMP_SPEED;
+        grounded = false;
+        coyote = 0;
+        jumped = true;
+      }
+      if (!grounded) {
+        if (!jumped) verticalVelocity = Math.max(verticalVelocity - GRAVITY * delta, -28);
+        body.y += verticalVelocity * delta;
+        if (body.y <= 0) {
+          body.y = 0;
+          verticalVelocity = 0;
+          grounded = true;
+        }
+      }
+    } else {
+      velocityX = velocityZ = 0;
+      pose.velocityX = pose.velocityZ = pose.planarSpeed = 0;
+      jumpHeld = false;
     }
-    const groundY = sampleGround(camera.position.x, camera.position.z);
-    camera.position.y = MathUtils.damp(camera.position.y || groundY + EYE_HEIGHT,
-      groundY + EYE_HEIGHT + Math.sin(stride) * gait * (aimed ? 0.018 : 0.042), 16, delta);
-    camera.rotation.set(pitch, yaw, Math.sin(stride * 0.5) * gait * 0.007);
+    const bob = Math.sin(stride) * gait * (aimed ? 0.018 : 0.042);
+    bobbed = MathUtils.damp(bobbed, thirdPerson ? 0 : bob, 20, delta);
+    placeCamera(bobbed);
+    if (!thirdPerson) {
+      camera.rotation.z = Math.sin(stride * 0.5) * gait * 0.007;
+    }
     const desiredFov = baseFov + (aimed ? -18 : sprinting ? 5 : 0);
     if (Math.abs(camera.fov - desiredFov) > 0.02) {
       camera.fov = MathUtils.damp(camera.fov, desiredFov, 15, delta);
       camera.updateProjectionMatrix();
     }
     hud.classList.toggle('aimed', aimed);
+    pose.x = body.x;
+    pose.y = sampleGround(body.x, body.z) + body.y;
+    pose.z = body.z;
+    pose.yaw = yaw;
+    pose.pitch = pitch;
+    pose.verticalSpeed = grounded ? 0 : verticalVelocity;
+    pose.grounded = grounded;
+    pose.sprinting = sprinting;
+    pose.aiming = aimed;
+    pose.walking = walking;
+    pose.thirdPerson = thirdPerson;
+    pose.jumped = jumped;
   }
 
-  return { camera, controls: { prepare, update, freeze, nudge } };
+  return {
+    camera,
+    controls: { prepare, update, engage, drive, setThirdPerson, freeze, nudge, pose, get active() { return active; } },
+  };
 }
