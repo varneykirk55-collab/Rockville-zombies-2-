@@ -1,0 +1,139 @@
+{
+  "playableOwners": 512,
+  "auditOwners": 508,
+  "districtCounts": {
+    "D": 264,
+    "B": 198,
+    "C": 31,
+    "A": 19
+  },
+  "overlapProblems": [],
+  "problems": [],
+  "capture": {
+    "drawCalls": 122,
+    "triangles": 337915,
+    "frameMs": 414.0,
+    "errors": [],
+    "windows": 5817,
+    "windowAudit": {
+      "placed": 5817,
+      "buried": 0,
+      "rejected": 0
+    },
+    "roads": {
+      "trimmed": 91,
+      "omitted": 13
+    },
+    "walk": {
+      "roadSamples": 7816,
+      "roadBlocked": 19,
+      "pedestrian": {
+        "center": 7797,
+        "shoulder": 15,
+        "detour": 4,
+        "interior": 0
+      },
+      "controllerMovedM": 32.06,
+      "blockedSteps": 0
+    },
+    "gameplayMovedM": 5.159999999999851,
+    "landmarks": [
+      {
+        "id": "clock-tower",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 20730
+      },
+      {
+        "id": "turret-corner",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 21068
+      },
+      {
+        "id": "missing-model-fallback",
+        "approval": "unapproved",
+        "loaded": false,
+        "placed": false,
+        "fallback": "procedural",
+        "reason": "no-file"
+      },
+      {
+        "id": "regal-cinemas",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 22254
+      },
+      {
+        "id": "white-columned",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 6518
+      },
+      {
+        "id": "regal-cinemas-pr1",
+        "approval": "unapproved",
+        "loaded": false,
+        "placed": false,
+        "fallback": null,
+        "reason": "inactive"
+      },
+      {
+        "id": "montgomery-colonnade-pr1",
+        "approval": "unapproved",
+        "loaded": false,
+        "placed": false,
+        "fallback": null,
+        "reason": "inactive"
+      },
+      {
+        "id": "circuit-court",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 19472
+      },
+      {
+        "id": "district-court",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 15326
+      },
+      {
+        "id": "historic-red-brick-courthouse",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "replaced-procedural",
+        "triangles": 24782
+      },
+      {
+        "id": "courthouse-roundabout",
+        "approval": "unapproved",
+        "loaded": true,
+        "placed": true,
+        "fallback": null,
+        "reason": "placed",
+        "triangles": 5718
+      }
+    ]
+  }
+}

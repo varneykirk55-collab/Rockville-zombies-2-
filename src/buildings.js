@@ -72,21 +72,34 @@ function solidAt(x, z, polygon) {
 }
 
 function seatPolygon(outer, sampleGameY) {
+  const samples = outer.slice();
+  for (let i = 0; i < outer.length; i++) {
+    const a = outer[i];
+    const b = outer[(i + 1) % outer.length];
+    const length = Math.hypot(b.x - a.x, b.z - a.z);
+    const steps = Math.max(1, Math.ceil(length / 8));
+    for (let step = 1; step < steps; step++) {
+      const t = step / steps;
+      samples.push({ x: a.x + (b.x - a.x) * t, z: a.z + (b.z - a.z) * t });
+    }
+  }
   let minY = Infinity;
   let maxY = -Infinity;
   let sx = 0;
   let sz = 0;
-  for (const point of outer) {
+  for (const point of samples) {
     const y = sampleGameY(point.x, point.z);
     minY = Math.min(minY, y);
     maxY = Math.max(maxY, y);
     sx += point.x;
     sz += point.z;
   }
-  const mid = sampleGameY(sx / outer.length, sz / outer.length);
+  const cx = sx / samples.length;
+  const cz = sz / samples.length;
+  const mid = sampleGameY(cx, cz);
   minY = Math.min(minY, mid);
   maxY = Math.max(maxY, mid);
-  return { floorY: maxY, skirtY: minY - 0.2, cx: sx / outer.length, cz: sz / outer.length };
+  return { floorY: maxY, skirtY: minY - 0.15, cx, cz };
 }
 
 function wallColor(id, year, garage) {
@@ -203,12 +216,12 @@ function addWindows(group, windows) {
   windows.forEach((item, index) => {
     dummy.position.set(item.x, item.y, item.z);
     dummy.rotation.y = item.angle;
-    dummy.scale.set(item.width + 0.18, item.height + 0.18, 0.12);
+    dummy.scale.set(item.width + 0.1, item.height + 0.1, 0.08);
     dummy.updateMatrix();
     frames.setMatrixAt(index, dummy.matrix);
-    dummy.position.x += Math.sin(item.angle) * 0.04;
-    dummy.position.z += Math.cos(item.angle) * 0.04;
-    dummy.scale.set(item.width, item.height, 0.05);
+    dummy.position.x += Math.sin(item.angle) * 0.012;
+    dummy.position.z += Math.cos(item.angle) * 0.012;
+    dummy.scale.set(item.width, item.height, 0.035);
     dummy.updateMatrix();
     panes.setMatrixAt(index, dummy.matrix);
     panes.setColorAt(index, color.setHex(item.color));
@@ -217,27 +230,45 @@ function addWindows(group, windows) {
   group.add(frames, panes);
 }
 
-function facade(windows, a, b, y0, y1, seed, spacing, nx, nz) {
+function facade(windows, a, b, baseA, baseB, topA, topB, seed, spacing, nx, nz, sampleGameY, audit) {
   const dx = b.x - a.x;
   const dz = b.z - a.z;
   const length = Math.hypot(dx, dz);
   const count = Math.floor((length - 0.8) / spacing);
-  const rows = Math.min(5, Math.max(1, Math.floor((y1 - y0 - 0.8) / 3.4)));
-  if (count < 1 || rows < 1 || y1 - y0 < 2.4) return;
+  if (count < 1 || length < 1.2) return;
+  const bay = length / (count + 1);
+  const width = Math.min(1.7, bay * 0.52);
   for (let col = 1; col <= count; col++) {
     const t = col / (count + 1);
-    const x = a.x + dx * t + nx * 0.07;
-    const z = a.z + dz * t + nz * 0.07;
+    // Sit the opening in the wall face. A few centimetres of proud glass reads
+    // as a frame; the old 11 cm offset left panes floating off party walls.
+    const x = a.x + dx * t + nx * 0.025;
+    const z = a.z + dz * t + nz * 0.025;
+    const ground = sampleGameY(x - nx * 0.025, z - nz * 0.025);
+    const base = baseA + (baseB - baseA) * t;
+    const top = topA + (topB - topA) * t;
+    const sill = Math.max(base + 0.16, ground + 0.45);
+    const head = top - 0.2;
+    if (head - sill < 1.35) continue;
+    const rows = Math.min(5, Math.max(1, Math.floor((head - sill) / 3.15)));
     for (let row = 0; row < rows; row++) {
+      const bandBottom = sill + row * (head - sill) / rows;
+      const bandTop = sill + (row + 1) * (head - sill) / rows;
+      const height = Math.min(row === 0 ? 1.65 : 1.3, (bandTop - bandBottom) * 0.7);
+      const y = (bandBottom + bandTop) / 2;
+      if (y - height / 2 < ground + 0.2 || y + height / 2 > head + 0.02) {
+        audit.rejected += 1;
+        continue;
+      }
       const tint = variation(seed + col * 97 + row * 4021);
       windows.push({
-        x, z,
-        y: y0 + (row + 0.55) * (y1 - y0) / rows,
+        x, z, y,
         angle: Math.atan2(nx, nz),
-        width: Math.min(2.1, (length / (count + 1)) * 0.62),
-        height: row === 0 ? 1.85 : 1.45,
+        width, height,
         color: glassColors[tint > 0.92 ? 4 : Math.floor(tint * 4)],
       });
+      audit.placed += 1;
+      if (y - height / 2 < ground + 0.15) audit.buried += 1;
     }
   }
 }
@@ -256,6 +287,7 @@ export async function buildBuildings({
   const backdrop = { walls: geometryBatch(), roofs: geometryBatch() };
   const collisionPolygons = [];
   const windows = [];
+  const windowAudit = { placed: 0, buried: 0, rejected: 0 };
   const edges = [];
   const floors = new Map();
   const separateGroups = new Map();
@@ -322,8 +354,9 @@ export async function buildBuildings({
     if (separate) {
       const group = new THREE.Group();
       group.name = `Landmark placeholder ${id}`;
-      separateGroups.set(id, { group, walls: geometryBatch(), roofs: geometryBatch() });
-      batch = separateGroups.get(id);
+      const entry = { group, walls: geometryBatch(), roofs: geometryBatch(), windows: [] };
+      separateGroups.set(id, entry);
+      batch = entry;
     }
     const height = role === 'backdrop' ? 7 : record.heightM;
     const ridgeM = role === 'backdrop' ? 0 : (record.ridgeM || 0);
@@ -343,6 +376,7 @@ export async function buildBuildings({
       } : null;
       addMass(polygon, {
         id, height, ridge, color, role, batch, seat,
+        windowList: batch?.windows ?? null,
         windows: role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80,
         spacing: 5.6,
         seed: id,
@@ -369,7 +403,8 @@ export async function buildBuildings({
           collide: true, windows: true, spacing: 4, seed: props.parentId + 17,
         });
       } else if (parent) {
-        const base = parent.floorY + (props.baseHeightM ?? 0) + 0.05;
+        // Overlap the parent roof by 8 cm so the upper mass is not a floating slab.
+        const base = parent.floorY + (props.baseHeightM ?? 0) - 0.08;
         const top = parent.floorY + props.heightM;
         addMass(polygon, {
           id: props.parentId, height: props.heightM, color, role: 'playable',
@@ -425,16 +460,36 @@ export async function buildBuildings({
         y0 = hiddenTo;
       }
     }
-    if (Math.max(topA, topB) - y0 < 0.35) continue;
-    const batch = edge.batch ?? targetFor(edge.a, edge.role);
-    emitQuad(batch.walls,
-      { x: edge.a.x, y: y0, z: edge.a.z },
-      { x: edge.b.x, y: y0, z: edge.b.z },
-      { x: edge.b.x, y: topB, z: edge.b.z },
-      { x: edge.a.x, y: topA, z: edge.a.z },
-      edge.nx, 0, edge.nz, edge.color);
-    if (edge.windows && topA - y0 > 2.4) {
-      facade(windows, edge.a, edge.b, y0, Math.min(topA, topB), edge.seed, edge.spacing, edge.nx, edge.nz);
+    const raised = sharedFraction > 0.6 && Number.isFinite(neighborTop) ? y0 : null;
+    const segments = Math.max(1, Math.ceil(edge.length / 8));
+    for (let segment = 0; segment < segments; segment++) {
+      const t0 = segment / segments;
+      const t1 = (segment + 1) / segments;
+      const ax = edge.a.x + (edge.b.x - edge.a.x) * t0;
+      const az = edge.a.z + (edge.b.z - edge.a.z) * t0;
+      const bx = edge.a.x + (edge.b.x - edge.a.x) * t1;
+      const bz = edge.a.z + (edge.b.z - edge.a.z) * t1;
+      const segTopA = edge.topOf(ax, az);
+      const segTopB = edge.topOf(bx, bz);
+      let baseA = sampleGameY(ax, az) - 0.12;
+      let baseB = sampleGameY(bx, bz) - 0.12;
+      if (raised !== null) {
+        baseA = Math.max(baseA, raised);
+        baseB = Math.max(baseB, raised);
+      }
+      if (Math.max(segTopA, segTopB) - Math.min(baseA, baseB) < 0.35) continue;
+      const batch = edge.batch ?? targetFor(edge.a, edge.role);
+      emitQuad(batch.walls,
+        { x: ax, y: baseA, z: az },
+        { x: bx, y: baseB, z: bz },
+        { x: bx, y: segTopB, z: bz },
+        { x: ax, y: segTopA, z: az },
+        edge.nx, 0, edge.nz, edge.color);
+      if (edge.windows && Math.min(segTopA, segTopB) - Math.max(baseA, baseB) > 2.2) {
+        const list = edge.windowList ?? windows;
+        facade(list, { x: ax, z: az }, { x: bx, z: bz }, baseA, baseB, segTopA, segTopB,
+          edge.seed + segment, edge.spacing, edge.nx, edge.nz, sampleGameY, windowAudit);
+      }
     }
   }
 
@@ -445,17 +500,18 @@ export async function buildBuildings({
   triangles += buildMesh(group, far.roofs, roofMaterial, 'Roofs far', false) / 3;
   triangles += buildMesh(group, backdrop.walls, wallMaterial, 'Backdrop walls', false) / 3;
   triangles += buildMesh(group, backdrop.roofs, roofMaterial, 'Backdrop roofs', false) / 3;
-  for (const { group: landmarkGroup, walls, roofs } of separateGroups.values()) {
+  for (const { group: landmarkGroup, walls, roofs, windows: landmarkWindows } of separateGroups.values()) {
     buildMesh(landmarkGroup, walls, wallMaterial, 'Landmark walls', true);
     buildMesh(landmarkGroup, roofs, roofMaterial, 'Landmark roofs', true);
+    addWindows(landmarkGroup, landmarkWindows ?? []);
     group.add(landmarkGroup);
   }
   addWindows(group, windows);
   onProgress?.(features.length, features.length);
 
   return {
-    rendered, skipped, collisionPolygons, separateGroups, windows: windows.length,
-    sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
+    rendered, skipped, collisionPolygons, separateGroups, windows: windowAudit.placed,
+    windowAudit, sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
   };
 }
 

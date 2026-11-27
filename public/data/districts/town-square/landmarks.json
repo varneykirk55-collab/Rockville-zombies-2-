@@ -1,0 +1,57 @@
+{
+  "district": "town-square",
+  "code": "A",
+  "models": [
+    {
+      "id": "clock-tower",
+      "buildingId": 131322,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/clock_tower_building.glb",
+      "longitude": -77.150515,
+      "latitude": 39.08531,
+      "rotationY": 0,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "branch": "grok/rockville-landmarks",
+        "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
+        "path": "public/landmarks/clock_tower_building.glb",
+        "sha256": "0fcfd6003b213f407e277c7b091877e69cd0353bbb439e562a0bf044e4908020"
+      },
+      "notes": "Unapproved. Moved off 1 Church Street (129521). Placed on 200 East Middle Lane, footprint 131322, the six-storey town-square building on the south edge of the open square. Model plan 42.8 by 20.2 m; county footprint 62.3 by 24.9 m. Origin at the footprint centre, no scale change. rotationY 0 faces the long facade south onto the open frontage; the tower is at the west end, toward Maryland Avenue. The building's district stays D."
+    },
+    {
+      "id": "turret-corner",
+      "buildingId": 227492,
+      "approval": "unapproved",
+      "active": true,
+      "glb": "landmarks/turret_corner_building.glb",
+      "longitude": -77.15127,
+      "latitude": 39.085686,
+      "rotationY": 1.5707963267948966,
+      "scale": 1,
+      "elevationOffsetM": 0,
+      "replaceProcedural": true,
+      "collision": { "mode": "footprint" },
+      "source": {
+        "branch": "grok/rockville-landmarks",
+        "commit": "30ed3aafc401857068229ad6f70d50e2bf7138d2",
+        "path": "public/landmarks/turret_corner_building.glb",
+        "sha256": "73abdb84332587571b5349f288751af1cb4bf413fcdbce9caca76f6f1698d792"
+      },
+      "notes": "Unapproved. 33 Maryland Avenue, the building immediately north of the Starbucks block at 39 Maryland Avenue (footprint 127071). Model plan 31.5 by 30.5 m; county footprint 25.4 by 37.4 m, so the model overhangs the short side by about 3 m. Not scaled. rotationY is π/2 so the rounded corner points southeast, toward the Starbucks corner. The generic suggestion of π pointed the corner northeast and does not match this site. District stays C because the address is Maryland Avenue. The Starbucks apartments themselves are not removed."
+    },
+    {
+      "id": "missing-model-fallback",
+      "buildingId": null,
+      "approval": "unapproved",
+      "active": true,
+      "glb": null,
+      "replaceProcedural": true,
+      "notes": "Empty path. The loader reports a procedural fallback and removes nothing."
+    }
+  ]
+}

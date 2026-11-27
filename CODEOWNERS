@@ -1,0 +1,38 @@
+# Role map for the six parallel owners.
+# These names are assignment roles, not GitHub accounts, so this file is not
+# installed under .github/ and does not request reviews from invented users.
+# The readable copy of the same map is docs/city-development-foundation/CONTRIBUTING.md.
+
+/src/districts/town-square/                         district-a-town-square
+/public/data/districts/town-square/                 district-a-town-square
+/public/assets/districts/town-square/               district-a-town-square
+
+/src/districts/hungerford/                          district-b-hungerford
+/public/data/districts/hungerford/                  district-b-hungerford
+/public/assets/districts/hungerford/                district-b-hungerford
+/docs/hungerford-corridor/                          district-b-hungerford
+
+/src/districts/regal-courthouse/                    district-c-regal-courthouse
+/public/data/districts/regal-courthouse/            district-c-regal-courthouse
+/public/assets/districts/regal-courthouse/          district-c-regal-courthouse
+
+/src/districts/pike-metro/                          district-d-pike-metro
+/public/data/districts/pike-metro/                  district-d-pike-metro
+/public/assets/districts/pike-metro/                district-d-pike-metro
+
+/src/infrastructure/                                infrastructure
+/public/data/infrastructure/                        infrastructure
+/public/assets/infrastructure/                      infrastructure
+
+/src/vegetation/                                    vegetation
+/public/data/vegetation/                            vegetation
+/public/assets/vegetation/                          vegetation
+
+# Shared files. The six owners do not edit these to add their own work.
+/src/main.js                                        foundation
+/src/runtime/                                       foundation
+/src/landmarks/integrate.js                         foundation
+/public/data/modules.json                           foundation
+/public/data/playable-boundary.geojson              foundation
+/public/data/ownership.json                         foundation
+/public/data/districts/boundaries.geojson           foundation

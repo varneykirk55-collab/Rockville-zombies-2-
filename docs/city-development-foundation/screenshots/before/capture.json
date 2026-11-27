@@ -1,0 +1,143 @@
+{
+  "label": "before",
+  "summary": {
+    "rendered": 743,
+    "skipped": 0,
+    "playable": 512,
+    "confidence": {
+      "Estimated": 243,
+      "High": 137,
+      "Medium": 132
+    },
+    "methods": {
+      "same-address-measured": 44,
+      "higher-measured-lowrise": 24,
+      "measured-high": 137,
+      "measured-medium": 132,
+      "published-storeys": 2,
+      "median-of-measured-neighbours": 70,
+      "single-measured-source": 51,
+      "higher-measured": 15,
+      "published-roof": 2,
+      "median-of-lowrise-district": 27,
+      "lower-measured-large-footprint": 4,
+      "published-plan-height": 4
+    },
+    "windows": 9303,
+    "sharedWallMetres": 11731,
+    "triangles": 15215,
+    "trees": 681,
+    "parking": 103,
+    "landmarks": [
+      {
+        "id": "clock-tower",
+        "loaded": false,
+        "footprintId": 129521
+      }
+    ],
+    "bridge": {
+      "deckElevationM": null,
+      "clearanceOverPikeM": null
+    },
+    "heightRange": {
+      "min": 0.95,
+      "max": 73.65
+    }
+  },
+  "walk": {
+    "roadSamples": 7833,
+    "roadBlocked": 33,
+    "roadBlockedFraction": 0.0042,
+    "heightPops": {
+      "worstRiseM": 0.971,
+      "stepsOver045m": 5
+    },
+    "boundarySamples": [
+      {
+        "lon": -77.1412,
+        "lat": 39.09,
+        "x": 934.4312252325446,
+        "z": -444.06838522014914,
+        "outsideM": 607.7,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.152,
+        "lat": 39.0954,
+        "x": 0,
+        "z": -1043.5607052660096,
+        "outsideM": 50.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.1554,
+        "lat": 39.086,
+        "x": -294.17279312860467,
+        "z": 0,
+        "outsideM": 34.6,
+        "blocked": false,
+        "buildingFree": true
+      },
+      {
+        "lon": -77.148,
+        "lat": 39.0794,
+        "x": 346.0856389753353,
+        "z": 732.7128356122206,
+        "outsideM": 131,
+        "blocked": false,
+        "buildingFree": true
+      }
+    ],
+    "approaches": [
+      {
+        "distanceM": 1.2,
+        "clearBeforeM": 0.8
+      },
+      {
+        "distanceM": 13.2,
+        "clearBeforeM": 12.8
+      }
+    ],
+    "controller": {
+      "start": {
+        "x": 186.9769694672329,
+        "z": 214.18846709802685
+      },
+      "end": {
+        "x": 154.98,
+        "z": 216.19
+      },
+      "blockedSteps": 0,
+      "movedM": 32.06
+    }
+  },
+  "performance": {
+    "drawCalls": 47,
+    "triangles": 334823,
+    "frameMs": 416.8950000000012
+  },
+  "gl": {
+    "width": 1280,
+    "height": 720,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+  },
+  "errors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "files": [
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/hungerford.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/town-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/maryland-regal.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/courthouse-square.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/rockville-pike.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/metro.png",
+    "/agent/repos/Rockville-zombies-2-/docs/city-development-foundation/screenshots/before/overview.png"
+  ],
+  "gameplay": {
+    "movedM": 0,
+    "loopAdvanced": true
+  }
+}

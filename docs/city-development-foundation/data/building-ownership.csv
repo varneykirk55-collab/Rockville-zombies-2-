@@ -1,0 +1,513 @@
+id,district,districtId,districtName,address,name,longitude,latitude,gameX,gameZ,heightM,inAudit508
+129621,A,town-square,Town Square,1 HELEN HENEGHAN WAY 20850,Apartments,-77.150277,39.084596,149.08,155.87,28.83,yes
+240005,A,town-square,Town Square,196 E MONTGOMERY AVE 20850,Cambria Hotel and Suites,-77.150415,39.084275,137.14,191.5,41.77,yes
+240006,A,town-square,Town Square,211 E MIDDLE LN 20850,,-77.150417,39.084822,136.96,130.78,38.17,yes
+240008,A,town-square,Town Square,219 E MIDDLE LN 20850,,-77.150229,39.084829,153.23,130.0,5.12,yes
+240271,A,town-square,Town Square,217 E MIDDLE LN 20850,,-77.150285,39.084827,148.38,130.22,38.17,yes
+240272,A,town-square,Town Square,221 E MIDDLE LN 20850,,-77.150177,39.084857,157.73,126.89,5.12,yes
+240273,A,town-square,Town Square,205 E MIDDLE LN 20850,,-77.150595,39.084816,121.56,131.44,5.12,yes
+240274,A,town-square,Town Square,209 E MIDDLE LN 20850,,-77.150474,39.08482,132.03,131.0,38.17,yes
+240275,A,town-square,Town Square,201 E MIDDLE LN 20850,,-77.150725,39.084811,110.31,132.0,5.12,yes
+240276,A,town-square,Town Square,213 E MIDDLE LN 20850,Apartments,-77.150347,39.084825,143.02,130.45,38.17,yes
+240277,A,town-square,Town Square,203 E MIDDLE LN 20850,,-77.150653,39.084814,116.54,131.67,5.12,yes
+240278,A,town-square,Town Square,207 E MIDDLE LN 20850,,-77.150535,39.084818,126.75,131.22,38.17,yes
+272519,A,town-square,Town Square,225 E MIDDLE LN 20850,Apartments,-77.149294,39.084908,234.13,121.23,8.64,yes
+272520,A,town-square,Town Square,4 HELEN HENEGHAN WAY 20850,Apartments,-77.149789,39.08439,191.3,178.74,52.73,yes
+272521,A,town-square,Town Square,2 HELEN HENEGHAN WAY 20850,Apartments,-77.149834,39.084827,187.41,130.22,52.73,yes
+272522,A,town-square,Town Square,221 E MIDDLE LN 20850,Apartments,-77.149631,39.0849,204.97,122.12,5.98,yes
+272523,A,town-square,Town Square,198 E MONTGOMERY AVE 20850,,-77.149317,39.084271,232.14,191.95,4.69,yes
+272524,A,town-square,Town Square,198 E MONTGOMERY AVE 20850,,-77.14958,39.084251,209.38,194.17,4.77,yes
+272525,A,town-square,Town Square,223 E MIDDLE LN 20850,Apartments,-77.149465,39.084908,219.33,121.23,8.64,yes
+116279,B,hungerford,Hungerford Corridor,801 HUNGERFORD DR 20850,Hungerford Gulf,-77.152884,39.094506,-76.48,-944.31,4.67,yes
+118003,B,hungerford,Hungerford Corridor,650 HUNGERFORD DR 20850,,-77.154854,39.092918,-246.93,-768.02,7.55,yes
+118280,B,hungerford,Hungerford Corridor,91 FREDERICK AVE 20850,,-77.152366,39.093404,-31.67,-821.97,3.99,yes
+118551,B,hungerford,Hungerford Corridor,790 HUNGERFORD DR 20850,,-77.153635,39.093738,-141.46,-859.05,3.84,yes
+118557,B,hungerford,Hungerford Corridor,790 HUNGERFORD DR 20850,Rockville Sunoco,-77.15376,39.093727,-152.28,-857.83,4.28,yes
+119203,B,hungerford,Hungerford Corridor,804 HUNGERFORD DR 20850,,-77.154469,39.094588,-213.62,-953.41,5.4,yes
+119220,B,hungerford,Hungerford Corridor,801 HUNGERFORD DR 20850,,-77.152731,39.094597,-63.25,-954.41,4.67,yes
+120023,B,hungerford,Hungerford Corridor,500 N WASHINGTON ST 20850,Rockville Post Office,-77.154031,39.091511,-175.72,-611.82,6.84,yes
+120175,B,hungerford,Hungerford Corridor,501 HUNGERFORD DR 20850,The Fitz At Rockville Apartments,-77.152867,39.091683,-75.01,-630.91,3.8,yes
+120285,B,hungerford,Hungerford Corridor,6 MARTINS SQUARE LN 20850,,-77.1549,39.090906,-250.91,-544.65,11.66,yes
+120292,B,hungerford,Hungerford Corridor,10 MARTINS SQUARE LN 20850,,-77.154775,39.090898,-240.1,-543.76,11.73,yes
+120347,B,hungerford,Hungerford Corridor,300 N WASHINGTON ST 20850,,-77.154084,39.089423,-180.31,-380.01,5.66,yes
+120605,B,hungerford,Hungerford Corridor,500 N WASHINGTON ST 20850,,-77.154808,39.091504,-242.95,-611.04,4.87,yes
+120606,B,hungerford,Hungerford Corridor,500 N WASHINGTON ST 20850,,-77.154817,39.091654,-243.73,-627.69,2.89,yes
+120717,B,hungerford,Hungerford Corridor,8 MARTINS SQUARE LN 20850,,-77.154859,39.090882,-247.36,-541.99,12.78,yes
+121763,B,hungerford,Hungerford Corridor,650 HUNGERFORD DR 20850,,-77.154194,39.092831,-189.83,-758.36,7.55,yes
+122161,B,hungerford,Hungerford Corridor,316 N WASHINGTON ST 20850,,-77.154077,39.089926,-179.7,-435.85,6.49,yes
+122300,B,hungerford,Hungerford Corridor,10 NORTH ST 20850,,-77.154578,39.089969,-223.05,-440.63,8.69,yes
+122323,B,hungerford,Hungerford Corridor,451 HUNGERFORD DR 20850,,-77.151243,39.089539,65.5,-392.89,29.87,yes
+122429,B,hungerford,Hungerford Corridor,401 HUNGERFORD DR 20850,DHHS Administrative Building,-77.150548,39.088928,125.63,-325.06,4.54,yes
+123037,B,hungerford,Hungerford Corridor,10 NORTH ST 20850,,-77.154774,39.089871,-240.01,-429.75,1.79,yes
+123342,B,hungerford,Hungerford Corridor,500 HUNGERFORD DR 20850,,-77.153144,39.090572,-98.98,-507.57,4.68,yes
+123525,B,hungerford,Hungerford Corridor,12 MARTINS SQUARE LN 20850,,-77.154728,39.090858,-236.03,-539.32,11.98,yes
+123826,B,hungerford,Hungerford Corridor,502 HUNGERFORD DR 20850,,-77.153291,39.0908,-111.7,-532.88,5.64,yes
+123877,B,hungerford,Hungerford Corridor,401 N WASHINGTON ST 20850,Commission for Women,-77.153051,39.090097,-90.93,-454.84,5.66,yes
+123929,B,hungerford,Hungerford Corridor,15 MARTINS SQUARE LN 20850,,-77.154773,39.090408,-239.92,-489.36,14.41,yes
+124001,B,hungerford,Hungerford Corridor,17 MARTINS SQUARE LN 20850,,-77.154715,39.090385,-234.91,-486.81,12.0,yes
+124010,B,hungerford,Hungerford Corridor,19 MARTINS SQUARE LN 20850,,-77.154656,39.090402,-229.8,-488.7,11.42,yes
+124124,B,hungerford,Hungerford Corridor,4 MARTINS SQUARE LN 20850,,-77.15497,39.090914,-256.97,-545.54,11.8,yes
+124179,B,hungerford,Hungerford Corridor,14 MARTINS SQUARE LN 20850,,-77.154664,39.090839,-230.49,-537.21,13.02,yes
+124195,B,hungerford,Hungerford Corridor,16 MARTINS SQUARE LN 20850,,-77.154623,39.090825,-226.95,-535.66,12.73,yes
+124204,B,hungerford,Hungerford Corridor,11 MARTINS SQUARE LN 20850,,-77.154911,39.090423,-251.86,-491.03,10.14,yes
+124309,B,hungerford,Hungerford Corridor,474 N WASHINGTON ST 20850,,-77.152877,39.090272,-75.88,-474.27,5.08,yes
+124333,B,hungerford,Hungerford Corridor,510 HUNGERFORD DR 20850,Freestate,-77.153313,39.091209,-113.6,-578.29,4.25,yes
+124455,B,hungerford,Hungerford Corridor,250 WASHINGTON ST 20850,,-77.154002,39.0877,-173.22,-188.73,8.82,yes
+124790,B,hungerford,Hungerford Corridor,369 HUNGERFORD DR 20850,,-77.14944,39.087399,221.49,-155.31,4.4,yes
+124801,B,hungerford,Hungerford Corridor,414 HUNGERFORD DR 20850,Hungerford Plaza,-77.151412,39.088003,50.87,-222.37,13.87,yes
+125105,B,hungerford,Hungerford Corridor,379 HUNGERFORD DR 20850,,-77.149806,39.087726,189.83,-191.62,6.54,yes
+125155,B,hungerford,Hungerford Corridor,260 N WASHINGTON ST 20850,,-77.153496,39.0875,-129.44,-166.53,4.62,yes
+125245,B,hungerford,Hungerford Corridor,380 HUNGERFORD DR 20850,Station  3 - Rockville,-77.15076,39.0875,107.29,-166.53,8.08,yes
+126073,B,hungerford,Hungerford Corridor,430 HUNGERFORD DR 20850,Hungerford Plaza,-77.151938,39.088639,5.36,-292.97,12.53,yes
+126115,B,hungerford,Hungerford Corridor,95 DAWSON AVE 20850,HERITAGE HOUSE,-77.154856,39.089206,-247.11,-355.92,19.11,yes
+126395,B,hungerford,Hungerford Corridor,254 WASHINGTON ST 20850,BEALLS GRANT,-77.153941,39.088304,-167.94,-255.78,8.82,yes
+128088,B,hungerford,Hungerford Corridor,260 N WASHINGTON ST 20850,Shell,-77.153395,39.087272,-120.7,-141.21,4.53,yes
+128307,B,hungerford,Hungerford Corridor,360 HUNGERFORD DR 20850,,-77.150245,39.087027,151.85,-114.01,6.26,yes
+128624,B,hungerford,Hungerford Corridor,369 HUNGERFORD DR 20850,,-77.149129,39.086957,248.4,-106.24,6.26,yes
+128917,B,hungerford,Hungerford Corridor,330 HUNGERFORD DR 20850,Montgomery Hills Apartments; Department Of Economic Development,-77.150242,39.086598,152.1,-66.39,5.98,yes
+208398,B,hungerford,Hungerford Corridor,621 HUNGERFORD DR 20850,,-77.151511,39.091824,42.31,-646.56,8.62,yes
+208937,B,hungerford,Hungerford Corridor,315 N WASHINGTON ST 20850,,-77.153062,39.089729,-91.89,-413.98,40.83,yes
+209199,B,hungerford,Hungerford Corridor,466 HUNGERFORD DR 20850,,-77.152505,39.089399,-43.69,-377.35,4.44,yes
+209472,B,hungerford,Hungerford Corridor,303 N WASHINGTON ST 20850,,-77.152764,39.089058,-66.1,-339.49,4.93,yes
+209478,B,hungerford,Hungerford Corridor,7 DAWSON AVE 20850,Shopping Center,-77.154036,39.088912,-176.16,-323.28,4.93,yes
+209716,B,hungerford,Hungerford Corridor,600 IVY LEAGUE LN 20850,,-77.154893,39.094665,-250.31,-961.96,10.3,yes
+209733,B,hungerford,Hungerford Corridor,223 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154593,39.088434,-224.35,-270.22,3.67,yes
+209982,B,hungerford,Hungerford Corridor,802 HUNGERFORD DR 20850,,-77.154279,39.094488,-197.18,-942.31,5.4,yes
+209992,B,hungerford,Hungerford Corridor,402 HUNGERFORD DR 20850,Hungerford Plaza,-77.151322,39.087736,58.66,-192.73,6.02,yes
+210246,B,hungerford,Hungerford Corridor,622 IVY LEAGUE LN 20850,,-77.154938,39.09423,-254.2,-913.67,10.31,yes
+210511,B,hungerford,Hungerford Corridor,777 HUNGERFORD DR 20850,,-77.152757,39.09387,-65.5,-873.7,4.86,yes
+211039,B,hungerford,Hungerford Corridor,753 HUNGERFORD DR 20850,,-77.152797,39.093213,-68.96,-800.77,4.86,yes
+211301,B,hungerford,Hungerford Corridor,811 HUNGERFORD DR 20850,Shopping Center,-77.152812,39.094819,-70.26,-979.06,4.92,yes
+223103,B,hungerford,Hungerford Corridor,602 IVY LEAGUE LN 20850,,-77.154932,39.094621,-253.68,-957.08,10.69,yes
+223364,B,hungerford,Hungerford Corridor,604 IVY LEAGUE LN 20850,,-77.154989,39.094582,-258.61,-952.75,11.21,yes
+223922,B,hungerford,Hungerford Corridor,624 IVY LEAGUE LN 20850,,-77.154963,39.094187,-256.36,-908.9,10.67,yes
+224181,B,hungerford,Hungerford Corridor,638 IVY LEAGUE LN 20850,,-77.154996,39.09389,-259.22,-875.92,8.68,yes
+224182,B,hungerford,Hungerford Corridor,640 IVY LEAGUE LN 20850,,-77.154965,39.093849,-256.54,-871.37,10.29,yes
+225013,B,hungerford,Hungerford Corridor,213 N ADAMS ST 20850,,-77.154668,39.087272,-230.84,-141.21,3.3,yes
+225014,B,hungerford,Hungerford Corridor,215 N ADAMS ST 20850,,-77.154643,39.087327,-228.68,-147.32,3.32,yes
+225015,B,hungerford,Hungerford Corridor,217 N ADAMS ST 20850,,-77.154644,39.08738,-228.76,-153.2,3.32,yes
+225016,B,hungerford,Hungerford Corridor,219 N ADAMS ST 20850,,-77.154648,39.087426,-229.11,-158.31,3.47,yes
+225017,B,hungerford,Hungerford Corridor,221 N ADAMS ST 20850,,-77.15462,39.08748,-226.69,-164.31,10.74,yes
+225018,B,hungerford,Hungerford Corridor,223 N ADAMS ST 20850,,-77.154623,39.087541,-226.95,-171.08,3.33,yes
+225019,B,hungerford,Hungerford Corridor,225 N ADAMS ST 20850,,-77.154644,39.087614,-228.76,-179.18,3.22,yes
+225020,B,hungerford,Hungerford Corridor,227 N ADAMS ST 20850,,-77.154644,39.087673,-228.76,-185.73,2.97,yes
+225021,B,hungerford,Hungerford Corridor,229 N ADAMS ST 20850,,-77.154644,39.087727,-228.76,-191.73,3.01,yes
+225022,B,hungerford,Hungerford Corridor,231 N ADAMS ST 20850,,-77.154645,39.087783,-228.85,-197.94,3.09,yes
+225023,B,hungerford,Hungerford Corridor,233 N ADAMS ST 20850,,-77.154645,39.087836,-228.85,-203.83,3.08,yes
+225024,B,hungerford,Hungerford Corridor,235 N ADAMS ST 20850,,-77.154645,39.087893,-228.85,-210.16,6.18,yes
+225025,B,hungerford,Hungerford Corridor,237 N ADAMS ST 20850,,-77.154645,39.087948,-228.85,-216.26,3.61,yes
+225026,B,hungerford,Hungerford Corridor,239 N ADAMS ST 20850,,-77.154646,39.087999,-228.94,-221.92,3.72,yes
+225027,B,hungerford,Hungerford Corridor,241 N ADAMS ST 20850,,-77.154672,39.088038,-231.19,-226.25,3.61,yes
+225290,B,hungerford,Hungerford Corridor,1 DAWSON AVE 20850,,-77.153879,39.088912,-162.57,-323.28,4.03,yes
+225291,B,hungerford,Hungerford Corridor,5 DAWSON AVE 20850,,-77.153947,39.088891,-168.46,-320.95,4.03,yes
+225292,B,hungerford,Hungerford Corridor,9 DAWSON AVE 20850,,-77.154119,39.088891,-183.34,-320.95,4.03,yes
+225293,B,hungerford,Hungerford Corridor,11 DAWSON AVE 20850,,-77.154199,39.088891,-190.26,-320.95,4.03,yes
+225294,B,hungerford,Hungerford Corridor,13 DAWSON AVE 20850,,-77.154277,39.088891,-197.01,-320.95,4.03,yes
+231090,B,hungerford,Hungerford Corridor,800 HUNGERFORD DR 20850,,-77.154089,39.094261,-180.74,-917.11,5.4,yes
+231091,B,hungerford,Hungerford Corridor,815 HUNGERFORD DR 20850,,-77.152741,39.094914,-64.11,-989.61,4.46,yes
+231140,B,hungerford,Hungerford Corridor,394 HUNGERFORD DR 20850,,-77.151027,39.087989,84.19,-220.81,5.12,yes
+231141,B,hungerford,Hungerford Corridor,392 HUNGERFORD DR 20850,,-77.150965,39.087914,89.55,-212.49,6.54,yes
+231142,B,hungerford,Hungerford Corridor,398 HUNGERFORD DR 20850,,-77.151095,39.08795,78.3,-216.48,8.08,yes
+231143,B,hungerford,Hungerford Corridor,400 HUNGERFORD DR 20850,,-77.151171,39.08787,71.73,-207.6,8.08,yes
+231144,B,hungerford,Hungerford Corridor,404 HUNGERFORD DR 20850,,-77.151477,39.087719,45.25,-190.84,4.32,yes
+231350,B,hungerford,Hungerford Corridor,817 HUNGERFORD DR 20850,,-77.152791,39.095005,-68.44,-999.71,4.46,yes
+231351,B,hungerford,Hungerford Corridor,819 HUNGERFORD DR 20850,Shopping Center,-77.152811,39.095055,-70.16,-1005.28,4.79,no
+231401,B,hungerford,Hungerford Corridor,408 HUNGERFORD DR 20850,,-77.151621,39.087724,32.79,-191.39,5.12,yes
+231402,B,hungerford,Hungerford Corridor,410 HUNGERFORD DR 20850,,-77.151536,39.08763,40.15,-180.96,5.12,yes
+231635,B,hungerford,Hungerford Corridor,779 HUNGERFORD DR 20850,,-77.152842,39.093962,-72.85,-883.92,4.86,yes
+231636,B,hungerford,Hungerford Corridor,775 HUNGERFORD DR 20850,,-77.152808,39.093772,-69.91,-862.82,3.72,yes
+231637,B,hungerford,Hungerford Corridor,771 HUNGERFORD DR 20850,Shopping Center,-77.152763,39.093702,-66.02,-855.05,4.86,yes
+231638,B,hungerford,Hungerford Corridor,763 HUNGERFORD DR 20850,,-77.152739,39.093526,-63.94,-835.51,4.86,yes
+231639,B,hungerford,Hungerford Corridor,761 HUNGERFORD DR 20850,,-77.152768,39.093464,-66.45,-828.63,4.23,yes
+231640,B,hungerford,Hungerford Corridor,759 HUNGERFORD DR 20850,,-77.152771,39.093405,-66.71,-822.08,4.23,yes
+231641,B,hungerford,Hungerford Corridor,757 HUNGERFORD DR 20850,,-77.152775,39.093348,-67.05,-815.75,4.23,yes
+231903,B,hungerford,Hungerford Corridor,755 HUNGERFORD DR 20850,Shopping Center,-77.152845,39.093279,-73.11,-808.09,5.25,yes
+231904,B,hungerford,Hungerford Corridor,751 HUNGERFORD DR 20850,,-77.152802,39.093139,-69.39,-792.55,4.86,yes
+232219,B,hungerford,Hungerford Corridor,221 N VAN BUREN ST 20850,,-77.15467,39.088442,-231.01,-271.1,9.17,yes
+232220,B,hungerford,Hungerford Corridor,225 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154618,39.088396,-226.51,-266.0,9.99,yes
+232221,B,hungerford,Hungerford Corridor,229 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154709,39.088391,-234.39,-265.44,9.17,yes
+232222,B,hungerford,Hungerford Corridor,219 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154764,39.088385,-239.15,-264.78,7.5,yes
+232223,B,hungerford,Hungerford Corridor,217 N VAN BUREN ST 20850,,-77.154815,39.088387,-243.56,-265.0,9.74,yes
+232224,B,hungerford,Hungerford Corridor,239 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154873,39.088397,-248.58,-266.11,10.21,yes
+232225,B,hungerford,Hungerford Corridor,241 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154897,39.088435,-250.65,-270.33,3.67,yes
+232226,B,hungerford,Hungerford Corridor,237 N VAN BUREN ST 20850,,-77.154899,39.088317,-250.83,-257.23,5.19,yes
+232227,B,hungerford,Hungerford Corridor,235 N VAN BUREN ST 20850,,-77.154855,39.088337,-247.02,-259.45,9.74,yes
+232228,B,hungerford,Hungerford Corridor,233 N VAN BUREN ST 20850,Heritage Park Apartments,-77.154798,39.088355,-242.09,-261.45,9.74,yes
+232229,B,hungerford,Hungerford Corridor,231 N VAN BUREN ST 20850,,-77.15474,39.088351,-237.07,-261.0,7.5,yes
+232230,B,hungerford,Hungerford Corridor,227 N VAN BUREN ST 20850,Heritage Park Apartments,-77.15464,39.088339,-228.42,-259.67,3.67,yes
+232689,B,hungerford,Hungerford Corridor,313 N WASHINGTON ST 20850,,-77.153049,39.089198,-90.76,-355.03,4.93,yes
+232690,B,hungerford,Hungerford Corridor,311 N WASHINGTON ST 20850,,-77.153324,39.089038,-114.55,-337.27,4.93,yes
+232691,B,hungerford,Hungerford Corridor,309 N WASHINGTON ST 20850,,-77.153206,39.089084,-104.34,-342.38,4.93,yes
+232692,B,hungerford,Hungerford Corridor,307 N WASHINGTON ST 20850,Commission for Women,-77.153067,39.089079,-92.32,-341.82,4.93,yes
+232693,B,hungerford,Hungerford Corridor,305 N WASHINGTON ST 20850,Commission for Women,-77.152929,39.089032,-80.38,-336.6,4.93,yes
+232694,B,hungerford,Hungerford Corridor,460 HUNGERFORD DR 20850,,-77.152337,39.089238,-29.16,-359.47,4.44,yes
+233564,B,hungerford,Hungerford Corridor,619 HUNGERFORD DR 20850,,-77.151592,39.091791,35.3,-642.9,5.12,yes
+233565,B,hungerford,Hungerford Corridor,617 HUNGERFORD DR 20850,,-77.151658,39.091793,29.59,-643.12,5.12,yes
+233566,B,hungerford,Hungerford Corridor,615 HUNGERFORD DR 20850,,-77.151728,39.091796,23.53,-643.46,5.12,yes
+233567,B,hungerford,Hungerford Corridor,613 HUNGERFORD DR 20850,,-77.15181,39.091798,16.44,-643.68,5.12,yes
+233568,B,hungerford,Hungerford Corridor,611 HUNGERFORD DR 20850,Shopping Center,-77.151889,39.091801,9.6,-644.01,8.62,yes
+233569,B,hungerford,Hungerford Corridor,609 HUNGERFORD DR 20850,,-77.151966,39.091804,2.94,-644.34,5.12,yes
+233821,B,hungerford,Hungerford Corridor,605 HUNGERFORD DR 20850,,-77.152036,39.091806,-3.11,-644.57,5.12,yes
+233822,B,hungerford,Hungerford Corridor,603 HUNGERFORD DR 20850,,-77.152096,39.091808,-8.31,-644.79,5.12,yes
+233823,B,hungerford,Hungerford Corridor,601 HUNGERFORD DR 20850,,-77.152153,39.09181,-13.24,-645.01,5.12,yes
+233824,B,hungerford,Hungerford Corridor,599 HUNGERFORD DR 20850,,-77.152198,39.091811,-17.13,-645.12,5.12,yes
+233825,B,hungerford,Hungerford Corridor,597 HUNGERFORD DR 20850,,-77.152237,39.091812,-20.51,-645.23,5.12,yes
+233826,B,hungerford,Hungerford Corridor,595 HUNGERFORD DR 20850,,-77.152275,39.091814,-23.79,-645.45,5.12,yes
+233827,B,hungerford,Hungerford Corridor,591 HUNGERFORD DR 20850,,-77.152318,39.091815,-27.51,-645.56,5.12,yes
+233828,B,hungerford,Hungerford Corridor,589 HUNGERFORD DR 20850,,-77.152354,39.091816,-30.63,-645.68,5.12,yes
+233829,B,hungerford,Hungerford Corridor,587 HUNGERFORD DR 20850,,-77.152388,39.091817,-33.57,-645.79,4.25,yes
+251530,B,hungerford,Hungerford Corridor,275 N WASHINGTON ST 20850,,-77.153288,39.088332,-111.44,-258.89,12.92,yes
+253837,B,hungerford,Hungerford Corridor,9 MARTINS SQUARE LN 20850,,-77.15498,39.09041,-257.83,-489.59,11.54,yes
+253838,B,hungerford,Hungerford Corridor,13 MARTINS SQUARE LN 20850,,-77.15485,39.090388,-246.59,-487.14,10.75,yes
+336692,B,hungerford,Hungerford Corridor,785 HUNGERFORD DR 20850,,-77.152316,39.093952,-27.34,-882.81,4.88,yes
+336694,B,hungerford,Hungerford Corridor,625 HUNGERFORD DR 20850,,-77.151933,39.092551,5.8,-727.27,11.22,yes
+336911,B,hungerford,Hungerford Corridor,255 N WASHINGTON ST 20850,Apartments,-77.152429,39.087549,-37.12,-171.97,6.6,yes
+337166,B,hungerford,Hungerford Corridor,416 HUNGERFORD DR 20850,Hungerford Plaza,-77.151584,39.08844,35.99,-270.88,13.97,yes
+337167,B,hungerford,Hungerford Corridor,387 HUNGERFORD DR 20850,,-77.15021,39.08837,154.87,-263.11,7.62,yes
+337980,B,hungerford,Hungerford Corridor,501 HUNGERFORD DR 20850,City Center,-77.151973,39.090948,2.34,-549.31,16.59,yes
+338888,B,hungerford,Hungerford Corridor,808 HUNGERFORD DR 20850,,-77.153808,39.094772,-156.43,-973.84,6.38,yes
+339338,B,hungerford,Hungerford Corridor,700 HUNGERFORD DR 20850,,-77.154302,39.093061,-199.17,-783.89,2.84,yes
+339404,B,hungerford,Hungerford Corridor,285 N WASHINGTON ST 20850,,-77.152729,39.088174,-63.07,-241.35,7.53,yes
+341162,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154503,39.092264,-216.56,-695.41,7.03,yes
+341163,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154481,39.092432,-214.66,-714.06,7.03,yes
+341164,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154537,39.092006,-219.5,-666.77,7.03,yes
+341165,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.15452,39.092135,-218.03,-681.09,7.03,yes
+341166,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154495,39.092326,-215.87,-702.29,7.03,yes
+341167,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154529,39.09207,-218.81,-673.87,7.03,yes
+341168,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154174,39.092008,-188.1,-666.99,7.03,yes
+341169,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154146,39.092173,-185.67,-685.31,7.03,yes
+341170,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154107,39.092399,-182.3,-710.4,7.03,yes
+341171,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.15413,39.092267,-184.29,-695.74,7.03,yes
+341172,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154185,39.091944,-189.05,-659.89,7.03,yes
+341173,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154103,39.092423,-181.95,-713.06,7.03,yes
+341174,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154119,39.09233,-183.34,-702.74,7.03,yes
+341175,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154141,39.092204,-185.24,-688.75,7.03,yes
+341176,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154163,39.092073,-187.15,-674.21,7.03,yes
+341177,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154135,39.092236,-184.72,-692.3,8.74,yes
+341178,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154124,39.092298,-183.77,-699.19,7.03,yes
+341179,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154151,39.092142,-186.11,-681.87,7.03,yes
+341438,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154169,39.092039,-187.66,-670.43,7.03,yes
+341439,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154179,39.091977,-188.53,-663.55,7.03,yes
+341440,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154157,39.092107,-186.63,-677.98,7.03,yes
+341441,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153781,39.092015,-154.09,-667.77,7.03,yes
+341442,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153795,39.091888,-155.31,-653.67,7.03,yes
+341443,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153751,39.092277,-151.5,-696.85,6.84,yes
+341444,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153788,39.091954,-154.7,-661.0,7.03,yes
+341445,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153754,39.092248,-151.76,-693.63,6.84,yes
+341446,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153762,39.09218,-152.45,-686.09,6.84,yes
+341447,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153769,39.092117,-153.06,-679.09,6.84,yes
+341448,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153765,39.092149,-152.71,-682.64,6.84,yes
+341449,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153747,39.092308,-151.15,-700.3,7.03,yes
+341450,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153773,39.092085,-153.4,-675.54,7.03,yes
+341451,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153784,39.091985,-154.35,-664.44,7.03,yes
+341452,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.15374,39.092373,-150.55,-707.51,7.03,yes
+341453,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153791,39.091921,-154.96,-657.33,7.03,yes
+341454,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153758,39.092215,-152.1,-689.97,6.84,yes
+341455,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153743,39.092343,-150.81,-704.18,7.03,yes
+341691,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154486,39.092396,-215.09,-710.07,7.03,yes
+341692,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154113,39.092366,-182.82,-706.73,7.03,yes
+341693,B,hungerford,Hungerford Corridor,620 HUNGERFORD DR 20850,,-77.153777,39.09205,-153.75,-671.65,7.03,yes
+341694,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154478,39.092456,-214.4,-716.73,7.03,yes
+341695,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154499,39.092293,-216.22,-698.63,7.03,yes
+341696,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154524,39.092102,-218.38,-677.43,7.03,yes
+341697,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154533,39.092037,-219.16,-670.21,7.03,yes
+341698,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154507,39.092232,-216.91,-691.86,7.03,yes
+341699,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154541,39.091973,-219.85,-663.11,7.03,yes
+341700,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154516,39.092169,-217.69,-684.86,7.03,yes
+341701,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154491,39.09236,-215.52,-706.07,7.03,yes
+341702,B,hungerford,Hungerford Corridor,622 HUNGERFORD DR 20850,,-77.154511,39.092202,-217.26,-688.53,7.03,yes
+126987,C,regal-courthouse,Regal and Courthouse,36 MARYLAND AVE 20850,Montgomery Hills Apartments; Department Of Economic Development,-77.150741,39.085748,108.93,27.98,5.98,yes
+127071,C,regal-courthouse,Regal and Courthouse,39 MARYLAND AVE 20850,Wesmond Apartments,-77.151356,39.085371,55.72,69.83,24.24,yes
+127891,C,regal-courthouse,Regal and Courthouse,21 MARYLAND AVE 20850,Rockville Memorial,-77.151367,39.086597,54.77,-66.28,22.74,yes
+128588,C,regal-courthouse,Regal and Courthouse,26 MARYLAND AVE 20850,Montgomery Hills Apartments; Department Of Economic Development,-77.15067,39.086382,115.07,-42.41,18.77,yes
+128717,C,regal-courthouse,Regal and Courthouse,29 MARYLAND AVE 20850,,-77.151174,39.086299,71.47,-33.19,5.98,yes
+128822,C,regal-courthouse,Regal and Courthouse,20 MARYLAND AVE 20850,Montgomery Hills Apartments; Department Of Economic Development,-77.150722,39.086687,110.57,-76.27,5.98,yes
+129058,C,regal-courthouse,Regal and Courthouse,29 COURTHOUSE SQ 20850,Red Brick Courthouse,-77.151553,39.083656,38.68,260.22,12.84,yes
+129091,C,regal-courthouse,Regal and Courthouse,30 COURTHOUSE SQ 20850,,-77.151308,39.084276,59.87,191.39,13.78,yes
+129092,C,regal-courthouse,Regal and Courthouse,32 COURTHOUSE SQ 20850,MCE Federal Credit Union,-77.151187,39.084261,70.34,193.06,13.78,yes
+129186,C,regal-courthouse,Regal and Courthouse,50 MARYLAND AVE 20850,Montgomery County Circuit Court,-77.150259,39.083309,150.63,298.75,46.02,yes
+129932,C,regal-courthouse,Regal and Courthouse,27 COURTHOUSE SQ 20850,Gray Courthouse,-77.152004,39.08368,-0.35,257.56,12.84,yes
+130486,C,regal-courthouse,Regal and Courthouse,4 COURTHOUSE SQ 20850,,-77.1525,39.084319,-43.26,186.62,13.68,yes
+130524,C,regal-courthouse,Regal and Courthouse,24 COURTHOUSE SQ 20850,,-77.151562,39.084713,37.9,142.88,24.24,yes
+130563,C,regal-courthouse,Regal and Courthouse,20 COURTHOUSE SQ 20850,MCE Federal Credit Union,-77.152104,39.08426,-9.0,193.17,13.68,yes
+131187,C,regal-courthouse,Regal and Courthouse,22 COURTHOUSE SQ 20850,,-77.15188,39.084688,10.38,145.65,18.74,yes
+131579,C,regal-courthouse,Regal and Courthouse,150 MARYLAND AVE 20850,,-77.15168,39.080778,27.69,579.73,8.99,yes
+132710,C,regal-courthouse,Regal and Courthouse,191 E JEFFERSON ST 20850,District Court of MD - Rockville,-77.151789,39.082676,18.26,369.02,36.83,yes
+133670,C,regal-courthouse,Regal and Courthouse,100 MARYLAND AVE 20850,Council Office Building,-77.150633,39.082158,118.27,426.53,6.85,yes
+153949,C,regal-courthouse,Regal and Courthouse,34 MARYLAND AVE 20850,,-77.150745,39.086161,108.58,-17.87,5.98,yes
+153950,C,regal-courthouse,Regal and Courthouse,24 MARYLAND AVE 20850,,-77.150749,39.086229,108.24,-25.42,18.77,yes
+153951,C,regal-courthouse,Regal and Courthouse,31 MARYLAND AVE 20850,,-77.151233,39.085899,66.36,11.21,5.98,yes
+180822,C,regal-courthouse,Regal and Courthouse,110 MARYLAND AVE 20850,Council Office Building,-77.150854,39.081786,99.15,467.83,6.85,yes
+227492,C,regal-courthouse,Regal and Courthouse,33 MARYLAND AVE 20850,Wesmond Apartments,-77.151261,39.085664,63.94,37.3,24.24,yes
+227751,C,regal-courthouse,Regal and Courthouse,37 MARYLAND AVE 20850,,-77.151226,39.085494,66.97,56.17,19.64,yes
+238865,C,regal-courthouse,Regal and Courthouse,44 MARYLAND AVE 20850,,-77.150548,39.084405,125.63,177.07,41.77,yes
+238866,C,regal-courthouse,Regal and Courthouse,40 MARYLAND AVE 20850,,-77.150576,39.084698,123.21,144.54,46.47,yes
+240007,C,regal-courthouse,Regal and Courthouse,42 MARYLAND AVE 20850,Apartments,-77.150555,39.08453,125.02,163.2,50.78,yes
+255837,C,regal-courthouse,Regal and Courthouse,38 MARYLAND AVE 20850,,-77.15076,39.085442,107.29,61.95,23.53,yes
+274034,C,regal-courthouse,Regal and Courthouse,111 MARYLAND AVE 20850,Rockville City Hall,-77.15174,39.081767,22.5,469.94,13.8,yes
+274036,C,regal-courthouse,Regal and Courthouse,101 MONROE ST 20850,Executive Office Building,-77.14942,39.083052,223.23,327.28,67.94,yes
+277318,C,regal-courthouse,Regal and Courthouse,199 E MONTGOMERY AVE 20850,Rockville Town Square,-77.149826,39.083878,188.1,235.58,15.12,yes
+106251,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147567,39.080732,383.55,584.84,7.66,yes
+106470,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147581,39.080654,382.34,593.5,7.66,yes
+106471,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147598,39.08059,380.87,600.6,7.66,yes
+106886,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147714,39.080736,370.83,584.39,7.66,yes
+106887,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147742,39.080661,368.41,592.72,7.66,yes
+115819,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.14769,39.08084,372.91,572.85,11.7,yes
+115820,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147597,39.081082,380.95,545.98,7.66,yes
+115821,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147583,39.081158,382.17,537.54,7.66,yes
+123247,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147474,39.081135,391.6,540.1,7.66,yes
+123540,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147628,39.080932,378.27,562.63,7.66,yes
+124267,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147501,39.081072,389.26,547.09,7.66,yes
+124268,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147527,39.08091,387.01,565.08,7.66,yes
+124535,D,pike-metro,Rockville Pike and Metro,13 BEALL AVE 20850,Bealls Grant Apartments,-77.154387,39.08711,-206.53,-123.23,9.24,yes
+126672,D,pike-metro,Rockville Pike and Metro,200 N WASHINGTON ST 20850,,-77.153263,39.08628,-109.28,-31.08,5.21,yes
+126694,D,pike-metro,Rockville Pike and Metro,33 WOOD LN 20850,,-77.154816,39.085974,-243.64,2.89,10.56,yes
+126713,D,pike-metro,Rockville Pike and Metro,24 WOOD LN 20850,,-77.154006,39.085605,-173.56,43.85,9.98,yes
+126854,D,pike-metro,Rockville Pike and Metro,17 WOOD LN 20850,,-77.153801,39.085954,-155.83,5.11,7.69,yes
+126892,D,pike-metro,Rockville Pike and Metro,202 N WASHINGTON ST 20850,,-77.153597,39.08644,-138.17,-48.85,5.87,yes
+126956,D,pike-metro,Rockville Pike and Metro,111 ROCKVILLE PIKE 20850,Department of Economic Development,-77.149643,39.086014,203.93,-1.55,5.98,yes
+127113,D,pike-metro,Rockville Pike and Metro,200 N WASHINGTON ST 20850,,-77.153278,39.086453,-110.57,-50.29,2.61,yes
+127231,D,pike-metro,Rockville Pike and Metro,120 GIBBS ST 20850,Apartments,-77.152465,39.085514,-40.23,53.95,18.74,yes
+127428,D,pike-metro,Rockville Pike and Metro,21 WOOD LN 20850,,-77.153865,39.086116,-161.36,-12.88,3.51,yes
+127554,D,pike-metro,Rockville Pike and Metro,200 N WASHINGTON ST 20850,JC Hickman Exxon,-77.15315,39.086071,-99.5,-7.88,5.72,yes
+127646,D,pike-metro,Rockville Pike and Metro,21 WOOD LN 20850,,-77.153946,39.086079,-168.37,-8.77,2.88,yes
+127681,D,pike-metro,Rockville Pike and Metro,110 N WASHINGTON ST 20850,,-77.153182,39.085627,-102.27,41.41,7.69,yes
+127739,D,pike-metro,Rockville Pike and Metro,21 WOOD LN 20850,Jerusalem Mt Pleasant United Methodist Church,-77.153977,39.085974,-171.05,2.89,12.41,yes
+127747,D,pike-metro,Rockville Pike and Metro,110 N WASHINGTON ST 20850,,-77.153654,39.08538,-143.11,68.83,8.34,yes
+127788,D,pike-metro,Rockville Pike and Metro,25 WOOD LN 20850,,-77.154418,39.086233,-209.21,-25.87,12.9,yes
+128154,D,pike-metro,Rockville Pike and Metro,246 N WASHINGTON ST 20850,,-77.153773,39.087244,-153.4,-138.11,8.85,yes
+128471,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146653,39.084673,462.63,147.32,2.23,yes
+128508,D,pike-metro,Rockville Pike and Metro,100 GIBBS ST 20850,,-77.152185,39.085563,-16.01,48.51,24.24,yes
+128548,D,pike-metro,Rockville Pike and Metro,246 N WASHINGTON ST 20850,,-77.153828,39.087007,-158.16,-111.79,4.51,yes
+128601,D,pike-metro,Rockville Pike and Metro,260 N WASHINGTON ST 20850,,-77.153348,39.087206,-116.63,-133.89,3.73,yes
+128821,D,pike-metro,Rockville Pike and Metro,101 GIBBS ST 20850,,-77.151713,39.085312,24.83,76.38,13.68,yes
+128960,D,pike-metro,Rockville Pike and Metro,14 BEALL AVE 20850,,-77.154447,39.086622,-211.72,-69.05,4.89,yes
+128964,D,pike-metro,Rockville Pike and Metro,16 BEALL AVE 20850,,-77.154632,39.086602,-227.72,-66.83,5.1,yes
+129090,D,pike-metro,Rockville Pike and Metro,99 S WASHINGTON ST 20850,,-77.153087,39.083333,-94.05,296.08,9.41,yes
+129215,D,pike-metro,Rockville Pike and Metro,17 W JEFFERSON ST 20850,,-77.153484,39.083308,-128.4,298.86,10.21,yes
+129287,D,pike-metro,Rockville Pike and Metro,14 S ADAMS ST 20850,,-77.154594,39.083269,-224.44,303.19,11.1,yes
+129444,D,pike-metro,Rockville Pike and Metro,101 S WASHINGTON ST 20850,,-77.153107,39.083033,-95.78,329.39,10.88,yes
+129476,D,pike-metro,Rockville Pike and Metro,51 MONROE PL 20850,MCG,-77.148031,39.083776,343.4,246.9,73.65,yes
+129521,D,pike-metro,Rockville Pike and Metro,1 CHURCH ST 20850,,-77.146252,39.083118,497.33,319.95,38.1,yes
+129529,D,pike-metro,Rockville Pike and Metro,6 MONROE ST 20850,Americana Centre Condo,-77.147226,39.083147,413.05,316.73,9.45,yes
+129590,D,pike-metro,Rockville Pike and Metro,132 MONROE ST 20850,,-77.146937,39.081867,438.06,458.83,2.87,yes
+129602,D,pike-metro,Rockville Pike and Metro,109 S WASHINGTON ST 20850,Christ Episcopal Day School,-77.153171,39.08234,-101.32,406.32,13.01,yes
+129627,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.145791,39.083929,537.21,229.92,2.23,yes
+129773,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146378,39.084159,486.42,204.38,2.23,yes
+129778,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.145973,39.083876,521.46,235.8,0.95,yes
+129809,D,pike-metro,Rockville Pike and Metro,77 S WASHINGTON ST 20850,,-77.153563,39.083467,-135.23,281.21,3.17,yes
+129814,D,pike-metro,Rockville Pike and Metro,21 CHURCH ST 20850,,-77.145647,39.083206,549.67,310.18,29.87,yes
+129894,D,pike-metro,Rockville Pike and Metro,4 MONROE ST 20850,Americana Centre Condo,-77.147675,39.083121,374.21,319.62,35.22,yes
+129927,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.145888,39.083802,528.82,244.02,0.99,yes
+129938,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.145632,39.083792,550.97,245.13,2.23,yes
+129985,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146068,39.0839,513.25,233.14,1.97,yes
+130005,D,pike-metro,Rockville Pike and Metro,77 S WASHINGTON ST 20850,,-77.153221,39.083601,-105.64,266.33,17.04,yes
+130099,D,pike-metro,Rockville Pike and Metro,90 MONROE ST 20850,TOWN CENTER,-77.148407,39.083351,310.87,294.08,28.84,yes
+130139,D,pike-metro,Rockville Pike and Metro,2 W MONTGOMERY AVE 20850,Courthouse Station Post Office,-77.153159,39.083973,-100.28,225.03,11.79,yes
+130140,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146228,39.084029,499.4,218.81,2.2,yes
+130148,D,pike-metro,Rockville Pike and Metro,103 N ADAMS ST 20850,,-77.154602,39.085312,-225.13,76.38,10.99,yes
+130257,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,Rockville,-77.1466,39.084401,467.22,177.52,10.1,yes
+130318,D,pike-metro,Rockville Pike and Metro,204 HIGHLAND AVE 20850,,-77.144614,39.084694,639.01,144.98,5.12,no
+130331,D,pike-metro,Rockville Pike and Metro,5 N ADAMS ST 20850,,-77.154613,39.084657,-226.08,149.1,9.72,yes
+130368,D,pike-metro,Rockville Pike and Metro,106 E MIDDLE LN 20850,,-77.15262,39.085222,-53.64,86.37,5.72,yes
+130426,D,pike-metro,Rockville Pike and Metro,201 N WASHINGTON ST 20850,,-77.152734,39.085219,-63.51,86.7,5.72,yes
+130427,D,pike-metro,Rockville Pike and Metro,25 W MIDDLE LN 20850,,-77.154216,39.085187,-191.73,90.26,10.92,yes
+130483,D,pike-metro,Rockville Pike and Metro,39 W MONTGOMERY AVE 20850,,-77.154503,39.084399,-216.56,177.74,11.14,yes
+130529,D,pike-metro,Rockville Pike and Metro,11 N WASHINGTON ST 20850,Board of Investment Trustees,-77.152596,39.084635,-51.57,151.54,6.16,yes
+130561,D,pike-metro,Rockville Pike and Metro,15 W MONTGOMERY AVE 20850,,-77.153605,39.084308,-138.87,187.84,9.72,yes
+130583,D,pike-metro,Rockville Pike and Metro,80024 METRORAIL TRACK A2 RAIL 20850,Metro Station (Rockville),-77.146908,39.084897,440.57,122.45,4.61,yes
+130796,D,pike-metro,Rockville Pike and Metro,23 W MIDDLE LN 20850,,-77.153991,39.085189,-172.26,90.03,8.34,yes
+130905,D,pike-metro,Rockville Pike and Metro,255 ROCKVILLE PIKE 20850,Rockville Center,-77.148426,39.084495,309.23,167.08,17.25,yes
+130913,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146812,39.084808,448.87,132.33,3.89,yes
+130927,D,pike-metro,Rockville Pike and Metro,50 W MONTGOMERY AVE 20850,,-77.154134,39.083976,-184.64,224.7,12.04,yes
+130944,D,pike-metro,Rockville Pike and Metro,101 N ADAMS ST 20850,,-77.154609,39.085132,-225.73,96.36,8.6,yes
+130989,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,,-77.146044,39.084284,515.32,190.51,3.24,yes
+131008,D,pike-metro,Rockville Pike and Metro,51 MONROE ST 20850,,-77.147277,39.084226,408.64,196.94,5.75,yes
+131014,D,pike-metro,Rockville Pike and Metro,201 HIGHLAND AVE 20850,,-77.144402,39.084358,657.39,182.29,8.22,yes
+131082,D,pike-metro,Rockville Pike and Metro,260 E JEFFERSON ST 20850,,-77.149417,39.082242,223.48,417.2,6.86,yes
+131092,D,pike-metro,Rockville Pike and Metro,14 MONROE ST 20850,Americana Centre Condo,-77.14743,39.082719,395.4,364.25,9.45,yes
+131132,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,Metro Station (Rockville),-77.146097,39.084247,510.74,194.61,5.75,yes
+131165,D,pike-metro,Rockville Pike and Metro,27 W JEFFERSON ST 20850,,-77.154092,39.083384,-181.0,290.42,11.68,yes
+131221,D,pike-metro,Rockville Pike and Metro,250 ROCKVILLE PIKE 20850,Metro Station (Rockville),-77.146165,39.084201,504.85,199.72,5.61,yes
+131299,D,pike-metro,Rockville Pike and Metro,22 BALTIMORE RD 20850,,-77.14509,39.082734,597.86,362.58,12.89,yes
+131322,D,pike-metro,Rockville Pike and Metro,200 E MIDDLE LN 20850,,-77.150644,39.08531,117.32,76.6,24.24,yes
+131350,D,pike-metro,Rockville Pike and Metro,123 S ADAMS ST 20850,,-77.154985,39.081345,-258.27,516.78,7.59,yes
+131384,D,pike-metro,Rockville Pike and Metro,136 MONROE ST 20850,Americana Centre Condo,-77.146894,39.081829,441.78,463.05,7.09,yes
+131462,D,pike-metro,Rockville Pike and Metro,119 S WASHINGTON ST 20850,,-77.153063,39.081794,-91.97,466.94,10.43,yes
+131479,D,pike-metro,Rockville Pike and Metro,119 S WASHINGTON ST 20850,,-77.153094,39.081599,-94.65,488.59,8.65,yes
+131565,D,pike-metro,Rockville Pike and Metro,128 S ADAMS ST 20850,,-77.154239,39.081274,-193.72,524.67,18.3,yes
+131594,D,pike-metro,Rockville Pike and Metro,134 MONROE ST 20850,,-77.146914,39.081768,440.05,469.82,2.87,yes
+131607,D,pike-metro,Rockville Pike and Metro,124 MONROE ST 20850,Americana Centre Condo,-77.14729,39.081728,407.52,474.27,7.09,yes
+131642,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147624,39.081002,378.62,554.86,7.66,yes
+131656,D,pike-metro,Rockville Pike and Metro,144 MONROE ST 20850,,-77.147005,39.082046,432.17,438.96,7.49,yes
+131682,D,pike-metro,Rockville Pike and Metro,132 MONROE ST 20850,,-77.14699,39.08174,433.47,472.93,6.82,yes
+131687,D,pike-metro,Rockville Pike and Metro,191 LELAND ST 20850,,-77.153926,39.080965,-166.64,558.97,10.23,yes
+131690,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147552,39.080815,384.85,575.62,7.66,yes
+131723,D,pike-metro,Rockville Pike and Metro,520 VEIRS MILL RD 20852,St Marys Catholic Church,-77.144637,39.081829,637.06,463.05,13.33,yes
+131780,D,pike-metro,Rockville Pike and Metro,208 MONROE ST 20850,,-77.150079,39.07996,166.21,670.54,9.43,yes
+131877,D,pike-metro,Rockville Pike and Metro,600 JEFFERSON PLZ 20850,Family Justice Center,-77.146198,39.081194,502.0,533.55,23.51,yes
+131905,D,pike-metro,Rockville Pike and Metro,130 MONROE ST 20850,,-77.147059,39.081704,427.5,476.93,6.82,yes
+131952,D,pike-metro,Rockville Pike and Metro,520 VEIRS MILL RD 20852,St Marys Catholic Church; St Marys School & Cemetery,-77.145029,39.081918,603.14,453.17,10.21,yes
+131967,D,pike-metro,Rockville Pike and Metro,146 MONROE ST 20850,,-77.147166,39.081956,418.24,448.95,7.49,yes
+131970,D,pike-metro,Rockville Pike and Metro,128 MONROE ST 20850,,-77.147127,39.08169,421.62,478.48,6.71,yes
+132035,D,pike-metro,Rockville Pike and Metro,600 VEIRS MILL RD 20852,St Marys School,-77.143669,39.081573,720.81,491.47,7.02,yes
+132050,D,pike-metro,Rockville Pike and Metro,119 S WASHINGTON ST 20850,,-77.153239,39.08171,-107.2,476.26,4.34,yes
+132064,D,pike-metro,Rockville Pike and Metro,121 S WASHINGTON ST 20850,,-77.153193,39.081503,-103.22,499.24,6.09,yes
+132075,D,pike-metro,Rockville Pike and Metro,140 FLEET ST 20850,,-77.150943,39.081476,91.45,502.24,5.82,yes
+132095,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.147507,39.080993,388.74,555.86,7.66,yes
+132155,D,pike-metro,Rockville Pike and Metro,121 S WASHINGTON ST 20850,,-77.153083,39.081418,-93.7,508.68,16.4,yes
+132181,D,pike-metro,Rockville Pike and Metro,120 MONROE ST 20850,Americana Centre Condo,-77.147547,39.081813,385.28,464.83,9.22,yes
+132183,D,pike-metro,Rockville Pike and Metro,138 MONROE ST 20850,,-77.146883,39.081891,442.73,456.17,2.87,yes
+132301,D,pike-metro,Rockville Pike and Metro,123 S WASHINGTON ST 20850,,-77.15325,39.081291,-108.15,522.78,4.24,yes
+132438,D,pike-metro,Rockville Pike and Metro,126 S WASHINGTON ST 20850,,-77.152469,39.081379,-40.58,513.01,12.65,yes
+132447,D,pike-metro,Rockville Pike and Metro,126 S ADAMS ST 20850,,-77.15446,39.081348,-212.84,516.45,5.85,yes
+132461,D,pike-metro,Rockville Pike and Metro,123 S WASHINGTON ST 20850,,-77.153059,39.081197,-91.63,533.22,7.17,yes
+132505,D,pike-metro,Rockville Pike and Metro,142 MONROE ST 20850,,-77.146921,39.082022,439.44,441.63,7.49,yes
+132545,D,pike-metro,Rockville Pike and Metro,110 S WASHINGTON ST 20850,,-77.152577,39.082302,-49.92,410.54,10.38,yes
+132552,D,pike-metro,Rockville Pike and Metro,50 MONROE PL 20850,,-77.148126,39.083198,335.18,311.07,27.98,yes
+132569,D,pike-metro,Rockville Pike and Metro,102 MONROE ST 20850,Americana Centre Condo,-77.147917,39.082792,353.27,356.14,12.0,yes
+132575,D,pike-metro,Rockville Pike and Metro,104 S ADAMS ST 20850,,-77.154529,39.082812,-218.81,353.92,11.24,yes
+132581,D,pike-metro,Rockville Pike and Metro,98 CHURCH ST 20850,,-77.144744,39.082801,627.8,355.14,11.69,yes
+132584,D,pike-metro,Rockville Pike and Metro,20 MONROE ST 20850,Americana Centre Condo,-77.147153,39.082443,419.37,394.89,9.45,yes
+132625,D,pike-metro,Rockville Pike and Metro,8 MONROE ST 20850,Americana Centre Condo,-77.147103,39.083052,423.7,327.28,9.45,yes
+132654,D,pike-metro,Rockville Pike and Metro,100 MONROE ST 20850,Americana Centre Condo,-77.147745,39.082753,368.15,360.47,12.0,yes
+132726,D,pike-metro,Rockville Pike and Metro,108 MONROE ST 20850,Americana Centre Condo,-77.14818,39.082425,330.51,396.89,12.0,yes
+132738,D,pike-metro,Rockville Pike and Metro,16 MONROE ST 20850,Americana Centre Condo,-77.147469,39.082584,392.03,379.23,9.45,yes
+132778,D,pike-metro,Rockville Pike and Metro,22 W JEFFERSON ST 20850,Christ Episcopal School,-77.153818,39.082891,-157.3,345.15,14.1,yes
+132804,D,pike-metro,Rockville Pike and Metro,140 MONROE ST 20850,Americana Centre Condo,-77.146897,39.081952,441.52,449.4,7.15,yes
+132826,D,pike-metro,Rockville Pike and Metro,18 MONROE ST 20850,Americana Centre Condo,-77.147279,39.082557,408.47,382.23,9.45,yes
+132848,D,pike-metro,Rockville Pike and Metro,100 S WASHINGTON ST 20850,,-77.152521,39.082958,-45.08,337.71,9.6,yes
+132911,D,pike-metro,Rockville Pike and Metro,146 MONROE ST 20850,Americana Centre Condo,-77.147065,39.082071,426.98,436.19,7.09,yes
+132933,D,pike-metro,Rockville Pike and Metro,10 MONROE ST 20850,Americana Centre Condo,-77.147142,39.082929,420.32,340.93,9.45,yes
+132943,D,pike-metro,Rockville Pike and Metro,122 MONROE ST 20850,Americana Centre Condo,-77.147411,39.08178,397.05,468.49,9.52,yes
+132989,D,pike-metro,Rockville Pike and Metro,520 VEIRS MILL RD 20852,St Marys Catholic Church; St Marys School & Cemetery,-77.144973,39.082144,607.99,428.08,7.01,yes
+133071,D,pike-metro,Rockville Pike and Metro,114 MONROE ST 20850,Americana Centre Condo,-77.148156,39.082282,332.59,412.76,3.73,yes
+133080,D,pike-metro,Rockville Pike and Metro,12 MONROE ST 20850,Americana Centre Condo,-77.147268,39.08279,409.42,356.36,9.45,yes
+133118,D,pike-metro,Rockville Pike and Metro,108 S WASHINGTON ST 20850,,-77.152576,39.082483,-49.84,390.45,10.41,yes
+133131,D,pike-metro,Rockville Pike and Metro,114 MONROE ST 20850,Americana Centre Condo,-77.148352,39.082087,315.63,434.41,7.99,yes
+133142,D,pike-metro,Rockville Pike and Metro,104 MONROE ST 20850,Americana Centre Condo,-77.148018,39.082704,344.53,365.91,12.0,yes
+133143,D,pike-metro,Rockville Pike and Metro,8 BALTIMORE RD 20850,SUNRISE OF ROCKVILLE,-77.145974,39.082561,521.38,381.79,15.43,yes
+133163,D,pike-metro,Rockville Pike and Metro,104 S WASHINGTON ST 20850,,-77.152555,39.082702,-48.02,366.13,10.93,yes
+133248,D,pike-metro,Rockville Pike and Metro,98 CHURCH ST 20850,,-77.14461,39.082679,639.39,368.69,9.23,yes
+133275,D,pike-metro,Rockville Pike and Metro,112 MONROE ST 20850,Americana Centre Condo,-77.148538,39.082086,299.54,434.52,9.77,yes
+133287,D,pike-metro,Rockville Pike and Metro,148 MONROE ST 20850,Americana Centre Condo,-77.147177,39.082117,417.29,431.08,9.33,yes
+133314,D,pike-metro,Rockville Pike and Metro,12 MONROE ST 20850,Americana Centre Condo,-77.147099,39.082658,424.04,371.02,2.92,yes
+133318,D,pike-metro,Rockville Pike and Metro,106 MONROE ST 20850,Americana Centre Condo,-77.148095,39.082582,337.87,379.46,12.0,yes
+133363,D,pike-metro,Rockville Pike and Metro,118 MONROE ST 20850,Americana Centre Condo,-77.147896,39.082033,355.08,440.4,40.25,yes
+133385,D,pike-metro,Rockville Pike and Metro,107 S WASHINGTON ST 20850,Christ Episcopal Church,-77.153084,39.08259,-93.79,378.57,10.73,yes
+133476,D,pike-metro,Rockville Pike and Metro,100 FLEET ST 20850,,-77.149741,39.081988,195.45,445.4,4.49,yes
+133483,D,pike-metro,Rockville Pike and Metro,110 MONROE ST 20850,Americana Centre Condo,-77.148627,39.082338,291.84,406.54,7.28,yes
+133546,D,pike-metro,Rockville Pike and Metro,129 S ADAMS ST 20850,,-77.154999,39.080947,-259.48,560.97,9.2,yes
+133550,D,pike-metro,Rockville Pike and Metro,118 S ADAMS ST 20850,,-77.154466,39.081727,-213.36,474.38,11.76,yes
+133576,D,pike-metro,Rockville Pike and Metro,150 MONROE ST 20850,Americana Centre Condo,-77.14737,39.08214,400.59,428.53,9.37,yes
+133613,D,pike-metro,Rockville Pike and Metro,126 MONROE ST 20850,,-77.147195,39.081726,415.74,474.49,6.71,yes
+133644,D,pike-metro,Rockville Pike and Metro,22 MONROE ST 20850,Americana Centre Condo,-77.147219,39.082339,413.66,406.43,9.45,yes
+134153,D,pike-metro,Rockville Pike and Metro,210 MONROE ST 20850,,-77.150204,39.079804,155.41,687.86,5.12,no
+134158,D,pike-metro,Rockville Pike and Metro,208 MONROE ST 20850,,-77.149984,39.079831,174.44,684.87,9.43,no
+134854,D,pike-metro,Rockville Pike and Metro,100 PARK AVE 20850,,-77.147016,39.080921,431.22,563.86,13.67,yes
+134893,D,pike-metro,Rockville Pike and Metro,204 MONROE ST 20850,,-77.149714,39.080065,197.79,658.89,10.95,yes
+134913,D,pike-metro,Rockville Pike and Metro,194 LELAND ST 20850,,-77.153295,39.081043,-112.05,550.31,11.45,yes
+135057,D,pike-metro,Rockville Pike and Metro,193 LELAND ST 20850,,-77.153911,39.080794,-165.34,577.96,21.75,yes
+135172,D,pike-metro,Rockville Pike and Metro,700 ROCKVILLE PIKE 20852,Courthouse Exxon,-77.143485,39.080446,736.73,616.59,3.67,yes
+135202,D,pike-metro,Rockville Pike and Metro,130 S ADAMS ST 20850,,-77.154431,39.080952,-210.33,560.41,9.94,yes
+135285,D,pike-metro,Rockville Pike and Metro,125 S WASHINGTON ST 20850,,-77.153091,39.080902,-94.39,565.97,8.77,yes
+135353,D,pike-metro,Rockville Pike and Metro,200 MONROE ST 20850,,-77.149518,39.080857,214.75,570.96,7.01,yes
+135416,D,pike-metro,Rockville Pike and Metro,103 FLEET ST 20850,,-77.151041,39.080886,82.97,567.74,10.19,yes
+135436,D,pike-metro,Rockville Pike and Metro,9 DODGE ST 20852,,-77.143572,39.080695,729.2,588.95,7.22,yes
+135593,D,pike-metro,Rockville Pike and Metro,193 LELAND ST 20850,,-77.154089,39.080703,-180.74,588.06,5.93,yes
+135651,D,pike-metro,Rockville Pike and Metro,200 MONROE ST 20850,,-77.149092,39.080703,251.6,588.06,2.42,yes
+135715,D,pike-metro,Rockville Pike and Metro,401 E JEFFERSON ST 20850,,-77.14774,39.080588,368.58,600.82,7.66,yes
+135717,D,pike-metro,Rockville Pike and Metro,105 FLEET ST 20850,,-77.150878,39.080803,97.08,576.96,7.59,yes
+135727,D,pike-metro,Rockville Pike and Metro,490 FLEET ST 20850,,-77.146623,39.0806,465.23,599.49,22.23,yes
+207203,D,pike-metro,Rockville Pike and Metro,230 N WASHINGTON ST 20850,,-77.153254,39.086623,-108.5,-69.16,19.33,yes
+209991,D,pike-metro,Rockville Pike and Metro,205 N ADAMS ST 20850,,-77.154641,39.087052,-228.5,-116.79,6.16,yes
+210000,D,pike-metro,Rockville Pike and Metro,31 WOOD LN 20850,,-77.15466,39.086289,-230.15,-32.08,8.15,yes
+210259,D,pike-metro,Rockville Pike and Metro,6 W MIDDLE LN 20850,Courthouse Center,-77.15364,39.08473,-141.9,140.99,5.42,yes
+210263,D,pike-metro,Rockville Pike and Metro,10 N WASHINGTON ST 20850,Courthouse Center,-77.153516,39.084576,-131.17,158.09,5.9,yes
+210526,D,pike-metro,Rockville Pike and Metro,4 S ADAMS ST 20850,,-77.154568,39.083875,-222.19,235.91,5.74,yes
+210795,D,pike-metro,Rockville Pike and Metro,489 S STONESTREET AVE 20850,,-77.144213,39.083146,673.74,316.84,5.77,yes
+211255,D,pike-metro,Rockville Pike and Metro,141 GIBBS ST 20850,,-77.151765,39.086338,20.33,-37.52,22.74,yes
+212553,D,pike-metro,Rockville Pike and Metro,119 GIBBS ST 20850,,-77.151866,39.085971,11.59,3.22,4.51,yes
+212554,D,pike-metro,Rockville Pike and Metro,135 GIBBS ST 20850,,-77.151871,39.086121,11.16,-13.43,4.51,yes
+224748,D,pike-metro,Rockville Pike and Metro,201 N ADAMS ST 20850,,-77.15464,39.086937,-228.42,-104.02,7.73,yes
+224749,D,pike-metro,Rockville Pike and Metro,203 N ADAMS ST 20850,,-77.154667,39.086978,-230.75,-108.57,5.7,yes
+225010,D,pike-metro,Rockville Pike and Metro,207 N ADAMS ST 20850,,-77.154641,39.087111,-228.5,-123.34,3.2,yes
+225011,D,pike-metro,Rockville Pike and Metro,209 N ADAMS ST 20850,,-77.154641,39.087165,-228.5,-129.33,3.31,yes
+225012,D,pike-metro,Rockville Pike and Metro,211 N ADAMS ST 20850,,-77.154642,39.087226,-228.59,-136.11,3.06,yes
+227488,D,pike-metro,Rockville Pike and Metro,225 N WASHINGTON ST 20850,,-77.152575,39.086577,-49.75,-64.06,18.74,yes
+227489,D,pike-metro,Rockville Pike and Metro,156 GIBBS ST 20850,,-77.152315,39.086794,-27.25,-88.15,5.72,yes
+227490,D,pike-metro,Rockville Pike and Metro,130 GIBBS ST 20850,,-77.152191,39.086029,-16.53,-3.22,22.74,yes
+227491,D,pike-metro,Rockville Pike and Metro,115 GIBBS ST 20850,Wesmond Apartments,-77.151533,39.08576,40.41,26.64,24.24,yes
+228546,D,pike-metro,Rockville Pike and Metro,115 GIBBS ST 20850,,-77.151816,39.085881,15.92,13.21,24.24,yes
+228547,D,pike-metro,Rockville Pike and Metro,113 GIBBS ST 20850,,-77.151721,39.08578,24.14,24.42,23.18,yes
+228548,D,pike-metro,Rockville Pike and Metro,107 GIBBS ST 20850,Wesmond Apartments,-77.151755,39.085559,21.2,48.96,24.24,yes
+231415,D,pike-metro,Rockville Pike and Metro,8 W MIDDLE LN 20850,Courthouse Center,-77.153416,39.084758,-122.51,137.88,5.9,yes
+231416,D,pike-metro,Rockville Pike and Metro,12 W MIDDLE LN 20850,Courthouse Center,-77.153715,39.084647,-148.38,150.21,5.42,yes
+231417,D,pike-metro,Rockville Pike and Metro,4 W MIDDLE LN 20850,Courthouse Center,-77.153367,39.084438,-118.27,173.41,4.51,yes
+231418,D,pike-metro,Rockville Pike and Metro,4 N WASHINGTON ST 20850,Courthouse Center,-77.153297,39.084359,-112.22,182.18,5.42,yes
+231677,D,pike-metro,Rockville Pike and Metro,2 N WASHINGTON ST 20850,Courthouse Center,-77.15331,39.084283,-113.34,190.62,4.51,yes
+232781,D,pike-metro,Rockville Pike and Metro,98 W MONTGOMERY AVE 20850,,-77.154662,39.083939,-230.32,228.81,4.66,yes
+232782,D,pike-metro,Rockville Pike and Metro,94 W MONTGOMERY AVE 20850,,-77.154569,39.083956,-222.27,226.92,4.66,yes
+232783,D,pike-metro,Rockville Pike and Metro,90 W MONTGOMERY AVE 20850,,-77.154504,39.08394,-216.65,228.7,4.66,yes
+232960,D,pike-metro,Rockville Pike and Metro,155 GIBBS ST 20850,,-77.15177,39.08678,19.9,-86.59,6.0,yes
+232961,D,pike-metro,Rockville Pike and Metro,141 GIBBS ST 20850,,-77.151769,39.086677,19.99,-75.16,22.74,yes
+232962,D,pike-metro,Rockville Pike and Metro,141 GIBBS ST 20850,MC Government,-77.151768,39.08655,20.07,-61.06,22.74,yes
+232963,D,pike-metro,Rockville Pike and Metro,234 N WASHINGTON ST 20850,,-77.15316,39.086673,-100.36,-74.71,14.2,yes
+232964,D,pike-metro,Rockville Pike and Metro,232 N WASHINGTON ST 20850,,-77.15314,39.0866,-98.63,-66.61,14.2,yes
+232966,D,pike-metro,Rockville Pike and Metro,27 WOOD LN 20850,,-77.15484,39.086154,-245.72,-17.1,8.15,yes
+232967,D,pike-metro,Rockville Pike and Metro,29 WOOD LN 20850,,-77.154792,39.086257,-241.57,-28.53,8.15,yes
+233050,D,pike-metro,Rockville Pike and Metro,485 S STONESTREET AVE 20850,,-77.144122,39.0831,681.62,321.95,5.77,yes
+233051,D,pike-metro,Rockville Pike and Metro,481 S STONESTREET AVE 20850,,-77.14407,39.083058,686.11,326.61,5.77,yes
+244315,D,pike-metro,Rockville Pike and Metro,16280 CSX TRACK 1 RAIL 20850,Rockville,-77.146044,39.084478,515.32,168.97,8.47,yes
+245888,D,pike-metro,Rockville Pike and Metro,18 W MONTGOMERY AVE 20850,,-77.15354,39.084016,-133.24,220.26,10.9,yes
+247224,D,pike-metro,Rockville Pike and Metro,152 GIBBS ST 20850,,-77.152177,39.086548,-15.31,-60.84,14.2,yes
+248283,D,pike-metro,Rockville Pike and Metro,112 N WASHINGTON ST 20850,,-77.153186,39.085443,-102.61,61.84,23.2,yes
+248284,D,pike-metro,Rockville Pike and Metro,110 N WASHINGTON ST 20850,,-77.153225,39.085353,-105.99,71.83,18.4,yes
+248285,D,pike-metro,Rockville Pike and Metro,110 N WASHINGTON ST 20850,,-77.153201,39.085196,-103.91,89.26,5.9,yes
+249173,D,pike-metro,Rockville Pike and Metro,12 N WASHINGTON ST 20850,Courthouse Center,-77.153478,39.08468,-127.88,146.54,5.42,yes
+251529,D,pike-metro,Rockville Pike and Metro,121 ROCKVILLE PIKE 20850,Department Of Economic Development,-77.149061,39.085621,254.29,42.08,36.11,yes
+253420,D,pike-metro,Rockville Pike and Metro,150 GIBBS ST 20850,,-77.152225,39.086283,-19.47,-31.42,18.74,yes
+253421,D,pike-metro,Rockville Pike and Metro,154 GIBBS ST 20850,,-77.152252,39.086687,-21.8,-76.27,5.72,yes
+255540,D,pike-metro,Rockville Pike and Metro,20 BALTIMORE RD 20850,,-77.145107,39.082627,596.39,374.46,8.55,yes
+271548,D,pike-metro,Rockville Pike and Metro,20 W JEFFERSON ST 20850,,-77.153539,39.082934,-133.16,340.38,5.12,yes
+271549,D,pike-metro,Rockville Pike and Metro,18 W JEFFERSON ST 20850,,-77.153479,39.082935,-127.97,340.27,5.12,yes
+271550,D,pike-metro,Rockville Pike and Metro,16 W JEFFERSON ST 20850,,-77.153419,39.082936,-122.77,340.16,5.12,yes
+271551,D,pike-metro,Rockville Pike and Metro,14 W JEFFERSON ST 20850,,-77.15337,39.082936,-118.53,340.16,5.12,yes
+271552,D,pike-metro,Rockville Pike and Metro,24 W JEFFERSON ST 20850,,-77.153913,39.082745,-165.52,361.36,7.18,yes
+271553,D,pike-metro,Rockville Pike and Metro,28 W JEFFERSON ST 20850,,-77.153913,39.082658,-165.52,371.02,7.18,yes
+271554,D,pike-metro,Rockville Pike and Metro,46 W JEFFERSON ST 20850,,-77.153912,39.082269,-165.43,414.2,6.63,yes
+271555,D,pike-metro,Rockville Pike and Metro,44 W JEFFERSON ST 20850,,-77.153912,39.082312,-165.43,409.43,6.63,yes
+271556,D,pike-metro,Rockville Pike and Metro,42 W JEFFERSON ST 20850,,-77.153913,39.082355,-165.52,404.66,7.18,yes
+271557,D,pike-metro,Rockville Pike and Metro,40 W JEFFERSON ST 20850,,-77.153913,39.082398,-165.52,399.88,7.18,yes
+271558,D,pike-metro,Rockville Pike and Metro,38 W JEFFERSON ST 20850,,-77.153913,39.082442,-165.52,395.0,7.18,yes
+271559,D,pike-metro,Rockville Pike and Metro,36 W JEFFERSON ST 20850,,-77.153913,39.082485,-165.52,390.23,7.18,yes
+271829,D,pike-metro,Rockville Pike and Metro,34 W JEFFERSON ST 20850,,-77.153913,39.082528,-165.52,385.45,5.76,yes
+271830,D,pike-metro,Rockville Pike and Metro,32 W JEFFERSON ST 20850,,-77.153913,39.082572,-165.52,380.57,7.18,yes
+271831,D,pike-metro,Rockville Pike and Metro,30 W JEFFERSON ST 20850,,-77.153913,39.082615,-165.52,375.79,7.18,yes
+271832,D,pike-metro,Rockville Pike and Metro,48 W JEFFERSON ST 20850,,-77.153947,39.082234,-168.46,418.09,6.09,yes
+271833,D,pike-metro,Rockville Pike and Metro,26 W JEFFERSON ST 20850,,-77.153913,39.082701,-165.52,366.25,7.18,yes
+272526,D,pike-metro,Rockville Pike and Metro,33 MONROE ST 20850,,-77.149224,39.084552,240.18,160.75,52.73,yes
+272794,D,pike-metro,Rockville Pike and Metro,35 MONROE ST 20850,,-77.149421,39.084539,223.14,162.2,24.25,yes
+272795,D,pike-metro,Rockville Pike and Metro,31 MONROE ST 20850,,-77.149259,39.084727,237.16,141.32,8.64,yes
+274033,D,pike-metro,Rockville Pike and Metro,200 MONROE ST 20850,,-77.149331,39.081234,230.93,529.11,15.27,yes
+274035,D,pike-metro,Rockville Pike and Metro,111 FLEET ST 20850,,-77.150474,39.080663,132.03,592.5,10.96,yes
+277387,D,pike-metro,Rockville Pike and Metro,106 S ADAMS ST 20850,,-77.154566,39.082599,-222.01,377.57,11.77,yes
+277388,D,pike-metro,Rockville Pike and Metro,100 S ADAMS ST 20850,,-77.154527,39.083014,-218.64,331.5,7.29,yes
+277389,D,pike-metro,Rockville Pike and Metro,105 S WASHINGTON ST 20850,,-77.153059,39.082783,-91.63,357.14,10.55,yes
+277883,D,pike-metro,Rockville Pike and Metro,101 FLEET ST 20850,,-77.151216,39.080931,67.83,562.75,9.27,yes
+277965,D,pike-metro,Rockville Pike and Metro,116 S ADAMS ST 20850,,-77.154512,39.081931,-217.34,451.73,7.18,yes
+277966,D,pike-metro,Rockville Pike and Metro,110 S ADAMS ST 20850,,-77.154549,39.082254,-220.54,415.87,11.05,yes
+277968,D,pike-metro,Rockville Pike and Metro,132 S ADAMS ST 20850,,-77.154469,39.080754,-213.62,582.4,10.68,yes
+277969,D,pike-metro,Rockville Pike and Metro,128 S ADAMS ST 20850,,-77.154414,39.081122,-208.86,541.54,10.08,yes
+278238,D,pike-metro,Rockville Pike and Metro,120 S ADAMS ST 20850,,-77.154479,39.081547,-214.49,494.36,8.64,yes
+278239,D,pike-metro,Rockville Pike and Metro,108 S ADAMS ST 20850,,-77.154529,39.082427,-218.81,396.66,10.66,yes
+278249,D,pike-metro,Rockville Pike and Metro,100 FLEET ST 20850,,-77.1502,39.081471,155.74,502.8,7.96,yes
+278250,D,pike-metro,Rockville Pike and Metro,194 LELAND ST 20850,,-77.15347,39.080848,-127.19,571.96,5.93,yes
+329760,D,pike-metro,Rockville Pike and Metro,12 S ADAMS ST 20850,,-77.154604,39.083388,-225.3,289.98,9.15,yes
+329761,D,pike-metro,Rockville Pike and Metro,10 S ADAMS ST 20850,,-77.154609,39.083557,-225.73,271.21,8.43,yes
+336625,D,pike-metro,Rockville Pike and Metro,107 N ADAMS ST 20850,,-77.154655,39.085525,-229.71,52.73,6.86,yes
+336626,D,pike-metro,Rockville Pike and Metro,109 N ADAMS ST 20850,,-77.154656,39.085696,-229.8,33.75,11.48,yes
+337432,D,pike-metro,Rockville Pike and Metro,11 WOOD LN 20850,,-77.153568,39.085962,-135.67,4.22,7.6,yes
+338803,D,pike-metro,Rockville Pike and Metro,9 N ADAMS ST 20850,,-77.154597,39.084878,-224.7,124.56,10.01,yes
+339884,D,pike-metro,Rockville Pike and Metro,107 FLEET ST 20850,,-77.150706,39.080764,111.96,581.29,7.3,yes
+339885,D,pike-metro,Rockville Pike and Metro,109 FLEET ST 20850,,-77.150673,39.080744,114.81,583.51,7.3,yes

@@ -1,43 +1,7 @@
 {
-  "landmarks": [
-    {
-      "id": "clock-tower",
-      "footprintId": 129521,
-      "address": "1 CHURCH ST 20850",
-      "glb": "landmarks/clock_tower_building.glb",
-      "rotationY": -1.22318,
-      "documentedRotationY": -1.5708,
-      "position": {
-        "x": 503.53,
-        "z": 321.87,
-        "baseElevationM": -1.65
-      },
-      "hideProcedural": true,
-      "sourceBranch": "grok/rockville-landmarks",
-      "notes": "1 Church Street is the downtown clock-tower office. The GLB stays on grok/rockville-landmarks and is not copied here. When the file is present the procedural mass and its collider are removed. rotationY aligns the model long axis with the county footprint and turns the facade toward west."
-    },
-    {
-      "id": "turret-corner",
-      "glb": "landmarks/turret_corner_building.glb",
-      "documentedRotationY": 3.14159,
-      "hideProcedural": false,
-      "sourceBranch": "grok/rockville-landmarks",
-      "notes": "Reserved. The GLB on grok/rockville-landmarks is a corner turret with a 31.5 m by 30.5 m plan. hideProcedural stays false until the owner confirms the footprint, so the county mass is not removed.",
-      "candidateFootprintId": 129621,
-      "candidateAddress": "1 HELEN HENEGHAN WAY 20850",
-      "candidateName": "Apartments",
-      "candidateSizeM": [
-        29.1,
-        43.1
-      ],
-      "position": {
-        "x": 148.99,
-        "z": 160.31,
-        "baseElevationM": -1.63
-      },
-      "rotationY": 3.14159
-    }
-  ],
+  "movedTo": "public/data/districts/<district>/landmarks.json",
+  "note": "Landmark models are registered per district. This file keeps the pedestrian bridge, whose deck elevation is still unknown.",
+  "landmarks": [],
   "bridge": {
     "id": "metro-pedestrian-bridge",
     "osmWay": 266681164,
