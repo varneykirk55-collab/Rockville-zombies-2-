@@ -6,6 +6,7 @@
   <title>Rockville Town Center</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./public/styles.css">
+  <link rel="stylesheet" href="./public/virtual-controller.css">
   <script type="importmap">
     {
       "imports": {
@@ -36,24 +37,95 @@
     <div id="hud" hidden>
       <div id="reticle" aria-hidden="true"></div>
       <p id="gait" hidden></p>
-      <output id="weapon-hud" aria-label="Weapon and ammunition"></output>
-      <output id="survival-hud" aria-label="Round, health and remaining zombies"></output>
-      <p id="round-banner" role="status"></p>
-      <output id="points-hud" aria-label="Available points"></output>
-      <p id="machine-prompt" role="status"></p>
-      <p id="machine-hint"></p>
-      <div id="joystick" aria-label="Move"><span id="stick"></span></div>
-      <div id="touch-actions">
-        <button id="sprint" type="button" aria-pressed="false">Sprint</button>
-        <button id="jump" type="button">Jump</button>
-        <button id="aim" type="button" aria-pressed="false">Aim</button>
-        <button id="fire" type="button">Fire</button>
-        <button id="reload" type="button">Reload</button>
-        <button id="swap" type="button">Swap</button>
-        <button id="interact" type="button" hidden>Interact</button>
-        <button id="shoulder" type="button">Shoulder</button>
+      <div id="status-band">
+        <output id="survival-hud" aria-label="Round, health and remaining zombies"></output>
+        <output id="weapon-hud" aria-label="Weapon and ammunition"></output>
+        <output id="points-hud" aria-label="Available points"></output>
       </div>
+      <div id="mobile-notices">
+        <p id="machine-hint"></p>
+        <p id="round-banner" role="status"></p>
+      </div>
+      <p id="machine-prompt" role="status"></p>
     </div>
+    <section id="virtual-controller" aria-label="Touch controller">
+      <div data-group="leftShoulder" class="controller-group shoulders">
+        <button type="button" data-pad-button="6" aria-label="LT, aim">LT</button>
+        <button type="button" data-pad-button="4" aria-label="LB, unassigned" class="unbound">LB</button>
+      </div>
+      <div data-group="rightShoulder" class="controller-group shoulders">
+        <button type="button" data-pad-button="7" aria-label="RT, fire">RT</button>
+        <button type="button" data-pad-button="5" aria-label="RB, next weapon">RB</button>
+      </div>
+      <div data-group="leftStick" class="controller-group stick-group">
+        <div data-stick="0" class="virtual-stick" role="group" aria-label="Left stick, move"><span class="stick-thumb"></span></div>
+        <button type="button" data-pad-button="10" aria-label="L3, sprint" class="stick-click">L3</button>
+      </div>
+      <div data-group="dpad" class="controller-group d-pad">
+        <button type="button" data-pad-button="12" aria-label="D-pad up, unassigned" class="unbound up"><span aria-hidden="true"></span></button>
+        <button type="button" data-pad-button="14" aria-label="D-pad left, previous weapon" class="left"><span aria-hidden="true"></span></button>
+        <span class="d-pad-center"></span>
+        <button type="button" data-pad-button="15" aria-label="D-pad right, next weapon" class="right"><span aria-hidden="true"></span></button>
+        <button type="button" data-pad-button="13" aria-label="D-pad down, unassigned" class="unbound down"><span aria-hidden="true"></span></button>
+      </div>
+      <div data-group="rightStick" class="controller-group stick-group">
+        <div data-stick="2" class="virtual-stick" role="group" aria-label="Right stick, look"><span class="stick-thumb"></span></div>
+        <button type="button" data-pad-button="11" aria-label="R3, switch shoulder" class="stick-click">R3</button>
+      </div>
+      <div data-group="face" class="controller-group face-buttons">
+        <button type="button" data-pad-button="3" aria-label="Y, interact" class="face-y">Y</button>
+        <button type="button" data-pad-button="2" aria-label="X, reload" class="face-x">X</button>
+        <button type="button" data-pad-button="1" aria-label="B, unassigned" class="face-b unbound">B</button>
+        <button type="button" data-pad-button="0" data-pause-control aria-label="A, jump or restart" class="face-a">A</button>
+      </div>
+      <div data-group="center" class="controller-group controller-center">
+        <button type="button" data-pad-button="8" aria-label="View, unassigned" class="unbound view-button">View</button>
+        <button type="button" data-pad-button="9" data-pause-control aria-label="Menu, pause or resume">Menu</button>
+      </div>
+    </section>
+    <div id="controller-tools">
+      <button type="button" id="open-controller-settings">Controls</button>
+      <button type="button" id="fit-game-view" hidden>Fit screen</button>
+    </div>
+    <dialog id="controller-settings" aria-labelledby="controller-title">
+      <header>
+        <h2 id="controller-title">Touch controls</h2>
+        <button type="button" id="close-controller-settings">Done</button>
+      </header>
+      <div class="controller-settings-fields">
+        <label>Opacity <input type="range" data-setting="opacity" min="0.25" max="1" step="0.01"><output></output></label>
+        <label>Button size <input type="range" data-setting="buttonScale" min="0.78" max="1.25" step="0.01"><output></output></label>
+        <label>Stick size <input type="range" data-setting="stickScale" min="0.75" max="1.3" step="0.01"><output></output></label>
+        <label>Move dead zone <input type="range" data-setting="moveDeadZone" min="0" max="0.45" step="0.01"><output></output></label>
+        <label>Look dead zone <input type="range" data-setting="cameraDeadZone" min="0" max="0.45" step="0.01"><output></output></label>
+        <label>Horizontal look <input type="range" data-setting="horizontal" min="0.25" max="2.5" step="0.01"><output></output></label>
+        <label>Vertical look <input type="range" data-setting="vertical" min="0.25" max="2.5" step="0.01"><output></output></label>
+        <label>Aiming multiplier <input type="range" data-setting="aimMultiplier" min="0.2" max="1" step="0.01"><output></output></label>
+      </div>
+      <fieldset>
+        <legend>Control positions</legend>
+        <label>Group
+          <select id="control-position-group">
+            <option value="leftShoulder">LT and LB</option>
+            <option value="rightShoulder">RT and RB</option>
+            <option value="leftStick">Left stick and L3</option>
+            <option value="dpad">D-pad</option>
+            <option value="rightStick">Right stick and R3</option>
+            <option value="face">A, B, X and Y</option>
+            <option value="center">View and Menu</option>
+          </select>
+        </label>
+        <label>Horizontal position <input id="control-position-x" type="range" min="0" max="100"></label>
+        <label>Vertical position <input id="control-position-y" type="range" min="0" max="100"></label>
+        <p>Portrait and landscape positions are saved separately.</p>
+      </fieldset>
+      <footer>
+        <button type="button" id="use-touch-controller">Use touch controls</button>
+        <button type="button" id="settings-fit-view">Fit screen</button>
+        <button type="button" id="restore-controller-defaults">Restore defaults</button>
+      </footer>
+      <p id="viewport-status" role="status"></p>
+    </dialog>
     <section id="game-over" aria-labelledby="game-over-title" hidden>
       <div class="start-card">
         <h2 id="game-over-title">Game over</h2>

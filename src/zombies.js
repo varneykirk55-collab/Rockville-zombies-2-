@@ -1,3 +1,4 @@
+import { PAD } from './controller-input.js';
 import {
   AnimationMixer, BufferGeometry, Frustum, LoopOnce, LoopRepeat, MathUtils, Matrix4, Sphere, Vector3,
 } from 'three';
@@ -19,7 +20,7 @@ const HIT_REGIONS = [['head', 0, 0.15], ['torso', 1.08, 0.35], ['legs', 0.49, 0.
 const pick = list => list[Math.floor(Math.random() * list.length)];
 const lerp = (a, b) => MathUtils.lerp(a, b, Math.random());
 
-export function createSurvival({ world, camera, controls, renderer, wallet, graphics, overlay }) {
+export function createSurvival({ world, camera, controls, renderer, wallet, graphics, overlay, input }) {
   const panel = document.querySelector('#survival-hud');
   const banner = document.querySelector('#round-banner');
   const gameOver = document.querySelector('#game-over');
@@ -63,7 +64,6 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
   let kills = 0;
   let headshots = 0;
   let bannerUntil = 0;
-  let padStart = false;
   let hudText = '';
   const metrics = { animation: 0, navigation: 0, frames: 0 };
 
@@ -402,10 +402,7 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
 
   function update(delta, armed) {
     if (phase === 'dead') {
-      const pad = Array.from(navigator.getGamepads?.() ?? []).find(gamepad => gamepad?.mapping === 'standard');
-      const pressed = Boolean(pad?.buttons[0]?.pressed || pad?.buttons[9]?.pressed);
-      if (pressed && !padStart) location.reload();
-      padStart = pressed;
+      if (input.justPressed(PAD.A) || input.justPressed(PAD.MENU)) location.reload();
       return;
     }
     if (!navigation || !controls.active || !armed) return;

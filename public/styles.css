@@ -18,7 +18,6 @@ canvas {
   display: block;
   width: 100%;
   height: 100%;
-  touch-action: none;
 }
 
 #loading {
@@ -132,58 +131,6 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
   background: #fff4dd;
 }
 
-#joystick, #touch-actions { display: none; }
-
-.touch-controls #joystick {
-  display: grid;
-  position: absolute;
-  align-items: center;
-  justify-items: center;
-  left: max(1.2rem, calc(env(safe-area-inset-left) + 0.5rem));
-  bottom: max(1.4rem, calc(env(safe-area-inset-bottom) + 0.7rem));
-  width: clamp(94px, 23vmin, 128px);
-  aspect-ratio: 1;
-  pointer-events: auto;
-  touch-action: none;
-  border: 1px solid #d4e9e681;
-  border-radius: 50%;
-  background: #17273390;
-}
-
-#stick {
-  width: 41%;
-  aspect-ratio: 1;
-  pointer-events: none;
-  border-radius: 50%;
-  background: #eedabdaf;
-  box-shadow: 0 2px 8px #192027a3;
-}
-
-.touch-controls #touch-actions {
-  position: absolute;
-  right: max(1rem, calc(env(safe-area-inset-right) + 0.5rem));
-  bottom: max(1.4rem, calc(env(safe-area-inset-bottom) + 0.7rem));
-  display: flex;
-  gap: 0.55rem;
-}
-
-#touch-actions button {
-  pointer-events: auto;
-  touch-action: manipulation;
-  color: #f8edda;
-  padding: 0.7rem;
-  min-width: 54px;
-  background: #182933d9;
-  border: 1px solid #bfd2d69c;
-  border-radius: 4px;
-}
-
-#touch-actions button[aria-pressed="true"] {
-  color: #18232a;
-  background: #f5aa6b;
-  border-color: #f5aa6b;
-}
-
 #weapon-hud {
   position: absolute;
   top: max(1rem, env(safe-area-inset-top));
@@ -196,14 +143,6 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
 
 #weapon-hud:empty { display: none; }
 #reticle.obstructed { border-color: #ff7860; background: #ff7860; }
-
-.touch-controls #touch-actions {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 0.35rem;
-}
-
-#touch-actions #fire { touch-action: none; background: #704032; }
 
 #reticle.on-target { border-color: #ffd06d; }
 
@@ -225,7 +164,6 @@ button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
 #machine-prompt { bottom: 6rem; }
 #machine-hint { top: 4.8rem; }
 #points-hud:empty, #machine-prompt:empty, #machine-hint:empty { display: none; }
-.touch-controls #machine-prompt { bottom: 10.5rem; }
 
 #survival-hud, #round-banner {
   position: absolute;
