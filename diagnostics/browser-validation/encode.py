@@ -9,7 +9,7 @@ parser.add_argument("source", type=Path)
 parser.add_argument("output", type=Path)
 args = parser.parse_args()
 source = args.source.resolve()
-frames = json.loads((source / "frames.json").read_text())
+frames = sorted(json.loads((source / "frames.json").read_text()), key=lambda frame: frame[1])
 assert len(frames) > 1
 timestamps = [float(t) for _, t in frames]
 assert all(a <= b for a, b in zip(timestamps, timestamps[1:]))

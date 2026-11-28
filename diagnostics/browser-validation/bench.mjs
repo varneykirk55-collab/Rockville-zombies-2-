@@ -3,6 +3,9 @@ import {browser,setup,ready,local} from './browser.mjs';
 import {views,measured,prepareCamera} from './locations.mjs';
 const phase=process.argv[2]||'sync-matrix';
 const pathname='../out/'+phase+'.ndjson';
+const cohort=process.env.QA_TEST_COHORT||'concurrent software tests';
+const checked=new Set((await readFile(pathname,'utf8').catch(()=>'' )).trim().split('\n').filter(Boolean)
+  .map(line=>{const {build,location,preset,zombies}=JSON.parse(line);return [build,location,preset,zombies].join(':');}));
 const b=await browser();
 const states={};
 const gameLoopHook=src=>src.replace('    update(delta);',`    const qaUpdateAt=performance.now();
@@ -44,10 +47,10 @@ try {
     });
     await page.addInitScript(workload=>{
       const native=window.requestAnimationFrame.bind(window);
-      let clock=performance.now();
+      let clock=performance.now(),firstManual=true;
       window.qaQueue=[];
       window.requestAnimationFrame=cb=>window.qaManual?(window.qaQueue.push(cb),window.qaQueue.length):native(cb);
-      window.qaStep=()=>{const pending=window.qaQueue.splice(0);clock+=50;pending.forEach(cb=>cb(clock));};
+      window.qaStep=()=>{if(firstManual){clock=Math.max(clock,performance.now()+75); firstManual=false;} const pending=window.qaQueue.splice(0);clock+=50;pending.forEach(cb=>cb(clock));};
       window.qaEnableManual=()=>{clock=performance.now()+50;window.qaManual=true;};
       const gl=WebGL2RenderingContext.prototype;
       if(workload) {
@@ -76,13 +79,13 @@ try {
       viewport:[innerWidth,innerHeight],resources:performance.getEntriesByType('resource').map(r=>[r.name,r.duration,r.encodedBodySize]),
       timeToReadyMs:performance.now(),shaders:window.qaShaders,
     };});
-    await writeFile('../out/'+phase+'-'+build+'-environment.json', JSON.stringify({...env,elapsedMs:Date.now()-start}));
+    await writeFile('../out/'+phase+'-'+build+(cohort.startsWith('isolated')?'-isolated':'')+'-environment.json', JSON.stringify({...env,elapsedMs:Date.now()-start}));
     await page.evaluate(()=>qaEnableManual());
     await page.waitForFunction(()=>qaQueue.length>0,null,{polling:50,timeout:45000});
     states[build]={context,page,issues,external};
   }
-  const readback=phase==='readback-matrix';
-  const matrix=phase==='sync-matrix'||phase==='workload'||readback;
+  const readback=phase==='readback-matrix'||phase==='targets';
+  const matrix=phase==='sync-matrix'||phase==='workload'||phase==='readback-matrix';
   const locations=matrix?measured:['regal-theater','citywide-overview'];
   for(const id of readback?[...locations.slice(2),...locations.slice(0,2)]:locations){
     for(const build of ['baseline','game']){
@@ -91,23 +94,37 @@ try {
       for(const p of presets){
         if(phase==='targets')await page.setViewportSize(p==='low'?{width:1280,height:720}:{width:1920,height:1080});
         for(const n of matrix?[0,6,10,24,50]:[6,24]){
+          if(checked.has([build,id,p,n].join(':')))continue;
           const result=await page.evaluate(async({pose,p,n,duration,workload,fenced})=>{
             const a=window.__ROCKVILLE__,shadersAt=window.qaShaders.length;
             const gl=a.renderer.getContext(), ext=gl.getExtension('EXT_disjoint_timer_query_webgl2');
             window.qaCamera(pose,p);a.survival.qaStage(n);
-            const warm=[],frames=[],pixel=new Uint8Array(4);
+            const warm=[],frames=[],queries=[],pixel=new Uint8Array(4);
             let measured;
             window.qaFrameHook=frame=>{measured=frame;};
-            function frame(){
+            function frame(collectTimer=false){
+              const query=fenced&&ext&&collectTimer?gl.createQuery():null;
+              if(query)gl.beginQuery(ext.TIME_ELAPSED_EXT,query);
               const begin=performance.now();
-              window.qaStep();if(fenced)gl.readPixels(gl.drawingBufferWidth>>1,gl.drawingBufferHeight>>1,1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);else if(!workload)gl.finish();
+              window.qaStep();if(query){gl.endQuery(ext.TIME_ELAPSED_EXT);queries.push(query);}
+              if(fenced)gl.readPixels(gl.drawingBufferWidth>>1,gl.drawingBufferHeight>>1,1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);else if(!workload)gl.finish();
               const interval=performance.now()-begin;
               return {...measured,interval,calls:a.renderer.info.render.calls,triangles:a.renderer.info.render.triangles};
             }
             warm.push(frame());
             const begin=performance.now();
-            do{frames.push(frame());}while((performance.now()-begin<duration||frames.length<2)&&frames.length<(workload||fenced?2:32));
+            do{frames.push(frame(true));}while((performance.now()-begin<duration||frames.length<2)&&frames.length<(workload||fenced?2:32));
             window.qaFrameHook=null;
+            const backendTimes=[];
+            if(queries.length){
+              await new Promise(resolve=>setTimeout(resolve,45));
+              const disjoint=gl.getParameter(ext.GPU_DISJOINT_EXT);
+              for(const query of queries){
+                if(!disjoint&&gl.getQueryParameter(query,gl.QUERY_RESULT_AVAILABLE))
+                  backendTimes.push(gl.getQueryParameter(query,gl.QUERY_RESULT)/1e6);
+                gl.deleteQuery(query);
+              }
+            }
             const textures=new Set();let objects=0,visible=0;
             a.scene.traverse(object=>{
               objects++;if(object.visible)visible++;
@@ -121,11 +138,11 @@ try {
               if(image?.width&&image?.height)bytes+=image.width*image.height*4*(t.generateMipmaps?4/3:1);
             }
             return {frames,warm,actors:n,viewport:[innerWidth,innerHeight],resolution:[gl.drawingBufferWidth,gl.drawingBufferHeight],
-              objects,visible,heap:performance.memory?.usedJSHeapSize??null,gpuFrameMs:null,gpuTimerAvailable:!!ext,
+              objects,visible,heap:performance.memory?.usedJSHeapSize??null,gpuFrameMs:backendTimes.length?backendTimes.reduce((sum,value)=>sum+value,0)/backendTimes.length:null,gpuBackendSampleCount:backendTimes.length,gpuTimerAvailable:!!ext,
               renderInfo:{...a.renderer.info.memory},estimatedTextureBytes:Math.round(bytes),
               shaders:window.qaShaders.slice(shadersAt),contextLoss:window.qaContextLoss};
           },{pose:views[id],p,n,duration:matrix?850:3000,workload:phase==='workload',fenced:readback});
-          const line={build,location:id,preset:p,zombies:n,diagnosticNoRaster:phase==='workload',fencedReadback:readback,...result};
+          const line={build,location:id,preset:p,zombies:n,diagnosticNoRaster:phase==='workload',fencedReadback:readback,cohort,...result};
           await appendFile(pathname,JSON.stringify(line)+'\n');
           console.log(build,id,p,n,result.frames.length,result.frames.map(f=>f.interval).reduce((x,y)=>x+y,0).toFixed(0));
         }

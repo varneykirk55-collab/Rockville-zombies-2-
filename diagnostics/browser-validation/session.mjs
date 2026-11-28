@@ -109,10 +109,11 @@ try {
     if(!r)return;
     const name=String(r.n++).padStart(5,'0')+'.jpg';
     r.frames.push([name,metadata.timestamp]);
-    chain=chain.then(()=>writeFile(r.dir+'/'+name,Buffer.from(data,'base64')));
+    chain=chain.then(async()=>{await writeFile(r.dir+'/'+name,Buffer.from(data,'base64'));
+      await appendFile(r.dir+'/frames-live.ndjson',JSON.stringify([name,metadata.timestamp])+'\n');});
   });
   async function startClip(name){
-    const dir=out+'/'+name;await mkdir(dir,{recursive:true});
+    const dir=out+'/'+name;await mkdir(dir,{recursive:true});await writeFile(dir+'/frames-live.ndjson','');
     recording={dir,n:0,frames:[]};
     await cdp.send('Page.startScreencast',{format:'jpeg',quality:76,maxWidth:640,maxHeight:360,everyNthFrame:1});
     console.log('RECORD',name);
@@ -153,18 +154,18 @@ try {
       await page.evaluate(()=>window.qaMode='combat');
     }
     const dead=await page.evaluate(()=>window.__ROCKVILLE__?.survival.dead);
-    if(dead&&!combatOnly){
+    if(dead){
       const state=await page.evaluate(()=>({run:qaRun,state:window.__ROCKVILLE__.survival.state,points:window.__ROCKVILLE__.machines.state.points}));
       await appendFile(out+(isolated?'/attempts-isolated.ndjson':retry?'/attempts-retry.ndjson':'/attempts.ndjson'),JSON.stringify({seconds,state})+'\n');
       await page.locator('#restart-rounds').click();
       await ready(page);
-      await page.locator('#graphics-preset').selectOption(retry||seconds<600?'low':seconds<1200?'medium':'high');
+      await page.locator('#graphics-preset').selectOption(combatOnly||retry||seconds<600?'low':seconds<1200?'medium':'high');
       await page.locator('#start').click();
       await boot();
       if(traversal&&seconds<247)await page.evaluate(()=>window.qaMode='traverse');
       restarted=true;
     }
-    const wanted=retry||seconds<600?'low':seconds<1200?'medium':'high';
+    const wanted=combatOnly||retry||seconds<600?'low':seconds<1200?'medium':'high';
     if(!retry&&await page.evaluate(()=>document.querySelector('#graphics-preset')?.value)!==wanted) {
       await page.evaluate(p=>{const sel=document.querySelector('#graphics-preset');sel.value=p;sel.dispatchEvent(new Event('change'));},wanted);
     }

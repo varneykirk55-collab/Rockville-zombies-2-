@@ -75,13 +75,16 @@ for location in sites:
                 row = dict(build=build, location=location, preset=preset, zombies=zombies,
                            timing_status="measured" if timed else "unmeasured",
                            timing_method=("pixel-readback" if timed.get("fencedReadback") else "finish-probe") if timed else "",
+                           timing_cohort=timed.get("cohort", "initial concurrent software tests") if timed else "",
                            structural_status=("raster" if timed else "no-raster diagnostic") if structural else "unmeasured")
                 if timed:
                     frames = timed["frames"]
                     row.update(frame_stats([f["interval"] for f in frames if f["interval"] > 0]))
                     row.update(cpu_update_median_ms=round3(stats.median(f["update"] for f in frames)),
                                cpu_submit_median_ms=round3(stats.median(f["render"] for f in frames)),
-                               gpu_frame_ms=timed.get("gpuFrameMs"),
+                               cpu_update_and_submit_median_ms=round3(stats.median(f["update"]+f["render"] for f in frames)),
+                               software_backend_query_mean_ms=timed.get("gpuFrameMs"),
+                               software_backend_query_samples=timed.get("gpuBackendSampleCount",0),
                                shader_api_stall_max_ms=max((s["ms"] for s in timed["shaders"]), default=0))
                 if structural:
                     row.update(viewport="x".join(map(str, structural["viewport"])),

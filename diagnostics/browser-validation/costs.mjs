@@ -4,6 +4,7 @@ import {writeFile,readFile} from 'node:fs/promises';
 const b=await browser();
 const output={visual:[],profile:null};
 try{
+  if(!process.argv.includes('--cpu-only')){
   const a=await setup(b,{viewport:{width:480,height:270}});
   await a.page.goto(local+'game/?audit=1');
   await ready(a.page,true);
@@ -69,6 +70,7 @@ try{
   output.auditIssues=a.issues;
   await writeFile('../out/feature-isolation.json',JSON.stringify(output.visual));
   await a.context.close();
+  }
 
   const p=await setup(b,{viewport:{width:480,height:270}});
   const cd=await p.context.newCDPSession(p.page);
@@ -80,7 +82,8 @@ try{
   const startup=(await cd.send('Profiler.stop')).profile;
   await p.page.locator('#graphics-preset').selectOption('low');
   await p.page.locator('#start').click();
-  await p.page.waitForFunction(()=>window.__ROCKVILLE__.survival.state.alive>0,null,{timeout:90000});
+  await p.page.waitForFunction(()=>window.__ROCKVILLE__.survival.state.alive>0,null,{timeout:120000,polling:200});
+  const before=await p.page.evaluate(()=>window.__ROCKVILLE__.survival.state);
   await cd.send('Profiler.start');
   await p.page.keyboard.down('w');
   await p.page.waitForTimeout(3700);
@@ -92,7 +95,7 @@ try{
   await p.page.waitForTimeout(5000);
   const active=(await cd.send('Profiler.stop')).profile;
   const state=await p.page.evaluate(()=>({survival:window.__ROCKVILLE__.survival.state,combat:window.__ROCKVILLE__.combat.state,contextLoss:qaContextLoss}));
-  output.profile={startup,active,state,issues:p.issues,external:p.external};
+  output.profile={startup,active,before,state,issues:p.issues,external:p.external};
   await writeFile('../out/chromium-cpu-profile.json',JSON.stringify(output.profile));
   await p.context.close();
 }finally{await b.close();}
