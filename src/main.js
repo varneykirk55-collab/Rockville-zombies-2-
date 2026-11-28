@@ -167,7 +167,7 @@ async function loadCity() {
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   status.textContent = 'Loading training machines and survival assets…';
   await Promise.all([
-    machines?.place(built.collisionPolygons, sampleGround, terrain.insidePlayable),
+    machines?.place(built.collisionPolygons, terrain.sampleGameY),
     survival?.prepare(terrain.insidePlayable),
   ]);
   controls.prepare(built.collisionPolygons, sampleGround);
@@ -267,6 +267,10 @@ async function loadCity() {
       }
       const south = blocked(frame.x, frame.maxZ + 2.2);
       return { id: frame.id, ringBlocked: blockedCount, samples, southBlocked: south };
+    });
+    const { auditCity } = await import('./collision-audit.js');
+    window.__ROCKVILLE__.collisionAudit = await auditCity({
+      polygons: built.collisionPolygons, terrain, sampleGround, frames, blocked, world,
     });
     window.__ROCKVILLE__.ready = true;
     controls.freeze(true);

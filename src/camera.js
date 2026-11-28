@@ -9,14 +9,16 @@ const SPRINT_SPEED = 6.9;
 const AIM_SPEED = 2.5;
 const GRAVITY = 22;
 const JUMP_SPEED = Math.sqrt(2 * GRAVITY * 1.15);
-const CELL_SIZE = 32;
+const CELL_SIZE = 16;
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
 const start = { x: junction.x + 14.5, z: junction.z + 2.45 };
 const movementKeys = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD',
   'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ShiftLeft', 'ShiftRight',
   'KeyC', 'Space']);
 
-const cellKey = (x, z) => `${Math.floor(x / CELL_SIZE)},${Math.floor(z / CELL_SIZE)}`;
+const cellKey = (x, z) => x * 1048576 + z;
+const EMPTY = [];
+const CAMERA_RADIUS = 0.18;
 
 function insideRing(x, z, ring) {
   let inside = false;
@@ -30,7 +32,7 @@ function insideRing(x, z, ring) {
   return inside;
 }
 
-function nearRing(x, z, ring) {
+function nearRing(x, z, ring, radiusSquared) {
   for (let i = 0; i < ring.length; i++) {
     const a = ring[i];
     const b = ring[(i + 1) % ring.length];
@@ -39,14 +41,27 @@ function nearRing(x, z, ring) {
     const lengthSquared = dx * dx + dz * dz;
     if (lengthSquared < 1e-8) continue;
     const t = MathUtils.clamp(((x - a.x) * dx + (z - a.z) * dz) / lengthSquared, 0, 1);
-    if ((x - a.x - dx * t) ** 2 + (z - a.z - dz * t) ** 2 < BODY_RADIUS ** 2) return true;
+    if ((x - a.x - dx * t) ** 2 + (z - a.z - dz * t) ** 2 < radiusSquared) return true;
   }
   return false;
 }
 
 export function createBuildingCollision(polygons) {
   const cells = new Map();
+  const indexed = new Set();
   for (const polygon of polygons) {
+    if (polygon.outer.length < 3) continue;
+    const canonical = ring => {
+      if (!ring.length) return '';
+      const points = ring.map(p => p.x + ',' + p.z);
+      const start = points.indexOf(points.reduce((a, b) => a < b ? a : b));
+      const forward = points.slice(start).concat(points.slice(0, start));
+      const reverse = [forward[0], ...forward.slice(1).reverse()];
+      return [forward.join(';'), reverse.join(';')].sort()[0];
+    };
+    const signature = [canonical(polygon.outer), ...polygon.holes.map(canonical).sort(), polygon.minY, polygon.maxY].join('|');
+    if (indexed.has(signature)) continue;
+    indexed.add(signature);
     let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
     for (const { x, z } of polygon.outer) {
       minX = Math.min(x, minX);
@@ -59,19 +74,36 @@ export function createBuildingCollision(polygons) {
       x <= Math.floor((maxX + BODY_RADIUS) / CELL_SIZE); x++) {
       for (let z = Math.floor((minZ - BODY_RADIUS) / CELL_SIZE);
         z <= Math.floor((maxZ + BODY_RADIUS) / CELL_SIZE); z++) {
-        const key = `${x},${z}`;
+        const key = cellKey(x, z);
         if (!cells.has(key)) cells.set(key, []);
         cells.get(key).push(body);
       }
     }
   }
 
-  return (x, z) => {
-    for (const body of cells.get(cellKey(x, z)) ?? []) {
-      if (x < body.minX - BODY_RADIUS || x > body.maxX + BODY_RADIUS ||
-          z < body.minZ - BODY_RADIUS || z > body.maxZ + BODY_RADIUS) continue;
-      if ((insideRing(x, z, body.outer) && !body.holes.some(ring => insideRing(x, z, ring))) ||
-          nearRing(x, z, body.outer) || body.holes.some(ring => nearRing(x, z, ring))) return true;
+  return (x, z, radius = BODY_RADIUS, y) => {
+    const bodies = cells.get(cellKey(Math.floor(x / CELL_SIZE), Math.floor(z / CELL_SIZE))) ?? EMPTY;
+    const radiusSquared = radius * radius;
+    for (const body of bodies) {
+      if (body.minY !== undefined && !(y >= body.minY && y <= body.maxY)) continue;
+      if (x < body.minX - radius || x > body.maxX + radius ||
+          z < body.minZ - radius || z > body.maxZ + radius) continue;
+      if (body.box) {
+        const dx = Math.max(body.minX - x, 0, x - body.maxX);
+        const dz = Math.max(body.minZ - z, 0, z - body.maxZ);
+        if ((dx === 0 && dz === 0) || dx * dx + dz * dz < radiusSquared) return true;
+        continue;
+      }
+      if (insideRing(x, z, body.outer)) {
+        let inHole = false;
+        for (const ring of body.holes) {
+          if (!insideRing(x, z, ring)) continue;
+          inHole = true;
+          if (nearRing(x, z, ring, radiusSquared)) return true;
+        }
+        if (!inHole) return true;
+      }
+      if (nearRing(x, z, body.outer, radiusSquared)) return true;
     }
     return false;
   };
@@ -87,8 +119,13 @@ export function moveGrounded(position, dx, dz, blocked) {
       position.x += sx;
       position.z += sz;
     } else {
-      if (!blocked(x + sx, z)) position.x += sx;
-      if (!blocked(position.x, z + sz)) position.z += sz;
+      if (Math.abs(sx) >= Math.abs(sz)) {
+        if (sx && !blocked(x + sx, z)) position.x += sx;
+        if (sz && !blocked(position.x, z + sz)) position.z += sz;
+      } else {
+        if (sz && !blocked(x, z + sz)) position.z += sz;
+        if (sx && !blocked(x + sx, position.z)) position.x += sx;
+      }
     }
   }
 }
@@ -381,7 +418,7 @@ export function createCamera(canvas) {
     let limit = 1;
     for (let i = 1; i <= steps; i++) {
       probe.copy(pivot).addScaledVector(offset, i / steps);
-      if (blocked(probe.x, probe.z) || probe.y < sampleGround(probe.x, probe.z) + 0.2) {
+      if (blocked(probe.x, probe.z, CAMERA_RADIUS, probe.y) || probe.y < sampleGround(probe.x, probe.z) + 0.2) {
         limit = (i - 1) / steps;
         break;
       }
@@ -495,6 +532,6 @@ export function createCamera(canvas) {
 
   return {
     camera,
-    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z) => blocked(x, z), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
+    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z, radius, y) => blocked(x, z, radius, y), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
   };
 }

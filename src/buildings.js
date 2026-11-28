@@ -1,3 +1,4 @@
+import { METRO_SPAN } from './config.js';
 import * as THREE from 'three';
 import { DOWNTOWN } from './config.js';
 import { lonLatToWorld, nextFrame } from './utils.js';
@@ -146,7 +147,7 @@ function triangulate(polygon) {
   return { faces: faces ?? [], flat };
 }
 
-function addRoof(batch, polygon, yOf, color) {
+function addRoof(batch, polygon, yOf, color, upward = true) {
   const { faces, flat } = triangulate(polygon);
   for (const face of faces) {
     const tri = face.map(index => {
@@ -162,7 +163,7 @@ function addRoof(batch, polygon, yOf, color) {
     let nx = aby * acz - abz * acy;
     let ny = abz * acx - abx * acz;
     let nz = abx * acy - aby * acx;
-    if (ny < 0) {
+    if ((ny >= 0) !== upward) {
       tri.reverse();
       nx = -nx; ny = -ny; nz = -nz;
     }
@@ -332,14 +333,16 @@ export async function buildBuildings({
     const batch = spec.batch ?? targetFor(polygon.outer[0], spec.role);
     addRoof(batch.roofs, polygon, roofOf, roofTint);
     const skirtY = spec.skirtY ?? seat.skirtY;
+    if (spec.overhead) addRoof(batch.roofs, polygon, () => skirtY, roofTint, false);
     for (const ring of [polygon.outer, ...polygon.holes]) {
       for (let i = 0; i < ring.length; i++) {
         rememberEdge(polygon, ring[i], ring[(i + 1) % ring.length], skirtY, roofOf, spec);
       }
     }
-    if (spec.collide) {
+    if (spec.collide || spec.overhead) {
       collisionPolygons.push({
         outer: polygon.outer, holes: polygon.holes, footprintId: spec.id,
+        ...(spec.overhead && { minY: skirtY, maxY: roofOf(seat.cx, seat.cz), source: 'elevated-span' }),
       });
     }
     return seat;
@@ -374,6 +377,14 @@ export async function buildBuildings({
       const seat = seatPolygon(polygon.outer, sampleGameY);
       floors.set(id, seat);
       if (replaced) continue;
+      if (id === METRO_SPAN.footprintId) {
+        const underside = Math.max(...polygon.outer.map(v => sampleGameY(v.x, v.z))) + METRO_SPAN.clearance;
+        addMass(polygon, {
+          id, color, role, batch, seat, overhead: true, upper: true,
+          skirtY: underside, roofOf: () => underside + METRO_SPAN.thickness,
+        });
+        continue;
+      }
       const axis = longestAxis(polygon.outer);
       const half = halfWidth(polygon.outer, axis, seat.cx, seat.cz);
       const ridge = ridgeM > 0 ? (x, z) => {
@@ -466,7 +477,7 @@ export async function buildBuildings({
         y0 = hiddenTo;
       }
     }
-    const raised = sharedFraction > 0.6 && Number.isFinite(neighborTop) ? y0 : null;
+    const raised = edge.overhead ? edge.skirtY : sharedFraction > 0.6 && Number.isFinite(neighborTop) ? y0 : null;
     const segments = Math.max(1, Math.ceil(edge.length / 8));
     for (let segment = 0; segment < segments; segment++) {
       const t0 = segment / segments;

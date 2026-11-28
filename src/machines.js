@@ -1,54 +1,15 @@
 import {
-  AudioListener, AudioLoader, Box3, Group, MathUtils, PointLight, PositionalAudio, Vector3,
+  AudioListener, AudioLoader, Box3, Group, MathUtils, PointLight, PositionalAudio,
 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { createBuildingCollision } from './camera.js';
-import { ROAD_CENTERLINES, DOWNTOWN } from './config.js';
-import { lonLatToWorld } from './utils.js';
 import { BOX_POOL, ECONOMY } from './machine-config.js';
 
 const ASSETS = new URL('../public/machines/', import.meta.url);
 const CYCLE = 3.4;
 const OFFER = 9;
 const PROCESS = 3.2;
-const ROAD_SEGMENTS = ROAD_CENTERLINES.flatMap(([width, coordinates]) => {
-  const points = coordinates.map(([lon, lat]) => lonLatToWorld(lon, lat));
-  return points.slice(1).map((end, index) => ({ width, start: points[index], end }));
-});
-
-function roadClear(x, z, radius) {
-  return ROAD_SEGMENTS.every(({ width, start, end }) => {
-    const dx = end.x - start.x;
-    const dz = end.z - start.z;
-    const length = dx * dx + dz * dz;
-    const t = length ? MathUtils.clamp(((x - start.x) * dx + (z - start.z) * dz) / length, 0, 1) : 0;
-    return Math.hypot(x - start.x - t * dx, z - start.z - t * dz) > width + 3.5 + radius;
-  });
-}
-
-function chooseSite(blocked, sampleGround, insidePlayable, bounds, prior) {
-  const spawn = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
-  const clearance = Math.max(Math.abs(bounds.min.x), Math.abs(bounds.max.x),
-    Math.abs(bounds.min.z), Math.abs(bounds.max.z)) + 1.45;
-  for (let distance = 9; distance <= 45; distance += 2) {
-    for (let index = 0; index < 24; index++) {
-      const angle = (index + 0.5) * Math.PI / 12;
-      const x = spawn.x + 14.5 + distance * Math.cos(angle);
-      const z = spawn.z + 2.45 + distance * Math.sin(angle);
-      if (!insidePlayable(x, z) || !roadClear(x, z, clearance) || blocked(x, z)
-          || (prior && Math.hypot(x - prior.x, z - prior.z) < 6)) continue;
-      const y = sampleGround(x, z);
-      const pads = Array.from({ length: 12 }, (_, step) => ({
-        x: x + Math.cos(step * Math.PI / 6) * clearance,
-        z: z + Math.sin(step * Math.PI / 6) * clearance,
-      }));
-      if (pads.some(p => blocked(p.x, p.z) || !insidePlayable(p.x, p.z)
-        || Math.abs(sampleGround(p.x, p.z) - y) > 0.45)) continue;
-      return new Vector3(x, y - bounds.min.y, z);
-    }
-  }
-  throw new Error('No unobstructed site found for a training machine.');
-}
+// Temporary apron east of Regal. Faces point into the open plaza.
+const MACHINE_SITES = [[232, 226], [232, 234]];
 
 function weightedReward(random) {
   const eligible = BOX_POOL.filter(entry => entry.weight > 0);
@@ -112,18 +73,19 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     node.play();
   }
 
-  async function place(polygons, sampleGround, insidePlayable) {
+  async function place(polygons, sampleGround) {
     const [box, pack] = await Promise.all(['mystery_box_new.glb', 'pack_a_punch_new.glb'].map(
       file => loader.loadAsync(new URL(file, ASSETS).href)));
-    const blocked = createBuildingCollision(polygons);
     for (const [index, gltf] of [box, pack].entries()) {
       const group = scenic[index];
       group.name = index ? 'Pack-a-Punch' : 'Mystery Box';
       const model = gltf.scene;
       group.add(model);
       model.traverse(node => { if (node.isMesh) node.castShadow = node.receiveShadow = true; });
-      const bounds = new Box3().setFromObject(model);
-      group.position.copy(chooseSite(blocked, sampleGround, insidePlayable, bounds, index ? scenic[0].position : null));
+      group.rotation.y = Math.PI / 2;
+      const bounds = new Box3().setFromObject(group, true);
+      const [siteX, siteZ] = MACHINE_SITES[index];
+      group.position.set(siteX, sampleGround(siteX, siteZ) - bounds.min.y, siteZ);
       const light = new PointLight(index ? 0xff8026 : 0xffb34d, index ? 1.5 : 1.8, index ? 7 : 8);
       light.position.set(0, index ? 1.2 : 1.4, index ? 1.2 : 0.6);
       group.add(light);
@@ -137,7 +99,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
       polygons.push({ outer: [
         { x: x + bounds.min.x, z: z + bounds.min.z }, { x: x + bounds.max.x, z: z + bounds.min.z },
         { x: x + bounds.max.x, z: z + bounds.max.z }, { x: x + bounds.min.x, z: z + bounds.max.z },
-      ], holes: [] });
+      ], holes: [], box: true, source: 'machine', id: group.name });
     }
     ready = true;
   }

@@ -232,7 +232,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   }
 
   function solidsAt(point) {
-    return controls.blocked(point.x, point.z) || point.y <= controls.sampleGround(point.x, point.z);
+    return controls.blocked(point.x, point.z, undefined, point.y) || point.y <= controls.sampleGround(point.x, point.z);
   }
 
   function trace(start, direction, range, testTargets) {

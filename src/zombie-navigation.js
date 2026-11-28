@@ -1,11 +1,13 @@
 const CELL = 1.7;
 const SIDE = 107;
 const AREA = SIDE * SIDE;
-const DX = [1, 0, -1, 0];
-const DZ = [0, 1, 0, -1];
+const DX = [1, 0, 1, -1, -1, 0, -1, 1];
+const DZ = [0, 1, 1, 1, 0, -1, -1, -1];
 
 export function pathClear(blocked, x, z, tx, tz) {
-  const steps = Math.ceil(Math.hypot(tx - x, tz - z) / 0.28);
+  const length = Math.hypot(tx - x, tz - z);
+  if (!Number.isFinite(length)) return false;
+  const steps = Math.ceil(length / 0.28);
   for (let i = 1; i <= steps; i++) {
     if (blocked(x + (tx - x) * i / steps, z + (tz - z) * i / steps)) return false;
   }
@@ -14,9 +16,11 @@ export function pathClear(blocked, x, z, tx, tz) {
 
 // One reverse breadth-first search serves the entire horde. Cache clearance
 // inside the current window and rebuild only when its centre moves.
-export function createZombieNavigation(blocked, inside) {
+export function createZombieNavigation(blocked, inside, cellSize = CELL) {
   const cells = new Uint8Array(AREA);
   const edges = new Uint8Array(AREA);
+  const priorCells = new Uint8Array(AREA);
+  const priorEdges = new Uint8Array(AREA);
   const distance = new Int16Array(AREA);
   const next = new Int16Array(AREA);
   const queue = new Int16Array(AREA);
@@ -25,38 +29,52 @@ export function createZombieNavigation(blocked, inside) {
   let initialized = false;
   let targetCell = -1;
   let count = 0;
+  let targetX, targetZ;
 
-  function locate(x, z) {
-    const col = Math.round((x - originX) / CELL);
-    const row = Math.round((z - originZ) / CELL);
-    return col >= 0 && col < SIDE && row >= 0 && row < SIDE ? row * SIDE + col : -1;
-  }
-  const xOf = id => originX + (id % SIDE) * CELL;
-  const zOf = id => originZ + Math.floor(id / SIDE) * CELL;
+  const xOf = id => originX + (id % SIDE) * cellSize;
+  const zOf = id => originZ + Math.floor(id / SIDE) * cellSize;
 
   function build(x, z) {
-    originX = (Math.round(x / CELL) - Math.floor(SIDE / 2)) * CELL;
-    originZ = (Math.round(z / CELL) - Math.floor(SIDE / 2)) * CELL;
+    const newX = (Math.round(x / cellSize) - Math.floor(SIDE / 2)) * cellSize;
+    const newZ = (Math.round(z / cellSize) - Math.floor(SIDE / 2)) * cellSize;
+    const shiftX = initialized ? Math.round((newX - originX) / cellSize) : SIDE;
+    const shiftZ = initialized ? Math.round((newZ - originZ) / cellSize) : SIDE;
+    originX = newX;
+    originZ = newZ;
+    const overlap = id => {
+      const col = id % SIDE + shiftX, row = Math.floor(id / SIDE) + shiftZ;
+      return col >= 0 && col < SIDE && row >= 0 && row < SIDE ? row * SIDE + col : -1;
+    };
     for (let i = 0; i < AREA; i++) {
-      cells[i] = Number(inside(xOf(i), zOf(i)) && !blocked(xOf(i), zOf(i)));
+      const old = overlap(i);
+      cells[i] = old >= 0 ? priorCells[old] : Number(inside(xOf(i), zOf(i)) && !blocked(xOf(i), zOf(i)));
       edges[i] = 0;
     }
     for (let i = 0; i < AREA; i++) {
       if (!cells[i]) continue;
-      for (let dir = 0; dir < 2; dir++) {
-        const j = locate(xOf(i) + DX[dir] * CELL, zOf(i) + DZ[dir] * CELL);
-        if (j < 0 || !cells[j] || !pathClear(blocked, xOf(i), zOf(i), xOf(j), zOf(j))) continue;
+      const col = i % SIDE, row = Math.floor(i / SIDE);
+      const old = overlap(i);
+      for (let dir = 0; dir < 4; dir++) {
+        if (col + DX[dir] < 0 || col + DX[dir] >= SIDE || row + DZ[dir] >= SIDE) continue;
+        const j = i + DX[dir] + DZ[dir] * SIDE;
+        if (!cells[j]) continue;
+        const clear = old >= 0 && overlap(j) >= 0
+          ? priorEdges[old] & (1 << dir)
+          : pathClear(blocked, xOf(i), zOf(i), xOf(j), zOf(j));
+        if (!clear) continue;
         edges[i] |= 1 << dir;
-        edges[j] |= 1 << (dir + 2);
+        edges[j] |= 1 << (dir + 4);
       }
     }
+    priorCells.set(cells);
+    priorEdges.set(edges);
     initialized = true;
     targetCell = -1;
   }
 
   function nearest(x, z, requireRoute) {
-    const col = Math.round((x - originX) / CELL);
-    const row = Math.round((z - originZ) / CELL);
+    const col = Math.round((x - originX) / cellSize);
+    const row = Math.round((z - originZ) / cellSize);
     let best = -1;
     let cost = Infinity;
     for (let dz = -2; dz <= 2; dz++) {
@@ -75,8 +93,10 @@ export function createZombieNavigation(blocked, inside) {
   }
 
   function update(x, z) {
-    const col = (x - originX) / CELL;
-    const row = (z - originZ) / CELL;
+    targetX = x;
+    targetZ = z;
+    const col = (x - originX) / cellSize;
+    const row = (z - originZ) / cellSize;
     if (!initialized || col < 23 || col >= SIDE - 23 || row < 23 || row >= SIDE - 23) build(x, z);
     const root = nearest(x, z, false);
     if (root === targetCell && count) return;
@@ -89,7 +109,7 @@ export function createZombieNavigation(blocked, inside) {
     queue[count++] = root;
     for (let i = 0; i < count; i++) {
       const id = queue[i];
-      for (let dir = 0; dir < 4; dir++) {
+      for (let dir = 0; dir < DX.length; dir++) {
         if (!(edges[id] & (1 << dir))) continue;
         const j = id + DX[dir] + DZ[dir] * SIDE;
         if (distance[j] >= 0) continue;
@@ -100,11 +120,21 @@ export function createZombieNavigation(blocked, inside) {
     }
   }
 
-  function waypoint(from, out) {
+  function waypoint(from, out, allowDirect = true) {
     const id = nearest(from.x, from.z, true);
-    if (id < 0) return false;
-    const nextId = next[id];
-    const target = nextId >= 0 && pathClear(blocked, from.x, from.z, xOf(nextId), zOf(nextId)) ? nextId : id;
+    if (id < 0) {
+      // A zombie outside the cached window can still make safe progress down
+      // a long street. Movement validates the same body clearance.
+      if (!allowDirect || !pathClear(blocked, from.x, from.z, targetX, targetZ)) return false;
+      out.x = targetX;
+      out.z = targetZ;
+      return true;
+    }
+    let target = id;
+    for (let step = 0, candidate = next[id]; step < 3 && candidate >= 0; step++, candidate = next[candidate]) {
+      if (!pathClear(blocked, from.x, from.z, xOf(candidate), zOf(candidate))) break;
+      target = candidate;
+    }
     out.x = xOf(target);
     out.z = zOf(target);
     return true;
@@ -113,8 +143,9 @@ export function createZombieNavigation(blocked, inside) {
   function spawn(x, z, accept, out) {
     if (!count) return false;
     const offset = Math.floor(Math.random() * count);
+    const stride = count % 53 === 0 ? 1 : 53;
     for (let i = 0; i < Math.min(count, 450); i++) {
-      const id = queue[(offset + i * 53) % count];
+      const id = queue[(offset + i * stride) % count];
       const tx = xOf(id), tz = zOf(id);
       if (!accept(tx, tz, Math.hypot(x - tx, z - tz))) continue;
       out.x = tx;

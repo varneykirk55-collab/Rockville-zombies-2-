@@ -47,6 +47,8 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
   let levelMeshes;
   let clips;
   let navigation;
+  let longNavigation;
+  let needsLongRoute = false;
   let round = 0;
   let pending = 0;
   let phase = 'waiting';
@@ -93,6 +95,7 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
     }));
     levelMeshes = meshes.length;
     navigation = createZombieNavigation(controls.blocked, inside);
+    longNavigation = createZombieNavigation(controls.blocked, inside, 5.1);
   }
 
   function makeZombie() {
@@ -270,13 +273,18 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
     const waypoint = zombie.waypoint;
     if (!direct && (clock >= zombie.routeAt || (zombie.hasRoute &&
       (position.x - waypoint.x) ** 2 + (position.z - waypoint.z) ** 2 < 0.13))) {
-      zombie.hasRoute = navigation.waypoint(position, waypoint);
+      zombie.hasRoute = navigation.waypoint(position, waypoint, false);
+      if (!zombie.hasRoute) {
+        needsLongRoute = true;
+        zombie.hasRoute = longNavigation.waypoint(position, waypoint);
+      }
       zombie.routeAt = clock + 0.1 + (zombie.root.id % 7) * 0.012;
     }
     const route = direct || zombie.hasRoute;
     let tx = direct ? x : waypoint.x, tz = direct ? z : waypoint.z;
-    if (route && distance > config.attackRange * 0.72) {
+    if (route && (!direct || distance > config.attackRange * 0.72)) {
       for (const other of living) {
+        if (zombie.stalled > 0.35) break;
         if (other === zombie) continue;
         const sx = position.x - other.root.position.x, sz = position.z - other.root.position.z;
         const squared = sx * sx + sz * sz;
@@ -291,6 +299,7 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
       const ratio = Math.min(1, zombie.speed * delta / Math.max(0.001, Math.hypot(mx, mz)));
       const beforeX = position.x, beforeZ = position.z;
       moveGrounded(position, mx * ratio, mz * ratio, controls.blocked);
+      if (position.x === beforeX && position.z === beforeZ) zombie.routeAt = Math.min(zombie.routeAt, clock + 0.05);
       position.y = controls.sampleGround(position.x, position.z);
       zombie.motion = Math.hypot(position.x - beforeX, position.z - beforeZ);
       if (zombie.motion > 0.001) {
@@ -407,6 +416,10 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
     if ((navIn -= delta) <= 0) {
       const start = performance.now();
       navigation.update(controls.pose.x, controls.pose.z);
+      if (needsLongRoute) {
+        longNavigation.update(controls.pose.x, controls.pose.z);
+        needsLongRoute = false;
+      }
       metrics.navigation += performance.now() - start;
       navIn = 0.32;
     }
@@ -416,14 +429,7 @@ export function createSurvival({ world, camera, controls, renderer, wallet, grap
     }
     if (clock - lastDamage >= config.regenDelay) playerHealth = Math.min(config.playerHealth, playerHealth + config.regenRate * delta);
     for (let i = living.length - 1; i >= 0 && phase !== 'dead'; i--) {
-      const zombie = living[i];
-      updateZombie(zombie, delta);
-      if (zombie.stalled > 11 || (clock > 2 && Math.hypot(zombie.root.position.x - controls.pose.x,
-        zombie.root.position.z - controls.pose.z) > 79)) {
-        living.splice(i, 1);
-        release(zombie);
-        pending++;
-      }
+      updateZombie(living[i], delta);
     }
     if (phase === 'wave' && pending === 0 && living.length === 0) endRound();
     for (let i = corpses.length - 1; i >= 0; i--) {
