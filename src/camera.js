@@ -86,6 +86,7 @@ export function createBuildingCollision(polygons) {
     const radiusSquared = radius * radius;
     for (const body of bodies) {
       if (body.minY !== undefined && !(y >= body.minY && y <= body.maxY)) continue;
+      if (body.minY === undefined && body.maxY !== undefined && y > body.maxY) continue;
       if (x < body.minX - radius || x > body.maxX + radius ||
           z < body.minZ - radius || z > body.maxZ + radius) continue;
       if (body.box) {

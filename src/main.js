@@ -15,6 +15,7 @@ import { startGameLoop } from './game-loop.js';
 import { configureGraphics } from './graphics.js';
 import { runWalkTest, SHOTS, EXTRA_POSES, shotPose } from './walk-test.js';
 import { lonLatToWorld } from './utils.js';
+import { addStreetscape } from './environment/streetscape.js';
 
 const viewport = document.querySelector('#viewport');
 const status = document.querySelector('#loading');
@@ -103,7 +104,7 @@ try {
       loadJson(dataUrl('playable-boundary.geojson')),
     ]);
     const terrain = createTerrain(terrainJson, boundaryJson);
-    world.add(terrain.buildMesh());
+    world.add(terrain.buildMesh(maps.grass));
     alignSun(sun, terrain.sampleGameY);
     addStreets(world, maps, terrain, []);
     controls.prepare([], (x, z) => terrain.sampleGameY(x, z) + 0.04);
@@ -112,6 +113,7 @@ try {
   } else {
     await loadCity();
   }
+  await maps.ready;
   readyToRender = true;
 } catch (error) {
   console.error('Rockville building load failed:', error);
@@ -132,10 +134,10 @@ async function loadCity() {
     loadLandmarkModels(),
   ]);
   const terrain = createTerrain(terrainJson, boundaryJson);
-  const ground = terrain.buildMesh();
+  const ground = terrain.buildMesh(maps.grass);
   world.add(ground);
   alignSun(sun, terrain.sampleGameY);
-  addParking(world, parking, terrain);
+  addParking(world, parking, terrain, maps);
   addBridgeMarkers(world, bridgeManifest.bridge, terrain);
 
   const separateIds = separateBuildingIds(landmarkModels);
@@ -164,6 +166,7 @@ async function loadCity() {
     collisionPolygons: built.collisionPolygons,
     batch: params.get('batch') !== '0',
   });
+  const environment = addStreetscape({ world, terrain, maps, polygons: built.collisionPolygons });
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   status.textContent = 'Loading training machines and survival assets…';
   await Promise.all([
@@ -191,6 +194,7 @@ async function loadCity() {
     triangles: built.triangles,
     trees: shared.trees,
     roads: shared.roads,
+    environment: { ...environment, ...built.frontages },
     modules: modules.map(item => item.id),
     parking: parking.features.length,
     landmarks: placed,

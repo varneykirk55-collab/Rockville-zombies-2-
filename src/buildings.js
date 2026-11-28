@@ -1,14 +1,14 @@
-import { METRO_SPAN } from './config.js';
 import * as THREE from 'three';
-import { DOWNTOWN } from './config.js';
+import { DOWNTOWN, METRO_SPAN } from './config.js';
+import { addFrontages } from './environment/frontages.js';
 import { lonLatToWorld, nextFrame } from './utils.js';
 
-const warm = [0xb46951, 0xd6b77e, 0xb88d70];
-const cool = [0x8b9ebe, 0x6eaaa7, 0x9aa7a4];
+const warm = [0xb48167, 0xcfb797, 0xb98f76, 0xd2bca5];
+const cool = [0xb8b8ad, 0xa4aeb0, 0xadaba0, 0xc2b59d];
 const focus = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
-const glassColors = [0x24414d, 0x294b59, 0x365f6a, 0x496e76, 0x806449];
+const glassColors = [0x35545f, 0x516b74, 0x45616b, 0x5c767d, 0x796851];
 const white = new THREE.Color(0xffffff);
-const roofTint = new THREE.Color(0xa4a8a5);
+const roofTint = new THREE.Color(0xb1aba0);
 const RIDGE_M = 2;
 
 function variation(id) {
@@ -177,12 +177,26 @@ function addRoof(batch, polygon, yOf, color, upward = true) {
 
 function emitQuad(batch, a, b, c, d, nx, ny, nz, color) {
   const length = Math.hypot(b.x - a.x, b.z - a.z) || 1;
-  pushVertex(batch, a.x, a.y, a.z, nx, ny, nz, 0, a.y / 6, color);
-  pushVertex(batch, b.x, b.y, b.z, nx, ny, nz, length / 6, b.y / 6, color);
-  pushVertex(batch, c.x, c.y, c.z, nx, ny, nz, length / 6, c.y / 6, color);
-  pushVertex(batch, a.x, a.y, a.z, nx, ny, nz, 0, a.y / 6, color);
-  pushVertex(batch, c.x, c.y, c.z, nx, ny, nz, length / 6, c.y / 6, color);
-  pushVertex(batch, d.x, d.y, d.z, nx, ny, nz, 0, d.y / 6, color);
+  // Keep courses continuous across eight-metre mesh subdivisions.
+  const phase = (a.x * (b.x-a.x) + a.z * (b.z-a.z)) / length;
+  const u0 = phase / 1.9, u1 = (phase + length) / 1.9;
+  const facing = (a.z - b.z) * nx + (b.x - a.x) * nz;
+  const put = (point, u) =>
+    pushVertex(batch, point.x, point.y, point.z, nx, ny, nz, u, point.y / 1.9, color);
+  put(a, u0);
+  if (facing >= 0) {
+    put(b, u1);
+    put(c, u1);
+    put(a, u0);
+    put(c, u1);
+    put(d, u0);
+  } else {
+    put(c, u1);
+    put(b, u1);
+    put(a, u0);
+    put(d, u0);
+    put(c, u1);
+  }
 }
 
 function buildMesh(group, batch, material, name, castShadow) {
@@ -202,11 +216,33 @@ function buildMesh(group, batch, material, name, castShadow) {
 }
 
 function windowMaterials() {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 96;
+  const ctx = canvas.getContext('2d');
+  const reflection = ctx.createLinearGradient(4, 0, 72, 98);
+  reflection.addColorStop(0, '#a1bdd1');
+  reflection.addColorStop(0.43, '#758b93');
+  reflection.addColorStop(0.58, '#535c5f');
+  reflection.addColorStop(1, '#637076');
+  ctx.fillStyle = reflection;
+  ctx.fillRect(0, 0, 96, 96);
+  ctx.fillStyle = 'rgba(213, 226, 232, 0.20)';
+  ctx.beginPath();
+  ctx.moveTo(9, 0);
+  ctx.lineTo(30, 0);
+  ctx.lineTo(82, 96);
+  ctx.lineTo(65, 96);
+  ctx.fill();
+  ctx.fillStyle = '#40454a';
+  ctx.fillRect(46, 0, 3, 96);
+  ctx.fillRect(0, 32, 96, 3);
+  const map = new THREE.CanvasTexture(canvas);
+  map.colorSpace = THREE.SRGBColorSpace;
   return {
-    geometry: new THREE.BoxGeometry(1, 1, 1),
-    frame: new THREE.MeshStandardMaterial({ color: 0x373743, roughness: 0.92 }),
+    geometry: new THREE.PlaneGeometry(1, 1),
+    frame: new THREE.MeshStandardMaterial({ color: 0x54504a, roughness: 0.61, metalness: 0.23 }),
     glass: new THREE.MeshStandardMaterial({
-      color: white, roughness: 0.56, metalness: 0.12, emissive: 0x091921, emissiveIntensity: 0.42,
+      color: white, map, roughness: 0.4, metalness: 0.10, emissive: 0x344450, emissiveIntensity: 0.3,
     }),
   };
 }
@@ -236,14 +272,14 @@ function addWindows(group, windows, materials) {
   group.add(frames, panes);
 }
 
-function facade(windows, a, b, baseA, baseB, topA, topB, seed, spacing, nx, nz, sampleGameY, audit) {
+function facade(windows, a, b, baseA, baseB, topA, topB, seed, spacing, nx, nz, sampleGameY, audit, detailed) {
   const dx = b.x - a.x;
   const dz = b.z - a.z;
   const length = Math.hypot(dx, dz);
   const count = Math.floor((length - 0.8) / spacing);
   if (count < 1 || length < 1.2) return;
   const bay = length / (count + 1);
-  const width = Math.min(1.7, bay * 0.52);
+  const width = Math.min(detailed ? 2.4 : 1.75, bay * (detailed ? 0.69 : 0.55));
   for (let col = 1; col <= count; col++) {
     const t = col / (count + 1);
     // Sit the opening in the wall face. A few centimetres of proud glass reads
@@ -256,11 +292,11 @@ function facade(windows, a, b, baseA, baseB, topA, topB, seed, spacing, nx, nz, 
     const sill = Math.max(base + 0.16, ground + 0.45);
     const head = top - 0.2;
     if (head - sill < 1.35) continue;
-    const rows = Math.min(5, Math.max(1, Math.floor((head - sill) / 3.15)));
+    const rows = Math.min(detailed ? 20 : 7, Math.max(1, Math.floor((head - sill) / 3.19)));
     for (let row = 0; row < rows; row++) {
       const bandBottom = sill + row * (head - sill) / rows;
       const bandTop = sill + (row + 1) * (head - sill) / rows;
-      const height = Math.min(row === 0 ? 1.65 : 1.3, (bandTop - bandBottom) * 0.7);
+      const height = Math.min(detailed ? 1.95 : 1.48, (bandTop - bandBottom) * 0.68);
       const y = (bandBottom + bandTop) / 2;
       if (y - height / 2 < ground + 0.2 || y + height / 2 > head + 0.02) {
         audit.rejected += 1;
@@ -283,10 +319,10 @@ export async function buildBuildings({
   features, heights, sections, sampleGameY, maps, onProgress, separateIds, group,
 }) {
   const wallMaterial = new THREE.MeshStandardMaterial({
-    vertexColors: true, map: maps.concrete ?? null, roughness: 0.95,
+    ...maps.masonry, vertexColors: true,
   });
   const roofMaterial = new THREE.MeshStandardMaterial({
-    vertexColors: true, map: maps.roof ?? null, roughness: 1,
+    ...maps.roof, vertexColors: true,
   });
   const districts = new Map();
   const windowTiles = new Map();
@@ -295,6 +331,8 @@ export async function buildBuildings({
   const windows = [];
   const windowAudit = { placed: 0, buried: 0, rejected: 0 };
   const edges = [];
+  const flashing = [];
+  const mounting = new Map();
   const floors = new Map();
   const separateGroups = new Map();
   let rendered = 0;
@@ -392,7 +430,7 @@ export async function buildBuildings({
         return ridgeM * (1 - Math.min(1, distance / half));
       } : null;
       addMass(polygon, {
-        id, height, ridge, color, role, batch, seat,
+        id, height, ridge, color, role, batch, seat, address: record?.address,
         windowList: batch?.windows ?? null,
         windows: role === 'playable' && !record?.garage && height >= 4 && Math.abs(ringArea(polygon.outer)) > 80,
         spacing: 5.6,
@@ -502,10 +540,21 @@ export async function buildBuildings({
         { x: bx, y: segTopB, z: bz },
         { x: ax, y: segTopA, z: az },
         edge.nx, 0, edge.nz, edge.color);
+      const detailed = batch.layer === 'near';
+      if (!edge.batch && !edge.upper && edge.windows) {
+        if (!mounting.has(edge)) mounting.set(edge, []);
+        mounting.get(edge).push({ start: t0 * edge.length, end: t1 * edge.length,
+          bottom: Math.max(baseA, baseB), top: Math.min(segTopA, segTopB) });
+      }
+      if (detailed && !edge.batch && !edge.upper && !edge.ridge &&
+          Math.abs(segTopA-segTopB) < 0.02 && Math.min(segTopA-baseA,segTopB-baseB) > 3) {
+        flashing.push({ ...edge, a:{x:ax,z:az}, b:{x:bx,z:bz}, length:edge.length/segments, top:segTopA });
+      }
       if (edge.windows && Math.min(segTopA, segTopB) - Math.max(baseA, baseB) > 2.2) {
         const list = edge.windowList ?? windows;
         facade(list, { x: ax, z: az }, { x: bx, z: bz }, baseA, baseB, segTopA, segTopB,
-          edge.seed + segment, edge.spacing, edge.nx, edge.nz, sampleGameY, windowAudit);
+          edge.seed + segment, detailed ? Math.min(edge.spacing, 3.35) : edge.spacing,
+          edge.nx, edge.nz, sampleGameY, windowAudit, detailed);
       }
     }
   }
@@ -527,11 +576,12 @@ export async function buildBuildings({
     windowTiles.get(key).push(window);
   }
   for (const tile of windowTiles.values()) addWindows(group, tile, glazing);
+  const frontages = addFrontages(group, edges, flashing, mounting, sampleGameY);
   onProgress?.(features.length, features.length);
 
   return {
     rendered, skipped, collisionPolygons, separateGroups, windows: windowAudit.placed,
-    windowAudit, sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
+    windowAudit, frontages, sharedMetres: Math.round(sharedMetres), minHeight, maxHeight, triangles: Math.round(triangles),
   };
 }
 

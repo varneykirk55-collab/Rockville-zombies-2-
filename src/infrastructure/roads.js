@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { DOWNTOWN, METRO_SPAN, ROAD_CENTERLINES } from '../config.js';
 import { lonLatToWorld } from '../utils.js';
+import { addRoadDetails } from '../environment/road-dressing.js';
 
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
 
@@ -203,11 +204,10 @@ export function addStreets(world, maps, terrain, features) {
     }
   }
   addRoadMesh(world, 'Concrete sidewalks', terrain.drapeTriangles(walks, 0.028),
-    new THREE.MeshStandardMaterial({ color: 0x9ca9ae, map: maps.concrete, roughness: 1 }), 3.5);
+    new THREE.MeshStandardMaterial({ ...maps.concrete, color: 0xc5beb0 }), 2);
   addRoadMesh(world, 'Asphalt streets', terrain.drapeTriangles(roads, 0.045),
     new THREE.MeshStandardMaterial({
-      color: 0xa8b6bc, map: maps.asphalt, roughness: 1,
-      emissive: 0x8ea7b9, emissiveMap: maps.asphalt, emissiveIntensity: 0.38,
+      ...maps.asphalt, color: 0xb9b8af,
     }), 5);
 
   const y = sampleGameY(junction.x, junction.z);
@@ -217,8 +217,7 @@ export function addStreets(world, maps, terrain, features) {
   clippedRibbon(brick, point(0, -4.05), point(-0.06, -8.3), 4.1, 0.06, solid, stats);
   addRoadMesh(world, 'Brick at East Montgomery and Helen Heneghan', terrain.drapeTriangles(brick, 0.06),
     new THREE.MeshStandardMaterial({
-      color: 0xffb595, map: maps.brick, roughness: 0.9,
-      emissive: 0xd88d73, emissiveMap: maps.brick, emissiveIntensity: 0.34,
+      ...maps.brick, color: 0xd4b7a5,
     }), 2.5);
 
   const paint = [];
@@ -264,5 +263,5 @@ export function addStreets(world, maps, terrain, features) {
     luminaire.rotation.y = arm.rotation.y;
     world.add(post, arm, luminaire);
   }
-  return stats;
+  return { ...stats, details: addRoadDetails(world, terrain, solid) };
 }

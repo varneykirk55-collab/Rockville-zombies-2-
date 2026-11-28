@@ -54,7 +54,7 @@ Ownership, the landmark inventory, and how the six parallel agents add work with
 
 ## Materials and data
 
-The four [Poly Haven CC0](https://polyhaven.com/license) diffuse maps are 2K WebP copies of the source images. Scalar roughness, tint, and lighting keep the style consistent and the material count low. Glazing uses opaque tinted materials.
+Assignment 008 uses local [Poly Haven CC0](https://polyhaven.com/license) surfaces, packed material maps, a shared facade treatment and a partly cloudy daylight panorama. See the [environment inventory, references and benchmark report](docs/environmental-realism/README.md).
 
 | Asset | Use |
 | --- | --- |
