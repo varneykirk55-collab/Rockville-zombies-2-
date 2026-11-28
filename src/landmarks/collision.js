@@ -1,4 +1,4 @@
-import { Matrix4, Vector3 } from 'three';
+import { Vector3 } from 'three';
 
 const CELL = 1;
 const corners = [new Vector3(), new Vector3(), new Vector3()];
@@ -38,12 +38,11 @@ function overlaps(vertices, x, z) {
   return true;
 }
 
-export function modelBoxes(root, baseY, openLocalZAbove) {
+export function modelBoxes(root, sampleGround) {
   root.updateMatrixWorld(true);
-  const m = new Matrix4().copy(root.matrixWorld).invert().elements;
-  const limit = v => openLocalZAbove - (m[2] * v.x + m[6] * v.y + m[10] * v.z + m[14]);
   const occupied = new Map();
-  const floor = baseY + 0.15, ceiling = baseY + 3.2;
+  const bottom = v => v.y - sampleGround(v.x, v.z) - 0.15;
+  const top = v => sampleGround(v.x, v.z) + 3.2 - v.y;
 
   root.traverse(mesh => {
     if (!mesh.isMesh) return;
@@ -56,10 +55,11 @@ export function modelBoxes(root, baseY, openLocalZAbove) {
         corners[j].fromBufferAttribute(attribute, indices ? indices.getX(i + j) : i + j).applyMatrix4(mesh.matrixWorld);
       const [a, b, c] = corners;
       const lo = Math.min(a.y, b.y, c.y), hi = Math.max(a.y, b.y, c.y);
-      if (hi < floor || lo > ceiling || hi - lo < 1e-4) continue;
-      let poly = lo < floor ? clip(corners, v => v.y - floor) : corners;
-      if (poly.length && hi > ceiling) poly = clip(poly, v => ceiling - v.y);
-      if (poly.length && openLocalZAbove != null) poly = clip(poly, limit);
+      // Paving and other horizontal surfaces are walkable. Sloped and
+      // vertical details are clipped to the local walking-height band.
+      if (hi - lo < 1e-4) continue;
+      let poly = clip(corners, bottom);
+      if (poly.length) poly = clip(poly, top);
       if (poly.length < 3) continue;
       let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
       for (const v of poly) {

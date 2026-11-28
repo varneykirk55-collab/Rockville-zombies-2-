@@ -9,7 +9,7 @@ const SPRINT_SPEED = 6.9;
 const AIM_SPEED = 2.5;
 const GRAVITY = 22;
 const JUMP_SPEED = Math.sqrt(2 * GRAVITY * 1.15);
-const CELL_SIZE = 32;
+const CELL_SIZE = 16;
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
 const start = { x: junction.x + 14.5, z: junction.z + 2.45 };
 const movementKeys = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD',
@@ -59,7 +59,7 @@ export function createBuildingCollision(polygons) {
       const reverse = [forward[0], ...forward.slice(1).reverse()];
       return [forward.join(';'), reverse.join(';')].sort()[0];
     };
-    const signature = canonical(polygon.outer) + '|' + polygon.holes.map(canonical).sort().join('|');
+    const signature = [canonical(polygon.outer), ...polygon.holes.map(canonical).sort(), polygon.minY, polygon.maxY].join('|');
     if (indexed.has(signature)) continue;
     indexed.add(signature);
     let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
@@ -81,12 +81,19 @@ export function createBuildingCollision(polygons) {
     }
   }
 
-  return (x, z, radius = BODY_RADIUS) => {
+  return (x, z, radius = BODY_RADIUS, y) => {
     const bodies = cells.get(cellKey(Math.floor(x / CELL_SIZE), Math.floor(z / CELL_SIZE))) ?? EMPTY;
     const radiusSquared = radius * radius;
     for (const body of bodies) {
+      if (body.minY !== undefined && !(y >= body.minY && y <= body.maxY)) continue;
       if (x < body.minX - radius || x > body.maxX + radius ||
           z < body.minZ - radius || z > body.maxZ + radius) continue;
+      if (body.box) {
+        const dx = Math.max(body.minX - x, 0, x - body.maxX);
+        const dz = Math.max(body.minZ - z, 0, z - body.maxZ);
+        if ((dx === 0 && dz === 0) || dx * dx + dz * dz < radiusSquared) return true;
+        continue;
+      }
       if (insideRing(x, z, body.outer)) {
         let inHole = false;
         for (const ring of body.holes) {
@@ -411,7 +418,7 @@ export function createCamera(canvas) {
     let limit = 1;
     for (let i = 1; i <= steps; i++) {
       probe.copy(pivot).addScaledVector(offset, i / steps);
-      if (blocked(probe.x, probe.z, CAMERA_RADIUS) || probe.y < sampleGround(probe.x, probe.z) + 0.2) {
+      if (blocked(probe.x, probe.z, CAMERA_RADIUS, probe.y) || probe.y < sampleGround(probe.x, probe.z) + 0.2) {
         limit = (i - 1) / steps;
         break;
       }
@@ -525,6 +532,6 @@ export function createCamera(canvas) {
 
   return {
     camera,
-    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z) => blocked(x, z), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
+    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z, radius, y) => blocked(x, z, radius, y), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
   };
 }

@@ -159,15 +159,6 @@ async function readModel(glb) {
 
 const LAMP_LOCAL = [[-11.54, 15.0], [11.59, 15.7], [-11.59, -15.66], [11.82, -15.72]];
 
-// Both approved machine sites lie inside the Regal shell. Preserve this
-// published proxy until an exterior placement is approved for the machines.
-const REGAL_PUBLISHED_HULL = [
-  [176, 248, 180, 252], [184, 248, 188, 252],
-  [200, 248, 228, 252], [176, 244, 228, 248],
-].map(([x0, z0, x1, z1]) => [
-  { x: x0, z: z0 }, { x: x1, z: z0 }, { x: x1, z: z1 }, { x: x0, z: z1 },
-]);
-
 export async function integrateLandmarks({ world, models, terrain, separateGroups, collisionPolygons, batch = true }) {
   const claimed = new Set();
   const removedFootprints = new Set();
@@ -245,11 +236,10 @@ export async function integrateLandmarks({ world, models, terrain, separateGroup
     }
     let hull = null;
     if (model.collision?.mode !== 'none' && model.id !== 'courthouse-roundabout') {
-      hull = model.id === 'regal-cinemas' ? REGAL_PUBLISHED_HULL
-        : modelBoxes(object, y, model.collision?.openLocalZAbove ?? null);
+      hull = modelBoxes(object, terrain.sampleGameY);
       for (const ring of hull) {
         collisionPolygons.push({
-          outer: ring, holes: [], footprintId: model.buildingId ?? model.id, source: 'landmark',
+          outer: ring, holes: [], box: true, footprintId: model.buildingId ?? model.id, source: 'landmark',
         });
       }
     }

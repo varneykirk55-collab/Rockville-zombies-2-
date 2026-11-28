@@ -1,5 +1,7 @@
 # City collision and navigation audit
 
+For the final machine placements, Regal repair and road-source corrections, see the [Assignment 007B closeout](007b.md). The rest of this page records the initial PR #16 audit.
+
 Baseline commit `a9e20c112b2cbdda1308e18951faa8aa9ad7d9ca`. Both builds loaded 743 buildings, six city modules and eight placed landmarks. Four of the modules are geographic districts. Infrastructure and vegetation cover the same map and do not define separate geographical borders.
 
 [Diagnostic map](audit-map.svg) · [Coordinate ledger (gzip CSV)](observations.csv.gz)

@@ -167,7 +167,7 @@ async function loadCity() {
   const sampleGround = (x, z) => terrain.sampleGameY(x, z) + 0.04;
   status.textContent = 'Loading training machines and survival assets…';
   await Promise.all([
-    machines?.place(built.collisionPolygons),
+    machines?.place(built.collisionPolygons, terrain.sampleGameY),
     survival?.prepare(terrain.insidePlayable),
   ]);
   controls.prepare(built.collisionPolygons, sampleGround);

@@ -37,14 +37,14 @@
       "elevationOffsetM": 0,
       "replaceProcedural": true,
       "shareFootprint": true,
-      "collision": { "mode": "model", "openLocalZAbove": 6 },
+      "collision": { "mode": "model" },
       "source": {
         "commit": "3975de596c576874160841d01f77b141449b2fb4",
         "pullRequest": 9,
         "path": "public/landmarks/white-columned.glb",
         "sha256": "804a24684de52e43e6b3b17e8f612b15053ecfd984ce0fae1d45eb4c643e2ac8"
       },
-      "notes": "Owner approved for use (PR #9 file). West of the Regal on the same footprint. Collision ignores local z above 6 m so the columned walkway on the street side stays open. PR #1 montgomery-colonnade.glb stays on disk, inactive."
+      "notes": "Owner approved for use (PR #9 file). West of the Regal on the same footprint. Walking-height collision follows the modeled walls and columns. PR #1 montgomery-colonnade.glb stays on disk, inactive."
     },
     {
       "id": "regal-cinemas-pr1",

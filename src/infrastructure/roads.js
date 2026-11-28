@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { DOWNTOWN, ROAD_CENTERLINES } from '../config.js';
+import { DOWNTOWN, METRO_SPAN, ROAD_CENTERLINES } from '../config.js';
 import { lonLatToWorld } from '../utils.js';
 
 const junction = lonLatToWorld(DOWNTOWN.longitude, DOWNTOWN.latitude);
@@ -75,7 +75,7 @@ export function createFootprintSolid(features) {
   const cell = 48;
   const cells = new Map();
   for (const feature of features ?? []) {
-    if (feature.properties?.role !== 'playable') continue;
+    if (feature.properties?.role !== 'playable' || Number(feature.properties.OBJECTID) === METRO_SPAN.footprintId) continue;
     const raw = feature.geometry?.type === 'Polygon' ? [feature.geometry.coordinates]
       : feature.geometry?.type === 'MultiPolygon' ? feature.geometry.coordinates : [];
     for (const polygon of raw) {

@@ -8,12 +8,8 @@ const ASSETS = new URL('../public/machines/', import.meta.url);
 const CYCLE = 3.4;
 const OFFER = 9;
 const PROCESS = 3.2;
-// Approved temporary positions from the published city. Keep these fixed when
-// collision or the surveyed ground sampler changes.
-const MACHINE_POSITIONS = [
-  [192.45582232831137, -0.14953467278408628, 221.32864716064796],
-  [185.80223373725244, -0.07105242096772682, 223.11147085039113],
-];
+// Temporary apron east of Regal. Faces point into the open plaza.
+const MACHINE_SITES = [[232, 226], [232, 234]];
 
 function weightedReward(random) {
   const eligible = BOX_POOL.filter(entry => entry.weight > 0);
@@ -77,7 +73,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     node.play();
   }
 
-  async function place(polygons) {
+  async function place(polygons, sampleGround) {
     const [box, pack] = await Promise.all(['mystery_box_new.glb', 'pack_a_punch_new.glb'].map(
       file => loader.loadAsync(new URL(file, ASSETS).href)));
     for (const [index, gltf] of [box, pack].entries()) {
@@ -86,8 +82,10 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
       const model = gltf.scene;
       group.add(model);
       model.traverse(node => { if (node.isMesh) node.castShadow = node.receiveShadow = true; });
-      const bounds = new Box3().setFromObject(model);
-      group.position.set(...MACHINE_POSITIONS[index]);
+      group.rotation.y = Math.PI / 2;
+      const bounds = new Box3().setFromObject(group, true);
+      const [siteX, siteZ] = MACHINE_SITES[index];
+      group.position.set(siteX, sampleGround(siteX, siteZ) - bounds.min.y, siteZ);
       const light = new PointLight(index ? 0xff8026 : 0xffb34d, index ? 1.5 : 1.8, index ? 7 : 8);
       light.position.set(0, index ? 1.2 : 1.4, index ? 1.2 : 0.6);
       group.add(light);
@@ -101,7 +99,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
       polygons.push({ outer: [
         { x: x + bounds.min.x, z: z + bounds.min.z }, { x: x + bounds.max.x, z: z + bounds.min.z },
         { x: x + bounds.max.x, z: z + bounds.max.z }, { x: x + bounds.min.x, z: z + bounds.max.z },
-      ], holes: [] });
+      ], holes: [], box: true, source: 'machine', id: group.name });
     }
     ready = true;
   }
