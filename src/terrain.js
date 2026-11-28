@@ -129,12 +129,13 @@ export function createTerrain(terrain, boundaryGeoJson) {
     return best;
   }
 
-  function buildMesh() {
+  function buildMesh(map = null) {
     const positions = new Float32Array(cols * rows * 3);
     const normals = new Float32Array(cols * rows * 3);
     const colors = new Float32Array(cols * rows * 3);
-    const urban = new THREE.Color(0x626e61);
-    const grass = new THREE.Color(0x3d5a3e);
+    const uv = new Float32Array(cols * rows * 2);
+    const urban = new THREE.Color(0xc2b9a5);
+    const grass = new THREE.Color(0x99a47d);
     const tint = new THREE.Color();
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
@@ -153,6 +154,8 @@ export function createTerrain(terrain, boundaryGeoJson) {
         normals[index * 3 + 2] = -dz / length;
         const outside = distanceOutside(x, z);
         tint.copy(urban).lerp(grass, Math.min(1, outside / 18));
+        uv[index * 2] = x / 5.4;
+        uv[index * 2 + 1] = z / 5.4;
         colors[index * 3] = tint.r;
         colors[index * 3 + 1] = tint.g;
         colors[index * 3 + 2] = tint.b;
@@ -169,9 +172,10 @@ export function createTerrain(terrain, boundaryGeoJson) {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
     geometry.setIndex(indices);
     geometry.computeBoundingSphere();
-    const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1 }));
+    const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 1, map }));
     mesh.name = 'Maryland DEM terrain';
     mesh.receiveShadow = true;
     return mesh;

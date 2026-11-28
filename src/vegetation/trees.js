@@ -49,8 +49,8 @@ export function addTrees(world, terrain, footprints) {
     spots.length / 2,
   );
   const crown = new THREE.InstancedMesh(
-    new THREE.ConeGeometry(2.3, 6.5, 6),
-    new THREE.MeshStandardMaterial({ color: 0x2f6a3c, roughness: 1 }),
+    new THREE.IcosahedronGeometry(1, 1),
+    new THREE.MeshStandardMaterial({ color: 0x748058, roughness: 1 }),
     spots.length / 2,
   );
   trunk.name = 'Backdrop tree trunks';
@@ -63,7 +63,11 @@ export function addTrees(world, terrain, footprints) {
     dummy.rotation.set(0, 0, 0);
     dummy.updateMatrix();
     trunk.setMatrixAt(i / 2, dummy.matrix);
-    dummy.position.y = y + 4.4;
+    dummy.position.y = y + 4.1;
+    const variation = ((Math.imul(spots[i] * 131 + spots[i+1] * 37, 0x45d9f3b) >>> 0) / 0x100000000);
+    const shoulder = 1.5 + variation * .85;
+    dummy.scale.set(shoulder, 2 + variation * 1.05, shoulder * .92);
+    dummy.rotation.y = variation * Math.PI;
     dummy.updateMatrix();
     crown.setMatrixAt(i / 2, dummy.matrix);
   }
