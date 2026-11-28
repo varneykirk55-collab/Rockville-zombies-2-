@@ -1,3 +1,4 @@
+import { PAD } from './controller-input.js';
 import {
   AudioListener, AudioLoader, Box3, Group, MathUtils, PointLight, PositionalAudio,
 } from 'three';
@@ -32,10 +33,9 @@ function bounceOut(t) {
   return 7.5625 * (t - 2.625 / 2.75) ** 2 + 0.984375;
 }
 
-export function createMachines({ world, camera, renderer, controls, combat, wallet, testing = false, available = () => true }) {
+export function createMachines({ world, camera, renderer, controls, combat, wallet, input, testing = false, available = () => true }) {
   const points = document.querySelector('#points-hud');
   const prompt = document.querySelector('#machine-prompt');
-  const touch = document.querySelector('#interact');
   const hint = document.querySelector('#machine-hint');
   const loader = new GLTFLoader();
   const audioLoader = new AudioLoader();
@@ -58,7 +58,6 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
   let upgradeId;
   let display;
   let clock = 0;
-  let padPressed = false;
   let notice = '';
   let noticeTimer = 0;
   let ready = false;
@@ -198,10 +197,7 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
   function update(delta) {
     if (!ready || !controls.active) return;
     const index = nearest();
-    const pad = Array.from(navigator.getGamepads?.() ?? []).find(gamepad => gamepad?.mapping === 'standard');
-    const pressed = Boolean(pad?.buttons[3]?.pressed);
-    if (pressed && !padPressed) interact();
-    padPressed = pressed;
+    if (input.justPressed(PAD.Y)) interact();
     clock += delta;
     noticeTimer = Math.max(0, noticeTimer - delta);
     const box = scenic[0].userData;
@@ -289,11 +285,10 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     }
     if (index < 0) {
       setText(prompt, noticeTimer ? notice : '');
-      touch.hidden = true;
       const { x, z } = controls.pose;
       const meters = group => Math.ceil(Math.hypot(x - group.position.x, z - group.position.z));
-      setText(hint, 'Training machines near spawn · Mystery Box ' + meters(scenic[0]) +
-        ' m · Pack-a-Punch ' + meters(scenic[1]) + ' m');
+      const prefix = input.source === 'virtual' ? 'Mystery Box ' : 'Training machines near spawn · Mystery Box ';
+      setText(hint, prefix + meters(scenic[0]) + ' m · Pack-a-Punch ' + meters(scenic[1]) + ' m');
       return;
     }
     setText(hint, '');
@@ -305,8 +300,8 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     else if (status === 'idle' && wallet.points < (index ? ECONOMY.pack : ECONOMY.box)) action += ' · Insufficient points';
     if (status !== 'idle' && status !== 'offering') action = index ? 'Upgrading weapon…' : 'Mystery Box in use…';
     if (status === 'idle' && states[1 - index] !== 'idle') action = 'Finish the other machine transaction';
-    setText(prompt, noticeTimer ? notice : action + (status === 'idle' || status === 'offering' ? ' · E / Y' : ''));
-    touch.hidden = status !== 'idle' && status !== 'offering';
+    const binding = input.source === 'desktop' ? 'E' : 'Y';
+    setText(prompt, noticeTimer ? notice : action + (status === 'idle' || status === 'offering' ? ' · ' + binding : ''));
   }
 
   addEventListener('keydown', event => {
@@ -314,7 +309,6 @@ export function createMachines({ world, camera, renderer, controls, combat, wall
     if (event.code === 'KeyE') interact();
     if (testing && event.code === 'KeyP') wallet.credit(5000);
   });
-  touch.addEventListener('click', interact);
   return {
     place, update,
     get state() {

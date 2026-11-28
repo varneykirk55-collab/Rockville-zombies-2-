@@ -1,3 +1,4 @@
+import { PAD } from './controller-input.js';
 import {
   Box3, BoxGeometry, Color, Group, MathUtils, Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   Quaternion, Ray, Sphere, SphereGeometry, Vector3,
@@ -44,7 +45,7 @@ function reach(arm, goal, wrist, yaw, side) {
   solveLimb(arm.upper, arm.forearm, arm.hand, handTarget, elbow, wrist);
 }
 
-export function createCombat({ scene, renderer, camera, controls, player, canvas, survival }) {
+export function createCombat({ scene, renderer, camera, controls, player, canvas, survival, input }) {
   const hud = document.querySelector('#weapon-hud');
   const reticle = document.querySelector('#reticle');
   const arms = [];
@@ -105,7 +106,6 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
   let active = 0;
   let trigger = false;
   let pressed = false;
-  let previousPad = [];
   let reload = 0;
   let draw = 0;
   let cooldown = 0;
@@ -448,14 +448,11 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     }
     upgradeClock.value += delta;
     const motion = controls.pose;
-    const pad = Array.from(navigator.getGamepads?.() ?? []).find(p => p?.mapping === 'standard');
-    const buttons = pad?.buttons.map(button => button.pressed) ?? [];
-    const edge = index => buttons[index] && !previousPad[index];
-    if (edge(14)) equip((active + gear.length - 1) % gear.length);
-    if (edge(15) || edge(5)) equip((active + 1) % gear.length);
-    if (edge(2)) startReload();
-    if (edge(7)) pressed = true;
-    previousPad = buttons;
+    if (input.justPressed(PAD.LEFT)) equip((active + gear.length - 1) % gear.length);
+    if (input.justPressed(PAD.RIGHT) || input.justPressed(PAD.RB)) equip((active + 1) % gear.length);
+    if (input.justPressed(PAD.X)) startReload();
+    if (input.justCanceled(PAD.RT) && !trigger) pressed = false;
+    if (input.justPressed(PAD.RT)) pressed = true;
     const item = gear[active];
     if (reload) {
       reload = Math.max(0, reload - delta);
@@ -490,7 +487,7 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
       animation.apply(player.root, motion, !visible.config.auto, delta, aimWeight);
       poseWeapon(visible, motion, delta);
     }
-    const firing = pressed || (item.config.auto && (trigger || buttons[7]));
+    const firing = pressed || (item.config.auto && (trigger || input.isDown(PAD.RT)));
     if (machineBusy || reload || motion.sprinting) pressed = false;
     else if (firing && !cooldown && !draw) {
       fire(item);
@@ -510,17 +507,15 @@ export function createCombat({ scene, renderer, camera, controls, player, canvas
     trigger = false;
   }
   canvas.addEventListener('pointerdown', event => { if (event.pointerType === 'mouse') fireDown(event); });
-  const touchFire = document.querySelector('#fire');
-  touchFire.addEventListener('pointerdown', event => {
-    touchFire.setPointerCapture(event.pointerId);
-    fireDown(event);
-  });
-  touchFire.addEventListener('lostpointercapture', fireUp);
   window.addEventListener('pointerup', event => { if (event.button === 0) fireUp(); });
-  window.addEventListener('pointercancel', fireUp);
-  window.addEventListener('blur', fireUp);
-  document.querySelector('#reload').addEventListener('click', startReload);
-  document.querySelector('#swap').addEventListener('click', () => equip((active + 1) % gear.length));
+  function cancelFire() {
+    trigger = pressed = false;
+  }
+  window.addEventListener('pointercancel', event => {
+    if (event.pointerType === 'mouse') cancelFire();
+  });
+  window.addEventListener('blur', cancelFire);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) cancelFire(); });
   document.addEventListener('keydown', event => {
     if (!controls.active || event.repeat) return;
     if (event.code === 'KeyR') startReload();

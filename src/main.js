@@ -15,6 +15,8 @@ import { startGameLoop } from './game-loop.js';
 import { configureGraphics } from './graphics.js';
 import { runWalkTest, SHOTS, EXTRA_POSES, shotPose } from './walk-test.js';
 import { lonLatToWorld } from './utils.js';
+import { createControllerInput } from './controller-input.js';
+import { mountVirtualController } from './virtual-controller.js';
 import { addStreetscape } from './environment/streetscape.js';
 
 const viewport = document.querySelector('#viewport');
@@ -24,19 +26,47 @@ const audit = params.has('audit');
 const demo = params.has('demo');
 
 const { scene, renderer, world, maps, sun } = createScene(viewport);
-const { camera, controls } = createCamera(renderer.domElement);
+let hasPlayed = false;
+const input = createControllerInput(syncControllerView);
+const { camera, controls } = createCamera(renderer.domElement, {
+  input,
+  canTogglePause: () => !controllerView.settingsOpen,
+  onActivity(active) {
+    if (!active) controllerView.reset();
+    syncControllerView();
+  },
+});
 const graphics = configureGraphics(renderer, sun, resize);
 const player = createPlayer({ scene, renderer });
 const wallet = createWallet();
 const survival = audit || params.has('preview') ? null : createSurvival({
-  world, camera, controls, renderer, wallet, graphics, overlay: document.querySelector('#start-panel'),
+  world, camera, controls, renderer, wallet, graphics, input, overlay: document.querySelector('#start-panel'),
 });
 const combat = audit || params.has('preview') ? null
-  : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement, survival });
+  : createCombat({ scene, renderer, camera, controls, player, canvas: renderer.domElement, survival, input });
 
 const machines = combat ? createMachines({
-  world, camera, renderer, controls, combat, wallet, available: () => !survival?.dead, testing: params.has('machine-test') && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname),
+  world, camera, renderer, controls, combat, wallet, input, available: () => !survival?.dead, testing: params.has('machine-test') && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname),
 }) : null;
+
+const controllerView = mountVirtualController({ viewport, input, controls });
+syncControllerView();
+
+function syncControllerView() {
+  const enabled = input.source === 'virtual';
+  const active = controls.active && !survival?.dead;
+  viewport.classList.toggle('touch-capable', input.supportsTouch);
+  viewport.classList.toggle('touch-controller-enabled', enabled);
+  viewport.classList.toggle('game-active', active);
+  viewport.classList.toggle('game-paused', hasPlayed && !active && !survival?.dead);
+  viewport.classList.toggle('game-ended', Boolean(survival?.dead));
+  document.documentElement.classList.toggle('playing-rockville', active);
+  document.documentElement.classList.toggle('mobile-controller-ready', enabled);
+  document.querySelector('#control-help').textContent = enabled
+    ? 'Left stick to move · Right stick to look · LT to aim · RT to fire · Menu to pause'
+    : 'WASD to move · Hold C to walk · Shift to sprint · Space to jump · Q switches shoulder · Esc to pause';
+  if (active) hasPlayed = true;
+}
 
 function resize() {
   const { clientWidth: width, clientHeight: height } = viewport;
@@ -59,6 +89,7 @@ startGameLoop({
   ready: () => readyToRender,
   shadowInterval: () => graphics().shadowInterval,
   update: (delta) => {
+    input.update();
     if (demo && !audit && controls.active) controls.drive(demoInput(demoTime += delta));
     controls.update(delta);
     if (survival?.dead) {
@@ -70,6 +101,11 @@ startGameLoop({
     combat?.update(delta);
     machines?.update(delta);
     survival?.update(delta, combat?.ready);
+    if (survival?.dead) {
+      input.clear();
+      controllerView.reset();
+      syncControllerView();
+    }
   },
 });
 

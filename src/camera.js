@@ -1,4 +1,5 @@
 import { MathUtils, PerspectiveCamera, Vector3 } from 'three';
+import { PAD } from './controller-input.js';
 import { DOWNTOWN } from './config.js';
 import { lonLatToWorld } from './utils.js';
 
@@ -144,17 +145,12 @@ function safeSpawn(blocked) {
   throw new Error('No clear ground near the downtown spawn.');
 }
 
-export function createCamera(canvas) {
+export function createCamera(canvas, { input, onActivity, canTogglePause }) {
   const camera = new PerspectiveCamera(58, 1, 0.07, 920);
   camera.rotation.order = 'YXZ';
-  const touch = matchMedia('(pointer: coarse)').matches;
   const overlay = document.querySelector('#start-panel');
   const startButton = document.querySelector('#start');
   const hud = document.querySelector('#hud');
-  const joystick = document.querySelector('#joystick');
-  const stick = document.querySelector('#stick');
-  const sprint = document.querySelector('#sprint');
-  const aim = document.querySelector('#aim');
   const help = document.querySelector('#control-help');
   const keys = new Set();
   let blocked = () => false;
@@ -166,12 +162,6 @@ export function createCamera(canvas) {
   let lockSettlesAt = 0;
   let dragMouse = false;
   let aimHeld = false;
-  let touchAim = false;
-  let touchSprint = false;
-  let movingPointer = null;
-  let lookingPointer = null;
-  let padX = 0, padY = 0;
-  let lookX = 0, lookY = 0;
   let yaw = Math.PI / 2 + 0.13;
   let pitch = -0.055;
   let velocityX = 0, velocityZ = 0;
@@ -179,15 +169,12 @@ export function createCamera(canvas) {
   let grounded = true;
   let coyote = 0;
   let jumpHeld = false;
-  let touchJump = false;
   let shoulder = 1;
   let shoulderOffset = 0.7;
   let followY;
   let boomFraction = 1;
   let zoom = 0;
   let recoilPitch = 0;
-  let padShoulder = false;
-  let padStart = false;
   const pivot = new Vector3();
   const offset = new Vector3();
   const probe = new Vector3();
@@ -200,20 +187,11 @@ export function createCamera(canvas) {
     jumped: false,
   };
 
-  document.querySelector('#viewport').classList.toggle('touch-controls', touch);
-  help.textContent = touch
-    ? 'Left stick to move · Drag to look · Aim and Fire'
-    : 'WASD to move · Hold C to walk · Shift to sprint · Space to jump · Q switches shoulder · Esc to pause';
-
   function resetInputs() {
     keys.clear();
-    velocityX = velocityZ = padX = padY = 0;
-    movingPointer = lookingPointer = null;
-    aimHeld = touchAim = touchSprint = touchJump = false;
-    jumpHeld = false;
-    aim.setAttribute('aria-pressed', 'false');
-    sprint.setAttribute('aria-pressed', 'false');
-    stick.style.transform = '';
+    velocityX = velocityZ = 0;
+    aimHeld = jumpHeld = false;
+    input.clear();
   }
 
   function setActive(value) {
@@ -224,10 +202,11 @@ export function createCamera(canvas) {
       resetInputs();
       startButton.textContent = 'Resume';
     }
+    onActivity(value);
   }
 
   function look(dx, dy, sensitivity) {
-    const scale = (aimHeld || touchAim) ? sensitivity * 0.53 : sensitivity;
+    const scale = aimHeld ? sensitivity * 0.53 : sensitivity;
     yaw -= dx * scale;
     pitch = MathUtils.clamp(pitch - dy * scale, -1.41, 1.41);
   }
@@ -235,7 +214,7 @@ export function createCamera(canvas) {
   startButton.addEventListener('click', () => {
     if (!blocked) return;
     setActive(true);
-    if (touch) return;
+    if (input.supportsTouch && input.source !== 'desktop') return;
     function enableDrag() {
       dragMouse = true;
       help.textContent = 'Drag to look · WASD to move · Hold C to walk · Shift to sprint · Space to jump';
@@ -284,76 +263,12 @@ export function createCamera(canvas) {
   document.addEventListener('keyup', event => keys.delete(event.code));
   canvas.addEventListener('contextmenu', event => event.preventDefault());
   canvas.addEventListener('pointerdown', (event) => {
-    if (!active) return;
-    if (event.pointerType === 'mouse') {
-      if (event.button === 2) aimHeld = true;
-      return;
-    }
-    if (lookingPointer !== null) return;
-    lookingPointer = event.pointerId;
-    canvas.setPointerCapture(event.pointerId);
-    lookX = event.clientX;
-    lookY = event.clientY;
+    if (active && event.pointerType === 'mouse' && event.button === 2) aimHeld = true;
   });
   window.addEventListener('pointerup', event => {
     if (event.pointerType === 'mouse' && event.button === 2) aimHeld = false;
   });
-  canvas.addEventListener('pointermove', (event) => {
-    if (!active || event.pointerId !== lookingPointer) return;
-    look(event.clientX - lookX, event.clientY - lookY, 0.005);
-    lookX = event.clientX;
-    lookY = event.clientY;
-  });
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-    canvas.addEventListener(type, (event) => {
-      if (event.pointerId === lookingPointer) lookingPointer = null;
-    });
-    joystick.addEventListener(type, (event) => {
-      if (event.pointerId !== movingPointer) return;
-      movingPointer = null;
-      padX = padY = 0;
-      stick.style.transform = '';
-    });
-  }
-
-  function movePad(event) {
-    const box = joystick.getBoundingClientRect();
-    const radius = box.width * 0.32;
-    const x = event.clientX - box.left - box.width / 2;
-    const y = event.clientY - box.top - box.height / 2;
-    const scale = Math.max(radius, Math.hypot(x, y));
-    padX = x / scale;
-    padY = -y / scale;
-    stick.style.transform = `translate(${padX * radius}px, ${-padY * radius}px)`;
-  }
-  joystick.addEventListener('pointerdown', (event) => {
-    if (!active || movingPointer !== null) return;
-    movingPointer = event.pointerId;
-    joystick.setPointerCapture(event.pointerId);
-    movePad(event);
-  });
-  joystick.addEventListener('pointermove', event => {
-    if (event.pointerId === movingPointer) movePad(event);
-  });
-  sprint.addEventListener('click', () => {
-    touchSprint = !touchSprint;
-    if (touchSprint) touchAim = false;
-    sprint.setAttribute('aria-pressed', String(touchSprint));
-    aim.setAttribute('aria-pressed', String(touchAim));
-  });
-  const jumpButton = document.querySelector('#jump');
-  document.querySelector('#shoulder').addEventListener('click', switchShoulder);
-  jumpButton.addEventListener('pointerdown', (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    touchJump = true;
-  });
-  aim.addEventListener('click', () => {
-    touchAim = !touchAim;
-    if (touchAim) touchSprint = false;
-    aim.setAttribute('aria-pressed', String(touchAim));
-    sprint.setAttribute('aria-pressed', String(touchSprint));
-  });
+  window.addEventListener('pointercancel', event => { if (event.pointerType === 'mouse') aimHeld = false; });
   window.addEventListener('blur', resetInputs);
   document.addEventListener('visibilitychange', () => { if (document.hidden) resetInputs(); });
 
@@ -408,8 +323,9 @@ export function createCamera(canvas) {
     const feetY = sampleGround(body.x, body.z) + body.y;
     followY = delta && followY !== undefined ? MathUtils.damp(followY, feetY, 18, delta) : feetY;
     zoom = MathUtils.damp(zoom, Number(aimed), 12, delta);
-    shoulderOffset = MathUtils.damp(shoulderOffset, shoulder * (0.71 - zoom * 0.11), 14, delta);
-    const distance = MathUtils.lerp(3.65, 2.85, zoom);
+    shoulderOffset = MathUtils.damp(shoulderOffset, shoulder * (0.71 + zoom * (input.source === 'virtual' ? 0.11 : -0.11)), 14, delta);
+    const virtual = input.source === 'virtual';
+    const distance = MathUtils.lerp(3.65, virtual ? 3.02 : 2.85, zoom);
     camera.rotation.set(pitch, yaw, 0);
     pivot.set(body.x, Math.max(feetY - 0.23, followY) + MathUtils.lerp(1.45, 1.2, zoom), body.z);
     offset.set(shoulderOffset, 0.23, distance).applyQuaternion(camera.quaternion);
@@ -432,43 +348,50 @@ export function createCamera(canvas) {
   function update(delta) {
     if (frozen) return;
     const baseFov = camera.aspect < 1 ? 67 : 58;
-    const gamepad = Array.from(navigator.getGamepads?.() ?? []).find(pad => pad?.mapping === 'standard');
-    const button = index => Boolean(gamepad?.buttons[index]?.pressed);
-    const axis = index => {
-      const value = gamepad?.axes[index] ?? 0;
-      return Math.abs(value) > 0.16 ? Math.sign(value) * (Math.abs(value) - 0.16) / 0.84 : 0;
-    };
-    const startPressed = button(9);
-    if (ready && startPressed && !padStart) setActive(!active);
-    padStart = startPressed;
-    const shoulderPressed = button(11);
-    if (active && shoulderPressed && !padShoulder) switchShoulder();
-    padShoulder = shoulderPressed;
-    const aimed = active && Boolean(aimHeld || touchAim || scripted?.aim || button(6));
-    if (active) look(axis(2), axis(3), delta * (aimed ? 1.05 : 2.2));
+    if (ready && input.justPressed(PAD.MENU) && canTogglePause()) setActive(!active);
+    if (active && input.justPressed(PAD.R3)) switchShoulder();
+
+    const virtual = input.source === 'virtual';
+    const aimed = active && Boolean(aimHeld || scripted?.aim || input.isDown(PAD.LT));
+    if (active) {
+      if (virtual) {
+        const { horizontal, vertical, aimMultiplier } = input.settings;
+        const rate = delta * 2.2 * (aimed ? aimMultiplier : 1);
+        look(input.axis(2) * horizontal, input.axis(3) * vertical, rate);
+      } else {
+        look(input.axis(2), input.axis(3), delta * (aimed ? 1.05 : 2.2));
+      }
+    }
     let sprinting = false;
     let walking = false;
     let jumped = false;
     if (active) {
       const pressed = (a, b) => Number(keys.has(a) || keys.has(b));
       const side = scripted ? (scripted.side || 0)
-        : padX + axis(0) + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
+        : input.axis(0) + pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft');
       const forward = scripted ? (scripted.forward || 0)
-        : padY - axis(1) + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
+        : -input.axis(1) + pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown');
       const magnitude = Math.max(1, Math.hypot(side, forward));
-      const stick = Math.hypot(padX + axis(0), padY - axis(1));
+      const stick = Math.hypot(input.axis(0), input.axis(1));
       walking = scripted ? !!scripted.walk : keys.has('KeyC');
       const keyboard = !scripted && Math.hypot(
         pressed('KeyD', 'ArrowRight') - pressed('KeyA', 'ArrowLeft'),
         pressed('KeyW', 'ArrowUp') - pressed('KeyS', 'ArrowDown'),
       ) > 0;
       sprinting = !aimed && !walking && forward > 0.3 &&
-        (scripted?.sprint || button(10) || touchSprint || keys.has('ShiftLeft') || keys.has('ShiftRight'));
-      const partialStick = !scripted && !keyboard && !aimed && !sprinting && stick > 0.05 && stick < 0.62;
+        (scripted?.sprint || input.isDown(PAD.L3) || keys.has('ShiftLeft') || keys.has('ShiftRight'));
+      const analogWalk = virtual && !scripted && !keyboard && !aimed && !sprinting && stick > 0 && stick < 0.62;
       let chosen = RUN_SPEED;
       if (aimed) chosen = AIM_SPEED;
       else if (sprinting) chosen = SPRINT_SPEED;
-      else if (walking || partialStick) chosen = partialStick ? WALK_SPEED * (stick / 0.62) : WALK_SPEED;
+      else if (walking) chosen = WALK_SPEED;
+      else if (virtual && !scripted && !keyboard && stick > 0) {
+        const pace = stick <= 0.62
+          ? WALK_SPEED * stick / 0.62
+          : MathUtils.lerp(WALK_SPEED, RUN_SPEED, (stick - 0.62) / 0.38);
+        chosen = pace / stick;
+      }
+      walking ||= analogWalk;
       const speed = chosen / magnitude;
       const sin = Math.sin(yaw), cos = Math.cos(yaw);
       const targetX = (side * cos - forward * sin) * speed;
@@ -482,10 +405,9 @@ export function createCamera(canvas) {
       pose.velocityZ = step > 0 ? (body.z - beforeZ) / Math.max(delta, 0.001) : 0;
       pose.planarSpeed = step / Math.max(delta, 0.001);
 
-      const spaceDown = scripted ? !!scripted.jump : keys.has('Space') || touchJump || button(0);
+      const spaceDown = scripted ? !!scripted.jump : keys.has('Space') || input.isDown(PAD.A) || input.justPressed(PAD.A);
       const jumpEdge = spaceDown && !jumpHeld;
       jumpHeld = spaceDown;
-      touchJump = false;
       if (grounded) coyote = 0.12;
       else coyote = Math.max(0, coyote - delta);
       if (jumpEdge && (grounded || coyote > 0)) {
@@ -512,7 +434,7 @@ export function createCamera(canvas) {
     pitch = Math.max(-1.41, pitch - (recoilPitch - recovered));
     recoilPitch = recovered;
     placeCamera(delta, aimed);
-    const desiredFov = baseFov + (aimed ? -12 : sprinting ? 5 : 0);
+    const desiredFov = baseFov + (aimed ? (virtual ? -9 : -12) : sprinting ? 5 : 0);
     if (Math.abs(camera.fov - desiredFov) > 0.02) {
       camera.fov = MathUtils.damp(camera.fov, desiredFov, 15, delta);
       camera.updateProjectionMatrix();
@@ -533,6 +455,6 @@ export function createCamera(canvas) {
 
   return {
     camera,
-    controls: { prepare, update, engage, drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z, radius, y) => blocked(x, z, radius, y), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
+    controls: { prepare, update, engage, pause: () => setActive(false), drive, switchShoulder, kick, freeze, nudge, pose, blocked: (x, z, radius, y) => blocked(x, z, radius, y), sampleGround: (x, z) => sampleGround(x, z), get active() { return active; } },
   };
 }
